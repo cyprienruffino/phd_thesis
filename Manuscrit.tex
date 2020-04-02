@@ -62,32 +62,28 @@
 \juryd{Civilité / prénom \textsc{Nom}}{Grade / fonction / statut / lieu d'exercice}{Rapporteur ou examinateur ou directeur de thèse ou codirecteur de thèse}
 \jurye{Civilité / prénom \textsc{Nom}}{Grade / fonction / statut / lieu d'exercice}{Rapporteur ou examinateur ou directeur de thèse ou codirecteur de thèse}
 
-\newcommand{\ver}{0.0}% Version du document
-
 \pagestyle{fancy}
 \begin{document}
-% Préambule
-	\pagenumbering{roman}
-	\pagedegarde
-	\cleardoublepage
-			\setcounter{tocdepth}{2}
+\pagenumbering{arabic}
 			
-			\dominitoc
-			\tableofcontents
-			\renewcommand*\listfigurename{List of figures}
-			\listoffigures
-			\renewcommand*\listtablename{List of tables}
-			\listoftables
-			
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
 %        Contenu du document        %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\setcounter{mtc}{3}	% "Corrige" les minitocs décallés à cause des chapter* (ex : table des matières)
-	\pagenumbering{arabic}
 
+\pagedegarde
+\cleardoublepage
+
+\setcounter{mtc}{-2}	% "Corrige" les minitocs décallés à cause des chapter* (ex : table des matières)
 \input{chapters/abstract.tex}
 \input{chapters/resume.tex}
+
+\setcounter{tocdepth}{2}
+\dominitoc
+\tableofcontents		
+
+\listoffigures
+\listoftables
+
 \input{chapters/introduction.tex}
 \input{chapters/chapter1.tex}
 \input{chapters/chapter2.tex}
@@ -96,7 +92,7 @@
 	% Annexes
 	\begin{appendix}
 		\pagenumbering{Roman}
-                \input{chapters/appendix.tex}
+                \input{chapters/appendix1.tex}
 	\end{appendix}
 
 	
