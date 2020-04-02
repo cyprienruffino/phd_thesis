@@ -1,14 +1,15 @@
-TEX = latexmk -file-line-error -pdf
+NAME = Cyprien_Ruffino
+COMP_TIME= $(shell date +%Y_%m_%d_%T)
 
-.PHONY: all view
 
-all : these.pdf
 
-view : these.pdf
-	evince these.pdf
+all: manuscrit
 
-these.pdf : these.tex 
-	$(TEX) these.tex
+manuscrit:
+	pdflatex -jobname=Manuscrit_$(NAME)_$(COMP_TIME) Manuscrit.tex
+	bibtex Manuscrit_$(NAME)_$(COMP_TIME)
+	pdflatex -jobname=Manuscrit_$(NAME)_$(COMP_TIME) Manuscrit.tex
+	pdflatex -jobname=Manuscrit_$(NAME)_$(COMP_TIME) Manuscrit.tex
 
-clean :  
-	rm *.fls *.log *.aux *.fdb_latexmk *.toc *.out *.bbl *.blg *.bcf *.run.xml *.dvi *.pdf
+clean:
+	rm *.aux *.bbl *.acn *.blg *.brf *.glo *.lof *.log *.lot *.maf *.mtc* *.xdy *.toc *.out *.ntn *.fls *.fdb_latexmk *.synctex.gz *.pdf

@@ -1,0 +1,107 @@
+%% Copyleft 2018 Jean-Baptiste Louvet
+%% Copyright (C) 2014 Dorian Depriester
+%% http://blog.dorian-depriester.fr
+%%
+%% This file may be distributed and/or modified under the conditions
+%% of the LaTeX Project Public License, either version 1.3c of this
+%% license or (at your option) any later version. The latest version
+%% of this license is in:
+%%
+%%    http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.3c or later is part of all distributions of LaTeX
+%% version 2006/05/20 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainer of this work is Dorian Depriester
+%% <contact [at] dorian [-] depriester [dot] fr>.
+%%
+%% This is main.tex for French PhD Thesis.
+%% See http://blog.dorian-depriester.fr/latex/template-these/template-complet-pour-manuscrit-de-these for help
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%           Fichier maitre				%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper, english, 11pt, twoside,openright]{report}
+\input{Preambule}		% Liste des packages et de leurs options
+\input{CommandesPerso}	% Commandes et environnements perso
+\input{PageDeGarde}
+
+
+% Méta-données du PDF
+\hypersetup{
+    pdfauthor={Cyprien Ruffino},
+    pdfsubject={Manuscrit de thèse de doctorat},
+    pdftitle={Auxiliary Tasks for the Conditioning of Generative Adversarial Networks},
+    pdfkeywords={TODO}%TODO
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%   			Liste des fichiers à compiler					%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	\includeonly{Chapitre1,Chapitre2,Annexes}
+
+
+% Répertoire contenant les images
+\graphicspath{{images/}}
+% Infos de la page de garde
+\author{Cyprien \textsc{Ruffino}}
+\title{Auxiliary Tasks for the Conditioning of Generative Adversarial Networks}
+\specialite{Informatique}
+\ecole{l'\'Ecole Doctorale Mathématiques, Information, Ingéniérie des Systèmes}
+\date{\today}
+\directeur{Gilles \textsc{Gasso}}
+\encadrant{Romain \textsc{Hérault}} %Optionnel
+\jurya{Civilité / prénom \textsc{Nom}}{Grade / fonction / statut / lieu d'exercice}{Rapporteur ou examinateur ou directeur de thèse ou codirecteur de thèse}
+\juryb{Civilité / prénom \textsc{Nom}}{Grade / fonction / statut / lieu d'exercice}{Rapporteur ou examinateur ou directeur de thèse ou codirecteur de thèse}
+\juryc{Civilité / prénom \textsc{Nom}}{Grade / fonction / statut / lieu d'exercice}{Rapporteur ou examinateur ou directeur de thèse ou codirecteur de thèse}
+\juryd{Civilité / prénom \textsc{Nom}}{Grade / fonction / statut / lieu d'exercice}{Rapporteur ou examinateur ou directeur de thèse ou codirecteur de thèse}
+\jurye{Civilité / prénom \textsc{Nom}}{Grade / fonction / statut / lieu d'exercice}{Rapporteur ou examinateur ou directeur de thèse ou codirecteur de thèse}
+
+\newcommand{\ver}{0.0}% Version du document
+
+\pagestyle{fancy}
+\begin{document}
+% Préambule
+	\pagenumbering{roman}
+	\pagedegarde
+	\cleardoublepage
+			\setcounter{tocdepth}{2}
+			
+			\dominitoc
+			\tableofcontents
+			\renewcommand*\listfigurename{List of figures}
+			\listoffigures
+			\renewcommand*\listtablename{List of tables}
+			\listoftables
+			
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
+%        Contenu du document        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\setcounter{mtc}{3}	% "Corrige" les minitocs décallés à cause des chapter* (ex : table des matières)
+	\pagenumbering{arabic}
+
+\input{chapters/abstract.tex}
+\input{chapters/resume.tex}
+\input{chapters/introduction.tex}
+\input{chapters/chapter1.tex}
+\input{chapters/chapter2.tex}
+\input{chapters/chapter3.tex}
+\input{chapters/conclusion.tex}
+	% Annexes
+	\begin{appendix}
+		\pagenumbering{Roman}
+                \input{chapters/appendix.tex}
+	\end{appendix}
+
+	
+      \bibliographystyle{alpha}
+      \nocite{*}
+      \bibliography{library.bib}
+	
+\end{document}
