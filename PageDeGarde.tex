@@ -29,6 +29,11 @@
   \def\@ecole{#1}
 }
 
+\def\@frenchtitle{frenchtitle}
+\newcommand{\frenchtitle}[1]{
+	\def\@frenchtitle{#1}
+}
+
 \def\@specialite{Spécialité}
 \newcommand{\specialite}[1]{
   \def\@specialite{#1}
@@ -109,6 +114,7 @@
 	\colorbox{black!30}{\begin{minipage}{\textwidth}
 		\begin{center}
 			{\bf\LARGE \@title}
+			{\bf\large \@frenchtitle}
 		\end{center}
 	\end{minipage}}
 
