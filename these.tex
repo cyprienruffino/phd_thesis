@@ -6,7 +6,9 @@
 \author{Cyprien Ruffino}
 
 \usepackage{gensymb}
-
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{babel}[french]
 \usepackage{eurosym}
 
 \usepackage{graphicx}
@@ -30,6 +32,9 @@
 \usepackage{algorithm}
 \usepackage{algorithmicx}
 \usepackage{algpseudocode} 
+
+\DeclareUnicodeCharacter{00D7}{ }
+
 
 % citestyle=authoryear]{biblatex}
 \usepackage[backend=biber,
@@ -56,10 +61,6 @@ style=alphabetic]{biblatex}
 \input{chapter3.tex}
 \input{conclusion.tex}
 
-%\input{selectedpublications.tex}
-
-%\bibliographystyle{plain}
-%\bibliography{hdr}
 
 \newrefcontext[sorting=nyt]
 \printbibliography
