@@ -1,0 +1,9 @@
+compile:
+    image: aergus/latex
+    script:
+           make
+    artifacts:
+        paths:
+            - Manuscrit.pdf
+            
+
