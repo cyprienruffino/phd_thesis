@@ -11,7 +11,32 @@ Image reconstruction is the task of completing an image from a very small subset
 
 The task of image reconstruction is challenging since very few information is available for use. To overcome this lack of information, generative models such as GANs leverage on existing datasets to learn the distribution of the real images. By conditioning the learned distribution, a GAN could learn to generate an image while enforcing the constraint that the pixels known beforehand must remain similar in the generated image.
 
-Similarly as in the GAN setup, we denote 
+Similarly as in the GAN setup, we denote  by $X \in \setX$ a random variable and $x$ its realization. Let $p_X$ be the distribution of $X$ over $\setX$ and $p_X(x)$ be its evaluation at $x$. Similarly $p_{X|Y}$ represents the distribution of $X$ conditioned on the random variable $Y \in \setY$. 
+
+Given a set of images $x \in \setX = [-1, 1]^{n\times p\times c}$  (see Figure \ref{fig:digit}) drawn from an unknown distribution $p_X$ and a sparse matrix  $y \in  \setY = [-1, 1]^{n\times p\times c}$ (Figure \ref{fig:pixelwise_gen}) as the given constrained pixels, the problem consists in finding a generative model $G$ with inputs $z$ (a random vector sampled from a known distribution $p_Z$ over the space $\setZ$) and constrained pixel values $y \in  [-1, 1]^{n\times p\times c}$ able to generate an image satisfying the constraints while likely following the distribution $p_X$ (see Figure \ref{fig:image_completion}).
+
+\begin{figure}[t]
+	\centering
+	\begin{subfigure}[t]{0.33\textwidth}
+		\centering
+		\includegraphics[width=3cm]{fashion_sample.jpg}
+		\caption{Original \\ Image}
+		\label{fig:digit}
+	\end{subfigure}\begin{subfigure}[t]{0.33\textwidth}
+		\centering
+		\includegraphics[width=3cm]{fashion_sample_inpainting.jpg}
+		\caption{Inpainting\\Input}
+		\label{fig:inpainting}
+	\end{subfigure}\begin{subfigure}[t]{0.33\textwidth}
+		\centering
+		\includegraphics[width=3cm]{fashion_sample_pixel.jpg}
+		\caption{Constraint\\Map}
+		\label{fig:pixelwise_gen}
+	\end{subfigure}
+	\caption{Difference between regular inpainting (\ref{fig:inpainting}) and the problem undertaken in this work (\ref{fig:pixelwise_gen}) on a real sample (\ref{fig:digit}).}
+	\label{fig:image_completion_task}
+\end{figure}
+
 	
 Introduction to the problem of image reconstruction, definitions and formulation
 
