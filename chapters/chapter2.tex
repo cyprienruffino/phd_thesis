@@ -37,8 +37,35 @@ We denote by $x \in \setX = [-1, 1]^{n\times p\times c}$  (see Figure \ref{fig:d
 	\label{fig:image_completion_task}
 \end{figure}
 
-	
-Introduction to the problem of image reconstruction, definitions and formulation
+\end{itemize}
+\begin{figure}[t]
+\centering
+\begin{subfigure}[t]{0.25\textwidth}
+	\centering
+	\includegraphics[scale=1.5]{origin.png}
+	\caption{Original\\Image}
+	\label{fig:original_shoe}
+\end{subfigure}\begin{subfigure}[t]{0.25\textwidth}
+	\centering
+	\includegraphics[scale=1.5]{consts.png}
+	\caption{Constraints}
+	\label{fig:constraints}
+\end{subfigure}\begin{subfigure}[t]{0.25\textwidth}
+	\centering
+	\includegraphics[scale=1.5]{img.png}
+	\caption{Generated\\Image}
+	\label{fig:pixelwise}
+\end{subfigure}\begin{subfigure}[t]{0.24\textwidth}
+	\centering
+	\includegraphics[scale=1.5]{imgcolor.png}
+	\caption{Satisfied\\Consts.}
+	\label{fig:generated}
+\end{subfigure}
+\caption[Generation of a sample during training]{Generation of a sample during training. We first sample an image from a training set (\ref{fig:original_shoe}) and we sample the constraints (\ref{fig:constraints}) from it. Then our GAN generates a sample (\ref{fig:pixelwise}). The constraints with squared error smaller than $\epsilon=0.1$ are deemed satisfied and shown by green pixels in (\ref{fig:generated}) while the red pixels are unsatisfied.}
+\label{fig:image_completion}
+\end{figure}
+
+
 
 Related works : CGAN, AmbientGAN, UNIR,  Compressed Sensing with Meta-Learning
 
