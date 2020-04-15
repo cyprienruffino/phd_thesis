@@ -1,2 +1,35 @@
-\chapter{Generative Adversarial Networks }
+\chapter{Generative Adversarial Networks}
 \label{chap:chapter1}
+
+\section{Generative Adversarial Networks}
+Applications to image generation
+
+GAN formulation, loss variations, JS/KL interpretation of the loss
+
+Taxonomie des approches GANs (pour s'éviter une liste des différents GANs)
+
+Schéma pour définir les grandes familles de GAN (évoquer les AmbientGAN / UNIR)
+
+
+\section{Domain-Transfer with Generative Adversarial Networks}
+
+Conditional GANs, Pix2Pix, CycleGAN
+
+\section{Evaluating generative models}
+
+No good adhoc methods
+
+Image quality : Inception distance + Fréchet inception distance, advantages
+
+Conditioning : Direct evaluation (pixel-wise), Classifier accuracy, Projections (PCA, t-SNE)
+
+Limitations of those metrics : need a pre-trained model
+
+\section{Limitations}
+Image quality : Incremental enhancement through architecture, more data, ... 
+
+Instability, catastrophic forgetting and the mode collapse problem
+
+Trade-off image quality/diversity : Explanation through the loss term and distribution coverage
+
+Black-box approach to conditioning, no tuning possible

@@ -65,8 +65,7 @@
 
 \pagestyle{fancy}
 \begin{document}
-\pagenumbering{arabic}
-			
+		
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
 %        Contenu du document        %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -75,30 +74,35 @@
 \cleardoublepage
 
 \setcounter{mtc}{-2}	% "Corrige" les minitocs décallés à cause des chapter* (ex : table des matières)
+\pagenumbering{Roman}
 \input{chapters/abstract.tex}
 \input{chapters/resume.tex}
+\input{chapters/remerciements.tex}
 
-\setcounter{tocdepth}{2}
+\setcounter{tocdepth}{1}
 \dominitoc
 \tableofcontents		
 
 \listoffigures
 \listoftables
 
+\pagenumbering{arabic}
 \input{chapters/introduction.tex}
 \input{chapters/chapter1.tex}
 \input{chapters/chapter2.tex}
 \input{chapters/chapter3.tex}
 \input{chapters/conclusion.tex}
-	% Annexes
-	\begin{appendix}
-		\pagenumbering{Roman}
-                \input{chapters/appendix1.tex}
-	\end{appendix}
 
-	
-      \bibliographystyle{alpha}
-      \nocite{*}
-      \bibliography{library.bib}
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliographystyle{alpha}
+\nocite{*}
+\bibliography{library.bib}
+
+% Annexes
+\begin{appendix}
+	\input{chapters/publications.tex}
+	\input{chapters/details_neucom.tex}
+	\input{chapters/details_eccv.tex}
+\end{appendix}
 	
 \end{document}

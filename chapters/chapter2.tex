@@ -1,2 +1,40 @@
 \chapter{Reconstruction as an Auxiliary Task for Generative Modeling}
 \label{chap:chapter2}
+ \section{Image Reconstruction with Generative Models}
+
+Introduction to the problem of image reconstruction, definitions and formulation
+
+Related works : CGAN, AmbientGAN, UNIR,  Compressed Sensing with Meta-Learning
+
+Limitations of these models
+
+\section{Conditional generation as a Maximum A Posteriori estimation}
+Approche de l'article NeuCom :
+
+Formulation as a Maximum A Posteriori Estimation, assumptions (normal error)
+
+Construction of the loss term using bayes rule and least squares 
+
+PacGAN for keeping the diversity
+
+\section{Experimental evaluation and application to underground soil generation}
+
+Datasets : MNIST/FashionMNIST/CelebA/Texture
+
+Evaluation : MSE/FID; Epoch  selection criterion
+
+Architectures : Appendix ? DCGAN + SGAN (encoder-decoder)
+
+Results : visible trade-off, good fidelity overall
+
+Application to hydro-geology : subsurface dataset
+
+Evaluation : MSE/HOG+LBP
+
+\section{Conclusion}
+
+Objective reached : tuneable loss, pixel-wise, keeping diversity
+
+Applications in hydro-geology : papier Eric
+
+Future works : other distributions (modelling error using Laplacian, beta or Poisson distributions)
