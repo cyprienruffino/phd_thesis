@@ -1,21 +1,40 @@
 \chapter{Generative Adversarial Networks}
 \label{chap:chapter1}
 
+\begin{chapterabstract}
+	In this chapter, we propose an overview	 of the Generative Adversarial Networks \cite{Goodfellow2014} framework, some of its theoretical interpretations, as well as some of its variations and applications. We discuss the different limitations of this approach and expose a trilemma between the quality of the generated samples, their diversity and the conditioning of the model. We then discuss the recent advances that have been made to overcome some of these limitations and propose a classification of these advances using the aforementioned trilemma. Finally, we discuss the evaluation of generative models and the difficulties of evaluating the intrinsic quality of a generated sample.  We propose an overview of the different classical metrics and discuss their limitations.
+\end{chapterabstract}
+
 \section{Generative Adversarial Networks}
 Applications to image generation
 
 GAN formulation, loss variations, JS/KL interpretation of the loss
-aaa
+
+Conditional GANs
+
+Introduction to domain-transfer (Pix2Pix, CycleGAN) through removal of the random noise
+
+\section{Limitations}
+Image quality : Incremental enhancement through architecture, more data, ... 
+
+Instability, catastrophic forgetting and the mode collapse problem
+
+Trade-off image quality/diversity : Explanation through the loss term and distribution coverage
+
+Black-box approach to conditioning, no tuning possible, no interpretability
+
+\section{The GAN Zoo}
+
+Enorme nombre de variantes de GANs
+
 Taxonomie des approches GANs (pour s'éviter une liste des différents GANs)
 
 Schéma pour définir les grandes familles de GAN (évoquer les AmbientGAN / UNIR)
 
+Table des loss alternatives (f-divergences + transport optimal)
 
-\section{Domain-Transfer with Generative Adversarial Networks}
 
-Conditional GANs, Pix2Pix, CycleGAN
-
-\section{Evaluating generative models}
+\section{A note on the  evaluation of generative models}
 
 No good adhoc methods
 
@@ -25,11 +44,4 @@ Conditioning : Direct evaluation (pixel-wise), Classifier accuracy, Projections 
 
 Limitations of those metrics : need a pre-trained model
 
-\section{Limitations}
-Image quality : Incremental enhancement through architecture, more data, ... 
 
-Instability, catastrophic forgetting and the mode collapse problem
-
-Trade-off image quality/diversity : Explanation through the loss term and distribution coverage
-
-Black-box approach to conditioning, no tuning possible

@@ -125,11 +125,14 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Navigation dans le document
-\usepackage[pdftex,hidelinks,
-			pagebackref=true,
-			]{hyperref}	% Créera automatiquement les liens internes au PDF
+\usepackage[pdftex,pagebackref=true]{hyperref}	% Créera automatiquement les liens internes au PDF
 					% Doit être chargé en dernier (Sauf exceptions ci-dessous)
-			
+\hypersetup{
+	    colorlinks = true,
+	    citecolor=.,
+		linkcolor=.,
+		linkbordercolor = {white}
+	}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Packages qui doivent être chargés APRES hyperref	             
