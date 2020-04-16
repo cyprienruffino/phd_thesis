@@ -59,7 +59,7 @@
 \makeatletter
 \newcommand{\acronym}[2]{
 	\label{acronyms:#1}
-	 \expandafter\newcommand\csname {\hyperref[acronyms:#1]{#1}}\endcsname{#1}%
+	 \expandafter\newcommand\csname {\hyperref[acronyms:#1]{#1}} \endcsname{#1}%
 	#1 & #2 \\
 }
 \makeatother
