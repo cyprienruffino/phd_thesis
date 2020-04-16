@@ -55,3 +55,16 @@
 \newcommand{\trainsetX}{\mathcal{D}_X}
 \newcommand{\trainsetY}{\mathcal{D}_Y}
 \newcommand{\vect}{\text{vect}}
+
+\newcommand{\acronym}[2]{
+	\label{acronyms:#1}
+	\@namedef{#1}{\hyperref[acronyms:#1]{#1}}%
+	#1 & #2 \\
+}
+
+\newcommand{\acronyms}[3]{
+	\label{acronyms:#1} 
+	\@namedef{#1}{\hyperref[acronyms:#1]{#1}}%
+	\@namedef{#2}{\hyperref[acronyms:#1]{#2}}%
+	#1 & #3\\
+}
