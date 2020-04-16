@@ -19,7 +19,17 @@ Schéma pour définir les grandes familles de GAN (évoquer les AmbientGAN / UNI
 
 Conditional GANs, Pix2Pix, CycleGAN
 
-\section{Evaluating generative models}
+\section{Limitations}
+Image quality : Incremental enhancement through architecture, more data, ... 
+
+Instability, catastrophic forgetting and the mode collapse problem
+
+Trade-off image quality/diversity : Explanation through the loss term and distribution coverage
+
+Black-box approach to conditioning, no tuning possible, no interpretability
+
+
+\section{A note on the  evaluation of generative models}
 
 No good adhoc methods
 
@@ -29,11 +39,3 @@ Conditioning : Direct evaluation (pixel-wise), Classifier accuracy, Projections 
 
 Limitations of those metrics : need a pre-trained model
 
-\section{Limitations}
-Image quality : Incremental enhancement through architecture, more data, ... 
-
-Instability, catastrophic forgetting and the mode collapse problem
-
-Trade-off image quality/diversity : Explanation through the loss term and distribution coverage
-
-Black-box approach to conditioning, no tuning possible, no interpretability
