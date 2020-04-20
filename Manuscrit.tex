@@ -43,7 +43,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%   			Liste des fichiers à compiler					%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	\includeonly{Chapitre1,Chapitre2,Annexes}
 
 
 % Répertoire contenant les images
@@ -73,26 +72,29 @@
 \pagedegarde
 \cleardoublepage
 
-\setcounter{mtc}{-2}	% "Corrige" les minitocs décallés à cause des chapter* (ex : table des matières)
+
 \pagenumbering{Roman}
 \input{chapters/abstract.tex}
 \input{chapters/resume.tex}
 \input{chapters/remerciements.tex}
 
-\setcounter{tocdepth}{1}
 \dominitoc
+\setcounter{tocdepth}{1}
+\setcounter{mtc}{4}	% "Corrige" les minitocs décallés à cause des chapter* (ex : table des matières)
 \tableofcontents		
 
-\listoffigures
-\listoftables
+
+\listoffigures \mtcaddchapter    
+\listoftables \mtcaddchapter    
 
 \input{acronyms.tex}
 
 \pagenumbering{arabic}
+\adjustmtc
 \input{chapters/introduction.tex}
 \input{chapters/chapter1.tex}
 \input{chapters/chapter2.tex}
-\input{chapters/chapter3.tex}
+\input{chapters/chapter3.tex}X
 \input{chapters/conclusion.tex}
 
 \addcontentsline{toc}{chapter}{Bibliography}
@@ -108,3 +110,4 @@
 \end{appendix}
 	
 \end{document}
+\sqrt{}
