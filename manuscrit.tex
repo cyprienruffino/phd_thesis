@@ -26,9 +26,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass[a4paper, english, 11pt, twoside,openright]{report}
-\input{Preambule}		% Liste des packages et de leurs options
-\input{CommandesPerso}	% Commandes et environnements perso
-\input{PageDeGarde}
+\input{preambule}		% Liste des packages et de leurs options
+\input{commandes_perso}	% Commandes et environnements perso
+\input{mathmacros}
+\input{page_de_garde}
 
 
 % Méta-données du PDF
@@ -80,12 +81,20 @@
 
 \dominitoc
 \setcounter{tocdepth}{1}
+<<<<<<< HEAD:Manuscrit.tex
 \setcounter{mtc}{4}	% "Corrige" les minitocs décallés à cause des chapter* (ex : table des matières)
+=======
+\setcounter{mtc}{5}	% "Corrige" les minitocs décallés à cause des chapter* (ex : table des matières)
+>>>>>>> working:manuscrit.tex
 \tableofcontents		
 
 
 \listoffigures \mtcaddchapter    
+<<<<<<< HEAD:Manuscrit.tex
 \listoftables \mtcaddchapter    
+=======
+\listoftables \mtcaddchapter  
+>>>>>>> working:manuscrit.tex
 
 \input{acronyms.tex}
 
