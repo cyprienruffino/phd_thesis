@@ -79,22 +79,17 @@
 \input{chapters/resume.tex}
 \input{chapters/remerciements.tex}
 
-\dominitoc
+\setcounter{minitocdepth}{5}
 \setcounter{tocdepth}{1}
-<<<<<<< HEAD:Manuscrit.tex
+
+\dominitoc
+
 \setcounter{mtc}{4}	% "Corrige" les minitocs décallés à cause des chapter* (ex : table des matières)
-=======
-\setcounter{mtc}{5}	% "Corrige" les minitocs décallés à cause des chapter* (ex : table des matières)
->>>>>>> working:manuscrit.tex
 \tableofcontents		
 
 
-\listoffigures \mtcaddchapter    
-<<<<<<< HEAD:Manuscrit.tex
-\listoftables \mtcaddchapter    
-=======
-\listoftables \mtcaddchapter  
->>>>>>> working:manuscrit.tex
+\listoffigures
+\listoftables 
 
 \input{acronyms.tex}
 

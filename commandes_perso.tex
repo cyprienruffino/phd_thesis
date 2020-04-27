@@ -33,6 +33,7 @@
 }
 
 \newcommand{\citeq}[1]{Equation. \eqref{#1}}
+\newcommand{\citealg}[1]{Algorithm. \ref{#1}}
 
 %% On commence par une page impaire quand on change le style de numérotation de pages 
 \let\oldpagenumbering\pagenumbering
@@ -50,19 +51,10 @@
 \newcommand{\cmark}{\ding{51}}%
 \newcommand{\xmark}{\ding{55}}%
 
-<<<<<<< HEAD:CommandesPerso.tex
-% Symboles mathématiques
-\newcommand{\setS}{\mathcal{S}}
-\newcommand{\setX}{\mathcal{X}}
-\newcommand{\setY}{\mathcal{Y}}
-\newcommand{\setZ}{\mathcal{Z}}
-\newcommand{\trainsetX}{\mathcal{D}_X}
-\newcommand{\trainsetY}{\mathcal{D}_Y}
-\newcommand{\vect}{\text{vect}}
-
-=======
->>>>>>> working:commandes_perso.tex
 % Pour les acronymes
 \newcommand{\ac}[1]{\hyperref[acronyms:#1]{#1}}  % Pour référencer un acronyme
 \newcommand{\acmake}[2]{\label{acronyms:#1}#1 & #2 \\}  % Pour créer un acronyme
+\newcommand{\acdup}[1]{\label{acronyms:#1}} % Pour créer un alias à un acronyme 
 
+\newcommand{\GAN}{\ac{GAN}}
+\newcommand{\GANs}{\ac{GAN}s}

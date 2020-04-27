@@ -16,18 +16,30 @@
 \newcommand{\pgx}{p_G(x)}
 \newcommand{\pgxz}{p_G(x|z)}
 \newcommand{\pxy}{p(x|y)}
+\newcommand{\pjxy}{p(x,y)}
 \newcommand{\pyx}{p(y|x)}
 \newcommand{\pxz}{p(x|z)}
 
 % GAN specifics
 \newcommand{\G}{G}
+\newcommand{\Gxy}{G_{XY}}
+\newcommand{\Gyx}{G_{YX}}
 \newcommand{\D}{D}
+\newcommand{\Dx}{D_X}
+\newcommand{\Dy}{D_Y}
+
 \newcommand{\lgan}{L_{GAN}}
+\newcommand{\lcgan}{L_{CGAN}}
+\newcommand{\lcycgan}{L_{CycGAN}}
 
 % Divergences
 \newcommand{\DKL}{D_{KL}}
 \newcommand{\JSD}{JSD}
 
+% Normes
+\newcommand{\Lone}{\ell_1}
+\newcommand{\Ltwo}{\ell_2}
+
 %% Divers
-\newcommand{\esp}{\mathop{\mathbb{E}}}
+\newcommand{\esp}[1]{\mathop{\mathbb{E}}_{\substack{#1}}}
 \newcommand{\vect}{\text{vect}}
