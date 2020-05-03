@@ -28,13 +28,6 @@
 	\end{subfigure}
 }
 
-\newcommand{\refchap}[2]{%
-	\epigraph{\og \textit{#1} \fg{}}{#2}
-}
-
-\newcommand{\citeq}[1]{Equation. \eqref{#1}}
-\newcommand{\citealg}[1]{Algorithm. \ref{#1}}
-
 %% On commence par une page impaire quand on change le style de numérotation de pages 
 \let\oldpagenumbering\pagenumbering
 \renewcommand{\pagenumbering}[1]{%
@@ -56,5 +49,15 @@
 \newcommand{\acmake}[2]{\label{acronyms:#1}#1 & #2 \\}  % Pour créer un acronyme
 \newcommand{\acdup}[1]{\label{acronyms:#1}} % Pour créer un alias à un acronyme 
 
-\newcommand{\GAN}{\ac{GAN}}
-\newcommand{\GANs}{\ac{GAN}s}
+\newcommand{\GAN}{ \ac{GAN} }
+\newcommand{\GANs}{ \ac{GAN}s }
+
+
+\newcommand{\refchap}[2]{%
+	\epigraph{\og \textit{#1} \fg{}}{#2}
+}
+
+\newcommand{\citeq}[1]{Equation. \eqref{#1}}
+\newcommand{\citealg}[1]{Algorithm. \ref{#1}}
+\newcommand{\citesec}[1]{Section. \ref{#1}}
+\newcommand{\citesub}[1]{Subsection. \ref{#1}}

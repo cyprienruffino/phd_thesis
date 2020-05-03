@@ -9,16 +9,23 @@
 \newcommand{\trainsetX}{\mathcal{D}_X}
 \newcommand{\trainsetY}{\mathcal{D}_Y}
 
+%% Vectors
+\newcommand{\vx}{\textit{x}}
+\newcommand{\vy}{\textit{y}}
+\newcommand{\vz}{\textit{z}}
+
+%% Matrices
+\newcommand{\mx}{\uppercase{x}}
+\newcommand{\my}{\uppercase{y}}
+\newcommand{\mz}{\uppercase{z}}
+
 %% Distributions
-\newcommand{\px}{p(x)}
-\newcommand{\py}{p(y)}
-\newcommand{\pz}{p(z)}
-\newcommand{\pgx}{p_G(x)}
-\newcommand{\pgxz}{p_G(x|z)}
-\newcommand{\pxy}{p(x|y)}
-\newcommand{\pjxy}{p(x,y)}
-\newcommand{\pyx}{p(y|x)}
-\newcommand{\pxz}{p(x|z)}
+\newcommand{\p}[1]{p(#1)}
+\newcommand{\pg}[1]{p_\G(#1)}
+\newcommand{\pt}[1]{p_\theta(#1)}
+
+\newcommand{\q}[1]{q(#1)}
+\newcommand{\qf}[1]{q_\F(#1)}
 
 % GAN specifics
 \newcommand{\G}{G}
@@ -27,14 +34,15 @@
 \newcommand{\D}{D}
 \newcommand{\Dx}{D_X}
 \newcommand{\Dy}{D_Y}
+\newcommand{\F}{F}
 
 \newcommand{\lgan}{L_{GAN}}
 \newcommand{\lcgan}{L_{CGAN}}
 \newcommand{\lcycgan}{L_{CycGAN}}
 
 % Divergences
-\newcommand{\DKL}{D_{KL}}
-\newcommand{\JSD}{JSD}
+\newcommand{\DKL}[2]{D_{KL}(#1||#2)}
+\newcommand{\JSD}[2]{JSD(#1||#2)}
 
 % Normes
 \newcommand{\Lone}{\ell_1}
