@@ -42,7 +42,7 @@ These two learning tasks, the discriminative (\citeq{eq:disc_mle}) modeling and 
 	\end{equation}
 \end{minipage}\\
 
-An example of a simple generative model are Gaussian Mixture Models (\ac{GMM}) . They consist in a sum of $K$ Gaussian distributions $\mathcal{N}(\mu_k, \sigma_k^2), k \in 1..K$ which are all attributed a selection probability $p(z=k) = \pi_k$, so that 	$\p{\vx|z=k} = \mathcal{N}(\mu_k, \sigma_k^2)$ . The model is then formulated as 
+An simple example of generative model are Gaussian Mixture Models (\ac{GMM}) . They consist in a sum of $K$ Gaussian distributions $\mathcal{N}(\mu_k, \sigma_k^2), k \in 1..K$ which are all attributed a selection probability $p(z=k) = \pi_k$, so that 	$\p{\vx|z=k} = \mathcal{N}(\mu_k, \sigma_k^2)$ . The model is then formulated as 
 
 \begin{equation*}
 	\pt{\vx} = \sum_{z}\p{z}\pt{\vx|z}\enspace,
