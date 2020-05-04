@@ -127,9 +127,9 @@ We will then outline some limitations of this framework and propose a formulatio
 
 \subsection{The GAN framework}
 
-In the same fashion as the generative models mentioned in \citesub{sub:deep_gen_modeling}, Generative Adversarial Networks (\ac{GANs})\cite{Goodfellow2014} aims to learn a parameterized mapping $\pg{\vx|\vz}$ between a simple distribution $\p{\vz}$ (usually normal or uniform) to the real data distribution $\p{\vx}$. However, instead of trying to estimate the distribution through marginalization, it aims to directly minimize an estimation of a divergence between $\p{\vx}$ and the mapped distribution $\pg{\vx}$. 
+In the same fashion as the generative models mentioned in \citesub{sub:deep_gen_modeling}, Generative Adversarial Networks (\ac{GANs})\cite{Goodfellow2014} aims to learn a parameterized mapping $\pg{\vx|\vz}$ between a simple distribution $\p{\vz}$ (usually normal or uniform) to the real data distribution $\p{\vx}$. However, instead of relying on the likelihood and trying to estimate the distribution through marginalization, it aims to minimize an estimation of a divergence between $\p{\vx}$ and the mapped distribution $\pg{\vx}$. 
 
-However, because divergences are usually intractable, \GANs rely on a second learned function that will act as an adversary: the discriminator $\D$.  The discriminator is a binary classifier that aims to predict the probability that a sample $x$ was sampled on the real distribution $\p{\vx}$ or was  generated from $z\sim\p{\vz}$ and is trained by minimizing the  binary cross-entropy. The objective of the generator $\G$ is then to fool the discriminator by maximizing the same binary cross-entropy. This training process is summed up as a mini-max game in \citeq{eq:GAN_problem} 
+Because divergences are usually intractable, \GANs rely on a second learned function that will act as an adversary: the discriminator $\D$.  The discriminator is a binary classifier that aims to predict the probability that a sample $x$ was sampled on the real distribution $\p{\vx}$ or was  generated from $z\sim\p{\vz}$ and is trained by minimizing the  binary cross-entropy. The objective of the generator $\G$ is then to fool the discriminator by maximizing the same binary cross-entropy. This training process is summed up as a mini-max game in \citeq{eq:GAN_problem} 
 
 \begin{equation}
 \label{eq:GAN_problem}
