@@ -129,7 +129,7 @@ We will then outline some limitations of this framework and propose a formulatio
 
 In the same fashion as the generative models mentioned in \citesub{sub:deep_gen_modeling}, Generative Adversarial Networks (\ac{GANs})\cite{Goodfellow2014} aims to learn a parameterized mapping $\pg{\vx|\vz}$ between a simple distribution $\p{\vz}$ (usually normal or uniform) to the real data distribution $\p{\vx}$. However, instead of relying on the likelihood and trying to estimate the distribution through marginalization, it aims to minimize an estimation of a divergence between $\p{\vx}$ and the mapped distribution $\pg{\vx}$. 
 
-Minimizing a divergence $\Div{\p{\vx}}{\pt{\vx}}$ allows for a parametric family of distributions $\pt{\vx}$ to converge to a target distribution $\p{\vx}$. When this divergence is both tractable (or estimable) and differentiable w.r.t the parameters $\theta$
+Minimizing a divergence $\Div{\p{\vx}}{\pt{\vx}}$ allows for a parametric distribution $\pt{\vx}$ to converge to a target distribution $\p{\vx}$. When this divergence is both tractable (or estimable) and differentiable w.r.t the parameters $\theta$
 
 In practice, divergences are usually intractable. To estimate such a divergence, \GANs rely on a second learned function that will act as an adversary: the discriminator $\D$.  The discriminator is a binary classifier that aims to predict the probability that a sample $x$ was sampled on the real distribution $\p{\vx}$ or was  generated from $z\sim\p{\vz}$ and is trained by minimizing the  binary cross-entropy. The objective of the generator $\G$ is then to fool the discriminator by maximizing the same binary cross-entropy. This training process is summed up as a mini-max game in \citeq{eq:GAN_problem} 
 
