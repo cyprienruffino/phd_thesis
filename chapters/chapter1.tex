@@ -211,7 +211,14 @@ Pix2Pix \cite{Isola2016} implemented this approach  explicitly by using paired s
 
 However, this kind of approaches rely on paired data which can be very hard to obtain, especially in the case of natural images. When trying for example to transfer images of zebras to images of horses, you need a dataset of very similar zebras and horses in the exact same position for the $\Lone$ term to work.
 
-This problem of paired data was solved by \ac{CycleGAN }\cite{Zhu} using cycle-consistency. Instead of training a single model $\G$ with reconstruction between $x$ and $\G(y,z)$, the CycleGAN approach train two domain-transfer models simultaneously: $\Gyx$ and $\Gxy$ that map samples from $\p{\vy}$ onto $\p{\vx}$ and $\p{\vx}$ onto $\p{\vy}$, respectively. This allows to compute the $\Lone$ reconstruction errors  $||x - \Gyx(\Gxy(x))||_1$ and $||y - \Gxy(\Gyx(y))||_1$, thus completely removing the need for paired data $(x,y)$. The training of the two models in done an adversarial setup, with two discriminators $\Dx$ and $\Dy$, and is summed up as an optimization problem in \citeq{eq:cyclegan}
+This problem of paired data was solved by \ac{CycleGAN }\cite{Zhu} using cycle-consistency. Instead of training a single model $\G$ with reconstruction between $x$ and $\G(y,z)$, the CycleGAN approach train two domain-transfer models simultaneously: $\Gyx$ and $\Gxy$ that map samples from $\p{\vy}$ onto $\p{\vx}$ and $\p{\vx}$ onto $\p{\vy}$, respectively (\seefigure{fig:cyclegan}). This allows to compute the $\Lone$ reconstruction errors  $||x - \Gyx(\Gxy(x))||_1$ and $||y - \Gxy(\Gyx(y))||_1$, thus completely removing the need for paired data $(x,y)$. The training of the two models in done an adversarial setup, with two discriminators $\Dx$ and $\Dy$, and is summed up as an optimization problem in \citeq{eq:cyclegan}
+
+\begin{figure}
+	\centering
+	\includegraphics[height=\textheight/3,width=\textwidth]{foo.png}
+	\caption{Generative Adversarial Networks framework}
+\end{figure}
+
 
 \begin{align}
 \label{eq:cyclegan}
