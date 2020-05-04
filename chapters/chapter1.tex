@@ -162,7 +162,7 @@ We can formulate a criterion $C(\G)$ by plugin this optimal discriminator in \ci
 Up to additive and multiplicative constants, the criterion  $C(\G)$ can be reformulated as
 
 \begin{equation*}
-		C(\G) = \DKL \Big(\p{\vx}\Big|\Big|\frac{\p{\vx}+\pg{\vx}}{2} \Big) + \DKL{\pg{\vx}}{\frac{\p{\vx}+\pg{\vx}}{2} } = 2\cdot\JSD{\p{\vx}}{\pg{\vx}} \enspace.
+		C(\G) = \DKL{\p{\vx}}{\frac{\p{\vx}+\pg{\vx}}{2}} + \DKL{\pg{\vx}}{\frac{\p{\vx}+\pg{\vx}}{2} } = 2\cdot\JSD{\p{\vx}}{\pg{\vx}} \enspace.
 \end{equation*}
 
 When the discriminator is trained to convergence, minimizing the criterion $C( \G) = \lgan(\D^*, \G)$ is equivalent to minimizing the Jensen-Shannon (\ac{JS}) divergence between $\p{\vx}$ and $\pg{\vx}$. The \GAN training process then consists in alternatively updating the discriminator and the generator via gradient ascent/descent. A summary of this process is presented in \citealg{alg:GAN_train}. 
