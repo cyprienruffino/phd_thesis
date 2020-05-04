@@ -63,7 +63,7 @@ For \ac{GMM}s, sampling a new point consists in, once the Gaussian component has
 \begin{figure}
 	\centering
 	\includegraphics[height=\textheight/3,width=\textwidth]{chapter1/latent_model}
-	\caption{Latent variable model}
+	\caption[Latent variable model]{A mapping between a latent space $\setZ$ and the space of a dataset $\setX$.}
 \end{figure}
 
 Since more complex distributions does not necessarily provide a natural sampling mechanism, using a latent variable model allows to outsource the stochastic part of the sampling  process from the learning process and only learn the function $\G(\vz; \theta)$. More formally, instead of directly modeling $\p{\vx}$, a latent variable model learns a deterministic mapping $\pg{\vx|\vz}$. From this mapping, the generative model can be obtain through marginalization 
