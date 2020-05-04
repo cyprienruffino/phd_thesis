@@ -256,7 +256,7 @@ The \ac{CycleGAN} training process then consists in alternatively updating the t
 
 GANs have shown strong advantages over the classical generative modeling methods, such as generating sharper samples than \ac{VAE}s or taking significantly less time to train and to generate a sample than normalizing flows. However, they exhibit limitations: the instability of the training process; the lack diversity of the generated samples (\textit{mode-collapse}); and finally the problems due to conditioning. 
 
-The instability of the \GAN training process has first been conjectured to be caused by the bad quality of the gradients obtained when $\G$ generates bad samples, which makes $\D$ strongly reject these samples and therefore saturating the loss. The first solution proposed \cite{Goodfellow2014} was to slightly change the generator's loss function from $\log(1-\D(\G(z)))$ to $-\log(\D(\G(z)))$, which helped considerably to avoid failures of the training process and was then widely used%TODO références.
+The instability of the \GAN training process has first been conjectured to be caused by the bad quality of the gradients \cite{Goodfellow2014} obtained when $\G$ generates bad samples, which makes $\D$ strongly reject these samples and therefore saturating the loss. The first solution proposed \cite{Goodfellow2014} was to slightly change the generator's loss function from $\log(1-\D(\G(z)))$ to $-\log(\D(\G(z)))$, which helped considerably to avoid failures of the training process and was then widely used%TODO références.
 
  While this loss term converges to the same minimum as the original loss term, it however no longer correspond to a \ac{JSD}
 
