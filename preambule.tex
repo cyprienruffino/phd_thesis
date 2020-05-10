@@ -32,10 +32,14 @@
 \usepackage[utf8]{inputenc}		% LaTeX, comprend les accents !
 \usepackage[T1]{fontenc}
 
-% \usepackage[square,sort&compress,sectionbib]{natbib}		% Doit être chargé avant babel
-% \usepackage{chapterbib}
-% 	\renewcommand{\bibsection}{\section{Références}}		% Met les références biblio dans un \section (au lieu de \section*)
-		
+\usepackage[
+backend=biber,
+bibstyle=reading,
+citestyle=alphabetic
+]{biblatex}
+
+
+
 \usepackage{babel}
 \usepackage{lmodern}
 \usepackage{ae,aecompl}										% Utilisation des fontes vectorielles modernes
@@ -125,7 +129,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Navigation dans le document
-\usepackage[pdftex,pagebackref=true]{hyperref}	% Créera automatiquement les liens internes au PDF
+\usepackage{hyperref}	% Créera automatiquement les liens internes au PDF
 					% Doit être chargé en dernier (Sauf exceptions ci-dessous)
 \hypersetup{
 	    colorlinks = true,

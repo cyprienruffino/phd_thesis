@@ -26,7 +26,7 @@ Generative modeling is the task of learning the underlying distribution of a dat
 
  Indeed,  whereas a discriminative model tries to find decision boundaries by fitting a parametric model $\pt{\vy|\vx}$  to a conditional probability distribution $\p{\vy|\vx}$ of labels $\vy \in \setY$ relatively to the data $\vx \sim \p{x}$, a generative model aims to fit $\pt{\vx}$ to $\p{\vx}$  the intrinsic distribution of the data and to provide a sampling mechanism on this distribution (\seefigure{fig:disc_gen}).
 
-These two learning tasks, the discriminative (\citeq{eq:disc_mle}) modeling and the generative modeling (\ \citeq{eq:gen_mle}) can be formulated as a maximum log-likelihood estimation \cite{Fisher1912}\\
+These two learning tasks, the discriminative (\citeq{eq:disc_mle}) modeling and the generative modeling (\ \citeq{eq:gen_mle}) can be formulated as a maximum log-likelihood estimation \\
 
 \noindent\begin{minipage}{.5\linewidth}
 	\begin{equation}
@@ -310,9 +310,9 @@ where $\mathcal{N}(\mu, \Sigma)$ and $\mathcal{N}(\mu_G, \Sigma_G)$ are the dist
  
 However, while these two metrics are considered to be the standard method for evaluating \ac{GAN}s, their reliance on the pre-trained Inception model can prove to be an issue. Indeed, they behave well when used to compare models learned on natural images datasets such as ImageNet, but they cannot directly be applied to other datasets. A solution to consider can be the training of another classifier network on a more adapted dataset, but this solution cannot be applied when no labeled data is available.
 
-Conditioning : Direct evaluation (pixel-wise), Classifier accuracy, Projections (PCA, t-SNE)
+For completeness, we can also refer to less used metrics for evaluating visual quality: The Parzen window (or kernel density estimation) \cite{Parzen1962} aim to estimate the likelihood of the generated samples; the Sliced Wasserstein Distance \cite{Julien2011} is an efficient approximation of the Earth-Mover (or Wasserstein) distance; the  Kernel Inception Distance \cite{Binkowski2018a} is a recent metric that evaluates the maximum mean discrepancy between Inception features with a polynomial kernel.
 
-Limitations of those metrics : need a pre-trained model
+%\end{landscape}
 
 
 \section{The GAN Zoo}
