@@ -1,0 +1,87 @@
+\input{../tikzheader.tex}
+
+\begin{document}
+	
+	
+	\begin{tikzpicture}[scale=0.7,dot/.style={circle,minimum size=1mm,inner sep=0pt, fill=\cola}]
+	
+	\begin{scope}[triangle/.style = {regular polygon, regular polygon sides=3}]
+	
+	\path[draw=\cold,dashed] plot [smooth cycle] coordinates {(-0.5,-0.5) (-0.5,5.5) (5.5,5.5) (5.5,-.5)};
+
+\node[draw=\cola,fill=\cola, triangle] at (0,0) (xsw) {};
+\node[draw=\cola,fill=\cola, triangle] at (0.7,1.5)  {};
+\node[draw=\cola,fill=\cola, triangle] at (0.9,0.6)  {};
+\node[draw=\cola,fill=\cola, triangle] at (2,1)  {};
+
+\node[draw=\colb,fill=\colb, rectangle] at (4.5,4.1) {};
+\node[draw=\colb,fill=\colb, rectangle] at (3.5,4.5) {};
+\node[draw=\colb,fill=\colb, rectangle] at (5,5) (xne) {};
+
+
+\node[draw=\cold,fill=\cold, circle] at (2.5,2.7) {};
+\node[draw=\cold,fill=\cold, circle] at (2.7,2.4) {};
+\node[draw=\cold,fill=\cold, circle] at (3,2.5) {};
+\node[draw=\cold,fill=\cold, circle] at (3.5,2.6) {};
+
+\node[draw=\colc!75!\cold,fill=\colc!75!\cold, diamond] at (0.5,4.1) {};
+\node[draw=\colc!75!\cold,fill=\colc!75!\cold, diamond] at (0.7,4.5) {};
+\node[draw=\colc!75!\cold,fill=\colc!75!\cold, diamond] at (0.1,5)  {};
+		
+		
+	\end{scope}
+	
+	
+	\begin{scope}[xshift=9cm, triangle/.style = {regular polygon, regular polygon sides=3}]
+	
+	\path[draw=\cold,dashed] plot [smooth cycle] coordinates {(-0.5,-0.5) (-0.5,5.5) (5.5,5.5) (5.5,-.5)};
+
+	% Gaussian blue
+	\foreach\i in {0,0.1,...,1} {
+		\fill[opacity=\i/4,\cola,rotate around={300:(1,0.8)}](1,0.8)ellipse ({1.5-\i} and {2.5-2*\i});         
+	};
+
+	\foreach\i in {0,0.1,...,1} {
+	\fill[opacity=\i/4,\cola,rotate around={90:(4.5,4.5)}](4.5,4.5)ellipse ({1.5-\i} and {1.8-\i});         
+	};
+	
+	\foreach\i in {0,0.1,...,1} {
+		\fill[opacity=\i/4,\cola,rotate around={30:(0.5,4.5)}](0.5,4.5)ellipse ({1.2-\i} and {1.8-2*\i});         
+	};
+
+	\foreach\i in {0,0.1,...,1} {
+	\fill[opacity=\i/4,\cola,rotate around={90:(3,2.5)}](3,2.5)ellipse ({1.5-\i} and {2-\i});         
+};
+
+	%\path[fill=\cola!20] plot [smooth cycle] coordinates {(-0.5,-0.5) (-0.5,2) (2.3,2) (2.3,-.5)};
+	%\path[fill=\colb!20] plot [smooth cycle] coordinates {(3,3.8) (3,5.3) (5.5,5.3) (5.5,3.8)};
+	%\path[fill=\colc!20] plot [smooth cycle] coordinates {(-0.5,3.5) (-0.5,5.5) (1.5,5.5) (1.5,3.5)};
+	%\path[fill=\cold!20] plot [smooth cycle] coordinates {(2,2) (2,3) (4,3) (4,2)};	
+	
+	\node[draw=black,fill=black, circle] at (0,0) (xsw) {};
+	\node[draw=black,fill=black, circle] at (0.7,1.5)  {};
+	\node[draw=black,fill=black, circle] at (0.9,0.6)  {};
+	\node[draw=black,fill=black, circle] at (2,1)  {};
+	
+	\node[draw=black,fill=black, circle] at (4.5,4.1) {};
+	\node[draw=black,fill=black, circle] at (3.5,4.5) {};
+	\node[draw=black,fill=black, circle] at (5,5) (xne) {};
+	
+		
+	\node[draw=black!75!\cold,fill=black!75!\cold, circle] at (0.5,4.1) {};
+	\node[draw=black!75!\cold,fill=black!75!\cold, circle] at (0.7,4.5) {};
+	\node[draw=black!75!\cold,fill=black!75!\cold, circle] at (0.1,5)  {};
+		
+	\node[draw=black,fill=black, circle] at (2.5,2.7) {};
+	\node[draw=black,fill=black, circle] at (2.7,2.4) {};
+	\node[draw=black,fill=black, circle] at (3,2.5) {};
+	\node[draw=black,fill=black, circle] at (3.5,2.6) {};
+
+	
+	\end{scope}
+	
+	
+	\end{tikzpicture}
+	
+	
+\end{document}
