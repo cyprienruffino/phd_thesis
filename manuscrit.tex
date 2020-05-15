@@ -28,6 +28,7 @@
 \documentclass[a4paper, english, 11pt, twoside,openright]{report}
 \input{preambule}		% Liste des packages et de leurs options
 \input{commandes_perso}	% Commandes et environnements perso
+\input{palette.tex}  % Palette de couleurs pour les graphiques
 \input{mathmacros}
 \input{page_de_garde}
 
@@ -40,15 +41,14 @@
     pdfkeywords={TODO}%TODO
 }
 
-\bibliography{library.bib}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%   			Liste des fichiers à compiler					%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% Répertoire contenant les images
-\graphicspath{{images/}}
+% Répertoires contenant les images
+\graphicspath{{images/}, {tikz/}}
+
 % Infos de la page de garde
 \author{Cyprien \textsc{Ruffino}}
 \title{Auxiliary Tasks for the Conditioning of Generative Adversarial Networks}
@@ -105,7 +105,7 @@
 \addcontentsline{toc}{chapter}{Bibliography}
 %\bibliographystyle{unsrt}
 \printbibliography
-\nocite{*}
+%\nocite{*}
 
 % Annexes
 \begin{appendix}

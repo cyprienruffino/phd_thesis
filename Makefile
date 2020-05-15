@@ -5,7 +5,7 @@ show: manuscrit
 
 manuscrit:
 	pdflatex -jobname=Manuscrit Manuscrit.tex
-	bibtex Manuscrit
+	biber Manuscrit
 	pdflatex -jobname=Manuscrit Manuscrit.tex
 	pdflatex -jobname=Manuscrit Manuscrit.tex
 

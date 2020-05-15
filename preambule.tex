@@ -28,15 +28,19 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% Réglage des fontes et typo    
+%% Réglage des fontes, des typo  et des graphiques
+\usepackage[usenames,dvipsnames]{xcolor} % Coloration de texte
+
 \usepackage[utf8]{inputenc}		% LaTeX, comprend les accents !
 \usepackage[T1]{fontenc}
 
 \usepackage[
 backend=biber,
-bibstyle=reading,
-citestyle=alphabetic
+bibstyle=authoryear,
+citestyle=authoryear,
+natbib=true
 ]{biblatex}
+\addbibresource{library.bib}
 
 
 
@@ -44,7 +48,7 @@ citestyle=alphabetic
 \usepackage{lmodern}
 \usepackage{ae,aecompl}										% Utilisation des fontes vectorielles modernes
 \usepackage[upright]{fourier}
-\usepackage{xcolor} % Coloration de texte
+
 \usepackage{csquotes}
 
 
@@ -135,6 +139,7 @@ citestyle=alphabetic
 	    colorlinks = true,
 	    citecolor=.,
 		linkcolor=.,
+		urlcolor=.,
 		linkbordercolor = {white}
 	}
 
@@ -157,6 +162,9 @@ citestyle=alphabetic
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[french,color=white,linecolor=black]{todonotes} % Voir 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Paquets graphiques
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -165,3 +173,4 @@ citestyle=alphabetic
 
 \usepackage{algorithmic, algorithm}
 \usepackage{pdflscape}
+\DeclareUnicodeCharacter{0328}{ }
