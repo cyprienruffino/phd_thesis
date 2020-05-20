@@ -2,3 +2,19 @@
 \newcommand{\tikznn}[3]{
 \filldraw[#3]  plot coordinates {(#1,#2) (#1,#2+2.5) (#1+2.5,#2+2) (#1+2.5,#2+.5) (#1,#2) };
 }
+
+\newcommand{\tikznnae}[3]{
+	\filldraw[#3]  plot coordinates {(#1,#2) (#1,#2+2.5) (#1+1.25,#2+2.25) (#1+2.5,#2+2.5) (#1+2.5,#2) (#1+1.25,#2+0.25) (#1,#2) };
+}
+
+\newcommand{\tikzbrect}[3]{
+	\filldraw[#3, draw=black]  plot coordinates {(#1,#2) (#1,#2+2.5) (#1+0.8,#2+2.5) (#1+0.8,#2) (#1,#2) };
+}
+
+\newcommand{\tikzbrectsmall}[3]{
+	\filldraw[#3, draw=black]  plot coordinates {(#1,#2) (#1,#2+1.5) (#1+0.5,#2+1.5) (#1+0.5,#2) (#1,#2) };
+}
+
+\newcommand{\tikzbrectshort}[3]{
+	\filldraw[#3, draw=black]  plot coordinates {(#1,#2) (#1,#2+2) (#1+0.8,#2+2) (#1+0.8,#2) (#1,#2) };
+}

@@ -1,0 +1,42 @@
+\input{../tikzheader.tex}
+
+	\begin{document}
+		\begin{tikzpicture}[scale=0.7,dot/.style={circle,minimum size=1mm,inner sep=0pt, fill=\cola}]
+			
+	\begin{scope}
+	
+		\begin{axis}[]
+			%\draw[->] (0.5,0) -- (2.5,0) node[right] {};
+			%\draw[->] (0.5,0) -- (0.5,1.5) node[above] {};
+			\addplot[
+				scale=1,
+				domain=0.2:2.8,
+				smooth,
+				line width=2pt,
+				variable=\x,
+				\cola] plot ({\x}, {((1/(0.2 * sqrt(2*pi))) * exp((-1/2)*((\x-1)/0.2)^2) + (1/(0.2 * sqrt(2*pi))) * exp((-1/2)*((\x-2)/0.2)^2))/2});
+		
+
+			\addplot[\colb, mark=+] table [x=x, y=y,  col sep=space] {kla.csv};
+
+		\end{axis}
+	\end{scope}			
+	
+	\begin{scope}[xshift=8cm]
+			\begin{axis}[]
+	%\draw[->] (0.5,0) -- (2.5,0) node[right] {};
+	%\draw[->] (0.5,0) -- (0.5,1.5) node[above] {};
+		\addplot[
+		scale=1,
+		domain=0.2:2.8,
+		smooth,
+		line width=2pt,
+		variable=\x,\colb] plot ({\x}, 
+{(1/(0.3 * sqrt(2*pi))) * exp((-1/2)*((\x-1)/0.3)^2)});
+				\addplot[\cola, mark=+] table [x=x, y=y,  col sep=space] {klb.csv};
+	\end{axis}
+	\end{scope}
+			
+		\end{tikzpicture}
+	
+\end{document}

@@ -1,0 +1,42 @@
+\input{../tikzheader.tex}
+
+\begin{document}
+	
+	
+	\begin{tikzpicture}[scale=0.7,dot/.style={circle,minimum size=1mm,inner sep=0pt, fill=\cola}]
+				
+	\draw[->, line width=.2mm] (-1.5,0.8)--(-1.2,0.8);
+	\filldraw[fill=\colc,draw=black] plot coordinates {(-3.3,0.5) (-2.8,0.5) (-2.8,2) (-3.3,2) (-3.3,0.5)};	
+	\draw node at (-3.1,1.2) {\Large$\vz$};
+	
+	\tikzbrectshort{.4}{-2.7}{fill=\colc};
+	\draw node at (.8,-1.8) {\Large$\setX$};
+				
+	\begin{scope}[yshift=2.5cm,rotate=180]
+		\tikznn{0}{0}{fill=\cola}
+		\end{scope}
+		\draw node at (-1.2,1.2) {\Large$G$};
+		
+%	\filldraw[fill=\cold, draw=black] plot coordinates {(.4,0) (.4,2.5) (1.2,2.5) (1.2,0) (.4,0) };
+	\tikzbrectshort{.4}{0.2}{fill=\cold,draw=black}
+	\draw node at (.8,1.2) {\Large$\tilde{\setX}$};
+	
+	\draw[-, line width=.2mm] (1.2,1.2)--(2.1,1.2);
+	\draw[-, line width=.2mm] (2.1,1.2)--(2.1,0);
+	\draw[->, line width=.2mm] ((2.1,0)--(3,0);
+	
+	\draw[-, line width=.2mm] (1.2,-1.7)--(2.1,-1.7);
+	\draw[-, line width=.2mm] (2.1,-1.7)--(2.1,-0.5);
+	\draw[->, line width=.2mm] ((2.1,-0.5)--(3,-0.5);
+		
+	\tikznn{3}{-1.5}{draw=black,fill=\colb}
+	\draw node at (4.2,-0.3) {\Large$D$};
+
+	\filldraw[fill=\cold,draw=black] plot coordinates {(5.7,-1) (5.7,0.5) (6.2,0.5) (6.2,-1) (5.7,-1) };
+	
+	\draw node at (5.95,-0.7) {\large$0$};
+	\draw node at (5.95,0.1) {\large$1$};
+	
+	\end{tikzpicture}
+	
+\end{document}

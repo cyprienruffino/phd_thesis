@@ -9,16 +9,15 @@
 \newpage
 
 \section{Generative modeling}
-we will first propose an overview of generative modeling
+Generative modeling with deep neural networks has been a challenging task due to the stochastic nature of sampling, which prevents the computation of gradient, thus preventing the classical training of a deep model with gradient descent. However recent approaches such as variational autoencoders (\ac{VAE}s) \citep{Kingma2014b}, flow methods \citep{Dinh2017, Kingma2018} and adversarial models \citep{Goodfellow2014} managed to overcome this restriction. In this section, we first propose an introduction to generative modeling with a focus on latent variable models.
 
-Generative modeling with deep neural networks has been a challenging task due to the stochastic nature of sampling, which prevents the computation of gradient, thus preventing the training of a deep model with gradient descent.  \CR{TODO}%TODO
 
 \subsection{Generative modeling with maximum likelihood estimation}
 
 \begin{figure}
 	\centering
-	\includegraphics[width=\textwidth]{chapter1/disc_gen.pdf}
-%	\caption[Generative modeling]{Left: Discriminative modeling, the model aims to assign a class to each data point. Right: Generative modeling, the model aims to learn the underlying probability distribution of the data points.}
+	\includegraphics[width=\textwidth*3/4]{chapter1/disc_gen.pdf}
+	\caption[Generative modeling]{Left: Discriminative modeling, the model aims to assign a class to each data point. Right: Generative modeling, the model aims to learn the underlying probability distribution of the data points.}
 	\label{fig:disc_gen}
 \end{figure}
 
@@ -62,7 +61,7 @@ For \ac{GMM}s, sampling a new point consists in, once the Gaussian component has
 
 \begin{figure}
 	\centering
-	\includegraphics[width=\textwidth]{chapter1/latent_model.pdf}
+	\includegraphics[width=\textwidth*3/4]{chapter1/latent_model.pdf}
 	\caption[Latent variable model]{A mapping between a latent space $\setZ$ and the space of a dataset $\setX$.}
 \end{figure}
 
@@ -95,8 +94,8 @@ However, since sampling $\vz \sim\qf{\vz|\vx}$ is not differentiable, the \ac{VA
 
 \begin{figure}
 	\centering
-	\includegraphics[width=\textwidth]{chapter1/vae.pdf}	%\includegraphics[height=\textheight/5,width=\textwidth*2/5]{chapter1/vae_latent.jpg}
-	\caption[Variational auto-encoder]{ Variational auto-encoder global architecture}
+	\includegraphics[width=\textwidth*3/4]{chapter1/vae.pdf}	%\includegraphics[height=\textheight/5,width=\textwidth*2/5]{chapter1/vae_latent.jpg}
+	\caption[Variational auto-encoder]{ Variational auto-encoder framework}
 \end{figure}
 
 Finally, generating a sample $\vx$ with the trained model can be done by sampling a random vector $\epsilon \sim  \mathcal{N}(0,1)$ and computing $\vx = \G(\vz)$.
@@ -130,7 +129,7 @@ In the same fashion as the generative models mentioned in \citesub{sub:deep_gen_
 
 \begin{figure}
 	\centering
-	\includegraphics[width=\textwidth]{chapter1/div.pdf}\hspace{-2cm}
+	\includegraphics[width=\textwidth*3/4]{chapter1/div.pdf}\hspace{-2cm}
 	\caption[Illustration of a divergence]{A divergence can capture the distance between a (parametric) distribution and the estimated distribution of a set of data points $\setX$}
 	\label{fig:divergence}
 \end{figure}
@@ -148,7 +147,7 @@ The intuition behind this model is that once the discriminator is trained, maxim
 
 \begin{figure}
 	\centering
-	\includegraphics[height=\textheight/3,width=\textwidth]{foo.png}
+	\includegraphics[width=\textwidth*2/3]{chapter1/gan.pdf}
 	\caption{Generative Adversarial Networks framework}
 \end{figure}
 
@@ -202,7 +201,7 @@ As shown above, this mini-max game has, assuming infinite capacity for both $G$ 
 
 While classical generative models such as \ac{GAN}s try to unconditionally approximate the real-data distribution $\p{\vx}$, a conditional generative model aim to learn a model of the conditional distribution $\p{\vx|\vy}$, where $y \in \setY$ is a label of any kind.
 
-Several extensions of the \ac{GAN} framework allow for conditional modeling. First introduced, Conditional \ac{GAN}s (\ac{CGAN}s)\citep{Goodfellow2014} \citep{Mirza2014} simply adds the label $y$ as an input for both the discriminator and the generator. The new optimization problem that results from this change is summed-up in  \citeq{eq:CGAN_problem} as follows
+Several extensions of the \ac{GAN} framework allow for conditional modeling. First introduced, Conditional \ac{GAN}s (\ac{CGAN}s)\citep{Goodfellow2014, Mirza2014} simply adds the label $y$ as an input for both the discriminator and the generator. The new optimization problem that results from this change is summed-up in  \citeq{eq:CGAN_problem} as follows
 
 \begin{equation}
 \label{eq:CGAN_problem}
@@ -212,33 +211,36 @@ Several extensions of the \ac{GAN} framework allow for conditional modeling. Fir
 While this approach is trivially simple to implement, it relies entirely on the discriminator to use the label. Other approaches try to learn the conditional distribution by adding an explicit loss term to the optimization problem, such as Auxillary Classifier GAN (ACGAN) \citep{Odena2016}. This approach aims to learn a conditional generative model with discrete labels by adding another output to the discriminator that acts as a classifier. The model is then trained by having both the generator and the discriminator minimize the categorical cross-entropy  between the real and predicted labels.
 
 \subsection{Domain-transfer with \ac{GAN}s}
-
-Domain-transfer is the task of learning a mapping $\p{\vx|\vy}$ between two high-dimensional distributions $\p{\vx}$ and $\p{\vy}$ that maintains semantic information, for example changing the color palette of an image while keeping the same objects at the same position. \ac{CGAN}s already learn to model the conditional distribution $\p{\vx|\vy}$, and adding a way to enforce the consistency of the semantic information enables
-domain-transfer.
-
-Pix2Pix \citep{Isola2016} implemented this approach  explicitly by using paired samples $(x, y) \sim \p{\vx|\vy}$ forcing the generator to minimize the $\Lone$ reconstruction term between $x$ and $\G(y,z)$ (\citeq{ex:pix2pix}). 
-
-\begin{equation}
-\label{eq:pix2pix}
-\arg\min_G\max_\D L_{p2p} =  \arg\min_G\max_\D \lcgan(\D, \G) +\lambda\esp{x\sim\p{\vx}\\y\sim\p{\vy}\\z\sim\p{\vz}} ||x - G(y, z)||_1
-\end{equation}
-
-However, this kind of approaches rely on paired data which can be very hard to obtain, especially in the case of natural images. When trying for example to transfer images of zebras to images of horses, you need a dataset of very similar zebras and horses in the exact same position for the $\Lone$ term to work.
-
-This problem of paired data was solved by \ac{CycleGAN} \citep{Zhu2017} using cycle-consistency. Instead of training a single model $\G$ with reconstruction between $x$ and $\G(\vy,\vz)$, the CycleGAN approach train two domain-transfer models simultaneously: $\Gyx$ and $\Gxy$ that map samples from $\p{\vy}$ onto $\p{\vx}$ and $\p{\vx}$ onto $\p{\vy}$, respectively (\seefigure{fig:cyclegan}). This allows to compute the $\Lone$ reconstruction errors  $||x - \Gyx(\Gxy(\vx))||_1$ and $||y - \Gxy(\Gyx(\vy))||_1$, thus completely removing the need for paired data $(x,y)$. The training of the two models in done an adversarial setup, with two discriminators $\Dx$ and $\Dy$, and is summed up as an optimization problem in \citeq{eq:cyclegan}
+\label{subsec:domain_transfer}
 
 \begin{figure}
 	\centering
-	\includegraphics[height=\textheight/3,width=\textwidth]{foo.png}
-	\caption{CycleGAN framework}
+	\includegraphics[width=\textwidth*3/5]{chapter1/cyclegan}
+	\caption{The CycleGAN approach. Half of the training setup is illustrated, the other half consisting in the same setup but with inverted $X $ and $Y$}
 	\label{fig:cyclegan}
 \end{figure}
 
 
+Domain-transfer is the task of learning a mapping $\p{\vx|\vy}$ between two high-dimensional distributions $\p{\vx}$ and $\p{\vy}$ that maintains semantic information, for example changing the color palette of an image while keeping the same objects at the same position. \ac{CGAN}s already learn to model the conditional distribution $\p{\vx|\vy}$, and adding a way to enforce the consistency of the semantic information enables
+domain-transfer.
+
+Pix2Pix \citep{Isola2016} implemented this approach  explicitly by using paired samples $(x, y) \sim \p{\vx|\vy}$ forcing the generator to minimize the $\Lone$ reconstruction term between $x$ and $\G(y,z)$
+
+\begin{equation*}
+\arg\min_G\max_\D L_{p2p} =  \arg\min_G\max_\D \lcgan(\D, \G) +\lambda\esp{x\sim\p{\vx}\\y\sim\p{\vy}\\z\sim\p{\vz}} ||x - G(y, z)||_1 \enspace .
+\end{equation*}
+
+However, this kind of approaches rely on paired data which can be very hard to obtain, especially in the case of natural images. When trying for example to transfer images of zebras to images of horses, you need a dataset of very similar zebras and horses in the exact same position for the $\Lone$ term to work.
+
+
+
+
+This problem of paired data was solved by \ac{CycleGAN} \citep{Zhu2017} using cycle-consistency. Instead of training a single model $\G$ with reconstruction between $x$ and $\G(\vy,\vz)$, the CycleGAN approach train two domain-transfer models simultaneously: $\Gyx$ and $\Gxy$ that map samples from $\p{\vy}$ onto $\p{\vx}$ and $\p{\vx}$ onto $\p{\vy}$, respectively (\seefigure{fig:cyclegan}). This allows to compute the $\Lone$ reconstruction errors  $||x - \Gyx(\Gxy(\vx))||_1$ and $||y - \Gxy(\Gyx(\vy))||_1$, thus completely removing the need for paired data $(x,y)$. The training of the two models in done an adversarial setup, with two discriminators $\Dx$ and $\Dy$, and is summed up as an optimization problem in \citeq{eq:cyclegan}
+
 \begin{align}
 \label{eq:cyclegan}
 \arg\min_{\Gxy, \Gyx}\max_{\Dx, \Dy} \lcycgan &=   \arg\min_{\Gxy, \Gyx}\max_{\Dx, \Dy} \lgan(\Dx, \Gyx) + \lgan(\Dy, \Gxy) \nonumber \\
-& +\lambda \esp{x\sim\p{\vx}} ||x - \Gyx(\Gxy(x)||_1 + \lambda\esp{y\sim\p{\vy}} ||y - \Gxy(\Gyx(y)||_1
+& +\lambda \esp{x\sim\p{\vx}} ||x - \Gyx(\Gxy(x)||_1 + \lambda\esp{y\sim\p{\vy}} ||y - \Gxy(\Gyx(y)||_1 \enspace .
 \end{align}
 
 The \ac{CycleGAN} training process then consists in alternatively updating the two discriminator and the two generators via gradient ascent/descent. A summary of this process is presented in \citealg{alg:cyclegan_train}. 
@@ -268,26 +270,47 @@ The \ac{CycleGAN} training process then consists in alternatively updating the t
 
 \subsection{Limitations}
 
-GANs have shown strong advantages over the classical generative modeling methods, such as generating sharper samples than \ac{VAE}s or taking significantly less time to train and to generate a sample than normalizing flows. They however bear limitations, namely: the instability of the training process; the lack diversity of the generated samples (\textit{mode-collapse}); and finally the problems induced by the conditioning. 
+GANs have shown strong advantages over the classical generative modeling methods, such as generating sharper samples than \ac{VAE}s or taking significantly less time to train and to generate a sample than normalizing flows. They however bear limitations, namely: the instability of the training process; the loss of diversity in the generated samples (\textit{mode-collapse}); and finally the problem of black-box conditioning. 
 
-The instability of the \ac{GAN} training process has first been conjectured to be caused by the bad quality of the gradients obtained when $\G$ generates bad samples, which makes $\D$ strongly reject these samples and therefore saturating the loss. The first solution proposed \citep{Goodfellow2014} was to slightly change the generator's loss function from $\log(1-\D(\G(z)))$ to $-\log(\D(\G(z)))$, which helped considerably to avoid failures of the training process and was then widely used%TODO références.
+\subsubsection{Instability}
+
+As we have seen in the previous section, training \ac{GAN}s consist in solving a minimax problem. While the alternate gradient descent algorithm is a straightforward method for solving such a problem, the alternating updates can cause significant instabilities during the training process. This can result in oscillating values of the loss function which prevents convergence \citep{Mescheder2018}, which makes it difficult to determine a when to stop training. In the end, this behavior can be harmful in terms of performance.
+
+\CR{Figure loss GAN}
+
+The instability of the \ac{GAN} training process has first been conjectured to be caused by the bad quality of the gradients obtained when $\G$ generates bad samples, which makes $\D$ strongly reject these samples and therefore saturating the loss. The first solution proposed \citep{Goodfellow2014} was to slightly change the generator's loss function from $\log(1-\D(\G(z)))$ to $-\log(\D(\G(z)))$, which helped considerably in avoiding failures of the training process and was then widely used \citep{Radford2015} \CR{Plus de citations}.
 
  While this loss term converges to the same minimum as the original loss term, minimizing it no longer correspond to minimizing a \ac{JS} divergence but the non-symmetric reverse \ac{KL} divergence (minus a \ac{JS} term) \citep{Arjovsky2017a}. More formally, 
 
 \begin{equation*}
-	\esp{\vz\sim\p{\vz}}\Big[\nabla_\G\log\D^*(\G(\vz))\Big] = \nabla_\G\Big[\DKL{\pg{\vx}}{\p{x}} - 2\JSD{\pg{\vx}}{\p{x}}\Big]
+	\esp{\vz\sim\p{\vz}}\Big[\nabla_\G\log\D^*(\G(\vz))\Big] = \nabla_\G\Big[\DKL{\pg{\vx}}{\p{x}} - 2\JSD{\pg{\vx}}{\p{x}}\Big] \enspace .
 \end{equation*}
 
 \begin{figure}
 	\centering
-	\includegraphics[height=\textheight/3,width=\textwidth]{chapter1/kl_rkl}
-	\caption{Reverse \ac{KL} (left) and \ac{KL} (right) divergence between the true blue distribution and the mode-collapsed red distribution . The distance is low in the case of the reverse \ac{KL}, even if a missing mode is clearly visible.}
+	\includegraphics[width=\textwidth]{chapter1/kl_rkl.pdf}
+	\caption{Reverse \ac{KL} (left) and \ac{KL} (right) divergence between the true blue distribution and the mode-collapsed orange distribution . The distance is lower in the case of the reverse \ac{KL}, even if a missing mode is clearly visible.}
 	\label{fig:kl_rkl}
 \end{figure}
 
-The main issue of the reverse \ac{KL} divergence is that it does not penalize "missing" parts of the learned distribution $\pg{\vx}$, which are some points in the support of $\p{\vx}$ that have zero (or near-zero) probability on $\pg{\vx}$ (\seefigure{fig:kl_rkl}). This phenomenon leads to  (\textit{mode collapse}: different $\vz_1, \vz_2$ are mapped to samples $\G(\vz_1)$ and $\G(\vz_2)$ that are very close;  and  \textit{mode dropping}: only a localized subset of the distribution can actually be mapped to. This issues raise a first trade-off, since using the original \ac{GAN} creates instability which lead to a drop of visual quality, and using the non-saturating variant creates a lack of diversity. 
+However, albeit an empirical reduction of the instability, this loss substitution has been proved to not solve the instability problem \citep{Arjovsky2017a}. This is mainly due to an unstable behavior of these divergences when the real distribution and the learned one does not share the same support.
 
-While these issues already arise in the unconditional setting, su
+ A lot of similar tricks can be applied to the training process in order to avoid this pitfall \citep{Salimans2016, Sonderby2017, Heusel2017},  and while more recent approaches seemed to help alleviate this issue (which will be more detailed in the next section), instability can still be observed in the most recent approaches \citep{Brock2018}. Even though several theory-backed techniques aimed to solve this issue \citep{Arjovsky2017, Nowozin2016, Li2017a}, there are still, at the time of writing this thesis, neither clear consensus on the theoretical causes of this instability nor completely efficient solutions.
+
+
+\subsubsection{Mode collapse}
+
+Although the aforementioned change of loss can help solving the instability issues, using the reverse \ac{KL} divergence is conjectured to be one of the causes of another issue: the \textit{mode collapse} problem: different $\vz_1, \vz_2$ are mapped to samples $\G(\vz_1)$ and $\G(\vz_2)$ that are very close;  and  \textit{mode dropping}: only a localized subset of the distribution can actually be mapped to, leading to missing modes in the generated samples.
+
+Indeed, the reverse \ac{KL} divergence does not penalize "missing" parts of the learned distribution $\pg{\vx}$, which are some points in the support of $\p{\vx}$ that have zero (or near-zero) probability on $\pg{\vx}$ (\seefigure{fig:kl_rkl}).
+
+Another conjectured cause is raised by the alternate gradient descent, in that it does not clearly prioritize the minimax formulation $\G^* = \min_\G\max_\D \lgan$ over the maximin formulation $\G^* = \max_\D\min_\G \lgan$, which does not behave in the fashion as it pushes the generator towards mapping every $\vz$ to the single most probable $\vx$, evaluated  by the generator \citep{Goodfellow2016}.
+
+In the same fashion as the instability problem, there is at the time of writing this thesis no fundamental explanation to this issue. However, it still raise a first trade-off: since using the original \ac{GAN} creates instability which lead to a drop of visual quality, and using the non-saturating variant creates a lack of diversity. This extends to more recent approaches in which higher visual quality induces a loss of diversity \citep{Brock2018}.
+
+In the most extreme cases, this loss of diversity can result in a complete collapsing of the sampling mechanism, making it completely impossible to draw diverse samples. However this is not as much of an issue for conditional tasks that consists in mapping an input to one of many acceptable outputs, with one example of such a task being the aforementioned domain-transfer (see \citesec{subsec:domain_transfer}). 
+
+\subsubsection{Black-box conditioning}
 
 \CR{
 
@@ -312,7 +335,7 @@ In order to provide a more precise evaluation of the visual quality of generated
 
 Although it has been widely used, \ac{IS} has shown major issues \citep{Barratt2018} that raise from the use of the conditional label distribution. Most notably, examples that are correctly classified are not necessarily of the highest quality and the pre-determined label classes can skew the estimation of the marginal distribution $p_\G(\vy)$.
 
-The \textbf{Fréchet Inception Distance (\ac{FID})} \citep{Heusel}  differs from \ac{IS} since it evaluates a distance between the distributions of visual features computed on real and generated data, instead of relying on the labels. These features are extracted at the penultimate layer of the Inception classifier. The distributions of these features are assumed Gaussian, so that the Fréchet distance (or Wasserstein-2 distance) can be computed as
+The \textbf{Fréchet Inception Distance (\ac{FID})} \citep{Heusel2017}  differs from \ac{IS} since it evaluates a distance between the distributions of visual features computed on real and generated data, instead of relying on the labels. These features are extracted at the penultimate layer of the Inception classifier. The distributions of these features are assumed Gaussian, so that the Fréchet distance (or Wasserstein-2 distance) can be computed as
 \begin{equation*}
 	FID = ||\mu – \mu_G||^2 + Tr(\Sigma + \Sigma_G – 2\sqrt{\Sigma*\Sigma_G}) \enspace ,
 \end{equation*}

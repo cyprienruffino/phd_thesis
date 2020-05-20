@@ -35,10 +35,12 @@
 \usepackage[T1]{fontenc}
 
 \usepackage[
-backend=biber,
+	backend=biber,
 bibstyle=authoryear,
-citestyle=authoryear,
-natbib=true
+citestyle=apa,
+natbib=true,
+ hyperref=true,
+backref=true
 ]{biblatex}
 \addbibresource{library.bib}
 
@@ -174,3 +176,4 @@ natbib=true
 \usepackage{algorithmic, algorithm}
 \usepackage{pdflscape}
 \DeclareUnicodeCharacter{0328}{ }
+

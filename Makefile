@@ -1,7 +1,7 @@
 all: manuscrit
 
 show: manuscrit
-	xdg-open Manuscrit.pdf
+	xdg-open manuscrit.pdf
 
 tikzfigs:
 	cd tikz;\
@@ -16,9 +16,9 @@ tikzfigs:
 	cd ..
 
 manuscrit: tikzfigs
-	pdflatex -jobname=Manuscrit Manuscrit.tex
-	biber Manuscrit
-	pdflatex -jobname=Manuscrit Manuscrit.tex
+	pdflatex -jobname=manuscrit manuscrit.tex
+	biber manuscrit
+	pdflatex -jobname=manuscrit manuscrit.tex
 
 clean:
 	rm *.aux *.bbl *.acn *.blg *.brf *.glo *.lof *.log *.lot *.maf *.mtc* *.xdy *.toc *.out *.ntn *.fls *.fdb_latexmk *.synctex.gz *.pdf;\

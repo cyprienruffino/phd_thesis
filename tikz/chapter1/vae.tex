@@ -5,13 +5,13 @@
 	
 	\begin{tikzpicture}[scale=0.7,dot/.style={circle,minimum size=1mm,inner sep=0pt, fill=\cola}]
 		
-	\filldraw[fill=\cold, draw=black] plot coordinates {(1,0) (1,2.5) (1.8,2.5) (1.8,0) };
+	\filldraw[fill=\colc, draw=black] plot coordinates {(1,0) (1,2.5) (1.8,2.5) (1.8,0) };
 	\draw node at (1.4,1.2) {\Large$\setX$};
 		
 	\tikznn{2}{0}{draw=black,fill=\cola}
-	\draw node at (3,1.2) {\Large$F$};
+	\draw node at (3.2,1.2) {\Large$F$};
 
-	\filldraw[fill=\colc,draw=black] plot coordinates {(4.7,0.5) (4.7,2) (5.2,2) (5.2,0.5) (4.7,0.5) };
+	\filldraw[fill=\cold,draw=black] plot coordinates {(4.7,0.5) (4.7,2) (5.2,2) (5.2,0.5) (4.7,0.5) };
 	
 	\draw node at (4.95,0.8) {\large$\mu$};
 	\draw node at (4.95,1.6) {\large$\Sigma$};
@@ -25,7 +25,7 @@
 	\node at (7,0.8) {\large$\times$};	
 
 	\draw[->, line width=.2mm] (7.2,0.8)--(7.8,0.8);
-	\filldraw[fill=\colc,draw=black] plot coordinates {(7.8,0.5) (7.8,2) (8.3,2) (8.3,0.5) (7.8,0.5)};	
+	\filldraw[fill=\cold,draw=black] plot coordinates {(7.8,0.5) (7.8,2) (8.3,2) (8.3,0.5) (7.8,0.5)};	
 	\draw node at (8,1.2) {\Large$\vz$};
 	
 	\draw[-, line width=.2mm] (5.2,1.6)--(7,1.6);
@@ -33,17 +33,18 @@
 	
 	\draw[-, line width=.2mm] (5.2,0)--(6,0);
 	\draw[->, line width=.2mm] (6,0)--(6,0.6);
-	\filldraw[fill=\cold,draw=black]  plot coordinates {(4.75,-.25) (5.25,-0.25) (5.25,0.25) (4.75,0.25) (4.75,-.25)} ;
+	\filldraw[fill=\colc,draw=black]  plot coordinates {(4.75,-.25) (5.25,-0.25) (5.25,0.25) (4.75,0.25) (4.75,-.25)} ;
 	\node at (4.95,0.0) {\large$\epsilon$};		
 	
 		
 	\begin{scope}[xshift=15cm,yshift=2.5cm,rotate=180]
 		\tikznn{4}{0}{fill=\colb}
 	\end{scope}
-	\draw node at (10,1.2) {\Large$G$};
+	\draw node at (9.8,1.2) {\Large$G$};
 	
-	\filldraw[fill=\cold, draw=black] plot coordinates {(11.2,0) (11.22,2.5) (12,2.5) (12,0) };
+	\filldraw[fill=\colc, draw=black] plot coordinates {(11.2,0) (11.22,2.5) (12,2.5) (12,0) };
 	\draw node at (11.6,1.2) {\Large$\hat{\setX}$};
 	
-	\end{tikzpicture}	
+	\end{tikzpicture}
+	
 \end{document}
