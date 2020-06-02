@@ -7,7 +7,7 @@
 
 \minitoc
 
- \section{Image Reconstruction with Generative Models}
+ \section{Image Reconstruction, Inpainting and Compressed Sensing}
 
 Image reconstruction is the task of completing an image from a very small subset of the pixels. Such source data can usually be found in domains where the measurement process is very noisy or where measurements are expensive. This task differs from image inpainting since the source data is usually unstructured and very scarce, as in this chapter we will consider randomly scattered measurements of less than a percent of the image. While our discussion focus on image reconstruction, it is noteworthy to mention that this applies to other kinds of signals.
 
@@ -68,11 +68,24 @@ We denote by $x \in \setX = [-1, 1]^{n\times p\times c}$  (see Figure \ref{fig:d
 
 
 \CR{
-Related works : CGAN, AmbientGAN, UNIR,  Compressed Sensing with Meta-Learning
+Related works : CGAN, GAN inpainting
 
 Limitations of these models
 }
-\section{Conditional generation as a Maximum A Posteriori estimation}
+
+\section{Conditional generation as a Compressed Sensing problem}
+
+Sparsity prior, $\ell_0$ norm minimization, Lasso regularization
+
+Deep image prior
+
+%https://arxiv.org/pdf/1703.03208.pdf
+
+%http://corelab.ntua.gr/ml-seminar/slides/Dimakis_NTUA.pdf
+ Compressed Sensing with Meta-Learning
+ AmbientGAN, UNIR
+ 
+\section{Conditional generation as a Maximum A  Posteriori estimation}
 Approche de l'article NeuCom :
 
 Formulation as a Maximum A Posteriori Estimation, assumptions (normal error)

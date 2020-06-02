@@ -1,15 +1,17 @@
-\chapter{Generative Adversarial Networks : Principles, strengths and limitations}
+\chapter{Introduction to Generative Adversarial Networks }
 \label{chap:chapter1}
 
 \begin{chapterabstract}
-	In this chapter, we first propose an introduction to the problem of generative modeling and some solutions to tackle this problem. We then propose an overview of the Generative Adversarial Networks \citep{Goodfellow2014} framework, which is a recent method to train deep neural networks as generative models that is particularly adapted to the task of image generation. We will introduce some of its theoretical interpretations, as well as some of its variations and applications. We discuss the different limitations of this approach and expose a trilemma between the quality of the generated samples, their diversity and the conditioning of the model. We then discuss the recent advances that have been made to overcome some of these limitations and propose a taxonomy of these advances using the aforementioned trilemma. Finally, we discuss the evaluation of generative models and the difficulties of evaluating the intrinsic quality of a generated sample.  We propose an overview of the different classical metrics and discuss their limitations.
+	In this chapter, we first propose an introduction to the problem of generative modeling and some solutions to tackle this problem. We then propose an overview of the Generative Adversarial Networks \citep{Goodfellow2014} framework, which is a recent method to train deep neural networks as generative models that is particularly adapted to the task of image generation. We will introduce some of its theoretical interpretations, as well as some of its variations and applications. We discuss the different limitations of this approach and expose three main goals among the different works: enhancing the visual quality of the generated samples; maintaining their diversity; and conditioning the model. We then discuss the recent advances that have been made to overcome some of these limitations and propose a taxonomy of these advances using the aforementioned directions. We discuss the evaluation of generative models and the difficulties of evaluating the intrinsic quality of a generated sample through an overview of the different classical metrics and discuss their limitations.
 \end{chapterabstract}
 
 \minitoc
 \newpage
 
-\section{Generative modeling}
+\section{Generative modeling with Adversarial models}
 Generative modeling with deep neural networks has been a challenging task due to the stochastic nature of sampling, which prevents the computation of gradient, thus preventing the classical training of a deep model with gradient descent. However recent approaches such as variational autoencoders (\ac{VAE}s) \citep{Kingma2014b}, flow methods \citep{Dinh2017, Kingma2018} and adversarial models \citep{Goodfellow2014} managed to overcome this restriction. In this section, we first propose an introduction to generative modeling with a focus on latent variable models.
+
+We will then focus on the Generative Adversarial Networks \citep{Goodfellow2014} framework, their training process  and some of their variants, especially their conditional and domain-transfer variants. We outline some limitations of this framework and propose a formulation of these limitations in the form of a trilemma between the intrinsic quality of the generated samples, their diversity and the quality of the conditioning of the model. With this tool, we propose a taxonomy of the recent \ac{GAN} approaches and identify trends in these approaches.
 
 
 \subsection{Generative modeling with maximum likelihood estimation}
@@ -116,11 +118,6 @@ Real-valued non-volume preserving (RealNVP) normalizing flows \citep{Dinh2017} u
 %$\vx$ into $\vy$ by partitioning it into $(\vx_1, \vx_2)$ and computing $\vy_1 = \vx_1; \vy_2 = \exp(s_\theta(\vx_1)) \odot \vx_2 + m_\theta(\vx_1)$, where $s_\theta$ and $m_\theta$ are arbitrary scaling and translation parametric functions. These transformations can be inverted as $\vx_1 = \vy_1; \vx_2 = \exp(-s_\theta(\vy_1)) \odot (\vx_2 - m_\theta(\vx_1))$ 
 
 
-\section{Adversarial models}
-
-In this section, we will focus on the Generative Adversarial Networks \citep{Goodfellow2014} framework, their training process  and some of their variants, especially their conditional and domain-transfer variants.
-
-We will then outline some limitations of this framework and propose a formulation of these limitations in the form of a trilemma between the intrinsic quality of the generated samples, their diversity and the quality of the conditioning of the model. With this tool, we propose a taxonomy of the recent \ac{GAN} approaches and identify trends in these approaches.
 
 
 \subsection{Generative Adversarial Networks}
@@ -130,7 +127,7 @@ In the same fashion as the generative models mentioned in \citesub{sub:deep_gen_
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth*3/4]{chapter1/div.pdf}\hspace{-2cm}
-	\caption[Illustration of a divergence]{A divergence can capture the distance between a (parametric) distribution and the estimated distribution of a set of data points $\setX$}
+	\caption[Illustration of a divergence]{A divergence $\Div{\alpha}{\beta}$ can capture the distance between a parametric model $\alpha_\theta$ and the observations $\beta$. Density fitting can then be formulated as $\alpha^* = \arg\min_\theta \Div{\alpha_\theta}{\beta}$, where $\alpha^*$ is the best fit model.}
 	\label{fig:divergence}
 \end{figure}
 
@@ -196,81 +193,10 @@ As shown above, this mini-max game has, assuming infinite capacity for both $G$ 
 	\end{algorithmic}
 \end{algorithm}
 
-
-\subsection{Conditional modeling with  \ac{CGAN}s}
-
-While classical generative models such as \ac{GAN}s try to unconditionally approximate the real-data distribution $\p{\vx}$, a conditional generative model aim to learn a model of the conditional distribution $\p{\vx|\vy}$, where $y \in \setY$ is a label of any kind.
-
-Several extensions of the \ac{GAN} framework allow for conditional modeling. First introduced, Conditional \ac{GAN}s (\ac{CGAN}s)\citep{Goodfellow2014, Mirza2014} simply adds the label $y$ as an input for both the discriminator and the generator. The new optimization problem that results from this change is summed-up in  \citeq{eq:CGAN_problem} as follows
-
-\begin{equation}
-\label{eq:CGAN_problem}
-		\arg\min_G\max_\D \lcgan = 	\arg\min_G\max_\D \esp{x,y\sim \p{\vx,\vy}} [\log \D(x, y)] +  \esp{y\sim \p{\vy} \\ z\sim\p{\vz}} [1 - \log \D(\G(y, z), y)]
-\end{equation}
-
-While this approach is trivially simple to implement, it relies entirely on the discriminator to use the label. Other approaches try to learn the conditional distribution by adding an explicit loss term to the optimization problem, such as Auxillary Classifier GAN (ACGAN) \citep{Odena2016}. This approach aims to learn a conditional generative model with discrete labels by adding another output to the discriminator that acts as a classifier. The model is then trained by having both the generator and the discriminator minimize the categorical cross-entropy  between the real and predicted labels.
-
-\subsection{Domain-transfer with \ac{GAN}s}
-\label{subsec:domain_transfer}
-
-\begin{figure}
-	\centering
-	\includegraphics[width=\textwidth*3/5]{chapter1/cyclegan}
-	\caption{The CycleGAN approach. Half of the training setup is illustrated, the other half consisting in the same setup but with inverted $X $ and $Y$}
-	\label{fig:cyclegan}
-\end{figure}
-
-
-Domain-transfer is the task of learning a mapping $\p{\vx|\vy}$ between two high-dimensional distributions $\p{\vx}$ and $\p{\vy}$ that maintains semantic information, for example changing the color palette of an image while keeping the same objects at the same position. \ac{CGAN}s already learn to model the conditional distribution $\p{\vx|\vy}$, and adding a way to enforce the consistency of the semantic information enables
-domain-transfer.
-
-Pix2Pix \citep{Isola2016} implemented this approach  explicitly by using paired samples $(x, y) \sim \p{\vx|\vy}$ forcing the generator to minimize the $\Lone$ reconstruction term between $x$ and $\G(y,z)$
-
-\begin{equation*}
-\arg\min_G\max_\D L_{p2p} =  \arg\min_G\max_\D \lcgan(\D, \G) +\lambda\esp{x\sim\p{\vx}\\y\sim\p{\vy}\\z\sim\p{\vz}} ||x - G(y, z)||_1 \enspace .
-\end{equation*}
-
-However, this kind of approaches rely on paired data which can be very hard to obtain, especially in the case of natural images. When trying for example to transfer images of zebras to images of horses, you need a dataset of very similar zebras and horses in the exact same position for the $\Lone$ term to work.
-
-
-
-
-This problem of paired data was solved by \ac{CycleGAN} \citep{Zhu2017} using cycle-consistency. Instead of training a single model $\G$ with reconstruction between $x$ and $\G(\vy,\vz)$, the CycleGAN approach train two domain-transfer models simultaneously: $\Gyx$ and $\Gxy$ that map samples from $\p{\vy}$ onto $\p{\vx}$ and $\p{\vx}$ onto $\p{\vy}$, respectively (\seefigure{fig:cyclegan}). This allows to compute the $\Lone$ reconstruction errors  $||x - \Gyx(\Gxy(\vx))||_1$ and $||y - \Gxy(\Gyx(\vy))||_1$, thus completely removing the need for paired data $(x,y)$. The training of the two models in done an adversarial setup, with two discriminators $\Dx$ and $\Dy$, and is summed up as an optimization problem in \citeq{eq:cyclegan}
-
-\begin{align}
-\label{eq:cyclegan}
-\arg\min_{\Gxy, \Gyx}\max_{\Dx, \Dy} \lcycgan &=   \arg\min_{\Gxy, \Gyx}\max_{\Dx, \Dy} \lgan(\Dx, \Gyx) + \lgan(\Dy, \Gxy) \nonumber \\
-& +\lambda \esp{x\sim\p{\vx}} ||x - \Gyx(\Gxy(x)||_1 + \lambda\esp{y\sim\p{\vy}} ||y - \Gxy(\Gyx(y)||_1 \enspace .
-\end{align}
-
-The \ac{CycleGAN} training process then consists in alternatively updating the two discriminator and the two generators via gradient ascent/descent. A summary of this process is presented in \citealg{alg:cyclegan_train}. 
-
-\begin{algorithm}[]
-	\begin{algorithmic}[H]
-		\REQUIRE{$\setX$ and $\setY$ two unpaired datasets, $\Gxy$ and $\Gyx$ the mapping networks, $\Dx$ and $\Dy$ the discrimination models, $m$ the mini-batch size}
-		\REPEAT
-		\STATE sample a mini-batch $\lbrace x_i \rbrace_{i=1}^m$ from $\setX$\;
-		\STATE sample a mini-batch $\lbrace y_i \rbrace_{i=1}^m$ from $\setY$\;
-		\STATE update $\Dx$ by stochastic gradient descent of
-		\STATE \ \ \ \ $ \sum_{i=1}^{m}(\Dx(x_i)-1)^2 + (\Dx(\Gyx(y_i)))^2$
-		\STATE update $\Dy$ by stochastic gradient descent of
-		\STATE \ \ \ \ $ \sum_{i=1}^{m}(\Dy(y_i)-1)^2 + (\Dy(\Gxy(x_i)))^2$
-		\STATE sample a mini-batch $\lbrace x_i \rbrace_{i=1}^m$ from $X$\;
-		\STATE sample a mini-batch $\lbrace y_i \rbrace_{i=1}^m$ from $Y$\;
-		\STATE update $\Gxy$ by stochastic gradient descent of
-		\STATE \ \ \ \ $ \sum_{i=1}^n (\Dy(\Gxy(x_i))-1)^2 + \lambda (||x_i - \Gyx(\Gxy(x_i))||_1$ \STATE \ \ \ \ \ \ \ \ $+||y_i -\Gxy(\Gyx(y_i))||_1)$\;
-		\STATE update $\Gyx$ by stochastic gradient descent of
-		\STATE \ \ \ \ $ \sum_{i=1}^n (\Dx(\Gyx(y_i))-1)^2+ \lambda (||x_i - \Gyx(\Gxy(x_i))||_1 $
-		\STATE \ \ \ \ \ \ \ \ $+ ||y_i - \Gxy(\Gyx(y_i))||_1)$\;
-		\UNTIL a stopping condition is met
-	\end{algorithmic}
-	\caption{CycleGAN training algorithm}
-	\label{alg:cyclegan_train}
-\end{algorithm}
-
 \subsection{Limitations}
+\label{sub:limitations}
 
-GANs have shown strong advantages over the classical generative modeling methods, such as generating sharper samples than \ac{VAE}s or taking significantly less time to train and to generate a sample than normalizing flows. They however bear limitations, namely: the instability of the training process; the loss of diversity in the generated samples (\textit{mode-collapse}); and finally the problem of black-box conditioning. 
+GANs have shown strong advantages over the classical generative modeling methods, such as generating sharper samples than \ac{VAE}s and normalizing flows \citep{Danihelka2017}. They however bear limitations, namely: the instability of the training process; the loss of diversity in the generated samples (\textit{mode-collapse}); and finally the problem of black-box conditioning. 
 
 \subsubsection{Instability}
 
@@ -308,20 +234,212 @@ Another conjectured cause is raised by the alternate gradient descent, in that i
 
 In the same fashion as the instability problem, there is at the time of writing this thesis no fundamental explanation to this issue. However, it still raise a first trade-off: since using the original \ac{GAN} creates instability which lead to a drop of visual quality, and using the non-saturating variant creates a lack of diversity. This extends to more recent approaches in which higher visual quality induces a loss of diversity \citep{Brock2018}.
 
-In the most extreme cases, this loss of diversity can result in a complete collapsing of the sampling mechanism, making it completely impossible to draw diverse samples. However this is not as much of an issue for conditional tasks that consists in mapping an input to one of many acceptable outputs, with one example of such a task being the aforementioned domain-transfer (see \citesec{subsec:domain_transfer}). 
+In the most extreme cases, this loss of diversity can result in a complete collapsing of the sampling mechanism, making it completely impossible to draw diverse samples. However this is not as much of an issue for conditional tasks that consists in mapping an input to one of many acceptable outputs, with one example of such a task being domain-transfer (see \citesec{subsec:domain_transfer}). 
 
-\subsubsection{Black-box conditioning}
 
-\CR{
 
-Instability, catastrophic forgetting and the mode collapse problem
+\section{The GAN Zoo}
 
-Trade-off image quality/diversity : Explanation through the loss term and distribution coverage
+Recently, Generative Adversarial Networks have made considerable progress towards generating realistic high definition images \citep{Brock2018, Karras2020, Wang2018b}. These notable successes leverage on an overwhelming amount of incremental enhancements and variations of the original GAN \citep{Hindupur2017} that has been made in the recent years. In this section, a summary of these GAN variants is proposed by examining different three objectives: conditioning the generation, enhancing the visual quality of the generated samples, ensuring some diversity among the generated samples. We propose a classification of these approaches into three categories: alternative and additional losses for conditioning;  changes to the original objective functions; and improvements to the  architecture, regularization, normalization and training process. A summary of this overview is presented in \citefig{fig:trilemma}.
 
-Black-box approach to conditioning, no tuning possible, no interpretability
-}
 
-\subsection{A note on the  evaluation of generative models}
+\subsection{Conditional modeling and domain-transfer}
+
+\CR{TODO} %TODO Intro subsection
+
+\subsubsection{Conditional modeling}
+
+While classical generative models such as \ac{GAN}s try to unconditionally approximate the real-data distribution $\p{\vx}$, a conditional generative model aim to learn a model of the conditional distribution $\p{\vx|\vy}$, where $y \in \setY$ is a label of any kind.
+
+Several extensions of the \ac{GAN} framework allow for conditional modeling. First introduced, Conditional \ac{GAN}s (\ac{CGAN}s)\citep{Goodfellow2014, Mirza2014} simply adds the label $y$ as an input for both the discriminator and the generator. The new optimization problem that results from this change is summed-up in  \citeq{eq:CGAN_problem} as follows
+
+\begin{equation}
+\label{eq:CGAN_problem}
+\arg\min_G\max_\D \lcgan = 	\arg\min_G\max_\D \esp{x,y\sim \p{\vx,\vy}} [\log \D(x, y)] +  \esp{y\sim \p{\vy} \\ z\sim\p{\vz}} [1 - \log \D(\G(y, z), y)]
+\end{equation}
+
+While this approach is trivially simple to implement, it relies entirely on the discriminator to use the label. Other approaches try to learn the conditional distribution by adding an explicit loss term to the optimization problem, such as Auxillary Classifier GAN (ACGAN) \citep{Odena2016}. This approach aims to learn a conditional generative model with discrete labels by adding another output to the discriminator that acts as a classifier. The model is then trained by having both the generator and the discriminator minimize the categorical cross-entropy  between the real and predicted labels.
+
+\label{subsec:domain_transfer}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth*3/5]{chapter1/cyclegan}
+	\caption{The CycleGAN approach. Half of the training setup is illustrated, the other half consisting in the same setup but with inverted $X $ and $Y$}
+	\label{fig:cyclegan}
+\end{figure}
+
+\subsubsection{Domain-transfer}
+
+Domain-transfer is the task of learning a mapping $\p{\vx|\vy}$ between two high-dimensional distributions $\p{\vx}$ and $\p{\vy}$ that maintains semantic information, for example changing the color palette of an image while keeping the same objects at the same position. \ac{CGAN}s already learn to model the conditional distribution $\p{\vx|\vy}$, and adding a way to enforce the consistency of the semantic information enables
+domain-transfer.
+
+Pix2Pix \citep{Isola2016} implemented this approach  explicitly by using paired samples $(x, y) \sim \p{\vx|\vy}$ forcing the generator to minimize the $\Lone$ reconstruction term between $x$ and $\G(y,z)$
+
+\begin{equation*}
+\arg\min_G\max_\D L_{p2p} =  \arg\min_G\max_\D \lcgan(\D, \G) +\lambda\esp{x\sim\p{\vx}\\y\sim\p{\vy}\\z\sim\p{\vz}} ||x - G(y, z)||_1 \enspace .
+\end{equation*}
+
+However, this kind of approaches rely on paired data which can be very hard to obtain, especially in the case of natural images. When trying for example to transfer images of zebras to images of horses, you need a dataset of very similar zebras and horses in the exact same position for the $\Lone$ term to work.
+
+This problem of paired data was solved by \ac{CycleGAN} \citep{Zhu2017} using cycle-consistency. Instead of training a single model $\G$ with reconstruction between $x$ and $\G(\vy,\vz)$, the CycleGAN approach train two domain-transfer models simultaneously: $\Gyx$ and $\Gxy$ that map samples from $\p{\vy}$ onto $\p{\vx}$ and $\p{\vx}$ onto $\p{\vy}$, respectively (\seefigure{fig:cyclegan}). This allows to compute the $\Lone$ reconstruction errors  $||x - \Gyx(\Gxy(\vx))||_1$ and $||y - \Gxy(\Gyx(\vy))||_1$, thus completely removing the need for paired data $(x,y)$. The training of the two models in done an adversarial setup, with two discriminators $\Dx$ and $\Dy$, and is summed up as an optimization problem in \citeq{eq:cyclegan}
+
+\begin{align}
+\label{eq:cyclegan}
+\arg\min_{\Gxy, \Gyx}\max_{\Dx, \Dy} \lcycgan &=   \arg\min_{\Gxy, \Gyx}\max_{\Dx, \Dy} \lgan(\Dx, \Gyx) + \lgan(\Dy, \Gxy) \nonumber \\
+& +\lambda \esp{x\sim\p{\vx}} ||x - \Gyx(\Gxy(x)||_1 + \lambda\esp{y\sim\p{\vy}} ||y - \Gxy(\Gyx(y)||_1 \enspace .
+\end{align}
+
+The \ac{CycleGAN} training process then consists in alternatively updating the two discriminator and the two generators via gradient ascent/descent. A summary of this process is presented in \citealg{alg:cyclegan_train}. 
+
+\begin{algorithm}[]
+	\begin{algorithmic}[H]
+		\REQUIRE{$\setX$ and $\setY$ two unpaired datasets, $\Gxy$ and $\Gyx$ the mapping networks, $\Dx$ and $\Dy$ the discrimination models, $m$ the mini-batch size}
+		\REPEAT
+		\STATE sample a mini-batch $\lbrace x_i \rbrace_{i=1}^m$ from $\setX$\;
+		\STATE sample a mini-batch $\lbrace y_i \rbrace_{i=1}^m$ from $\setY$\;
+		\STATE update $\Dx$ by stochastic gradient descent of
+		\STATE \ \ \ \ $ \sum_{i=1}^{m}(\Dx(x_i)-1)^2 + (\Dx(\Gyx(y_i)))^2$
+		\STATE update $\Dy$ by stochastic gradient descent of
+		\STATE \ \ \ \ $ \sum_{i=1}^{m}(\Dy(y_i)-1)^2 + (\Dy(\Gxy(x_i)))^2$
+		\STATE sample a mini-batch $\lbrace x_i \rbrace_{i=1}^m$ from $X$\;
+		\STATE sample a mini-batch $\lbrace y_i \rbrace_{i=1}^m$ from $Y$\;
+		\STATE update $\Gxy$ by stochastic gradient descent of
+		\STATE \ \ \ \ $ \sum_{i=1}^n (\Dy(\Gxy(x_i))-1)^2 + \lambda (||x_i - \Gyx(\Gxy(x_i))||_1$ \STATE \ \ \ \ \ \ \ \ $+||y_i -\Gxy(\Gyx(y_i))||_1)$\;
+		\STATE update $\Gyx$ by stochastic gradient descent of
+		\STATE \ \ \ \ $ \sum_{i=1}^n (\Dx(\Gyx(y_i))-1)^2+ \lambda (||x_i - \Gyx(\Gxy(x_i))||_1 $
+		\STATE \ \ \ \ \ \ \ \ $+ ||y_i - \Gxy(\Gyx(y_i))||_1)$\;
+		\UNTIL a stopping condition is met
+	\end{algorithmic}
+	\caption{CycleGAN training algorithm}
+	\label{alg:cyclegan_train}
+\end{algorithm}
+
+
+\subsubsection{Task-specific losses}
+
+\CR{TODO} %TODO Subsection class specific losses
+
+\subsection{Objective variants}
+
+As mentioned in \citesub{sub:limitations}, the original GAN losses as well as the non-saturating losses show strong limitations, the former causes instability and the latter causes a loss in diversity. As a possible solution to these issues, several new loss terms were envisioned
+
+\subsubsection{Changing the divergence}
+
+As an alternative to the original loss and in order to replace the Jensen-Shannon and the reverse Kullback-Leibler divergences as objectives, the Least-Squares GAN (\ac{LSGAN}) \citep{Mao2017} were proposed. In this approach, the loss function are replaced with a least-square formulation of the discriminator error, as 
+
+\begin{equation*}
+	\loss{LSGAN}(\D, \G) = \esp{\vx\sim\p{\vx}} \Big[ (1-\D(\vx))^2\Big] + \esp{\vz\sim\p{\vz}} \Big[ (\D(\G(\vz)))^2\Big] \enspace .
+\end{equation*}
+
+While this loss function follow the same idea as the original GAN method, \ac{LSGAN} actually optimizes the Pearson's $\chi^2$ divergence. Empirically, \ac{LSGAN}s show more stability as well as a higher visual quality of the generated samples than the original GAN approach, which have been conjectured to be caused by a better quality of the gradients.
+
+Although showing notable differences in their behavior when optimized, both the Jensen-Shannon, reverse Kullback-Leibler and Pearson $\chi^2$ divergences are part of the $f$-divergence family \citep{Liese2006} defined as 
+
+\begin{equation*}
+	D_f(p || q)  =\esp{\vx\sim\q{\vx}}f\Big(\frac{p(x)}{q(x)}\Big)  \enspace ,
+\end{equation*}
+
+where $f: \mathbb{R}^+\rightarrow \mathbb{R}$  is a convex, lower-semicontinuous function satisfying $f(1) = 0$. By carefully choosing $f$, we can recover the \ac{KL} ($f(u) =  u\log u$), reverse \ac{KL} ($f(u) =  -\log u$), \ac{JS} ($f(u) =  -(u+1)\log (\frac{u+1}{2} + u\log u)$) and Pearson's $\chi^2$ ($f(u) = (u-1)^1$) divergences. \citet{Nowozin2016} proposed a generalized approach for these divergences as well as several new GAN formulation based on divergences such as the Squared Hellinger distance or the Total Variation, which has been shown \citep{Arjovsky2017} to be the divergence used in the Energy-Based GAN \citep{Zhao2017} approach.  
+
+While the $f$-divergences have been the seminal approach to GANs, they can exhibit strong issues. \citet{Arjovsky2017} have shown that these divergences can have degenerate behavior, most notably in the case where the two distributions have no shared support, which is reflected by points where the divergence is non-continuous and non-differentiable.
+
+As a solution to this issue and orthogonal to the $f$-divergences, \citet{Arjovsky2017} proposed the Wasserstein GAN (\ac{WGAN}), replacing the Jensen-Shannon divergence by the Wasserstein -1 (or Earth-Mover) distance, which stems from transportation theory \citep{Peyre2020}.  The Wasserstein distance, albeit having many different formulations, can be expressed through the Kantorovich-Rubinstein duality \citep{Kantorovich1982} as
+
+\begin{equation*}
+		W(p||q) = \sup_{f \in \mathcal{F}} \Big[ \esp{\vx\sim\p{\vx}} f(\vx) - \esp{\vx\sim\q{\vx}} f(\vx) \Big] \enspace ,
+\end{equation*}
+
+where $\mathbb{F} = \{f:||f||_L\leq1\}$ is the set of all 1-Lipschitz functions. By using a parametrized family of functions $D$ (in our case, a neural network), we can formulate the Wasserstein GAN problem as
+
+\begin{equation*}
+\loss{WGAN}(\D, \G) = \min_G\max_D \Big[ \esp{\vx\sim\p{\vx}} D(\vx) - \esp{\vz\sim\q{\vz}} D(G(\vz)) \Big] \enspace .
+\end{equation*}
+
+This formulations, however, requires the discriminator to be 1-Lipschitz, which is done by clipping the weights $w$ of the discriminator to a fixed interval $w \in [-c, c]$. This solution proved to be quite harmful in terms of visual quality by \citet{Gulrajani2017}, who proposed the WGAN Gradient Penalty (\ac{WGAN-GP}), which replace this clipping by a gradient penalty. This additional loss term pushes the discriminator towards having a gradient norm equal to $1$ and is formulated as
+
+\begin{equation*}
+W_{GP}(p||p_G) = \max_D \Big[ \esp{\vx\sim\p{\vx}} D(\vx) - \esp{\vz\sim\q{\vz}} D(G(\vz)) \Big] + \lambda \esp{\Hat{\vx}\sim\p{\Hat{\vx}}} \Big[ (||\nabla_{\Hat{\vx}} \D(\Hat{\vx})||_2 -1)^2 \Big] \enspace ,
+\end{equation*}
+
+where $\p{\hat{\vx}}$ is implicitly defined as an uniform distribution on straight lines between pairs of points sampled on $\p{\vx}$ and $\pg{\vx}$. This artificial distribution is used to overcome the intractability of enforcing the gradient norm constraint everywhere.
+
+In the same fashion as the$f$-divergence family, the Wasserstein distance is a special case of the Integral Probability Metrics (\ac{IPM}) \citep{Muller1997}, defined as 
+
+\begin{equation*}
+D_\mathcal{F}(p || q)  =\sup_{f \in \mathcal{F}} \Big[ \esp{\vx\sim\p{\vx}} f(\vx) - \esp{\vx\sim\q{\vx}} f(\vx) \Big] \enspace ,
+\end{equation*}
+
+where $\mathcal{F}$ is a family of real-valued bounded measurable functions. By putting restrictions on $\mathcal{F}$,  several classical divergences can be recovered \citep{Sriperumbudur2009}, among them the Wasserstein divergence ($\mathcal{F} = \{f:f \text{ is 1-Lipschitz}\}$), as well as the Total Variation ($\mathcal{F} = \{f:||f||_\infty \leq 1\}$).
+
+Another category of approaches that are part of the \ac{IPMs} are moment matching methods, most notably the Maximum Mean Discrepancy (\ac{MMD}) \citep{Gretton2012}, which is defined as the \ac{IPM} that restricts the set $\mathcal{F}$ to the set of functions in the ball of a Reproducing Kernel Hilbert Space (\ac{RKHS}) , or more formally: $\mathcal{F} = \{f:||f||_\mathcal{H} \leq 1\}$, with $\mathcal{H}$ a \ac{RKHS} of kernel $k:\setX\times\setX\rightarrow \mathbb{R}$).
+
+Although this distance can show nice properties, allowing for two-sample testing, it relies on the choice of the kernel $k$. Thus by using a fixed kernel, \ac{MMD} was used to formulate the different \ac{MMD}GAN \citep{Li2017a ,Dziugaite2015, Binkowski2018} approaches, which train GANs by estimating the \ac{MMD} with either gaussian or quadratic kernels. 
+
+More recent approaches leverage gradient penalty similar as \ac{WGAN-GP} in order to learn the kernel $k$, which translates into special cases of \ac{MMD} such as Energy Distance \citep{Bellemare2017, Szekely2004} or the so-called Fisher IPM \cite{ Mroueh2017}.
+
+\begin{table}
+	\centering
+	\begin{tabular}{|c c|}
+		\hline
+		Approach & Divergence \\
+		\hline 
+		\multicolumn{2}{|l|}{$f$-divergences} \\
+		\hline
+		GAN \citep{Goodfellow2014}& Jensen-Shannon \\
+		NS-GAN \citep{Goodfellow2014} & Reverse Kullback-Leibler \\
+		LSGAN \citep{Mao2017}& Pearson $\chi^2$ \\
+		EBGAN* \citep{Zhao2017} & Total variation \\
+		$f$-GAN \citep{Nowozin2016} & Various $f$-divergences\\
+		\hline 
+		\multicolumn{2}{|l|}{Integral Probability Metrics (\ac{IPM}s)}\\
+		\hline
+		EBGAN* \citep{Zhao2017} & Total variation \\
+		WGAN \citep{Arjovsky2017}& Wasserstein distance \\
+		Cramér GAN \citep{Bellemare2017}& Energy Distance (Unbiased WGAN) \\
+		MMDGAN \citep{Li2017a}& Maximum Mean Discrepancy \\				
+		Fisher GAN\citep{Mroueh2017}& Fisher IPM \\
+		\hline
+	\end{tabular}
+	\label{table:divergences}
+	\caption{A summary of common $f$-divergences and \ac{IPM} used to train GANs. Note than the Total Variation can be formulated as both.}
+\end{table}
+
+\CR{Hinge Loss}
+
+\subsubsection{Augmenting the objective}
+
+
+Semi-supervised, self supervised
+ACGAN, ALI/BigGAN, Structured GAN, TripleGAN
+
+
+\subsection{Architecture, regularization and normalization}
+
+The original GAN approach \citep{Goodfellow2014} used very simple multi-layer perceptrons as discriminator and generator. While this approach showed equal or better performance than most generative models of its time \citep{Kingma2014b,Bengio2014} on small image datasets \citep{LeCun1998a, Krizhevsky2009}, these simple architectures were quickly enhanced with tools from regular deep learning and computer vision.
+
+The first two notable enhancements were the Laplacian Pyramid GAN (LAPGAN) \citep{Denton2015} and the Deep Convolutional GAN (\ac{DCGAN}) \citep{Radford2015}. The LAPGAN approach used Laplacian Pyramids \citep{Burt1983} to iteratively upscale a low-resolution generated sample. The \ac{DCGAN} approach replaced the discriminator by a simple fully-convolutional network \citep{Springenberg2015} with strided convolutions and introduced deconvolutional (or transposed convolutional) layers in the generator. It also introduced dropout \citep{Srivastava2014} and Batch Normalization \citep{Ioffe2015}, and used both \ac{ReLU} \citep{Nair2010} and Leaky \ac{ReLU} \citep{Maas2013} as activation functions. This last approach showed much better results than the original GAN and the LAPGAN and became a standard baseline for image generation.
+
+Although this approach remained unstable, it was extended \citep{Salimans2016} with several tricks such as matching features from real and generated data, smoothing the 0/1 label or adding noise to the discriminator's input \citep{Sonderby2017} that helped stabilizing the training process. However, the DCGAN approach was stil limited in both the visual quality of the generated samples and in its ability to generate high-dimension images.
+
+Progressive GAN, introduced by \citet{Karras2017}, allowed for the first high-dimensional 
+
+
+Proggan, spectral normalization, self-attention, Biggan,  stylegan/2
+
+
+%\begin{landscape}
+\begin{figure}
+		\centering
+	\includegraphics[width=\textheight*3/2, height=\textwidth*15/16]{chapter1/trilemma.jpg}
+	\label{fig:trilemma}
+	\caption{Classifications of some advances in GANs on the trilemma}
+\end{figure}
+
+%\end{landscape}
+
+
+\subsection{A note on the  evaluation of  GANs}
 
 Unlike discriminative models, evaluating and comparing \ac{GAN} approaches is a non-trivial task. Two approaches can be envisioned: evaluating the \textit{intrinsic} quality of generated samples with ad-hoc criterions or directly evaluating the likelihood of the generated samples. However, unlike \ac{VAE}s and flow-based models, \ac{GAN}s offer no explicit way to evaluate or approximate the likelihood of the generated samples. Thus, a significant part of the \ac{GAN} literature resorted to a subjective visual evaluation of the generated samples. 
 
@@ -330,49 +448,27 @@ In order to provide a more precise evaluation of the visual quality of generated
 \textbf{Inception Score (\ac{IS})}) \citep{Salimans2016} is based on the evaluation of the entropy of the labels $\vy$ predicted by the Inception classifier of generated data. High-fidelity samples should be easier to classify and therefore have a conditional label distribution $\pg{\vy|\vx}$ with low entropy. In addition to the high quality, the samples should be diverse, therefore the marginal distribution $\pg{\vy} = \int_{\setZ}\pg{\vy|\vx=\G(\vz)}d\vz$ should have a high entropy. By combining these two requirements, the \ac{IS} is formulated as 
 
 \begin{equation*}
-	\text{IS}(\vy) = \exp\Big[\esp{\vx\sim\pg{\vx}} \DKL{\pg{\vy | \vx}}{\pg{\vy}}\Big] \enspace .
+\text{IS}(\vy) = \exp\Big[\esp{\vx\sim\pg{\vx}} \DKL{\pg{\vy | \vx}}{\pg{\vy}}\Big] \enspace .
 \end{equation*}
 
 Although it has been widely used, \ac{IS} has shown major issues \citep{Barratt2018} that raise from the use of the conditional label distribution. Most notably, examples that are correctly classified are not necessarily of the highest quality and the pre-determined label classes can skew the estimation of the marginal distribution $p_\G(\vy)$.
 
 The \textbf{Fréchet Inception Distance (\ac{FID})} \citep{Heusel2017}  differs from \ac{IS} since it evaluates a distance between the distributions of visual features computed on real and generated data, instead of relying on the labels. These features are extracted at the penultimate layer of the Inception classifier. The distributions of these features are assumed Gaussian, so that the Fréchet distance (or Wasserstein-2 distance) can be computed as
 \begin{equation*}
-	FID = ||\mu – \mu_G||^2 + Tr(\Sigma + \Sigma_G – 2\sqrt{\Sigma*\Sigma_G}) \enspace ,
+FID = ||\mu – \mu_G||^2 + Tr(\Sigma + \Sigma_G – 2\sqrt{\Sigma\times\Sigma_G}) \enspace ,
 \end{equation*}
 
 where $\mathcal{N}(\mu, \Sigma)$ and $\mathcal{N}(\mu_G, \Sigma_G)$ are the distributions of the extracted features of the real and generated data, respectively. \ac{FID} is considered more robust than 
- \ac{IS} and has been either completing or replacing the use of \ac{IS} in recent works.
- 
+\ac{IS} and has been either completing or replacing the use of \ac{IS} in recent works.
+
 However, while these two metrics are considered to be the standard method for evaluating \ac{GAN}s, their reliance on the pre-trained Inception model can prove to be an issue. Indeed, they behave well when used to compare models learned on natural images datasets such as ImageNet, but they cannot directly be applied to other datasets. A solution to consider can be the training of another classifier network on a more adapted dataset, but this solution cannot be applied when no labeled data is available.
 
-For completeness, we can also refer to less used metrics for evaluating visual quality: The Parzen window (or kernel density estimation) \citep{Parzen1962} aim to estimate the likelihood of the generated samples; the Sliced Wasserstein Distance \citep{Julien2011} is an efficient approximation of the Earth-Mover (or Wasserstein) distance; the  Kernel Inception Distance \citep{Binkowski2018} is a recent metric that evaluates the maximum mean discrepancy between Inception features with a polynomial kernel.
+For completeness, we can also refer to notable (albeit less used) among numerous others metrics for evaluating visual quality  \citep{Borji2018}: the Parzen window (or kernel density) estimation \citep{Parzen1962} aim to estimate the likelihood of the generated samples; the Sliced Wasserstein Distance \citep{Julien2011} is an efficient approximation of the Earth-Mover (or Wasserstein) distance; the  Kernel Inception Distance \citep{Binkowski2018} is a recent metric that evaluates the maximum mean discrepancy between Inception features with a polynomial kernel.
 
 Finally it is to note that for conditioned models, evaluating the aforementioned metrics does not inform about the quality of the conditioning. However, since the conditioning usually requires either labels or prior information, these can often be evaluated by, for example, predicting the labels of generated samples with a pre-trained classifier and computing the error between the predicted label and the original one.
 
 
-\section{The GAN Zoo}
+\section{Conclusion}
 
-\subsection{A taxonomy of GANs}
-Enorme nombre de variantes de GANs
-
-Taxonomie des approches GANs (pour s'éviter une liste des différents GANs)
-
-Schéma pour définir les grandes familles de GAN (évoquer les AmbientGAN / UNIR)
-
-\subsection{Architecture variants}
-
-\subsection{Divergence variants}
-Table des loss alternatives (f-divergences + transport optimal)
-
-\subsection{Task-specific losses}
-
-%\begin{landscape}
-\begin{figure}
-		\centering
-	\includegraphics[width=\textheight*3/2, height=\textwidth*15/16]{chapter1/trilemma.jpg}
-	\caption{Classifications of some advances in GANs on the trilemma}
-\end{figure}
-
-%\end{landscape}
 
 

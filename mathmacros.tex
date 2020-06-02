@@ -36,9 +36,10 @@
 \newcommand{\Dy}{D_Y}
 \newcommand{\F}{F}
 
-\newcommand{\lgan}{L_{GAN}}
-\newcommand{\lcgan}{L_{CGAN}}
-\newcommand{\lcycgan}{L_{CycGAN}}
+\newcommand{\loss}[1]{L_{#1}}
+\newcommand{\lgan}{\loss{GAN}}
+\newcommand{\lcgan}{\loss{CGAN}}
+\newcommand{\lcycgan}{\loss{CycGAN}}
 
 % Divergences
 \newcommand{\Div}[2]{\text{Div}(#1||#2)}
@@ -52,3 +53,4 @@
 %% Divers
 \newcommand{\esp}[1]{\mathop{\mathbb{E}}_{\substack{#1}}}
 \newcommand{\vect}{\text{vect}}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
