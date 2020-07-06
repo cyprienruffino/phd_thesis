@@ -355,7 +355,7 @@ We keep the same discriminator across all the experiments with these architectur
 The Up-Dil architecture consists in a set of transposed convolutions (the upscaling part), and a set of dilated convolutional layers \citep{Yu2015}, while the Up-EncDec has an upscaling part followed by an encoder-decoder section with skip-connections, where the constraints are downscaled, concatenated to the noise, and re-upscaled to the output size.
 
 The UNet \citep{Ronneberger2015} architecture is an encoder-decoder where skip-connections are added between the encoder and the decoder.
-The Res architecture is an encoder-decoder where residual blocks \citep{He2015} are added after the noise is concatenated to the features. The UNet-Res combines the UNet and the Res architectures by including both residual blocks and skip-connections.
+The Res architecture is an encoder-decoder where residual blocks \citep{He2016} are added after the noise is concatenated to the features. The UNet-Res combines the UNet and the Res architectures by including both residual blocks and skip-connections.
 
 Finally, we will evaluate our approach on the Subsurface dataset using the architecture that yields to the best performances on the Texture dataset.
 %
