@@ -66,7 +66,7 @@ $$
 %
 The $DOP \in [0,1]$ refers to the amount of polarized light in a wave. It is equal to 1 for a totally polarized light, 0 for unpolarized light and between 0 and 1 for partially polarized light.
 
-Polarization images are accordingly obtained by the computation of the Stokes vector related to each pixel. The acquisition principle is based on a device composed of a polarizer oriented at an angle $\alpha$ between the object and the sensor \citep{Wang_2019_CVPR}. At least three acquisitions with three different angles are required to get the Stokes parameters. The reflected light from the object, represented by the unknown Stokes vector, passes through the rotated polarizer before reaching the camera. 
+Polarization images are accordingly obtained by the computation of the Stokes vector related to each pixel. The acquisition principle is based on a device composed of a polarizer oriented at an angle $\alpha$ between the object and the sensor \citep{Wang2019}. At least three acquisitions with three different angles are required to get the Stokes parameters. The reflected light from the object, represented by the unknown Stokes vector, passes through the rotated polarizer before reaching the camera. 
 
 For this work, a Polarcam 4D Technology polarimetric camera was used, enabling to get simultaneously four images respectively obtained with four different linear polarizers oriented at $(\alpha_i)_{i=1:4} =$ (0\degree, 45\degree, 90\degree, 135\degree). The polarimetric camera measures an intensity $I_{\alpha_i}$ of the scene for each angle $\alpha_i$. The relationship between the Stokes vector $S$ and the intensities $I(\alpha_i)_{i=1:4}$ reaching the camera is given by: 
 $$
