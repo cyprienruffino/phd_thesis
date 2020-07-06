@@ -280,8 +280,8 @@ When implementing this training procedure we experienced, at inference stage, a 
 	\end{algorithmic}
 \end{algorithm}
 
-To avoid the problem, we exploit the recent PacGAN \citep{lin2018pacgan} technique: it consists in passing a set of samples to the discrimination function instead of a single one.  PacGAN is intended to tackle the mode collapse problem in GAN training. The underlying principle being that if a set of images are sampled from the same training set, they are very likely to be completely different, whereas if the generator experiences mode collapse, generated images are likely to be similar.
-In practice, we only give two samples to the discriminator, which is sufficient to overcome the loss of diversity as  suggested in \citep{lin2018pacgan}. 
+To avoid the problem, we exploit the recent PacGAN \citep{Lin2018} technique: it consists in passing a set of samples to the discrimination function instead of a single one.  PacGAN is intended to tackle the mode collapse problem in GAN training. The underlying principle being that if a set of images are sampled from the same training set, they are very likely to be completely different, whereas if the generator experiences mode collapse, generated images are likely to be similar.
+In practice, we only give two samples to the discriminator, which is sufficient to overcome the loss of diversity as  suggested in \citep{Lin2018}. 
 %
 The resulting training procedure is summarized in Algorithm~\ref{alg:trainpac}.
 
