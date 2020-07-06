@@ -177,7 +177,7 @@ G^*, D^* = \arg\min_G\max_D L_{GAN}(D, G) \enspace,  \nonumber \\
 $$
 \noindent where $\mathbb{E}$ refers to the expectation.
 
-For its part, CycleGAN learns the two models $M_{XY}$ and $M_{YX}$ by using unpaired real samples $x$ $\in X$ and $y \in Y$ respectively drawn according to the (unknown) distributions $p_X$ and $p_Y$  as input. It also learns two discrimination networks $D_X: X \rightarrow [0,1]$ and $D_Y: Y\rightarrow [0,1]$ able to detect generated samples from real ones in the domains $X$ and $Y$ respectively. CycleGAN relies on the Least-Squares variant of GAN \citep{mao2017least} and considers the following adversarial  costs:
+For its part, CycleGAN learns the two models $M_{XY}$ and $M_{YX}$ by using unpaired real samples $x$ $\in X$ and $y \in Y$ respectively drawn according to the (unknown) distributions $p_X$ and $p_Y$  as input. It also learns two discrimination networks $D_X: X \rightarrow [0,1]$ and $D_Y: Y\rightarrow [0,1]$ able to detect generated samples from real ones in the domains $X$ and $Y$ respectively. CycleGAN relies on the Least-Squares variant of GAN \citep{Mao2017} and considers the following adversarial  costs:
 %
 \begin{eqnarray}
 L_{GAN}(D_Y, M_{XY}) = \mathop{\mathbb{E}}_{y \small{\sim} p_Y} \Big[(D_Y(y) - 1)^2\Big] + \mathop{\mathbb{E}}_{x\small{\sim}p_X}\Big[D_Y(M_{XY}(x))^2\Big] \enspace, \nonumber\\
