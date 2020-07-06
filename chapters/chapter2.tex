@@ -99,7 +99,7 @@ Unsupervised Image Reconstruction \citep{Pajot2018} combines the AmbientGAN appr
 \noindent
 The $\ell_2$ norm term ensures that the generator is able to learn to revert $f_\theta$ i.e. to revert the alteration process on a given sample. This  allows the reconstruction of realistic image only from a given constraint map $y$. However the reconstruction process is deterministic and does not provide a sampling mechanism.
 
-Compressed Sensing with Meta-Learning \citep{wu2019deep} is an approach that combines the exploration of the latent space $\mathcal{Z}$ to recover images from lossy measurements with the enforcing of the Restricted Isometric Property \citep{candes2005decoding}, which states that for two samples $x_1,x_2 \sim p_X$, $$(1 - \alpha)||x_1 - x_2||_2^2 \leq ||f_\theta(x_1 - x_2)||_2^2 \leq (1 + \alpha) ||x_1 - x_2||_2^2$$ where $\alpha$ is a small constant.
+Compressed Sensing with Meta-Learning \citep{Wu2019} is an approach that combines the exploration of the latent space $\mathcal{Z}$ to recover images from lossy measurements with the enforcing of the Restricted Isometric Property \citep{Candes2005}, which states that for two samples $x_1,x_2 \sim p_X$, $$(1 - \alpha)||x_1 - x_2||_2^2 \leq ||f_\theta(x_1 - x_2)||_2^2 \leq (1 + \alpha) ||x_1 - x_2||_2^2$$ where $\alpha$ is a small constant.
 It replaces the adversarial training of the generative model $G$ (Eq. \ref{eq:basic_gan}) by searching, for a given degraded image $y$, a vector $\hat{z}$ such that $\hat{y} = f_\theta(G(\hat{z}))$ minimizes the $\ell_2$ distance between $y$ and $\hat{y}$ while still enforcing the RIP. The overall problem induced by this approach can be formulated as:
 
 % 		\begin{multline}
