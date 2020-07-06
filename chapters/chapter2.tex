@@ -44,7 +44,7 @@ The remainder of the paper is organized as follows. In Section \ref{sec:related_
 The contributions of this chapter are summarized as follows:
 \begin{itemize}[nosep]
 	\item We propose a method for learning to generate images with a few pixel-wise constraints.
-	\item A theoretical justification of the modelling framework is investigated.
+	\item A theoretical justification of the modeling framework is investigated.
 	\item A controllable trade-off between the image quality and the constraints' fulfillment is highlighted,
 	\item We showcase a lack of diversity in generating high-dimensional images which we solve by using  PacGAN\cite{lin2018pacgan} technique. Several experiments allow to conclude that the proposed formulation can effectively generate diverse and high visual quality images while satisfying the pixel-wise constraints. 
 \end{itemize}
@@ -80,16 +80,6 @@ Given a set of images $x \in \setX = [-1, 1]^{n\times p\times c}$  (see Figure \
 	\label{fig:image_completion_task}
 \end{figure}
 
-One of the state-of-the-art modelling framework for image generation is the Generative Adversarial Network. The seminal version of GAN \cite{Goodfellow2014} learns the generative models in an unsupervised way.
-It relies on a game between a generation function $G$ and a discrimination network $D$, in which $G$ learns to produce realistic samples while $D$ learns to distinguish real examples from generated ones (Figure \ref{fig:gan}). Training GANs amounts to find a Nash equilibrium to the following min-max problem,
-
-\begin{equation}
-\label{eq:basic_gan}
-\min_G \max_D L(D, G) = \mathop{\mathbb{E}}_{x\sim p_X} \Big[\log (D(x))\Big] + \mathop{\mathbb{E}}_{z\sim p_Z} \Big[\log (1-D(G(z)))\Big] \enspace,
-\end{equation}
-
-\noindent where $p_Z$ is a known distribution, usually normal or uniform, from which the latent input $z$ of $G$ is drawn, and $p_X$ is the distribution of the real images. %However, this objective has been shown to be particularly unstable, so in practice a non-saturating version of this cost is used , as recommended in \cite{Goodfellow2014}.
-%
 
 Among several applications, the GANs was adapted  to image inpainting task (Figure \ref{fig:inpainting}). For instance Yeh et al. \cite{Yeh2017} propose an inpainting approach which considers a pre-trained generator, and explores its latent space $\mathcal{Z}$ through an optimization procedure to find a latent vector $z$, which induces an image with missing regions filled in by conditioning on the surroundings available information. However, the method requires to solve a full optimization problem at inference stage, which is computationally expensive.
 
