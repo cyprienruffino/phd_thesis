@@ -91,7 +91,7 @@ AmbientGAN \cite{bora2018ambientgan} (Figure \ref{fig:ambientgan}) trains a gene
 \min_G \max_D L(D, G) = \mathop{\mathbb{E}}_{\substack{y\sim p_Y}} \Big[\log(D(y))\Big] + \mathop{\mathbb{E}}_{\substack{z\sim p_Z \\\theta \sim p_\theta}} \Big[ \log(1-D(f_\theta(G(z))))\Big] \enspace.
 \end{equation}
 
-Pajot et al. \cite{pajot2018unsupervised} combined the AmbientGAN approach with an additional reconstruction task that consists in reconstructing the $f_\theta(G(y))$ from the twice-altered image $\tilde{y} = f_\theta(G(y))$ and $\hat{y} = f_\theta(G(f_\theta(G(y))))$,
+Unsupervised Image Reconstruction \cite{pajot2018unsupervised} combined the AmbientGAN approach with an additional reconstruction task that consists in reconstructing the $f_\theta(G(y))$ from the twice-altered image $\tilde{y} = f_\theta(G(y))$ and $\hat{y} = f_\theta(G(f_\theta(G(y))))$,
 
 \begin{equation}
 \min_G \max_D L(D, G) = \mathop{\mathbb{E}}_{\substack{y\sim p_Y}} \Big[\log(D(y))\Big] + \mathop{\mathbb{E}}_{\substack{y\sim p_Y}} \Big[ \log(1-D(\hat{y}))\Big] + ||\hat{y} - \tilde{y} ||^2_2 \enspace.
