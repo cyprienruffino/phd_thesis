@@ -456,7 +456,7 @@ The bottom panel in Figure \ref{fig:paretos} illustrates that the trade-off betw
 \label{sub:fcnn}
 Fully-convolutional architectures for GANs are widely used, either for domain-transfer applications \citep{Zhu2017}\citep{Isola2017} or for texture generation \citep{Jetchev2016}. In order to evaluate the efficiency of our method on relatively high resolution images, we experiment the fully-convolutional networks described in Section \ref{subs:architectures} on a texture generation task using Texture dataset. We investigate the upscaling-dilatation network, the encoder-decoder one and the resnet-like architectures.
 
-Our training algorithm was run for 40 epochs on all reported results. We provide a comparison to CGAN\citep{mirza2014} approach by using the selected best architectures.
+Our training algorithm was run for 40 epochs on all reported results. We provide a comparison to CGAN\citep{Mirza2014} approach by using the selected best architectures.
 The models are evaluated in terms of best FID (visual quality of sampled images) at each epoch and MSE (conditioning on fixed pixel values).  We also compute the FID score of the models at the epochs where the MSE is the lowest. In the other way around, the MSE is reported at epoch when the FID is the lowest. The obtained quantitative results are detailed in Table \ref{tab:ablation}.
 
 For the encoder-decoder models, we can notice that the models using ResNet blocks perform better than just using a UNet generator. A trade-off can also be seen between the FID and MSE for the ResNet models and the UNet-ResNet, which could mean that skip-connections help the generator to fulfill the constraints but at the price of lowered visual quality.
