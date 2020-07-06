@@ -348,7 +348,7 @@ We use a variety of GAN architectures in order to adapt to the different scales 
 For the experiments on the FashionMNIST \citep{Xiao2017}, we use a lightweight network for both the discriminator and the generator similarly to DCGAN  \citep{Radford2015} due to the small resolution of FashionMnist images.
 %This is motivated by the large number of experiments and the small dimension of the images.
 
-To experiment on the Texture dataset, we consider a set of fully-convolutional generator architectures based on either dilated convolutions \citep{Yu2015}, which behave well on texture datasets \citep{Ruffino2018}, or encoder-decoder architectures that are commonly used in domain-transfer applications such as CycleGAN \citep{Zhu2017}. We selected these architectures because they have very large receptive fields without using pooling, which allow the generator to use a large context for each pixel.
+To experiment on the Texture dataset, we consider a set of fully-convolutional generator architectures based on either dilated convolutions \citep{Yu2015}, which behave well on texture datasets \citep{Ruffino2019}, or encoder-decoder architectures that are commonly used in domain-transfer applications such as CycleGAN \citep{Zhu2017}. We selected these architectures because they have very large receptive fields without using pooling, which allow the generator to use a large context for each pixel.
 
 We keep the same discriminator across all the experiments with these architectures, the PatchGAN discriminator \citep{Isola2016}, which is a five-layer fully-convolutional network with a sigmoid activation.
 
