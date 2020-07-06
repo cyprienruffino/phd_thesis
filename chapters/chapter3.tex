@@ -383,7 +383,7 @@ Overall, the trained CycleGANs and detection networks under these settings are e
 
 We  measure the visual quality of the generated images by computing the classical Fréchet Inception Distance \citep{Heusel2017}. Computing this distance requires to extract visual features from each set of images (real and generated) using a pre-trained deep neural network (usually an Inception v3 \citep{Szegedy2016} network pre-trained on ImageNet \citep{Deng2009}) and to evaluate the Fréchet (or Wasserstein) distance between the distributions of these features, which are assumed be Gaussian distributions. We calculate this distance using 509 images from each generated polarimetric dataset and from the test set as described in Table \ref{tab:dataset_properties}.
 
-As feature extractor, since the classical Inception v3 network is not adapted to polarimetric images, we use the convolutional part of a polarimetry-adapted RetinaNet detection network \cite{blin2019road}, which has been trained on the MS-COCO dataset and fine-tuned on a real polarimetric dataset.
+As feature extractor, since the classical Inception v3 network is not adapted to polarimetric images, we use the convolutional part of a polarimetry-adapted RetinaNet detection network \cite{Blin2019}, which has been trained on the MS-COCO dataset and fine-tuned on a real polarimetric dataset.
 %
 In order to evaluate the improvements in the detection, we compute the error rate evolution $ER_o$. The improvement $ER_o$ on the detection of the object $o$ is given by:
 $$
