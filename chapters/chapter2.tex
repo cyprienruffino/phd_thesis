@@ -83,14 +83,6 @@ Given a set of images $x \in \setX = [-1, 1]^{n\times p\times c}$  (see Figure \
 
 Among several applications, the GANs was adapted  to image inpainting task (Figure \ref{fig:inpainting}). For instance Yeh et al. \cite{Yeh2017} propose an inpainting approach which considers a pre-trained generator, and explores its latent space $\mathcal{Z}$ through an optimization procedure to find a latent vector $z$, which induces an image with missing regions filled in by conditioning on the surroundings available information. However, the method requires to solve a full optimization problem at inference stage, which is computationally expensive.
 
-Other approaches (Figure \ref{fig:gansetup}) rely on Conditional variant of GAN (CGAN) \cite{mirza2014} in which additional information $y$ is provided to the generator and the discriminator (see Figure \ref{fig:cgan}). 
-This leads to the following optimization problem adapted to CGAN
-%\vspace{-0.5em}
-\begin{equation}
-\min_G \max_D L(D, G) = \mathop{\mathbb{E}}_{\substack{x\sim p_X \\y \sim p_{Y|X} }} \Big[\log(D(x, y))\Big]
-+ \mathop{\mathbb{E}}_{\substack{z\sim p_Z\\y\sim p_Y}} \Big[ \log(1-D(G(y,z),y))\Big] \enspace.
-\end{equation}
-
 Although CGAN was initially designed for class-conditioned image generation by setting $y$ as the class label of the image, several types of conditioning information can apply such as a full image for image-to-image translation \cite{Isola2017} or partial image as in inpainting \cite{Yu2018}. CGAN-based inpainting methods rely on generating a patch that will fill up a structured missing part of the image and achieve impressive results. However they are not well suited to reconstruct very sparse and unstructured signal \cite{demir2018}. Additionally, these approaches learn to reconstruct a single sample instead of a full distribution, implying that there is no sampling process for a given constraint map or highly degraded image.
 
 AmbientGAN \cite{bora2018ambientgan} (Figure \ref{fig:ambientgan}) trains a generative model capable to yield full images from only lossy measurements. One of the image degradations considered in this approach is the random removal of pixels leading to sparse pixel map $y$. It is simulated with a differentiable function $f_\theta$ whose parameter $\theta$ indicates the pixels to be removed. The underlying optimization problem solved by AmbientGAN is therefore stated as
