@@ -168,7 +168,7 @@ As the equality constraint in  Problem (\ref{eq:formulation_our_primary_GAN}) is
 %\label{eq:noisy_generation_primary_CGAN}
 %\end{equation}
 %
-Following Pajot et al. \citep{pajot2018unsupervised} we assume that the constraint map is obtained through a noisy measurement process
+Following Pajot et al. \citep{Pajot2018} we assume that the constraint map is obtained through a noisy measurement process
 \begin{equation}
 y = f_M(x) + \varepsilon \enspace.
 \label{eq:noisy_generation_primary_CGAN}
@@ -222,7 +222,7 @@ The second term in Problem (\ref{eq:bayesian_formulation_our_primary_CGAN_G}) is
 	
 	\item This additional term acts as a regularization over prescribed pixels by the mask $M(y)$. The trade-off between the distribution matching loss and the constraint enforcement is assessed by the regularization parameter $\lambda \geq 0$.
 	
-	\item It is worth noting that the noise $\varepsilon$ can be of any other distribution, according to the prior information, one may associate to the measurement process. We only require this distribution to admit a closed-form solution for the maximum likelihood estimation for optimization purpose. Typical choices are distributions from the exponential family \citep{brown1986fundamentals}.
+	\item It is worth noting that the noise $\varepsilon$ can be of any other distribution, according to the prior information, one may associate to the measurement process. We only require this distribution to admit a closed-form solution for the maximum likelihood estimation for optimization purpose. Typical choices are distributions from the exponential family \citep{Brown1986}.
 	
 \end{itemize}
 \begin{figure}[t]
