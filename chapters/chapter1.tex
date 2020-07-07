@@ -452,7 +452,7 @@ In order to provide a more precise evaluation of the visual quality of generated
 \end{equation*}
 
 Although it has been widely used, \ac{IS} has shown major issues \citep{Barratt2018} that raise from the use of the conditional label distribution. Most notably, examples that are correctly classified are not necessarily of the highest quality and the pre-determined label classes can skew the estimation of the marginal distribution $p_\G(\vy)$.
-
+-
 The \textbf{Fréchet Inception Distance (\ac{FID})} \citep{Heusel2017}  differs from \ac{IS} since it evaluates a distance between the distributions of visual features computed on real and generated data, instead of relying on the labels. These features are extracted at the penultimate layer of the Inception classifier. The distributions of these features are assumed Gaussian, so that the Fréchet distance (or Wasserstein-2 distance) can be computed as
 \begin{equation*}
 FID = ||\mu – \mu_G||^2 + Tr(\Sigma + \Sigma_G – 2\sqrt{\Sigma\times\Sigma_G}) \enspace ,
