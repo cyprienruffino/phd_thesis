@@ -53,6 +53,7 @@ The contributions of this chapter are summarized as follows:
 
 \section{Image Reconstruction, Inpainting and Compressed Sensing}
 
+\subsection{Problem formulation}
 The pursued objective of the chapter is image generation using generative deep network conditioned on  randomly scattered and scarce (less than a percent of the image size) pixel values. This kind of pixel constraints occurs in application domains where an image or signal need to be generated from very sparse measurements.
 
 Before delving into the details, let introduce the notations and previous work related to the problem. We denote by $X \in \setX$ a random variable and $x$ its realization. Let $p_X$ be the distribution of $X$ over $\setX$ and $p_X(x)$ be its evaluation at $x$. Similarly $p_{X|Y}$ represents the distribution of $X$ conditioned on the random variable $Y \in \setY$. 
@@ -81,6 +82,7 @@ Given a set of images $x \in \setX = [-1, 1]^{n\times p\times c}$  (see Figure \
 	\label{fig:image_completion_task}
 \end{figure}
 
+\subsection{Related approaches}
 
 Among several applications, the GANs was adapted  to image inpainting task (Figure \ref{fig:inpainting}). For instance Yeh et al. \citep{Yeh2017} propose an inpainting approach which considers a pre-trained generator, and explores its latent space $\mathcal{Z}$ through an optimization procedure to find a latent vector $z$, which induces an image with missing regions filled in by conditioning on the surroundings available information. However, the method requires to solve a full optimization problem at inference stage, which is computationally expensive.
 
