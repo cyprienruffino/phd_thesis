@@ -150,9 +150,9 @@ In practice, $\hat{z}$ is computed with gradient descent on $z$ by minimizing $|
 \end{figure}
 
 
-\section{Conditional generation as a Maximum A  Posteriori estimation}
+\section{Conditional generation as a Maximum A Posteriori estimation}
 
-\subsection{Reformulation as a Maximum A Posteriori estimation}
+\subsection{Reformulating the reconstruction task}
 Let introduce the formal formulation of the addressed problem. Assume $y$ is the given set of constrained pixel values. To ease the presentation, let consider $y$ as a $n\times p\times c$ image with only a few available pixels (less than $1\%$ of $n\times p\times c$). We will also encode the spatial location of these pixels using a corresponding binary mask $M(y) \in \{0,1 \}^{n\times p\times c}$.  We intend to learn a GAN whose generation network takes as input the constraint map $y$ and the sampled latent code $z \in \setZ$ and outputs a realistic image that fulfills the prescribed pixel values. Within this setup, the generative model can sample from the unknown distribution $p_X$ of the training images $\{x_1, \cdots, x_N\}$ while satisfying unseen pixel-wise constraints at training stage. Formally our proposed GAN can be formulated as
 %
 \begin{eqnarray}
