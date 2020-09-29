@@ -146,6 +146,7 @@ where $\vy$ is the constraint map and $\D$ is the discriminator network.
 \CR{TODO}
 However, CGAN-based inpainting methods rely on generating a patch that will fill up a structured missing part of the image and achieve impressive results. Thus, they are not well suited to reconstruct very sparse and unstructured signal \citep{Demir2018}. 
 
+The most common approach os 
 \CR{Transition}
 
 Another of these approaches is \textbf{Ambient \ac{GAN}} \citep{Bora2018} (Figure \ref{fig:ambientgan}), which aims at training an unconditional generative model using a dataset of noisy or incomplete samples $\setY$. Ambient \ac{GAN} attempts to produce unaltered images $\tilde{\vx}$ which distribution matches the true one without accessing to the original images $\vx$. For the sake, Ambient \ac{GAN} considers lossy measurements such as blurred images, images with removed patch or removed pixels at random (up to 95\%), leading to sparse pixel map $\vy$. This lossy measurement is simulated with a function $f_\theta$ instead of the matrix $A$, whose parameter $\theta$ indicates the pixels to be removed, such that
