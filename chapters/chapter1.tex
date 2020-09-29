@@ -6,7 +6,7 @@
 \end{chapterabstract}
 
 \minitoc
-\newpage
+
 
 \section{Generative modeling with Adversarial models}
 Generative modeling with deep neural networks has been a challenging task due to the stochastic nature of sampling, which prevents the computation of gradient, thus preventing the classical training of a deep model with gradient descent. However recent approaches such as variational autoencoders (\ac{VAE}s) \citep{Kingma2014b}, flow methods \citep{Dinh2017, Kingma2018} and adversarial models \citep{Goodfellow2014} managed to overcome this restriction. In this section, we first propose an introduction to generative modeling with a focus on latent variable models.
@@ -248,6 +248,7 @@ Recently, Generative Adversarial Networks have made considerable progress toward
 \CR{TODO} %TODO Intro subsection
 
 \subsubsection{Conditional modeling}
+\label{subs:CGAN}
 
 While classical generative models such as \ac{GAN}s try to unconditionally approximate the real-data distribution $\p{\vx}$, a conditional generative model aim to learn a model of the conditional distribution $\p{\vx|\vy}$, where $y \in \setY$ is a label of any kind.
 

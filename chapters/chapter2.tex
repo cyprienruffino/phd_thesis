@@ -21,9 +21,9 @@ Completion. In: Neurocomputing.
 
 \section{Introduction}
 
-As we have seen in \citesec{sec:cgan}, Conditional GANs enables a variety of conditioned generation, such as class-conditioned image generation \citep{Mirza2014}, image-to-image translation \citep{Isola2016, Wang2018}, image super-resolution \citep{Wang2020} or image inpainting \citep{Pathak2016}. While this approach, combined with enough data and the right network architectures, has led to spectacular results \citep{Karras2020}, it lacks some mechanism to strongly enforce the respect of the constraints. Indeed, it only rely on the adversarial learning process with no explicit method for including the constraints into the generation task.
+As we have seen in \citesec{subs:CGAN}, Conditional GANs enables a variety of conditioned generation, such as class-conditioned image generation \citep{Mirza2014}, image-to-image translation \citep{Isola2016, Wang2018}, image super-resolution \citep{Wang2020} or image inpainting \citep{Pathak2016}. While this approach, combined with enough data and the right network architectures, has led to spectacular results \citep{Karras2020}, it lacks some mechanism to strongly enforce the respect of the constraints. Indeed, it only rely on the adversarial learning process with no explicit method for including the constraints into the generation task.
 
-In this chapter,  we propose to study in depth the less general problem of reconstructing images from very few pixels (usually less than a percent). We refer to these conditioning pixels as a constraint map $y$. This kind of task has several direct applications, in which recovering the entirety of a signal with very sparse measurements is necessary, for example in domains where measuring the signal is expensive. Here, we study the task of recreating a subsurface rock formation from very few measurements \CR{Nom du process de mesure}, which has direct applications in geology. This is motivated by previous works on subsurface data generation \citep{Laloy2018, Laloy2019}.
+In this chapter,  we propose to study in depth the less general problem of reconstructing images from very few pixels (usually less than a percent). We refer to these conditioning pixels as a constraint map $y$. This kind of task has several direct applications, in which recovering the entirety of a signal with very sparse measurements is necessary, for example in domains where measuring the signal is expensive. Here, we study the task of recreating a subsurface rock formation from very few measurements, which has direct applications in geology. This is motivated by previous works on subsurface data generation \citep{Laloy2018, Laloy2019}.
 
 To reconstruct the missing information, a generative  model must able to generate high quality images coherent with the given pixel values by leveraging on a training set of similar images. The model aims to match the distribution of the real images conditioned on a highly scarce constraint map. While the \ac{CGAN} approach is theoretically capable of tackling this problem, there is in practice no guarantee that the constraints will be enforced in the generated image. In settings where respecting these constraints is crucial, this is a significant limitation.
 
@@ -34,7 +34,7 @@ Additionally to show the effectiveness of our approach, we conduct experiments o
 
 As a conclusion, our approach performs well both in terms of visual quality and respect of the pixel constraints while keeping diversity among generated samples. Evaluations on CIFAR-10 and CelebA show that the proposed generative model always outperforms the CGAN approach on the respect of the constraints and either come close or outperforms it on the visual quality of the generated samples.
 
-The remainder of the chapter is organized as follows. In Section \ref{sec:related_work}, we review the relevant related  work focusing first on methods dealing with image generation and reconstruction from highly altered training samples.  Section \ref{sec:our-approach}  details the overall generative model we propose. In Section \ref{sec:experiments_protocol}, we present the experimental protocol and evaluation measures while Section \ref{sec:results} gathers quantitative and qualitative effectiveness of our approach. The last section concludes the paper.
+The remainder of the chapter is organized as follows. In Section \ref{sec:related_work}, we review the relevant related  work focusing first on two families of methods for dealing with image reconstruction from highly altered training samples, optimization-based approaches and conditional generation-based ones. Section \ref{sec:bridging} propose to review the links between these two categories of approaches, introduces our approach for image reconstruction and propose some theoretical insight to justify it. In Section \ref{sec:experiments_protocol}, we present the experimental protocol and evaluation measures while Section \ref{subs:results} gathers quantitative and qualitative effectiveness of our approach. The last section concludes the paper.
 
 The contributions of this chapter are summarized as follows:
 \begin{itemize}[nosep]
@@ -44,6 +44,7 @@ The contributions of this chapter are summarized as follows:
 \end{itemize}
 
 \section{Approaches for image reconstruction}
+\label{sec:related_work}
 
 Image reconstruction is the task of retrieving an image from a very altered source, which can take several forms from additive noise to missing parts of the image. In this chapter, we study a rather extreme case of alteration, which is the removal of over 99\% of the original image, leaving only a handful of pixels scattered at random positions.
 
@@ -109,7 +110,7 @@ Most notably, \citet{Candes2005} introduced \textbf{Compressed Sensing}, which c
 	(1 - \alpha)||x_1 - x_2||_2^2 \leq ||A(x_1 - x_2)||_2^2 \leq (1 + \alpha) ||x_1 - x_2||_2^2 \enspace,
 \end{equation}
 
-where $\alpha$ is a small constant. This states that distances between two samples are conserved when altered by $A$. \CR{Montrer un cas pas image où ça marche} Solving this problem can be done with linear programming as 
+where $\alpha$ is a small constant. This states that distances between two samples are conserved when altered by $A$. Solving this problem can be done with linear programming as 
 %
 \begin{equation}
 	\label{eq:compressed_sensing}
@@ -175,6 +176,7 @@ The $\ell_2$ norm term ensures that the generator is able to learn to revert $f_
 
 
 \section{Bridging conditional generation and optimization-based reconstruction}
+\label{sec:bridging}
 
  As we have seen, two main categories of solution aim to tackle the problem of image reconstruction. First, the approaches that try to directly solve the problem by finding a solution through optimization, among them is compressed sensing. However, the main drawback of these families of approaches are that they require to solve an optimization problem for each reconstructed image, which is a heavy computational burden. 
 
@@ -420,7 +422,6 @@ We tested our approach on several datasets listed hereafter. Detailed  informati
 	
 	\item{Subsurface} is a classical dataset in geological simulation \citep{Strebelle2002} which consists, similarly to the Texture dataset, of 20,000  $160 \times 160$ patches sampled from a model of a subsurface binary domain. These models are assumed to have the same properties as a texture, mainly the property of global ergodicity of the data.
 	
-	\CR{Exemples de génération des 5 jeux de données}
 	
 \end{description}
 
@@ -470,6 +471,7 @@ Finally, we check by visual inspection if the trained model $G$ is able to gener
 
 
 \subsection{Quality-fidelity trade-off}
+\label{subs:results}
 
 % \begin{figure}[!]
 %     \centering
