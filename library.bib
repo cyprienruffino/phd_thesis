@@ -332,6 +332,23 @@
   keywords = {deep learning,global optimization,model selection,neural networks,response surface modeling}
 }
 
+@inproceedings{Bertalmio2000,
+  title = {Image Inpainting},
+  booktitle = {Proceedings of the 27th Annual Conference on {{Computer}} Graphics and Interactive Techniques},
+  author = {Bertalmio, Marcelo and Sapiro, Guillermo and Caselles, Vincent and Ballester, Coloma},
+  date = {2000-07-01},
+  pages = {417--424},
+  publisher = {{ACM Press/Addison-Wesley Publishing Co.}},
+  location = {{USA}},
+  doi = {10.1145/344779.344972},
+  url = {https://doi.org/10.1145/344779.344972},
+  urldate = {2020-09-15},
+  abstract = {Inpainting, the technique of modifying an image in an undetectable form, is as ancient as art itself. The goals and applications of inpainting are numerous, from the restoration of damaged paintings and photographs to the removal/replacement of selected objects. In this paper, we introduce a novel algorithm for digital inpainting of still images that attempts to replicate the basic techniques used by professional restorators. After the user selects the regions to be restored, the algorithm automatically fills-in these regions with information surrounding them. The fill-in is done in such a way that isophote lines arriving at the regions' boundaries are completed inside. In contrast with previous approaches, the technique here introduced does not require the user to specify where the novel information comes from. This is automatically done (and in a fast way), thereby allowing to simultaneously fill-in numerous regions containing completely different structures and surrounding backgrounds. In addition, no limitations are imposed on the topology of the region to be inpainted. Applications of this technique include the restoration of old photographs and damaged film; removal of superimposed text like dates, subtitles, or publicity; and the removal of entire objects from the image like microphones or wires in special effects.},
+  isbn = {978-1-58113-208-3},
+  keywords = {anisotropic diffusion,image restoration,inpainting,isophotes},
+  series = {{{SIGGRAPH}} '00}
+}
+
 @report{Berthelot2018,
   title = {Understanding and {{Improving Interpolation}} in {{Autoencoders}} via an {{Adversarial Regularizer}}},
   author = {Berthelot, David and Brain, Google and Raffel, Colin and Roy Google Brain, Aurko and Goodfellow Google Brain, Ian},
@@ -493,6 +510,24 @@
   number = {12}
 }
 
+@article{Candes2008,
+  title = {The Restricted Isometry Property and Its Implications for Compressed Sensing},
+  author = {Cand\`es, Emmanuel J.},
+  date = {2008-05-01},
+  journaltitle = {Comptes Rendus Mathematique},
+  shortjournal = {Comptes Rendus Mathematique},
+  volume = {346},
+  pages = {589--592},
+  issn = {1631-073X},
+  doi = {10.1016/j.crma.2008.03.014},
+  url = {http://www.sciencedirect.com/science/article/pii/S1631073X08000964},
+  urldate = {2020-09-22},
+  abstract = {It is now well-known that one can reconstruct sparse or compressible signals accurately from a very limited number of measurements, possibly contaminated with noise. This technique known as ``compressed sensing'' or ``compressive sampling'' relies on properties of the sensing matrix such as the restricted isometry property. In this Note, we establish new results about the accuracy of the reconstruction from undersampled measurements which improve on earlier estimates, and have the advantage of being more elegant. To cite this article: E.J. Cand\`es, C. R. Acad. Sci. Paris, Ser. I 346 (2008). R\'esum\'e Il est maintenant bien connu que l'on peut reconstruire des signaux compressibles de mani\`ere pr\'ecise \`a partir d'un nombre \'etonnamment petit de mesures, peut-\^etre m\^eme bruit\'ees. Cette technique appel\'ee le ``compressed sensing'' ou ``compressive sampling'' utilise des propri\'et\'es de la matrice d'\'echantillonage comme la propri\'et\'e d'isom\'etrie restreinte. Dans cette Note, nous pr\'esentons de nouveaux r\'esultats sur la reconstruction de signaux \`a partir de donn\'ees incompl\`etes qui am\'eliorent des travaux pr\'ecedents et qui, en outre, ont l'avantage d'\^etre plus \'el\'egants. Pour citer cet article : E.J. Cand\`es, C. R. Acad. Sci. Paris, Ser. I 346 (2008).},
+  file = {/home/cyprien/.zotero/zotero/storage/798V52L3/S1631073X08000964.html},
+  langid = {english},
+  number = {9}
+}
+
 @article{Cao2018,
   title = {Adversarial {{Learning}} with {{Local Coordinate Coding}}},
   author = {Cao, Jiezhang and Guo, Yong and Wu, Qingyao and Shen, Chunhua and Huang, Junzhou and Tan, Mingkui},
@@ -538,6 +573,16 @@
   url = {https://arxiv.org/pdf/1606.03657.pdf},
   abstract = {This paper describes InfoGAN, an information-theoretic extension to the Gener-ative Adversarial Network that is able to learn disentangled representations in a completely unsupervised manner. InfoGAN is a generative adversarial network that also maximizes the mutual information between a small subset of the latent variables and the observation. We derive a lower bound of the mutual information objective that can be optimized efficiently. Specifically, InfoGAN successfully disentangles writing styles from digit shapes on the MNIST dataset, pose from lighting of 3D rendered images, and background digits from the central digit on the SVHN dataset. It also discovers visual concepts that include hair styles, pres-ence/absence of eyeglasses, and emotions on the CelebA face dataset. Experiments show that InfoGAN learns interpretable representations that are competitive with representations learned by existing supervised methods.},
   file = {/home/cyprien/.zotero/zotero/storage/RAAJW9Q6/InfoGAN Interpretable Representation Learning by Information Maximizing Generative Adversarial Nets - Unknown.pdf;/home/cyprien/.zotero/zotero/storage/VIZKYLLU/InfoGAN Interpretable Representation Learning by Information Maximizing Generative Adversarial Nets - Unknown.pdf}
+}
+
+@article{Chen2016b,
+  title = {Compressed Sensing and Dictionary Learning},
+  author = {Chen, Guangliang and Needell, Deanna},
+  date = {2016},
+  pages = {41},
+  abstract = {Compressed sensing is a new field that arose as a response to inefficient traditional signal acquisition schemes. Under the assumption that the signal of interest is sparse, one wishes to take a small number of linear samples and later utilize a reconstruction algorithm to accurately recover the compressed signal. Typically, one assumes the signal is sparse itself or with respect to some fixed orthonormal basis. However, in applications one instead more often encounters signals sparse with respect to a tight frame which may be far from orthonormal. In the first part of these notes, we will introduce the compressed sensing problem as well as recent results extending the theory to the case of sparsity in tight frames.},
+  file = {/home/cyprien/.zotero/zotero/storage/6BDZC465/Chen and Needell - Compressed sensing and dictionary learning.pdf},
+  langid = {english}
 }
 
 @article{Chen2018,
@@ -592,7 +637,8 @@
 @book{Chollet2015,
   title = {Keras},
   author = {Chollet, Fran\c{c}ois and {Others}},
-  date = {2015}
+  date = {2015},
+  annotation = {Published: \$\textbackslash backslash\$url\{https://github.com/fchollet/keras\}}
 }
 
 @inproceedings{Cimpoi2014,
@@ -842,6 +888,38 @@
   series = {Lecture {{Notes}} in {{Computer Science}}}
 }
 
+@article{Donoho2006,
+  title = {Compressed Sensing},
+  author = {Donoho, D.L.},
+  date = {2006-04},
+  journaltitle = {IEEE Transactions on Information Theory},
+  shortjournal = {IEEE Trans. Inform. Theory},
+  volume = {52},
+  pages = {1289--1306},
+  issn = {0018-9448},
+  doi = {10.1109/TIT.2006.871582},
+  url = {http://ieeexplore.ieee.org/document/1614066/},
+  urldate = {2020-09-21},
+  number = {4}
+}
+
+@article{Duarte2008,
+  title = {Single-Pixel Imaging via Compressive Sampling},
+  author = {Duarte, Marco F. and Davenport, Mark A. and Takhar, Dharmpal and Laska, Jason N. and Sun, Ting and Kelly, Kevin F. and Baraniuk, Richard G.},
+  date = {2008-03},
+  journaltitle = {IEEE Signal Processing Magazine},
+  shortjournal = {IEEE Signal Process. Mag.},
+  volume = {25},
+  pages = {83--91},
+  issn = {1053-5888},
+  doi = {10.1109/MSP.2007.914730},
+  url = {http://ieeexplore.ieee.org/document/4472247/},
+  urldate = {2020-09-21},
+  file = {/home/cyprien/.zotero/zotero/storage/LESG7C4I/Duarte et al. - 2008 - Single-pixel imaging via compressive sampling.pdf},
+  langid = {english},
+  number = {2}
+}
+
 @article{Duchi2011,
   title = {Adaptive {{Subgradient Methods}} for {{Online Learning}} and {{Stochastic Optimization}}},
   author = {Duchi, John and Hazan, Elad and Singer, Yoram},
@@ -996,7 +1074,8 @@
   author = {Geirhos, Robert and Rubisch, Patricia and Michaelis, Claudio and Bethge, Matthias and Wichmann, Felix A. and Brendel, Wieland},
   date = {2018-11},
   url = {http://arxiv.org/abs/1811.12231},
-  abstract = {Convolutional Neural Networks (CNNs) are commonly thought to recognise objects by learning increasingly complex representations of object shapes. Some recent studies suggest a more important role of image textures. We here put these conflicting hypotheses to a quantitative test by evaluating CNNs and human observers on images with a texture-shape cue conflict. We show that ImageNet-trained CNNs are strongly biased towards recognising textures rather than shapes, which is in stark contrast to human behavioural evidence and reveals fundamentally different classification strategies. We then demonstrate that the same standard architecture (ResNet-50) that learns a texture-based representation on ImageNet is able to learn a shape-based representation instead when trained on "Stylized-ImageNet", a stylized version of ImageNet. This provides a much better fit for human behavioural performance in our well-controlled psychophysical lab setting (nine experiments totalling 48,560 psychophysical trials across 97 observers) and comes with a number of unexpected emergent benefits such as improved object detection performance and previously unseen robustness towards a wide range of image distortions, highlighting advantages of a shape-based representation.}
+  abstract = {Convolutional Neural Networks (CNNs) are commonly thought to recognise objects by learning increasingly complex representations of object shapes. Some recent studies suggest a more important role of image textures. We here put these conflicting hypotheses to a quantitative test by evaluating CNNs and human observers on images with a texture-shape cue conflict. We show that ImageNet-trained CNNs are strongly biased towards recognising textures rather than shapes, which is in stark contrast to human behavioural evidence and reveals fundamentally different classification strategies. We then demonstrate that the same standard architecture (ResNet-50) that learns a texture-based representation on ImageNet is able to learn a shape-based representation instead when trained on "Stylized-ImageNet", a stylized version of ImageNet. This provides a much better fit for human behavioural performance in our well-controlled psychophysical lab setting (nine experiments totalling 48,560 psychophysical trials across 97 observers) and comes with a number of unexpected emergent benefits such as improved object detection performance and previously unseen robustness towards a wide range of image distortions, highlighting advantages of a shape-based representation.},
+  annotation = {\_eprint: 1811.12231}
 }
 
 @article{Gers1999,
@@ -1072,6 +1151,25 @@
   url = {https://arxiv.org/pdf/1701.00160.pdf},
   abstract = {This report summarizes the tutorial presented by the author at NIPS 2016 on generative adversarial networks (GANs). The tutorial describes: (1) Why generative modeling is a topic worth studying, (2) how generative models work, and how GANs compare to other generative models, (3) the details of how GANs work, (4) research frontiers in GANs, and (5) state-of-the-art image models that combine GANs with other methods. Finally, the tutorial contains three exercises for readers to complete, and the solutions to these exercises.},
   file = {/home/cyprien/.zotero/zotero/storage/NT9RIBZA/NIPS 2016 Tutorial Generative Adversarial Networks - 2016.pdf;/home/cyprien/.zotero/zotero/storage/RRR34DR2/NIPS 2016 Tutorial Generative Adversarial Networks - 2016.pdf}
+}
+
+@article{Goyal2020,
+  title = {Image Denoising Review: {{From}} Classical to State-of-the-Art Approaches},
+  shorttitle = {Image Denoising Review},
+  author = {Goyal, Bhawna and Dogra, Ayush and Agrawal, Sunil and Sohi, B. S. and Sharma, Apoorav},
+  date = {2020-03-01},
+  journaltitle = {Information Fusion},
+  shortjournal = {Information Fusion},
+  volume = {55},
+  pages = {220--244},
+  issn = {1566-2535},
+  doi = {10.1016/j.inffus.2019.09.003},
+  url = {http://www.sciencedirect.com/science/article/pii/S1566253519301861},
+  urldate = {2020-09-21},
+  abstract = {At the crossing of the statistical and functional analysis, there exists a relentless quest for an efficient image denoising algorithm. In terms of greyscale imaging, a plethora of denoising algorithms have been documented in the literature, in spite of which the level of functionality of these algorithms still holds margin to acquire desired level of applicability. Quite often noise affecting the pixels in image is Gaussian in nature and uniformly deters information pixels in image. Based on some specific set of assumptions all methods work optimally, however they tend to create artefacts and remove fine structural details under general conditions. This article focuses on classifying and comparing some of the significant works in the field of denoising.},
+  file = {/home/cyprien/.zotero/zotero/storage/XMPFRZ7U/Goyal et al. - 2020 - Image denoising review From classical to state-of.pdf;/home/cyprien/.zotero/zotero/storage/2BLDEQ2E/S1566253519301861.html},
+  keywords = {Denoising,Filters,Hybrid,PSNR,Spatial,Transform},
+  langid = {english}
 }
 
 @article{Graves2005,
@@ -1583,6 +1681,7 @@
   date = {2017},
   url = {https://youtu.be/G06dEcZ-QTg.},
   abstract = {We describe a new training methodology for generative adversarial networks. The key idea is to grow both the generator and discriminator progressively: starting from a low resolution, we add new layers that model increasingly fine details as training progresses. This both speeds the training up and greatly stabilizes it, allowing us to produce images of unprecedented quality, e.g., CELEBA images at 1024 2. We also propose a simple way to increase the variation in generated images , and achieve a record inception score of 8.80 in unsupervised CIFAR10. Additionally, we describe several implementation details that are important for discouraging unhealthy competition between the generator and discriminator. Finally , we suggest a new metric for evaluating GAN results, both in terms of image quality and variation. As an additional contribution, we construct a higher-quality version of the CELEBA dataset.},
+  annotation = {\_eprint: 1710.10196v3},
   file = {/home/cyprien/.zotero/zotero/storage/9HMA6H8Q/PROGRESSIVE GROWING OF GANS FOR IMPROVED QUALITY, STABILITY, AND VARIATION - Unknown.pdf}
 }
 
@@ -1714,6 +1813,16 @@
   primaryClass = {cs}
 }
 
+@article{Kolev2011,
+  title = {Compressed Sensing of Astronomical Images: Orthogonal Wavelets Domains},
+  author = {Kolev, Vasil},
+  date = {2011},
+  pages = {8},
+  abstract = {A simple approach for orthogonal wavelets in compressed sensing (CS) applications is presented. We compare efficient algorithm for different orthogonal wavelet measurement matrices in CS for image processing from scanned photographic plates (SPP). Some important characteristics were obtained for astronomical image processing of SPP. The best orthogonal wavelet choice for measurement matrix construction in CS for image compression of images of SPP is given. The image quality measure for linear and nonlinear image compression method is defined.},
+  file = {/home/cyprien/.zotero/zotero/storage/AW4ZCJS5/Kolev - Compressed sensing of astronomical images orthogo.pdf},
+  langid = {english}
+}
+
 @article{Kong2017,
   title = {{{DRAGNN}}: {{A Transition}}-Based {{Framework}} for {{Dynamically Connected Neural Networks}}},
   author = {Kong, Lingpeng and Alberti, Chris and Andor, Daniel and Bogatyy, Ivan and Weiss, David},
@@ -1831,6 +1940,7 @@
   publisher = {{Elsevier Ltd}},
   issn = {00983004},
   doi = {10.1016/j.cageo.2019.104333},
+  annotation = {\_eprint: 1812.09140},
   keywords = {Deep learning,Deterministic inversion,Generative adversarial networks (GANs),Geophysics,Non-linearity},
   pagetotal = {104333}
 }
@@ -1974,7 +2084,7 @@
   pages = {269--298},
   issn = {21676453},
   doi = {10.1007/s10032-009-0098-4},
-  url = {http://www.tsi.enst.fr/\%003clauli/ http://link.springer.com/10.1007/s10032-009-0098-4 http://www7.informatik.tu-muenchen.de/ hochreit http://www.idsia.ch/ juergen http://paper.ijcsns.org/07_book/200807/20080703.pdf https://hal.archives-ouvertes.fr/hal-0048827},
+  url = {http://www.tsi.enst.fr/∼lauli/ http://link.springer.com/10.1007/s10032-009-0098-4 http://www7.informatik.tu-muenchen.de/ hochreit http://www.idsia.ch/ juergen http://paper.ijcsns.org/07_book/200807/20080703.pdf https://hal.archives-ouvertes.fr/hal-0048827},
   abstract = {There is a huge amount of historical documents in libraries and in various National Archives that have not been exploited electronically. Although automatic reading of complete pages remains, in most cases, a long-term objective, tasks such as word spotting, text/image alignment, authentication and extraction of specific fields are in use today.For all these tasks, a major step is document segmentation into text lines. Because of the low quality and the complexity of these docu- ments (background noise, artifacts due to aging, inter- fering lines), automatic text line segmentation remains an open research field. The objective of this paper is to present a survey of existing methods, developed during the last decade and dedicated to documents of historical interest},
   file = {/home/cyprien/.zotero/zotero/storage/3H6FFS6E/Text line segmentation of historical documents a survey - 2015(11).pdf;/home/cyprien/.zotero/zotero/storage/56GU844D/Text line segmentation of historical documents a survey - 2015(12).pdf;/home/cyprien/.zotero/zotero/storage/5KB9P5PD/Text line segmentation of historical documents a survey - 2015(10).pdf;/home/cyprien/.zotero/zotero/storage/5XUV4G3Z/Joint Line Segmentation and Transcription for End-to-End Handwritten Paragraph Recognition - 2016.pdf;/home/cyprien/.zotero/zotero/storage/6UCS5PSF/Text line segmentation of historical documents a survey - 2015.pdf;/home/cyprien/.zotero/zotero/storage/976VYQUT/Text line segmentation of historical documents a survey - 2015(10).pdf;/home/cyprien/.zotero/zotero/storage/9DVFPPNE/Text line segmentation of historical documents a survey - 2015.pdf;/home/cyprien/.zotero/zotero/storage/GETY4CXZ/Improvement of Context Dependent Modeling for Arabic Handwriting Recognition - 2014.pdf;/home/cyprien/.zotero/zotero/storage/JPLV2YTU/Text line segmentation of historical documents a survey - 2015.pdf;/home/cyprien/.zotero/zotero/storage/LEP7K7QY/Text line segmentation of historical documents a survey - 2015.pdf;/home/cyprien/.zotero/zotero/storage/M2WFG8DV/Long Short-Term Memory - 1997.pdf;/home/cyprien/.zotero/zotero/storage/VW4WUPM6/Text line segmentation of historical documents a survey - 2015(9).pdf;/home/cyprien/.zotero/zotero/storage/WLXYYREL/Text line segmentation of historical documents a survey - 2015.pdf;/home/cyprien/.zotero/zotero/storage/WVBV7R7Y/Text line segmentation of historical documents a survey - 2015(13).pdf;/home/cyprien/.zotero/zotero/storage/X68YH4ZB/Text line segmentation of historical documents a survey - 2015(11).pdf;/home/cyprien/.zotero/zotero/storage/ZXGLFEDC/Text line segmentation of historical documents a survey - 2015.pdf},
   keywords = {-handwritten word spotting,Arabic Handwriting Recognition,Context Dependent Modeling,convolutional neural,convolutional neural ne,deep learning,Handwriting ·,handwritten word spotting,Hidden Markov models,Hidden Markov Models,Historical documents ·,N-Gram language models,networks,Off-line handwriting recognition,Offline handwriting recognition,Recurrent Neural Networks,Segmentation ·,Survey,text line segmentation,Text lines ·,word embeddings},
@@ -2515,6 +2625,23 @@
   primaryClass = {cs}
 }
 
+@article{Parkale2016,
+  title = {Application of 1-{{D}} Discrete Wavelet Transform Based Compressed Sensing Matrices for Speech Compression},
+  author = {Parkale, Yuvraj V. and Nalbalwar, Sanjay L.},
+  date = {2016-11-30},
+  journaltitle = {SpringerPlus},
+  shortjournal = {SpringerPlus},
+  volume = {5},
+  pages = {2048},
+  issn = {2193-1801},
+  doi = {10.1186/s40064-016-3740-x},
+  url = {https://doi.org/10.1186/s40064-016-3740-x},
+  urldate = {2020-09-21},
+  abstract = {Compressed sensing is a novel signal compression technique in which signal is compressed while sensing. The compressed signal is recovered with the only few numbers of observations compared to conventional Shannon\textendash Nyquist sampling, and thus reduces the storage requirements. In this study, we have proposed the 1-D discrete wavelet transform (DWT) based sensing matrices for speech signal compression. The present study investigates the performance analysis of the different DWT based sensing matrices such as: Daubechies, Coiflets, Symlets, Battle, Beylkin and Vaidyanathan wavelet families.},
+  file = {/home/cyprien/.zotero/zotero/storage/JU2UU4QQ/Parkale and Nalbalwar - 2016 - Application of 1-D discrete wavelet transform base.pdf;/home/cyprien/.zotero/zotero/storage/SUVJQM57/s40064-016-3740-x.html},
+  number = {1}
+}
+
 @article{Parzen1962,
   title = {On {{Estimation}} of a {{Probability Density Function}} and {{Mode}}},
   author = {Parzen, Emanuel},
@@ -2657,6 +2784,16 @@
   file = {/home/cyprien/.zotero/zotero/storage/2AJRSF33/HyperGAN A Generative Model for Diverse, Performant Neural Networks - 2019.pdf;/home/cyprien/.zotero/zotero/storage/3UV3RBNY/HyperGAN A Generative Model for Diverse, Performant Neural Networks - 2019.pdf}
 }
 
+@article{Rauhut2010,
+  title = {Compressive {{Sensing}} and {{Structured Random Matrices}}},
+  author = {Rauhut, Holger},
+  date = {2010},
+  pages = {94},
+  abstract = {These notes give a mathematical introduction to compressive sensing focusing on recovery using 1-minimization and structured random matrices. An emphasis is put on techniques for proving probabilistic estimates for condition numbers of structured random matrices. Estimates of this type are key to providing conditions that ensure exact or approximate recovery of sparse vectors using 1-minimization.},
+  file = {/home/cyprien/.zotero/zotero/storage/IQBGRYLV/Rauhut - Compressive Sensing and Structured Random Matrices.pdf},
+  langid = {english}
+}
+
 @article{Ray2015,
   title = {A Hypothesize-and-Verify Framework for {{Text Recognition}} Using {{Deep Recurrent Neural Networks}}},
   author = {Ray, Anupama and Rajeswar, Sai and Chaudhury, Santanu},
@@ -2742,6 +2879,24 @@
   keywords = {Domain adaptation,Generative models ·,Style transfer ·}
 }
 
+@article{Rudelson2008,
+  title = {On Sparse Reconstruction from {{Fourier}} and {{Gaussian}} Measurements},
+  author = {Rudelson, Mark and Vershynin, Roman},
+  date = {2008},
+  journaltitle = {Communications on Pure and Applied Mathematics},
+  volume = {61},
+  pages = {1025--1045},
+  issn = {1097-0312},
+  doi = {10.1002/cpa.20227},
+  url = {https://onlinelibrary.wiley.com/doi/abs/10.1002/cpa.20227},
+  urldate = {2020-09-22},
+  abstract = {This paper improves upon best-known guarantees for exact reconstruction of a sparse signal f from a small universal sample of Fourier measurements. The method for reconstruction that has recently gained momentum in the sparse approximation theory is to relax this highly nonconvex problem to a convex problem and then solve it as a linear program. We show that there exists a set of frequencies {$\Omega$} such that one can exactly reconstruct every r-sparse signal f of length n from its frequencies in {$\Omega$}, using the convex relaxation, and {$\Omega$} has size \$\$ k(r,n) = O(r \textbackslash log(n) \textbackslash cdot \textbackslash log\^2(r) \textbackslash log(r \textbackslash log n) ) = O(r \textbackslash log\^4 n). \$\$ A random set {$\Omega$} satisfies this with high probability. This estimate is optimal within the log logn and log3r factors. We also give a relatively short argument for a similar problem with k(r, n) {$\approx$} r[12 + 8 log(n/r)] Gaussian measurements. We use methods of geometric functional analysis and probability theory in Banach spaces, which makes our arguments quite short. \textcopyright{} 2007 Wiley Periodicals, Inc.},
+  annotation = {\_eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1002/cpa.20227},
+  file = {/home/cyprien/.zotero/zotero/storage/R5FMTBPC/Rudelson and Vershynin - 2008 - On sparse reconstruction from Fourier and Gaussian.pdf;/home/cyprien/.zotero/zotero/storage/DC2GYRPP/cpa.html},
+  langid = {english},
+  number = {8}
+}
+
 @article{Ruder2016,
   title = {An Overview of Gradient Descent Optimization Algorithms *},
   author = {Ruder, Sebastian},
@@ -2763,12 +2918,13 @@
   file = {/home/cyprien/.zotero/zotero/storage/J7SNSIU8/Nonlinear total variation based noise removal algorithms - 1992.pdf;/home/cyprien/.zotero/zotero/storage/MKYU9QPS/Nonlinear total variation based noise removal algorithms - 1992.pdf}
 }
 
-@article{Ruffino2019,
+@article{Ruffino2017,
   title = {Dilated {{Spatial Generative Adversarial Networks}} for {{Ergodic Image Generation}}},
   author = {Ruffino, Cyprien and H\'erault, Romain and Laloy, Eric and Gasso, Gilles},
-  date = {2019-05},
+  date = {2017-05},
   url = {http://arxiv.org/abs/1905.08613},
   abstract = {Generative models have recently received renewed attention as a result of adversarial learning. Generative adversarial networks consist of samples generation model and a discrimination model able to distinguish between genuine and synthetic samples. In combination with convolutional (for the discriminator) and de-convolutional (for the generator) layers, they are particularly suitable for image generation, especially of natural scenes. However, the presence of fully connected layers adds global dependencies in the generated images. This may lead to high and global variations in the generated sample for small local variations in the input noise. In this work we propose to use architec-tures based on fully convolutional networks (including among others dilated layers), architectures specifically designed to generate globally ergodic images, that is images without global dependencies. Conducted experiments reveal that these architectures are well suited for generating natural textures such as geologic structures .},
+  annotation = {\_eprint: 1905.08613},
   file = {/home/cyprien/.zotero/zotero/storage/GY9JUZPR/Dilated Spatial Generative Adversarial Networks for Ergodic Image Generation - 2019.pdf}
 }
 
@@ -2781,6 +2937,7 @@
   publisher = {{ESANN (i6doc.com)}},
   url = {http://arxiv.org/abs/1911.00689},
   abstract = {Generative Adversarial Networks (GANs) have proven successful for unsupervised image generation. Several works extended GANs to image inpainting by conditioning the generation with parts of the image one wants to reconstruct. However, these methods have limitations in settings where only a small subset of the image pixels is known beforehand. In this paper, we study the effectiveness of conditioning GANs by adding an explicit regularization term to enforce pixel-wise conditions when very few pixel values are provided. In addition, we also investigate the influence of this regularization term on the quality of the generated images and the satisfaction of the conditions. Conducted experiments on MNIST and FashionMNIST show evidence that this regularization term allows for controlling the trade-off between quality of the generated images and constraint satisfaction.},
+  annotation = {\_eprint: 1911.00689},
   file = {/home/cyprien/.zotero/zotero/storage/Y2UNMEGF/Pixel-wise Conditioning of Generative Adversarial Networks - 2019.pdf}
 }
 
@@ -2927,6 +3084,21 @@
   url = {http://arxiv.org/abs/1811.03600},
   abstract = {Recent hardware developments have made unprecedented amounts of data parallelism available for accelerating neural network training. Among the simplest ways to harness next-generation accelerators is to increase the batch size in standard mini-batch neural network training algorithms. In this work, we aim to experimentally characterize the effects of increasing the batch size on training time, as measured in the number of steps necessary to reach a goal out-of-sample error. Eventually, increasing the batch size will no longer reduce the number of training steps required, but the exact relationship between the batch size and how many training steps are necessary is of critical importance to practitioners, researchers, and hardware designers alike. We study how this relationship varies with the training algorithm, model, and dataset and find extremely large variation between workloads. Along the way, we reconcile disagreements in the literature on whether batch size affects model quality. Finally, we discuss the implications of our results for efforts to train neural networks much faster in the future.},
   file = {/home/cyprien/.zotero/zotero/storage/JLLG9X53/Measuring the Effects of Data Parallelism on Neural Network Training - 2018.pdf;/home/cyprien/.zotero/zotero/storage/LVGMZI9L/Measuring the Effects of Data Parallelism on Neural Network Training - 2018.pdf}
+}
+
+@inproceedings{Shaobing1994,
+  title = {Basis Pursuit},
+  booktitle = {Proceedings of 1994 28th {{Asilomar Conference}} on {{Signals}}, {{Systems}} and {{Computers}}},
+  author = {Shaobing, Chen and Donoho, D.},
+  date = {1994-10},
+  volume = {1},
+  pages = {41-44 vol.1},
+  issn = {1058-6393},
+  doi = {10.1109/ACSSC.1994.471413},
+  abstract = {The time-frequency and time-scale communities have recently developed an enormous number of over-complete signal dictionaries, wavelets, wavelet packets, cosine packets, Wilson bases, chirplets, warped bases, and hyperbolic cross bases being a few examples. Basis pursuit is a technique for decomposing a signal into an "optimal" superposition of dictionary elements. The optimization criterion is the l/sup 1/ norm of coefficients. The method has several advantages over matching pursuit and best ortho basis, including super-resolution and stability.{$<>$}},
+  eventtitle = {Proceedings of 1994 28th {{Asilomar Conference}} on {{Signals}}, {{Systems}} and {{Computers}}},
+  file = {/home/cyprien/.zotero/zotero/storage/J3N4MPV5/471413.html},
+  keywords = {adaptive representations,adaptive signal processing,basis pursuit,Chirp,chirplets,coefficients,cosine packets,Dictionaries,dictionary elements,Explosions,hyperbolic cross bases,Matching pursuit algorithms,optimal superposition,over-complete signal dictionaries,signal decompositon,signal representation,signal representations,Signal representations,signal resolution,Signal resolution,stability,Stability,Statistics,super-resolution,Time frequency analysis,time-frequency analysis,time-scale analysis,warped bases,wavelet packets,Wavelet packets,wavelets,Wilson bases}
 }
 
 @article{Shi2015,
@@ -3124,6 +3296,7 @@
   doi = {10.1109/CVPR.2016.308},
   url = {http://arxiv.org/abs/1512.00567},
   abstract = {Convolutional networks are at the core of most state of-the-art computer vision solutions for a wide variety of tasks. Since 2014 very deep convolutional networks started to become mainstream, yielding substantial gains in various benchmarks. Although increased model size and computational cost tend to translate to immediate quality gains for most tasks (as long as enough labeled data is provided for training), computational efficiency and low parameter count are still enabling factors for various use cases such as mobile vision and big-data scenarios. Here we are exploring ways to scale up networks in ways that aim at utilizing the added computation as efficiently as possible by suitably factorized convolutions and aggressive regularization. We benchmark our methods on the ILSVRC 2012 classification challenge validation set demonstrate substantial gains over the state of the art: 21:2\% top-1 and 5:6\% top-5 error for single frame evaluation using a network with a computational cost of 5 billion multiply-adds per inference and with using less than 25 million parameters. With an ensemble of 4 models and multi-crop evaluation, we report 3:5\% top-5 error and 17:3\% top-1 error on the validation set and 3:6\% top-5 error on the official test set.},
+  annotation = {\_eprint: 1512.00567},
   file = {/home/cyprien/.zotero/zotero/storage/DZ7VXCKA/Rethinking the Inception Architecture for Computer Vision - 2016.pdf},
   isbn = {978-1-4673-8850-4}
 }
@@ -3490,6 +3663,19 @@
   date = {2019}
 }
 
+@inproceedings{Xiang2017,
+  title = {A Deep Network Architecture for Image Inpainting},
+  booktitle = {2017 3rd {{IEEE International Conference}} on {{Computer}} and {{Communications}} ({{ICCC}})},
+  author = {Xiang, Peng and Wang, Lei and Cheng, Jun and Zhang, Bin and Wu, Jiaji},
+  date = {2017-12},
+  pages = {1851--1856},
+  doi = {10.1109/CompComm.2017.8322859},
+  abstract = {A number of artworks have been damaged to some extent, over time, which greatly affect their visual quality. Therefore, it's a very valuable and meaningful work to repair them. We proposed a deep network architecture - Image Inpainting Conditional Generative Adversarial Network (II-CGAN) to address this problem. Based on the deep convolutional neural network (CNN), we directly learn the mapping relationship between the damaged and repaired image detail layers from data. Since the intact image corresponding to the real-world damaged image is not available, we synthesize images with lost blocks for training. To minimize the lost of information and ensure better visual quality, a new refined network architecture is introduced. We made a thorough evaluation of the Generator of increased depth(22 layers) using an architecture with the units consisting of 3 \texttimes{} 3 and 4 {$\chi$} 4 convolution filters, and the Discriminator with small(3 {$\chi$} 3) convolution kernel used instead of 4 {$\chi$} 4 in all convolution filters. Experiments results prove that the method in this paper achieves better objective and subjective performance.},
+  eventtitle = {2017 3rd {{IEEE International Conference}} on {{Computer}} and {{Communications}} ({{ICCC}})},
+  file = {/home/cyprien/.zotero/zotero/storage/42JPJ5K6/8322859.html},
+  keywords = {4 χ 4 convolution filters,convolution,Convolution,damaged repaired image detail layers,deep convolutional neural network,deep learning,deep network architecture,feedforward neural nets,Generative Adversarial Networks,Generators,image filtering,image inpainting,Image Inpainting Conditional Generative Adversarial Network,image restoration,Image restoration,image texture,Information filtering,learning (artificial intelligence),Maintenance engineering,Painting,real-world damaged image,refined network architecture,small(3 χ 3) convolution kernel,Training,visual quality}
+}
+
 @article{Xiao2017,
   ids = {xiao2017},
   title = {Fashion-{{MNIST}}: A {{Novel Image Dataset}} for {{Benchmarking Machine Learning Algorithms}}},
@@ -3534,6 +3720,21 @@
   author = {Xu, Huazhe and Gao, Yang and Yu, Fisher and Darrell, Trevor},
   date = {2017},
   pages = {2174--2182}
+}
+
+@article{XuanFei2013,
+  title = {Iterative {{Directional Total Variation Refinement}} for {{Compressive Sensing Image Reconstruction}}},
+  author = {{Xuan Fei} and {Zhihui Wei} and {Liang Xiao}},
+  date = {2013-11},
+  journaltitle = {IEEE Signal Processing Letters},
+  shortjournal = {IEEE Signal Process. Lett.},
+  volume = {20},
+  pages = {1070--1073},
+  issn = {1070-9908, 1558-2361},
+  doi = {10.1109/LSP.2013.2280571},
+  url = {http://ieeexplore.ieee.org/document/6588871/},
+  urldate = {2020-09-21},
+  number = {11}
 }
 
 @inproceedings{Yang2019,

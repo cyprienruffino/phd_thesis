@@ -38,13 +38,12 @@
 backend=biber,
 bibstyle=authoryear,
 citestyle=apa,
+maxbibnames=1000,
 natbib=true,
  hyperref=true,
 backref=true
 ]{biblatex}
 \addbibresource{library.bib}
-
-
 
 \usepackage{babel}
 \usepackage{lmodern}
@@ -147,7 +146,7 @@ backref=true
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Packages qui doivent être chargés APRES hyperref	             
-\usepackage[top=2.5cm, bottom=2cm, left=3cm, right=2.5cm,
+\usepackage[top=3.5cm, bottom=3cm, left=3cm, right=2.5cm,
 			headheight=15pt]{geometry}
 
 \usepackage{fancyhdr}			% Entête et pieds de page. Doit être placé APRES geometry
@@ -179,4 +178,3 @@ backref=true
 \usepackage{pifont}% http://ctan.org/pkg/pifont
 \usepackage{siunitx}
 \usepackage{gensymb}
-
