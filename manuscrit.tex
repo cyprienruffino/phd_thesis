@@ -28,8 +28,8 @@
 \documentclass[a4paper, english, 12pt, twoside,openright]{report}
 \input{preambule}		% Liste des packages et de leurs options
 \input{commandes_perso}	% Commandes et environnements perso
-\input{palette.tex}  % Palette de couleurs pour les graphiques
-\input{tikz_macros.tex}
+\input{palette}  % Palette de couleurs pour les graphiques
+\input{tikz_macros}
 \input{mathmacros}
 \input{page_de_garde}
 
@@ -100,16 +100,12 @@
 \input{chapters/introduction.tex}
 \input{chapters/chapter1.tex}
 \input{chapters/chapter2.tex}
-\input{chapters/chapter3.tex}X
+\input{chapters/chapter3.tex}
 \input{chapters/conclusion.tex}
 
 \addcontentsline{toc}{chapter}{Bibliography}
-%\bibliographystyle{unsrt}
-%\nocite{*}
 \printbibliography
 
-
-% Annexes
 \begin{appendix}
 	\input{chapters/publications.tex}
 	\input{chapters/details_neucom.tex}

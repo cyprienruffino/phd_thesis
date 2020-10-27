@@ -64,7 +64,7 @@ For \ac{GMM}s, sampling a new point consists in, once the Gaussian component has
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth*3/4]{chapter1/latent_model.pdf}
-	\caption[Latent variable model]{A mapping between a latent space $\setZ$ and the space of a dataset $\setX$.}
+	\caption[Latent variable model]{\CR{A refaire :/ n}A mapping between a latent space $\setZ$ and the space of a dataset $\setX$.}
 \end{figure}
 
 Since more complex distributions does not necessarily provide a natural sampling mechanism, using a latent variable model allows to outsource the stochastic part of the sampling  process from the learning process and only learn the function $\G(\vz; \theta)$. More formally, instead of directly modeling $\p{\vx}$, a latent variable model learns a deterministic mapping $\pg{\vx|\vz}$. From this mapping, the generative model can be obtain through marginalization 
@@ -127,7 +127,7 @@ In the same fashion as the generative models mentioned in \citesub{sub:deep_gen_
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth*3/4]{chapter1/div.pdf}\hspace{-2cm}
-	\caption[Illustration of a divergence]{A divergence $\Div{\alpha}{\beta}$ can capture the distance between a parametric model $\alpha_\theta$ and the observations $\beta$. Density fitting can then be formulated as $\alpha^* = \arg\min_\theta \Div{\alpha_\theta}{\beta}$, where $\alpha^*$ is the best fit model.}
+	\caption[Illustration of a divergence]{A divergence $\Div{\alpha}{\beta}$ can capture the distance between a parametric model $\alpha_\theta$ and the observations $\beta$. Density fitting can then be formulated as $\alpha_{\theta^*} = \arg\min_\theta \Div{\alpha_\theta}{\beta}$, where $\alpha_{\theta^*}$ is the best fit model.}
 	\label{fig:divergence}
 \end{figure}
 
@@ -225,6 +225,7 @@ However, albeit an empirical reduction of the instability, this loss substitutio
 
 
 \subsubsection{Mode collapse}
+\label{subs:mode_collapse}
 
 Although the aforementioned change of loss can help solving the instability issues, using the reverse \ac{KL} divergence is conjectured to be one of the causes of another issue: the \textit{mode collapse} problem: different $\vz_1, \vz_2$ are mapped to samples $\G(\vz_1)$ and $\G(\vz_2)$ that are very close;  and  \textit{mode dropping}: only a localized subset of the distribution can actually be mapped to, leading to missing modes in the generated samples.
 
@@ -409,10 +410,11 @@ More recent approaches leverage gradient penalty similar as \ac{WGAN-GP} in orde
 \CR{Hinge Loss}
 
 \subsubsection{Augmenting the objective}
-
+\label{subs:augmented_objectives}
 
 Semi-supervised, self supervised
-ACGAN, ALI/BigGAN, Structured GAN, TripleGAN
+ACGAN, ALI/BigGAN, Structured GAN, TripleGAN,  PacGAN , Style loss
+
 
 
 \subsection{Architecture, regularization and normalization}

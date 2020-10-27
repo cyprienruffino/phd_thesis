@@ -7,7 +7,16 @@
 	The problem addressed in this chapter is the generation of polarimetric images using Cyle-Consistent Generative Adversarial Networks (CycleGAN) with constraints derived from the optics of polarimetry. The conducted research is motivated by the increasing popularity of the combination of deep learning frameworks with polarimetric imaging in various domains, including medical imaging and scene analysis. Even if polarimetric imaging has shown improved performances, their robustness may be questioned because of the small size of the training datasets. 
 	This issue could be resolved by data augmentation. However, polarization modality is subject to some physical feasibility constraints that could be impeded with classical data augmentation techniques. In this paper we propose a framework based on CycleGAN, integrating the constraints of polarimetric images during training stage. We evaluate the proposed generative model on road scene images. 
 	The obtained results achieved an effective generation of physical polarization-encoded images. Further experiments on the task of road object detection show that with the generated images, the detection of cars and pedestrian are improved by up to 9\%.
-\end{chapterabstract}
+\end{chapterabstract}\\
+
+
+The work in this chapter has led to the submission of the following paper: 
+\begin{itemize}
+	\item Rachel Blin, Cyprien Ruffino, Samia Ainouz,  Gilles Gasso, Romain H\'erault, St\'ephane Canu and Fabrice Meriaudeau (June. 2020). Generating Polarimetric-encoded Images using Constrained Cycle-Consistent Generative Adversarial Networks.
+	In: Asian Conference on Computer Vision 2020 (ACCV2020)
+\end{itemize}
+
+\newpage
 
 \minitoc
 
@@ -41,16 +50,20 @@ the polarization formalism and the physical constraints it involves are first pr
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Framework}
+\section{Context and application}
 
 This section introduces the polarization formalism, the Generative Adversarial Network approach and the CycleGAN principles. It focuses on the formulation of the proposed modelling framework, namely the learning of a CycleGAN with output constraints. A solution approach is detailed and the related learning principle is presented. 
 
-\subsection{Polarization formalism}
+\subsection{Introduction to polarimetric imaging}
 \label{physical_prop}
 
 Light waves can oscillate in different orientations. Polarization represents the direction of propagation of the electrical field of the light wave. When the direction is linear, elliptical or circular, the polarization state is said to be totally polarized. However, it is partially polarized or non polarized when the light wave partly propagates in a random way \citep{Bass1995}. 
 
-Polarimetric imaging consists in representing the polarization state of the light wave reflected from each part of the scene. When an unpolarized light wave is being reflected, it becomes partially linearly polarized. Its polarization depends on the normal surface  and the refractive index of the material it impinges on. The linear part of the reflected light can be described by measurable parameters and specifically by the linear Stokes vector $S = \begin{bmatrix}
+Polarimetric imaging consists in representing the polarization state of the light wave reflected from each part of the scene. When an unpolarized light wave is being reflected, it becomes partially linearly polarized. Its polarization depends on the normal surface  and the refractive index of the material it impinges on. 
+
+\subsection{Mathematical formulation}
+
+The linear part of the reflected light can be described by measurable parameters and specifically by the linear Stokes vector $S = \begin{bmatrix}
 S_0 & S_1 & S_2 \end{bmatrix}^\top$ where $S_0>0$ represents the total intensity, $S_1$ the amount of horizontally and vertically linearly polarized light and $S_2$ the amount of linearly polarized light at $\pm$~45\degree. 
 %
 It is important to note that by design, the Stokes vector is physically admissible if and only if the two following conditions are met:  
@@ -163,78 +176,24 @@ and the calibration constraint given by equation \eqref{eqn:physics}. The genera
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Unpaired image-to-image translation with CycleGAN}
-
-Given two domains $X$ and $Y$, unpaired image-to-image translation is the task of learning the mapping functions $M_{XY} : X \rightarrow Y$ and $M_{YX} : Y \rightarrow X$ using unpaired samples $x_i \in X$ with $i \in [1..N]$ and $y_j \in Y$ with $j \in [1..M]$. 
-%
-An effective approach to achieve the task is CycleGAN \citep{Zhu2017a}. 
-It consists in learning the two mapping models $M_{XY}$ and $M_{YX}$ by combining the objective function of the standard Generative Adversarial Network (GAN) \citep{Goodfellow2014}  with a Cycle-Consistency loss function. The adversarial cost related to the GAN serves for training the models to generate samples that will match the target domain distribution, while the Cycle-Consistency cost ensures that the learned models are able to correctly reconstruct an original image (of the source domain) from a generated one.
-
-Formally a GAN is composed of a generative model $G : Z \rightarrow X$ which maps a known distribution $p_Z$, usually normal or uniform, to the unknown distribution $p_X$ of the samples and a discrimination model $D : X \rightarrow [0,1]$. The generator $G$ attempts to fool the discriminator $D$, which in turn tries to distinguish a real sample from a sample generated by the model $G$. Learning a GAN amounts to solve the following problem:
-$$
-\begin{array}{c}
-G^*, D^* = \arg\min_G\max_D L_{GAN}(D, G) \enspace,  \nonumber \\
-\text{with }L_{GAN}(D, G) = \mathop{\mathbb{E}}_{x \sim p_X} \Big[\log (D(x))\Big] +
-\mathop{\mathbb{E}}_{z\sim p_Z} \Big[\log (1-D(G(z)))\Big] \enspace, \nonumber
-\end{array}
-$$
-\noindent where $\mathbb{E}$ refers to the expectation.
-
-For its part, CycleGAN learns the two models $M_{XY}$ and $M_{YX}$ by using unpaired real samples $x$ $\in X$ and $y \in Y$ respectively drawn according to the (unknown) distributions $p_X$ and $p_Y$  as input. It also learns two discrimination networks $D_X: X \rightarrow [0,1]$ and $D_Y: Y\rightarrow [0,1]$ able to detect generated samples from real ones in the domains $X$ and $Y$ respectively. CycleGAN relies on the Least-Squares variant of GAN \citep{Mao2017} and considers the following adversarial  costs:
-%
-\begin{eqnarray}
-L_{GAN}(D_Y, M_{XY}) = \mathop{\mathbb{E}}_{y \small{\sim} p_Y} \Big[(D_Y(y) - 1)^2\Big] + \mathop{\mathbb{E}}_{x\small{\sim}p_X}\Big[D_Y(M_{XY}(x))^2\Big] \enspace, \nonumber\\
-L_{GAN}(D_X, M_{YX}) = \mathop{\mathbb{E}}_{x \small{\sim}p_X} \Big[(D_X(x) - 1)^2\Big] + \mathop{\mathbb{E}}_{y\small{\sim}p_Y} \Big[D_X(M_{YX}(y))^2\Big] \enspace. \nonumber
-\end{eqnarray}
-%
-In order to ensure the cyclic consistency that is both the compositions $M_{XY} \circ M_{YX}$ and $M_{YX} \circ M_{XY}$ are identity functions, a $\ell_1$ reconstruction error term is devised for the mapping models: 
-\begin{equation}
-L_{reco}(M_{XY}, M_{YX})\small{=}\mathop{\mathbb{E}}_{y \small{\sim} p_Y}||y - M_{XY}(M_{YX}(y))||_1 +\mathop{\mathbb{E}}_{x \small{\sim} p_X}||x - M_{YX}(M_{XY}(x))||_1
-\enspace. \nonumber
-\end{equation}
-%
-Gathering all these elements leads to the objective function 
-\begin{align}
-L_{CycleGAN}&(D_X, D_Y, M_{XY}, M_{YX}) = \nonumber \\ 
-&L_{GAN}(D_Y, M_{XY}) + L_{GAN}(D_X, M_{YX})+\lambda L_{reco}(M_{XY}, M_{YX})
-\enspace, \label{eqn:Lcyclegan}
-\end{align}
-
-
-\noindent where $\lambda > 0$ is an hyper-parameter that controls the influence of the reconstruction term. Training a CycleGAN consists in solving, via alternate gradient descent,  the following minmax problem 
-
-\begin{eqnarray}
-M_{XY}^*, M_{YX}^*, D_X^*, D_Y^* =\arg\min_{\substack{M_{XY}\\M_{YX}}}\max_{\substack{D_X\\D_Y}} L_{CycleGAN}(D_X, D_Y, M_{XY}, M_{YX}) \enspace. \label{eq:cycleGAN}
-\end{eqnarray}
-
-The full learning procedure of a CycleGAN  is sketched in Algorithm \ref{alg:cyclegan_train}.
-
-\begin{algorithm}[]
-	\begin{algorithmic}[H]
-		\REQUIRE{$X$ and $Y$ two unpaired datasets, $M_{XY}$ and $M_{YX}$ the mapping networks, $D_X$ and $D_Y$ the discrimination models, $m$ the mini-batch size}
-		\REPEAT
-		\STATE sample a mini-batch $\lbrace x_i \rbrace_{i=1}^m$ from $X$\;
-		\STATE sample a mini-batch $\lbrace y_i \rbrace_{i=1}^m$ from $Y$\;
-		\STATE update $D_X$ by stochastic gradient descent of
-		\STATE \ \ \ \ $ \sum_{i=1}^{m}(D_X(x_i)-1)^2 + (D_X(M_{YX}(y_i)))^2$
-		\STATE update $D_Y$ by stochastic gradient descent of
-		\STATE \ \ \ \ $ \sum_{i=1}^{m}(D_Y(y_i)-1)^2 + (D_Y(M_{XY}(x_i)))^2$
-		\STATE sample a mini-batch $\lbrace x_i \rbrace_{i=1}^m$ from $X$\;
-		\STATE sample a mini-batch $\lbrace y_i \rbrace_{i=1}^m$ from $Y$\;
-		\STATE update $M_{XY}$ by stochastic gradient descent of
-		\STATE \ \ \ \ $ \sum_{i=1}^n (D_Y(M_{XY}(x_i))-1)^2 + \lambda (||x_i - M_{YX}(M_{XY}(x_i))||_1$ \STATE \ \ \ \ \ \ \ \ $+||y_i -M_{XY}(M_{YX}(y_i))||_1)$\;
-		\STATE update $M_{YX}$ by stochastic gradient descent of
-		\STATE \ \ \ \ $ \sum_{i=1}^n (D_X(M_{YX}(y_i))-1)^2+ \lambda (||x_i - M_{YX}(M_{XY}(x_i))||_1 $
-		\STATE \ \ \ \ \ \ \ \ $+ ||y_i - M_{XY}(M_{YX}(y_i))||_1)$\;
-		\UNTIL a stopping condition is met
-	\end{algorithmic}
-	\caption{CycleGAN training algorithm}
-	\label{alg:cyclegan_train}
-\end{algorithm}
-
-\section{Conditioning domain-transfer approaches}
+\section{Conditional domain-transfer approaches}
 \label{polarGAN}
 
+\subsection{Constrained problem formulation}
+
+\CR{TODO}
+
+\subsection{Limits of domain transfer approaches}
+
+\CR{TODO}
+
+\subsection{Related works}
+
+\CR{TODO: CyCADA, travaux d'Ahmed Rida Sekkat, ...}
+
+\section{Approaches for solving the constrained domain-transfer problem}
+
+\subsection{Relaxing the constraints}
 As discussed above, our main goal is to learn a generative model able to produce realistic polarization-based images starting from RGB images. For the sake, we adopt the image-to-image translation framework and extend it to account for the constraints a polarimetric image must fulfill. 
 
 To generate a polarimetric image  from an RGB image, we propose to use the CycleGAN approach to learn the translation models $M_{XY}$ and $M_{YX}$ between $X$ the domain of the polarimetric images and $Y$ the RGB image domain. Let $\hat{I} \in \mathbb{R}^4$ be the intensity vector associated to a pixel of a generated polarimetric image. To be physically admissible, each pixel  has to satisfy the admissibility constraints (\ref{eqn:stokes_constraint_S0}) and the calibration constraint (\ref{eqn:physics}). 
@@ -284,6 +243,10 @@ The non-negative hyper-parameters $\mu$ and $\nu \in \mathbb{R}^{+}$ control res
 	\caption{Overview of the CycleGAN training process extended with $L_{\mathcal{C}_1}$ and $L_{\mathcal{C}_2}$.}
 	\label{fig:overview_polarCycle}
 \end{figure}
+
+\subsection{Gradient projection}
+
+\CR{TODO}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -629,41 +592,5 @@ In this work, we proposed an efficient way to generate realistic polarimetric im
 With the proposed generative model, we successfully translated RGB images from road scenes to polarimetric images showing an enhancement of the detection performances.
 Future work would consist in improving the quality of the small objects in generated images. It would also be interesting to extend the generation of polarimetric images to other domains such as medical and Synthetic-Aperture Radar (SAR) imaging. Extension of the generation procedure to road scene images under adverse weather conditions may help improving object detection in these situations. From the optimization side, we plan to directly address the genuine constrained CycleGAN problem instead of its proposed relaxation. 
 
-{\Huge END OF COPY PASTED CONTENT}
 
-
-section{Introduction}
-Formulation as a constrained optimization problem
-
-Reformulation of CycleGAN as a constrained optimization problem 
-
-Relaxation of the constraints
-
-Ici, expérimenter sur des datasets artificiels ?
-
-section{Conditioning domain-transfer approaches}
-
-section{Proximal method for non-Euclidean output space}
-Travail sur le proximal ?
-
-Envelope theorem application
-
-section{Application to RGB to Polarimetric domain transfer}
-
-Introduction to polarimetry-specific physical constraints (briefly, no need to write a physics essay)
-
-Reformulation as constraints on the output space
-
-Relaxations : $L_2$ term + rectified term
-
-Dataset, Evaluation
-
-Experiments and results
-
-section{Conclusion}
-
-Relaxation of the constraints works even when a lot of constraints are applied
-
-The application to the polarimetric dataset works
-
-Future works : using adapted metrics for the non-euclidean outspace
+\CR{Future works : using adapted metrics for the non-euclidean outspace}
