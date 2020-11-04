@@ -244,7 +244,7 @@ In the most extreme cases, this loss of diversity can result in a complete colla
 Recently, Generative Adversarial Networks have made considerable progress towards generating realistic high definition images \citep{Brock2018, Karras2020, Wang2018b}. These notable successes leverage on an overwhelming amount of incremental enhancements and variations of the original GAN \citep{Hindupur2017} that has been made in the recent years. In this section, a summary of these GAN variants is proposed by examining different three objectives: conditioning the generation, enhancing the visual quality of the generated samples, ensuring some diversity among the generated samples. We propose a classification of these approaches into three categories: alternative and additional losses for conditioning;  changes to the original objective functions; and improvements to the  architecture, regularization, normalization and training process. A summary of this overview is presented in \citefig{fig:trilemma}.
 
 
-\subsection{Conditional modeling and domain-transfer}
+\subsection{Conditional modeling}
 
 \CR{TODO} %TODO Intro subsection
 
@@ -443,6 +443,7 @@ Proggan, spectral normalization, self-attention, Biggan,  stylegan/2
 
 
 \subsection{A note on the  evaluation of  GANs}
+\label{subs:evaluation_methods}
 
 Unlike discriminative models, evaluating and comparing \ac{GAN} approaches is a non-trivial task. Two approaches can be envisioned: evaluating the \textit{intrinsic} quality of generated samples with ad-hoc criterions or directly evaluating the likelihood of the generated samples. However, unlike \ac{VAE}s and flow-based models, \ac{GAN}s offer no explicit way to evaluate or approximate the likelihood of the generated samples. Thus, a significant part of the \ac{GAN} literature resorted to a subjective visual evaluation of the generated samples. 
 

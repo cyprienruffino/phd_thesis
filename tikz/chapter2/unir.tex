@@ -1,0 +1,92 @@
+\input{../tikzheader.tex}
+
+\begin{document}
+	
+	
+	\begin{tikzpicture}[scale=0.7,dot/.style={circle,minimum size=1mm,inner sep=0pt, fill=\cola}]
+				
+	% Y
+	\filldraw[fill=\colc,draw=black] plot coordinates {(-3.4,0.5) (-2.8,0.5) (-2.8,2) (-3.4,2) (-3.4,0.5)};	
+
+	\draw[->, line width=.2mm] (-1.5,0.8)--(-1.2,0.8);
+	\draw node at (-3.1,1.2) {\Large$\setY$};
+	\draw[->, line width=.2mm] ((-2.8,1.2)->(-2.5,1.2);	
+	
+	%G  
+	\begin{scope}[yshift=2.5cm,rotate=180]
+	\tikznn{0}{0}{fill=\cola}
+	\end{scope}
+	\draw node at (-1.2,1.2) {\Large$G$};
+	\draw[->, line width=.2mm] ((0,1.2)->(0.4,1.2);	
+	
+	% Xhat
+	\tikzbrectshort{.4}{0.2}{fill=\cold,draw=black}
+	\draw node at (.8,1.2) {\Large$\Hat{\setX}$};
+
+	%ftheta
+	\draw[->, line width=.2mm] ((1.2,1.2)->(1.6,1.2);	
+	\tikzbrectshort{1.6}{0.2}{fill=\cola,draw=black}
+	
+	\draw node at (2,1.2) {\Large${f_\theta}$};
+	
+	%Yhat
+		\draw[->, line width=.2mm] (2.4,1.2)->(2.8,1.2);
+		\tikzbrectshort{2.8}{0.2}{fill=\cold,draw=black}
+		\draw node at (3.2,1.2) {\Large$\Hat{\setY}$};
+	
+	%Y
+	\tikzbrectshort{2.8}{-2.7}{fill=\colc,draw=black}
+	\draw node at (3.2,-1.8) {\Large$\setY$};
+
+	%D
+	\draw[-, line width=.2mm] (3.6,1.0)--(4,1);
+	\draw[-, line width=.2mm] (4,1.0)--(4,-1.3);
+	\draw[->, line width=.2mm] (4,-1.3)--(4.6,-1.3);
+	
+	\draw[->, line width=.2mm] (3.6,-1.8)->(4.6,-1.8);
+		
+	\tikznn{4.6}{-2.7}{draw=black,fill=\cola}
+	\draw node at (5.8,-1.5) {\Large$D$};
+
+	%\filldraw[fill=\cold,draw=black] plot coordinates {(5.7,-1) (5.7,0.5) (6.2,0.5) (6.2,-1) (5.7,-1) };
+	\tikzbrectsmall{7.3}{-2.2}{fill=\colb,draw=black}
+		
+	\draw node at (7.55,-1.9) {\large$0$};
+	\draw node at (7.55,-1.1) {\large$1$};
+	
+	% G 2
+	\draw[->, line width=.2mm] (3.6,1.2)->(4.6,1.2);
+	\begin{scope}[yshift=2.5cm,xshift=7.1cm,rotate=180]
+		\tikznn{0}{0}{fill=\cola}
+	\end{scope}
+	\draw node at (5.8,1.2) {\Large$G$};
+	\draw[->, line width=.2mm] ((7.1,1.2)->(7.5,1.2);	
+	
+		% Xtilde
+	\tikzbrectshort{7.5}{0.2}{fill=\cold,draw=black}
+	\draw node at (7.9,1.2) {\Large$\tilde{\setX}$};
+	
+	%ftheta
+	\draw[->, line width=.2mm] ((8.3,1.2)->(8.7,1.2);	
+	\tikzbrectshort{8.7}{0.2}{fill=\cola,draw=black}
+	\draw node at (9.1,1.2) {\Large${f_\theta}$};
+	
+	%Ytilde
+	\draw[->, line width=.2mm] (9.5,1.2)->(9.9,1.2);
+	\tikzbrectshort{9.9}{0.2}{fill=\cold,draw=black}
+	\draw node at (10.3,1.2) {\Large$\tilde{\setY}$};
+	
+	% L2
+	%% yhat
+	\draw[-, line width=.2mm] (3.2,2.2)--(3.2,3.2);
+	\draw[->, line width=.2mm] (3.2,3.2)--(6,3.2);
+	
+	%%ytilde
+	\draw[-, line width=.2mm] (10.3,2.2)--(10.3,3.2);
+	\draw[->, line width=.2mm] (10.3,3.2)--(7.5,3.2);
+	
+	\filldraw[fill=\colb,draw=black] plot coordinates {(6,2.8) (7.5,2.8) (7.5,3.6) (6,3.6) (6,2.8)};	
+	\draw node at (6.8,3.2) {\Large$\ell_2$};
+	\end{tikzpicture}
+	
+\end{document}

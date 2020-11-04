@@ -1,9 +1,9 @@
-\chapter{Image reconstruction as an auxiliary task for generative modeling}
+\chapter{Image reconstruction as an auxiliary task to generative modeling}
 \label{chap:chapter2}
 \graphicspath{{images/chapter2/}, {tikz/chapter2/} }
 
 \begin{chapterabstract}
-		While the  Conditional GAN approach \citep{Mirza2014} is generic enough to model any kind of conditioning, it lacks some form of control or guarantee on the conditioning procedure. In this chapter, we propose to explore another approach for conditioning a GAN model through an image reconstruction task, which consists in (re-) generating images from a very small subset of randomly-located pixels known beforehand. This kind of preblom is directly motivated by applications in geosciences, most notably the generation of subsurface rock structure \citep{Laloy2019,Ruffino2017}.  We reformulate this conditional generation task as a Maximum A Posteriori estimation and find a solution in the form of an explicit auxiliary reconstruction task, which adds to the original unconditional GAN objective as an additional loss term. Complemented with the PacGAN \citep{Lin2018} variant for training GANs, this approach enables the generation of diverse samples from a scarce pixel map. As opposed to the more classical Conditional GAN approach, this auxiliary task is interpretable and a hyperparameter allows to control the importance of the conditioning in the learning procedure. We evaluate our approach on the classical MNIST, FashionMNIST and CIFAR10 datasets, as well as a custom-made texture dataset. Finally,  we apply this approach to a to a common dataset from geosciences of subsurface rock formations.
+		While the  Conditional GAN approach \citep{Mirza2014} is generic enough to model any kind of conditioning, it lacks some form of control or guarantee on the conditioning procedure. In this chapter, we propose to explore another approach for conditioning a GAN model through an image reconstruction task, which consists in (re-) generating images from a very small subset of randomly-located pixels known beforehand. This kind of problem is directly motivated by applications in geosciences, most notably the generation of subsurface rock structure \citep{Laloy2019,Ruffino2017}.  We reformulate this conditional generation task as a Maximum A Posteriori estimation and find a solution in the form of an explicit auxiliary reconstruction task, which adds to the original unconditional GAN objective as an additional loss term. Complemented with the PacGAN \citep{Lin2018} variant for training GANs, this approach enables the generation of diverse samples from a scarce pixel map. As opposed to the more classical Conditional GAN approach, this auxiliary task is interpretable and a hyperparameter allows to control the importance of the conditioning in the learning procedure. We evaluate our approach on the classical MNIST, FashionMNIST and CIFAR10 datasets, as well as a custom-made texture dataset. Finally,  we apply this approach to a to a common dataset from geosciences of subsurface rock formations.
 \end{chapterabstract}\\
 
 
@@ -23,13 +23,13 @@ Completion. In: Neurocomputing.
 
 \section{Introduction}
 
-Conditional \ac{GAN}s \citep{Mirza2014}  are a powerful method for learning conditional generative models. By simply providing a label to both the generator and discriminator networks, \ac{CGAN} is able to solve problems such as class-conditioned image generation \citep{Mirza2014}, image-to-image translation \citep{Isola2016, Wang2018}, image super-resolution \citep{Wang2020} or image inpainting \citep{Pathak2016}. However this approach, when combined with enough data and the appropriate neural network architectures, has led to impressive results \citep{Karras2020}, it lacks some mechanism to strongly enforce conditioning. Indeed, it only relies on the adversarial learning procedure with no explicit method for including the constraints into the generation task.
+Conditional \ac{GAN}s \citep{Mirza2014}  are a powerful method for learning conditional generative models. By simply providing a label to both the generator and discriminator networks, \ac{CGAN} is able to solve problems such as class-conditioned image generation \citep{Mirza2014}, image-to-image translation \citep{Isola2016, Wang2018}, image super-resolution \citep{Wang2020} or image inpainting \citep{Pathak2016}. Although this approach combined with enough data and the appropriate neural network architectures has led to impressive results \citep{Karras2020}, it lacks some mechanism to strongly enforce conditioning. Indeed, it only relies on the adversarial learning procedure with no explicit method for including the constraints into the generation task.
 
 In this chapter,  we propose to address the problem of reconstructing images from very few pixels (usually less than a percent). We refer to these conditioning pixels as a constraint map $\vy$. This kind of task has several applications, in which recovering the entirety of a signal with very sparse measurements is necessary, for example in domains where measuring the signal is expensive. Here, we study the task of generating a subsurface rock formation from very few measurements, which has direct applications in geology, and following previous works on subsurface data generation \citep{Laloy2018, Laloy2019}.
 
 To reconstruct the missing information, a generative  model must be able to generate high quality images coherent with the given pixel values by leveraging on a training set of similar images. The model aims to match the distribution of the real images conditioned on a highly scarce constraint map. To explicitly force the generated images towards honoring the prescribed pixel values, we use a reconstruction loss measuring how close real constrained pixels are to their generated counterparts.  By re-framing this problem as a Maximum A Posteriori estimation, we show that minimizing this loss is equivalent to maximizing the log-likelihood of the constraints given the generated image. Thereon we derive an objective function comprising a reconstruction loss and the classical adversarial loss of \ac{GAN}.  Both losses are balanced through a regularization parameter.
 
- We analyze the influence of this hyperparameter in terms of quality of generated images and the respect of the constraints. Specifically, empirical evaluation on \CR{J'ai aussi les résultats sur MNIST!} FashionMNIST~\citep{Xiao2017} evidences that the regularization parameter allows for controlling the trade-off between the visual quality of the generated images and constraints fulfillment.  Additionally, to show the effectiveness of our approach, we conduct experiments on CIFAR10 \citep{Krizhevsky2009}, CelebA \citep{Liu2015} or texture \citep{Jetchev2017} datasets using various deep architectures including fully convolutional network. We also evaluate our method on a classical geological problem which consists of generating 2D geological images of which the spatial patterns are consistent with those found in a conceptual image of a binary fluvial aquifer\citep{Strebelle2002, Laloy2018}. Our empirical findings reveal that the used architectures may lack stochasticity in the generated samples, that is the conditional GAN input is often mapped to the same output image irrespective of the variations in latent code \citep{Yang2019}. We address this issue by resorting to the PacGAN \citep{Lin2018} strategy, which consists in providing pairs of images as input to the discriminator during the training process instead of single images, and such for both the generated images and the images from the dataset (see \ref{subs:augmented_objectives}).
+ We analyze the influence of this hyperparameter in terms of quality of generated images and the respect of the constraints. Specifically, empirical evaluation on MNIST \citep{LeCun1998a} and FashionMNIST~\citep{Xiao2017} evidences that the regularization parameter allows for controlling the trade-off between the visual quality of the generated images and constraints fulfillment.  Additionally, to show the effectiveness of our approach, we conduct experiments on CIFAR10 \citep{Krizhevsky2009}, CelebA \citep{Liu2015} or texture \citep{Jetchev2017} datasets using various deep architectures including fully convolutional network. We also evaluate our method on a classical geological problem which consists of generating 2D geological images of which the spatial patterns are consistent with those found in a conceptual image of a binary fluvial aquifer\citep{Strebelle2002, Laloy2018}. Our empirical findings reveal that the used architectures may lack stochasticity in the generated samples, that is the conditional GAN input is often mapped to the same output image irrespective of the variations in latent code \citep{Yang2019}. We address this issue by resorting to the PacGAN \citep{Lin2018} strategy, which consists in providing pairs of images as input to the discriminator during the training process instead of single images, and such for both the generated images and the images from the dataset (see \ref{subs:augmented_objectives}).
 
 Endowed with the PacGAN learning procedure, our resulting GAN performs well both in terms of visual quality and respect of the pixel constraints while keeping diversity among generated samples. Evaluations on CIFAR-10 and CelebA show that the proposed generative model always outperforms the \ac{CGAN} approach on the respect of the constraints and either matches up or outperforms \ac{CGAN} on the visual quality of the generated samples.
 
@@ -49,23 +49,28 @@ Image reconstruction is the task of retrieving an image from a very altered sour
 
 \begin{figure}[!]
 	\centering
-	\begin{subfigure}[t]{0.33\textwidth}
+	\begin{subfigure}[t]{0.25\textwidth}
 		\centering
-		\includegraphics[width=3cm]{fashion_sample.jpg}
-		\caption{Original \\ Image}
+		\includegraphics[width=3cm]{wendy}
+		\caption{Original \\ image}
 		\label{fig:digit}
-	\end{subfigure}\begin{subfigure}[t]{0.33\textwidth}
+	\end{subfigure}\begin{subfigure}[t]{0.25\textwidth}
 		\centering
-		\includegraphics[width=3cm]{fashion_sample_inpainting.jpg}
-		\caption{Inpainting\\Input}
+		\includegraphics[width=3cm]{wendy_inpainting}
+		\caption{Inpainting\\input}
 		\label{fig:inpainting}
-	\end{subfigure}\begin{subfigure}[t]{0.33\textwidth}
+	\end{subfigure}\begin{subfigure}[t]{0.25\textwidth}
+	\centering
+	\includegraphics[width=3cm]{wendy_denoising}
+	\caption{Denoising\\input}
+	\label{fig:denoising}
+	\end{subfigure}\begin{subfigure}[t]{0.25\textwidth}
 		\centering
-		\includegraphics[width=3cm]{fashion_sample_pixel.jpg}
-		\caption{Constraint\\Map}
+		\includegraphics[width=3cm]{wendy_reconstruction}
+		\caption{Reconstruction\\input}
 		\label{fig:pixelwise_gen}
 	\end{subfigure}
-	\caption[Inpainting and image reconstruction]{\CR{Ajouter Denoising}Difference between regular inpainting (\ref{fig:inpainting}) and the problem undertaken in this work (\ref{fig:pixelwise_gen}) on a real sample (\ref{fig:digit}).}
+	\caption[Inpainting and image reconstruction]{Difference between regular image inpainting (\ref{fig:inpainting}) , image denoising (\ref{fig:denoising}) and the problem undertaken in this work (\ref{fig:pixelwise_gen}) on a real sample (\ref{fig:digit}).}
 	\label{fig:image_completion_task}
 \end{figure}
 
@@ -196,16 +201,17 @@ To overcome these problems, \textbf{Compressed Sensing with Meta-Learning} \cite
 \end{align}
 \noindent
 
-In practice, $\hat{\vz}$ is computed with gradient descent on $\vz$ by minimizing $\|\vy - AG(\vz) \|^2_2$, and starting from a random $\vz \sim \p{Z}$. 
+This objective try to minimize the difference between the distances among samples (generated or real) and the distances among samples altered by $A$. Solving this problem induces pushes the generator towards producing samples on which the \ac{RIP} of $A$ is respected. This implies that the generated samples will have a high likelihood on the real data distribution. Note that, in practice, $\hat{\vz}$ is computed with gradient descent on $\vz$ by minimizing $\|\vy - AG(\vz) \|^2_2$, starting from a random $\vz \sim \p{Z}$. 
 
 \textbf{Deep Compressed Sensing} \citep{Wu2019} extend  even further compressed sensing by replacing the (usually random) measurement matrix $A$ in the Compressed sensing with Meta-Learning approach by a learned measurement function $f_\theta$, so that the altered sample becomes $\tilde{\vy} = f_\theta(\vx)$. Then, Deep Compressed sensing consists in training, in the same fashion as the \ac{GAN} algorithm, $\G$ and $f_\theta$ by alternate gradient descent. This induced optimization problem is therefore
 \begin{align}
 	\label{eq:dcs}
 	\min_\G L_{\G} &= \mathop{\mathbb{E}}_{\substack{\vy\sim \p{Y}}} \ \|\vy - f_\theta(\G(\Hat{\vz}))\|^2_2 \\
-	\min_\theta L_{f_\theta} =& \mathop{\mathbb{E}}_{\substack{\vx\sim \p{X}\\\vz\sim \p{Z}}} \Big( \sum_{\substack{\vx_1, \vx_2 \in \setS\\x_1 \ne \vx_2}}((\|f_\theta(\vx_1 - \vx_2)\|_2^2  - \|\vx_1 -\vx_2\|^2_2)^2 \Big) / 3 \enspace.
+	\label{eq:dcs_a}
+	\min_\theta L_{f_\theta} =& \mathop{\mathbb{E}}_{\substack{\vx\sim \p{X}\\\vz\sim \p{Z}}} \Big( \sum_{\substack{\vx_1, \vx_2 \in \setX\cup \{G(\vz)\} \\x_1 \ne \vx_2}}((\|f_\theta(\vx_1 - \vx_2)\|_2^2  - \|\vx_1 -\vx_2\|^2_2)^2 \Big) / 3 \enspace.
 \end{align}
 
-\citet{Wu2019} showed that optimizing these two criterions trains both the generator $\G$ and the measurement function $f_\theta$, thus replacing the discriminator of a more classical \ac{GAN} framework.  As a benefit, the approach may generate an image $\hat{\vx} = \G(\hat{\vz})$ from a noisy information $\vy$ but at a high computation burden since it requires to solve an optimization problem (computing $\hat{\vz}$) at inference stage for generating an image.
+In the same fashion as the objective of the previous method (\citeq{eq:csmeta}), solving the problem \ref{eq:dcs_a} pushes $f_\theta$ towards respecting the \ac{RIP}. \citet{Wu2019} showed that optimizing these two criterions trains both the generator $\G$ and the measurement function $f_\theta$, thus replacing the discriminator of a more classical \ac{GAN} framework.  As a benefit, the approach may generate an image $\hat{\vx} = \G(\hat{\vz})$ from a noisy information $\vy$ but at a high computation burden since it requires to solve an optimization problem (computing $\hat{\vz}$) at inference stage for generating an image.
 %and so that $\tilde{y}$ is as close as possible to $\vy$. %the sparsity assumption on the signal $\vx$ a learned prior on the data distribution $\p{X}$, as a generative model $\G$.  By first generating an image $\G(\vz)$ and exploring the latent space $\setZ$ of the generative model $\G$ by minimizing $\|A\G(\vz) - \vy\|^2_2$, so that altering the generated image gives $\Hat{\vy}=A\G(\vz)$ where $\Hat{\vy}$ is as close as possible to $\vy$. Then, Compressed sensing with meta-learning trains the generative model $\G$ to enforce the \ac{RIP} (\citeq{eq:rip}) so that it does not try to map all $\G(\vz)$ into the null space of $A$. The overall problem induced by this approach is formulated as
 
 % 		\begin{multline}
@@ -266,13 +272,6 @@ Although \ac{CGAN} was initially designed for class-conditioned image generation
 %
 where $\vy$ is the constraint map and $\D$ is the discriminator network.
 
-\begin{figure}
-		\centering
-	\includegraphics[width=\textwidth/2]{cgan.pdf}
-	\caption{CGAN}
-	\label{fig:cgan}
-\end{figure}
-
 While using the \ac{CGAN} approach alone could theoretically be enough to solve the tasks of image reconstruction and inpainting, as it directly learns the conditional distribution of the samples, the most efficient approaches rely on extending the \ac{CGAN} with a reconstruction loss, such as a $\ell_1$ or $\ell_2$ norm, between the pixels known beforehand and the corresponding pixels in the generated sample. This has been often carried out for the inpainting task \citep{Pathak2016, Xiang2017}, and can be formulated (in the case of the $\ell_2$ norm) as finding a generator $\G$ and related discriminator $\D$ that optimize
 
 \begin{equation}
@@ -284,7 +283,7 @@ These approaches are often extended with techniques, such as using multiple disc
 
 \subsubsection{Unsupervised image reconstruction with generative adversarial networks}
 
-Another trend of approaches aims to reconstruct images without any knowledge of the real data distribution $\p{X}$, in other words they only hinge on datasets of altered samples $\vy \sim \p{Y}$. This problem is different from the one we tackle, since ours supposes that a dataset of unaltered samples $\setX = \{\vx_1, ...,  \vx_s\}, \vx_i \in \spaceR^{n\times m\times c}$ is available.  Among these approaches is \textbf{Ambient \ac{GAN}} \citep{Bora2018} (Figure \ref{fig:ambientgan}), which aims at training an unconditional generative model using a dataset of noisy or incomplete samples $\setY=\{\vy_1,...\vy_t\}, \vy_i\in spaceR^{n\times m\times c}$. Ambient \ac{GAN} attempts to produce unaltered images $\tilde{\vx}$ which distribution matches the true one without having access to any of the original images $\vx$. For the sake, Ambient \ac{GAN} considers lossy measurements such as blurred images, images with removed patch or removed pixels at random (up to 95\%), leading to sparse pixel map $\vy$. This lossy measurement is simulated with a parameterized function $f_\theta$ instead of the matrix $A$
+Another trend of approaches aims to reconstruct images without any knowledge of the real data distribution $\p{X}$, in other words they only hinge on datasets of altered samples $\vy \sim \p{Y}$. This problem is different from the one we tackle, since ours supposes that a dataset of unaltered samples $\setX = \{\vx_1, ...,  \vx_s\}, \vx_i \in \spaceR^{n\times m\times c}$ is available.  Among these approaches is \textbf{Ambient \ac{GAN}} \citep{Bora2018} (Figure \ref{fig:ambientgan}), which aims at training an unconditional generative model using a dataset of noisy or incomplete samples $\setY=\{\vy_1,...\vy_t\}, \vy_i\in \spaceR^{n\times m\times c}$. Ambient \ac{GAN} attempts to produce unaltered images $\tilde{\vx}$ which distribution matches the true one without having access to any of the original images $\vx$. For the sake, Ambient \ac{GAN} considers lossy measurements such as blurred images, images with removed patch or removed pixels at random (up to 95\%), leading to sparse pixel map $\vy$. This lossy measurement is simulated with a parameterized alteration function $f_\theta$ instead of the matrix $A$
 
 \begin{equation}
 	\label{eq:denoising_system}
@@ -298,16 +297,31 @@ The underlying optimization problem solved by Ambient \ac{GAN} is therefore stat
 	\min_G \max_D L(D, G) = \mathop{\mathbb{E}}_{\substack{\vy\sim \p{Y}}} \Big[\log(\D(\vy))\Big] + \mathop{\mathbb{E}}_{\substack{\vz\sim \p{Z} \\\theta \sim p_\theta}} \Big[ \log(1-\D(f_\theta(\G(\vz))))\Big] \enspace.
 \end{equation}
 
+Here, the discriminator has no knowledge of the distribution of the full images $\p{X}$, as its input is either real altered samples $\vy$ or generated samples $G(\vz)$ on which the alteration function $f_\theta$ is applied. Thus, the Ambient GAN generator network $\G$ actually learns to generate samples $\Hat{\vx} = G(\vz)$ that, once$f_\theta$ is applied on them, are close to the real$\vy$. This is equivalent to learning to invert the function $f_\theta$. The Ambient GAN process is described in \citefig{fig:ambientgan}.
+
 \begin{figure}
-		\centering
-	\includegraphics[width=\textwidth/2]{ambiantgan.pdf}
+	\centering
+	\includegraphics[width=(\textwidth/3)*2]{ambientgan.pdf}
 	\caption{AmbientGAN}
 	\label{fig:ambientgan}
 \end{figure}
 
-\CR{Expliquer un peu ce problème}
 
 \textbf{Unsupervised Image Reconstruction} (\ac{UNIR}) \citep{Pajot2019} extends the AmbientGAN approach by adding a conditioning to the model, which allows for the reconstruction of an image $\vx$ from an altered image $\vy\sim\p{Y}$, without any knowledge of the real data distribution $\p{X}$. \ac{UNIR} is deterministic and does not allow for sampling, as the only input of the model is the altered image $\vy$. For this, an additional reconstruction task is considered. It consists in first generating a reconstruction $\tilde{\vx} = \G(\vy)$, then applying the alteration function $f_\theta$ to the generated image $\tilde{\vx}$ to get $\tilde{\vy} = f_\theta(\G(\vy))$;  re-generating an image as $\hat{\vx} = f_\theta(\G(f_\theta(\G(\vy))))$ and finally re-applying $f\theta$ to the image $\Hat{\vx}$ to get $\Hat{\vy} = f_\theta(\G(f_\theta(\G(\vy))))$. This procedure can be deemed as 
+
+\begin{equation}
+	\label{eq:unir}
+	\min_\G \max_\D L(\D, \G) = \mathop{\mathbb{E}}_{\substack{\vy\sim \p{Y}}} \Big[\log(\D(\vy))\Big] + \mathop{\mathbb{E}}_{\substack{\vy\sim \p{Y}}} \Big[ \log(1-\D(\hat{\vy}))\Big] + \|\hat{\vy} - \tilde{\vy} \|^2_2 \enspace.
+\end{equation}
+\noindent
+Here, the $\ell_2$ norm term ensures that the generator is able to learn to revert $f_\theta$ i.e. to revert the alteration procedure on a given sample. This  allows the reconstruction of realistic image $\Hat{\vx}$ only from a given constraint map $\vy$. The full process is described in \citefig{fig:unir}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{unir.pdf}
+	\caption{Unsupervised Image Reconstruction}
+	\label{fig:unir}
+\end{figure}
 
 \begin{equation}
 	\label{eq:unir}
@@ -466,6 +480,156 @@ It is worth to note that the assumption of Gaussian noise measurement leads us t
 
 To solve Problem (\ref{eq:final_optim_problem}), we use stochastic gradient descent. The overall training procedure is detailed in Algorithm \ref{alg:train} and ends up when a maximal number of training epochs is attained. 
 
+In another fashion, \textbf{Semantic Inpainting by Constrained Image Generation} \citep{Yeh2017} is an approach for inpainting which considers the generator $\G$ of a pre-trained \ac{GAN} as a prior on the data distribution $\p{X}$, and explores its latent space $\spaceZ$ through an optimization procedure to find a latent vector $\vz$, which induces an image with missing regions filled in by conditioning on the surroundings available information. To ensure that the reconstruction is accurate, this approach uses the discriminator $\D$ as a prior instead of ensuring the \ac{RIP}. This is done by adding the discriminator loss to the reconstruction loss, so that it prevents the optimization procedure from providing images that are too far away from the real data distribution. As such, the problem becomes $\Hat{\vx} = \G(\vz^*)$ with $\vz^*$ minimizing
+\begin{align}
+	\label{eq:semantic_inpainting}
+	\min_\vz \|A\G(\vz) &- \vy \|^2_2 +  \lambda \log(1 - \D(\G(\vz))) \enspace ,
+\end{align}
+
+where $\lambda$  is a hyperparameter. To yield on an image satisfying some given constraints $\vy$, the method requires to solve a full optimization problem for each sample to reconstruct, which is computationally expensive.
+
+\begin{table}
+	\centering
+	\begin{tabular}{|l|c|c|c|c|}
+		\hline
+		\textbf{Approach} & \textbf{Dataset} & \textbf{One-step}   		& \textbf{Sampling}  &      \textbf{Constraint}s\\
+		 				  					 & \textbf{free}  & \textbf{reconstruction} & \textbf{mechanism}&	 \textbf{enforcement}\\  															  
+		\hline
+    	\hline
+		\multicolumn{5}{|l|}{\textbf{Compressed sensing-based}} \\
+		\hline
+		\hline
+		Compressed sensing			   & \cmark & \xmark & \xmark & Exact \\
+		\citep{Candes2005} 				&                 &				 &				&			  \\
+		\hline
+		Compressed sensing 				 &             & 				&				&  \\ 							
+	    with dictionary learning 	& \xmark & \xmark & \xmark &  Exact \\
+	     \citep{Donoho2006}				 &             & 				&				&   \\
+  		\hline
+	    Compressed sensing                 &             & 				&				& 	Control	   \\
+	    with Meta Learning 	               & \xmark & \xmark  &\xmark   &	parameter				   \\
+	    \citep{Wu2019} 	                         &              &			   &			    & \\
+		\hline
+		 Deep compressed sensing    & \xmark & \xmark  &\cmark & Control\\
+		\citep{Wu2019}						    &              &				  &			   & parameter\\
+		\hline
+		\hline
+		\multicolumn{5}{|l|}{\textbf{Generative modeling-based}} \\
+		\hline
+		\hline
+		Conditional GAN 										  &  \xmark & \cmark & \cmark & Implicit \\
+		\citep{Mirza2014} 										&   			 &				 &				&			        \\
+		\hline
+		Ambient GAN 									   			  & \xmark & \xmark & \xmark    & Explicit\\
+		\citep{Bora2018} 										&  (altered*) &				 &			      &			    \\
+		\hline
+		UNIR   									   			  				 & \xmark & \cmark & \xmark    & Explicit \\
+		\citep{Pajot2019} 										& (altered*) &				 &			      &			   \\
+		\hline
+		Constrained                  								&             & 				&				& 	Control	   \\
+		image generation              							& \xmark & \xmark  &\cmark   &	parameter				   \\
+		\citep{Yeh2017} 	                         				&              &			   &			    & \\
+		\hline
+		\hline
+		\textbf{Our approach}   							& \xmark & \cmark & \cmark    & Control \\
+		(see Section \ref{sec:our_approach})&              &				  &			   & parameter\\
+		\hline
+	\end{tabular}
+	{\begin{flushleft}\footnotesize* Only altered samples are required during training\end{flushleft}}
+%
+	\caption[Approaches for image reconstruction]{Summary of the different advantages and limitations of all the aforementioned methods for image reconstruction. We consider the need for a dataset, the necessity of solving an optimization problem for each generated sample, the ability to sample different solutions and the mechanism for enforcing the good reconstruction of the constraints.}
+	\label{tab:reconstruction_approaches}
+\end{table}
+
+\section{Image reconstruction as an auxiliary task to generative modeling}
+\label{sec:our_approach}
+
+ As we have seen, two main categories of solutions aim to tackle the problem of image reconstruction. First, the approaches that try to directly solve the problem by finding a solution through optimization, among them is compressed sensing. However, the main drawback of these categories of approaches are that they require to solve an optimization problem per reconstructed image, which is computationally expensive in the cases where a lot of samples need to be reconstructed. Then, the approaches that aims to learn the conditional data distribution $\p{X|Y}$ and try to reconstruct the image by sampling on this distribution. Among these approaches are \ac{CGAN}-based methods, norm-based methods, AmbientGAN or UNIR. While they have the advantage of only requiring to solve a unique optimization problem at training instead of one for each reconstructed sample, they do require a dataset to train on.
+
+As main contribution to this chapter, we introduce a \ac{GAN} model whose generation network takes as input the constraint map $\vy$ and the sampled latent code $\vz \in \spaceZ$ and outputs a realistic image that fulfills the prescribed pixel values. Within this setup, such a generative model can sample in a single step from the unknown distribution $\p{X}$ of the training images $\{\vx_1, \cdots, \vx_N\}$ while satisfying unseen pixel-wise constraints at training stage.  
+
+\subsection{Image reconstruction as a maximum a posteriori estimation}
+
+Starting from the image reconstruction problem ((\citeq{eq:reconstruction_system}), estimating the maximum a posteriori consists in finding an image $\Hat{\vx}$ that has the maximum likelihood on the posterior distribution $\p{X|Y}$, in other words the image that is the most likely to be the original image, from which the constraints $\vy$ has been measured. We find that this allows for replacing the implicit conditioning of the \ac{CGAN} by a norm-based reconstruction loss is an approach that naturally emerges from the denoising formulation \citeq{eq:denoising_system}. This provides a rationale for the use of these losses in the similar aforementioned approaches (\citesec{subs:conditional_reconstruction}). 
+ 
+ Such a generative model offers does not rely on per-sample optimization and provides a simple and efficient sampling mechanism through the latent variable $\vz$. This allows for the efficient sampling of several potential solutions, which can be crucial in some applications in which a large amount of solutions need to be sampled, such as solving inverse problems \citep{Laloy2019} . It also naturally provides a mechanism for controlling the trade-off between the respect of the constraints and the likelihood of the reconstructed image.
+ 
+\subsubsection{Conditional generative models for maximum a posteriori estimation}
+\label{subs:maximum_a_posteriori}
+
+Recall that the image reconstruction problem consist in recovering $\vx$ the solution, assuming the constraint map $\vy$ is resulting from applying a $M_\vy$ on the image $\vx$ (\citeq{eq:reconstruction_system}), to
+%
+\begin{equation}
+\vy = M_\vy \odot\vx \enspace.
+\label{eq:noiseless_generation_primary_CGAN}
+\end{equation}
+
+Here $M_\vy$ is the masking matrix in which the constrained pixels are assumed to be randomly and independently selected.  We can formulate the Maximum A Posteriori (MAP) estimation of this problem, which, given the constraint map $\vy$, consists in finding the most probable image $\vx^*$ following the posterior distribution $\p{X|Y}$, as
+%
+\begin{align}
+\vx^* &= \arg\max_\vx\log {\p{X|Y}}(\vx|\vy) + \log \p{Y}(\vy)\\
+&= \arg\max_\vx\log \p{Y|X}(\vy|\vx)+ \log \p{X}(\vx) \enspace.
+\label{eq:bayesian_formulation_our_primary_CGAN}
+\end{align}
+
+\noindent $\p{Y|X}(\vy|\vx)$ is the likelihood that the constrained pixels $\vy$ are issued from image $\vx$ while $\p{X|Y}(\vx|\vy)$ is the likelihood of an image knowing the constrained pixels $\vy$ . $\p{X}(\vx)$ and $\p{Y}(\vy)$ represent the marginal distributions of $\vx$ and $\vy$. As such, we can introduce a conditional generative model $\G : (\spaceY, \spaceZ) \rightarrow \spaceX$ in order to that replaces the conditional distribution $\p{X|Y}$, which allows for reformulating the original problem (\citeq{eq:noiseless_generation_primary_CGAN}) as
+%
+\begin{equation}
+	\vy = M_\vy \odot \G(\vy, \vz) + \epsilon_\G \enspace,
+	\label{eq:generation_primary_CGAN}
+\end{equation}
+
+where $\epsilon_\G$ represents the error of the model, which we consider to by an i.i.d noise corrupting the constrained pixels. Assuming that the generation network $\G$ may sample an image $\G(\vy, \vz)$ complying with the given pixel values $\vy$, we get the following problem
+
+\begin{equation}
+	\max_G \mathop{\mathbb{E}}_{\substack{\vy\sim \p{Y}\\\vz\sim \p{Z}}} \log \p{Y|X}(\vy| \G(\vy, \vz)) + \log \p{X}(\G(\vy, \vz)) \enspace.
+\label{eq:bayesian_formulation_our_primary_CGAN_G}
+\end{equation}
+
+\noindent The first term in Problem (\ref{eq:bayesian_formulation_our_primary_CGAN_G}) measures the likelihood of the constraints given a generated image. The second term measures the likelihood of the generated images according to the data distribution $\p{X}$. Let rewrite Equation (\ref{eq:bayesian_formulation_our_primary_CGAN_G}) as $\vect(\vy) = \vect(M_\vy \odot \vx) + \vect(\varepsilon)$ where $\vect(\cdot)$ is the vectorisation operator that consists in stacking the pixels, with $\vect(\vy) \in \spaceR^{n.m.c}$ for $\vy \in \spaceR^{n\times m\times c}$. Therefore, assuming $\vect(\varepsilon)$ is i.i.d and follows a Gaussian distribution $\mathcal{N}(0,\sigma^2 I)$, the conditional likelihood of $\vy$ knowing $\vx$  reads as
+\begin{equation}
+\log \p{Y|X}(\vy, \G(\vy| \vz)) \, \propto - \left \|\vect(\vy) - \vect(M_\vy) \odot G(\vy,\vz))\right\|_2^2 \enspace.
+\end{equation}
+\noindent It evaluates the euclidean distance between the conditioning pixels and their predictions by $\G$. In other words, using a matrix notation of  Equation (\ref{eq:generation_primary_CGAN}), the latter conditional likelihood given a generated image equivalently writes
+
+\begin{equation}
+\log {p_{Y|X}}(\vy, G(\vy, \vz) \, \propto - \left \|\vy - M_\vy \odot G(\vy,\vz)\right\|_F^2 \enspace.
+\end{equation}
+
+\noindent $\| N \|_F^2 $ represents the squared Frobenius norm of matrix $N$ that is the sum of its squared entries. 
+%
+%In this work, we assume that $\epsilon$ follows a normal distribution $\epsilon\sim\mathcal{N}[0,\sigma^2]$, but it is worth noting that any prior distribution with a close-form solution for maximum likelihood estimation (typically distribution from the exponential family) can be used.
+%In the case of the normal distribution, we can minimize our error term by using the $L_2$ norm on the constrained pixels.
+%    
+
+The second term in Problem (\ref{eq:bayesian_formulation_our_primary_CGAN_G}) is the likelihood of the generated image under the true but unknown data distribution $\p{X}$. Maximizing this term can be equivalently achieved by minimizing the distance between $\p{X}$ and the marginal distribution of the generated samples $\G(\vy,\vz)$. This amounts to minimizing with respect to $\G$, the GAN-like objective function $\mathop{\mathbb{E}}_{\substack{\vx\sim \p{X}}} \log(\D(\vx)) + \mathop{\mathbb{E}}_{\substack{\vz\sim \p{Z}\\\vy\sim \p{Y}}} \log(1-\D(\G(\vy, \vz)))$  \citep{Goodfellow2014}.
+
+Putting altogether these elements, we can propose a relaxation of the hard constraint optimization problem (\ref{eq:formulation_IR_problem}) (Figure \ref{fig:ourapproach}) that consists in learning on a generative network $\G$ and the related discriminator model $\D$ by solving
+%minimizing the Jensen-Shannon divergence between the real data distribution and the distribution of the generated data \citep{Goodfellow2014}.
+
+%In our approach, we explicitly model the relaxation of the constraint by minimizing the $L_2$ norm between the constrained pixels and the generated values (see Fig.\ref{fig:ourapproach}).
+
+%The objective function, with $\lambda \geq 0$ an additional parameter, becomes:
+\begin{eqnarray}
+\min_\G \max_\D L(\D,\G) & {\small=} & \mathop{\mathbb{E}}_{\substack{\vx\sim \p{X}}} \Big[\log(\D(\vx))\Big] \label{eq:final_optim_problem} \\
+&+&\mathop{\mathbb{E}}_{\substack{\vz\sim \p{Z}\\\vy\sim \p{Y}}} \Big[\log(1-\D(\G(\vy, \vz)))+\lambda \left\|\vy - M_\vy \odot \G(\vy,\vz)\right\|_F^2 \Big] \enspace . \nonumber
+\end{eqnarray}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=(\textwidth/3)*2]{ours.pdf}
+	\caption[\ac{Maximum  A Posteriori GAN} for image reconstruction]{Our approach}
+	
+	\label{fig:ourapproach}
+\end{figure}
+
+
+It is worth to note that the assumption of Gaussian noise measurement leads us to explicitly turn the pixel value constraints into the  minimization of the quadratic error between the real enforced pixel values and their generated counterparts as it corresponds to maximizing the conditional likelihood of the pixels in the generated  image. The additional term acts as a regularization over prescribed pixels by the mask $M_\vy$. The trade-off between the distribution matching loss and the constraint enforcement is assessed by the regularization parameter $\lambda \geq 0$. Figure \ref{fig:generated} illustrates the overall principle of the model. It is also worth noting that the noise $\varepsilon$ can be of any other distribution, according to the prior information, one may associate to the measurement process. To formulate the maximum a posteriori, we however require this distribution to admit a closed-form solution for the maximum likelihood estimation for optimization purpose. Typical choices are distributions from the exponential family \citep{Brown1986}.
+
+\subsubsection{Conditional image generation with an image reconstruction auxiliary task}
+
+To solve Problem (\ref{eq:final_optim_problem}), we use stochastic gradient descent. The overall training procedure is detailed in Algorithm \ref{alg:train} and ends up when a maximal number of training epochs is attained. 
+
 \begin{algorithm}[!ht]
 	\caption{Proposed training algorithm}
 	\label{alg:train}
@@ -486,9 +650,9 @@ To solve Problem (\ref{eq:final_optim_problem}), we use stochastic gradient desc
 	\end{algorithmic}
 \end{algorithm}
 
-When implementing this training procedure we experienced, at inference stage, a lack of diversity in the generated samples (see Figure \ref{fig:diversity_loss}). This issue manifests itself through the fact that the learned generation network, given a constraint map $\vy$, outputs almost deterministic image  regardless the variations in the input $\vz$. The issue was also pointed out by Yang et al. \citep{Yang2019} as characteristic of \ac{CGAN}s.
+When implementing this training procedure we experienced, at inference stage, a lack of diversity in the generated samples (see Figure \ref{fig:diversity_loss}). This issue manifests itself through the fact that the learned generation network, given a constraint map $\vy$, outputs almost deterministic image  regardless the variations in the input $\vz$. The issue was also pointed out by Yang et al. \citep{Yang2019} as characteristic of \ac{CGAN}s. To avoid the problem, we exploit the PacGAN \citep{Lin2018} technique , detailed in \citesec{subs:augmented_objectives},  which consists in passing a small set of samples to the discrimination function instead of a single one.  PacGAN is intended to tackle the mode collapse problem in GAN training (see \citesec{subs:mode_collapse}) . The underlying principle being that if a set of images are sampled from the same training set, they are very likely to be completely different, whereas if the generator experiences mode collapse, generated images are likely to be similar.In practice, we only give two samples to the discriminator, which is sufficient to overcome the loss of diversity as  suggested in \citep{Lin2018}. The resulting training procedure is summarized in Algorithm~\ref{alg:trainpac}.
 
-\begin{figure}[!t]
+\begin{figure}[h]
 	\centering
 	\includegraphics[width=2cm]{diversity_1.png}\hspace{0.5cm}\includegraphics[width=2cm]{diversity_2.png}\hspace{0.5cm}\includegraphics[width=2cm]{diversity_1_pac.png}\hspace{0.5cm}\includegraphics[width=2cm]{diversity_2_pac.png}
 	
@@ -498,13 +662,7 @@ When implementing this training procedure we experienced, at inference stage, a 
 	\label{fig:diversity_loss}
 \end{figure}
 
-
-To avoid the problem, we exploit the PacGAN \citep{Lin2018} technique , detailed in \citesec{subs:augmented_objectives},  which consists in passing a small set of samples to the discrimination function instead of a single one.  PacGAN is intended to tackle the mode collapse problem in GAN training (see \citesec{subs:mode_collapse}) . The underlying principle being that if a set of images are sampled from the same training set, they are very likely to be completely different, whereas if the generator experiences mode collapse, generated images are likely to be similar.
-In practice, we only give two samples to the discriminator, which is sufficient to overcome the loss of diversity as  suggested in \citep{Lin2018}. 
-%
-The resulting training procedure is summarized in Algorithm~\ref{alg:trainpac}.
-
-\begin{algorithm}[!ht]
+\begin{algorithm}[]
 	\caption{Our training algorithm including PacGAN}
 	\label{alg:trainpac}
 	\begin{algorithmic}[H]
@@ -550,7 +708,7 @@ We tested our approach on several datasets listed hereafter. Detailed  informati
 	composed of $20,000$ $160 \times 160$ patches sampled from a large brick wall texture, as recommended in \citep{Jetchev2017}. It is worth noting that this procedure can be reproduced on any texture image of sufficient size. Texture is a testbed of our approach on fully-convolutional networks for constrained texture generation task. 
 	%This allows us to experiment fully-convolutional architectures on a texture reconstruction task.
 	
-	\item{Subsurface} is a classical dataset in geological simulation \citep{Strebelle2002} which consists, similarly to the Texture dataset, of 20,000  $160 \times 160$ patches sampled from a model of a subsurface binary domain. These models are assumed to have the same properties as a texture, mainly the property of global ergodicity of the data.
+	\item{Subsurface} is a classical dataset in geological simulation \citep{Strebelle2002} which consists, similarly to the Texture dataset, of 20,000  $160 \times 160$ patches sampled from a model of a subsurface binary domain. These models are assumed to have the same properties as a texture.
 	
 	
 \end{description}
@@ -569,7 +727,7 @@ We use a variety of GAN architectures in order to adapt to the different scales 
 For the experiments on the FashionMNIST \citep{Xiao2017}, we use a lightweight convolutional network for both the discriminator and the generator, similar to DCGAN  \citep{Radford2015}, due to the small resolution of FashionMNIST images.
 %This is motivated by the large number of experiments and the small dimension of the images.
 
-To experiment on the Texture dataset, we consider a set of fully-convolutional generator architectures based on either dilated convolutions \citep{Yu2015}, which behave well on texture datasets \citep{Ruffino2017}, or encoder-decoder architectures that are commonly used in domain-transfer applications such as CycleGAN \citep{Zhu2017}. We selected these architectures because they have very large receptive fields without using pooling, which allow the generator to use a large context for each pixel.
+To experiment on the Texture dataset, we consider a set of fully-convolutional generator architectures based on either dilated convolutions \citep{Yu2015}, which behave well on texture datasets \citep{Ruffino2017}, or encoder-decoder architectures that are commonly used in domain-transfer applications such as CycleGAN \citep{Zhu2017}.
 
 We keep the PatchGAN discriminator \citep{Isola2016} across all the experiments with these architectures, which is a five-layer fully-convolutional network with a sigmoid activation.
 
@@ -589,14 +747,13 @@ MSE = \frac{1}{L} \sum_{i=1}^L \left\|\vy_i - M_{\vy_i} \odot G(\vy_i, \vz_i)\ri
 \end{equation}
 This metric should be understood as the mean squared error of reconstructing the constrained pixel values. 
 
-Visual quality evaluation of an image is not a trivial task \citep{Theis2015}. However, Fréchet Inception Distance (FID) \citep{Heusel2017} and Inception Score \citep{Salimans2016}, have been used to evaluate the performance of generative models. We employ FID since the Inception Score has been shown to be less reliable \citep{Barratt2018}. Since the FID requires a pre-trained classifier adapted to the dataset in study, we trained simple convolutional neural networks as classifiers for the FashionMNIST and the CIFAR-10 datasets. For the Texture dataset, the dataset is not labeled, hence we resort to a CNN classifier trained on the Describable Textures Dataset (DTD) \citep{Cimpoi2014}, which is a related application domain.
+Visual quality evaluation of an image is not a trivial task \citep{Theis2015}. However, Fréchet Inception Distance (FID) \citep{Heusel2017} and Inception Score \citep{Salimans2016}, have been used to evaluate the performance of generative models. These approaches  both consist in comparing, for both real and generated images, features extracted with a pre-trained classifier. We explain these approaches in section \ref{subs:evaluation_methods} of the chapter 1. We employ FID since the Inception Score has been shown to be less reliable \citep{Barratt2018}. Since the FID requires a pre-trained classifier adapted to the dataset in study, we trained simple convolutional neural networks as classifiers for the FashionMNIST and the CIFAR-10 datasets. For the Texture dataset, the dataset is not labeled, hence we resort to a CNN classifier trained on the Describable Textures Dataset (DTD) \citep{Cimpoi2014}, which is a related application domain.
 
 For the Subsurface dataset, there is not labels nor similar labeled dataset. Thus, we could not train a classifier for this dataset, so we cannot compute the FID. To evaluate the quality of the generated samples, we use metrics based on a distance between feature descriptors extracted from real samples and from generated ones. Similarly to \citep{Ruffino2017}, we rely on a $\chi^2$ distance between the Histograms of Oriented Gradients (HOG) or Local Binary Patterns (LBP) features computed on generated and real images. Histograms of Oriented Gradients (HOG) \citep{Dalal2005} and Local Binary Patterns (LBP) \citep{Pietikainen2011} are computed by splitting an image into cells of a given radius and computing on each cell the histograms of the oriented gradients for HOGs and of the light level differences for each pixel to the center of the cell for LBPs.  Additionally, we consider the domain-specific metric, the connectivity function \citep{Lemmens2017} which is presented in Appendix \ref{app:geostatistics}.
 
 Finally, we check by visual inspection if the trained model $\G$ is able to generate diverse samples, meaning that for a given $\vy$ and for a set of latent codes $(\vz_1, ..., \vz_n) \sim \p{Z}$, the generated samples $\G(\vy,\vz_1), \ldots, \G(\vy, \vz_n)$ are visually different. 
 
 %Since we empirically observed that our models were either producing very different samples or samples that only differ by a small noise factor, we do not propose a specific evaluation metric and instead check manually if a loss of diversity occurs.
-
 
 \subsubsection{Study of the quality-fidelity trade-off}
 \label{subs:results}
@@ -615,25 +772,25 @@ Finally, we check by visual inspection if the trained model $\G$ is able to gene
 %     \label{fig:mses}
 % \end{figure}
 
-\begin{figure}[t]
-	\centering
-	\includegraphics[trim=0 0 0 40, clip,scale=0.4]{MSE_fashion}\includegraphics[trim=0 0 0 40, clip,scale=0.4]{FID_fashion}
-	
-	\includegraphics[scale=0.5]{pareto_fashion}
-	
-	\centering
-	\caption[Comparison between our approach and the GAN/CGAN approach on FashionMNIST]{Our approach compared to the GAN and CGAN baselines. MSE (left) and  FID (right) w.r.t. the regularization parameter $\lambda$, MSE w.r.t the FID (bottom).
-		%The different orders of magnitude for the Y-axis of the FID is due to the different classifiers used to compute this distances.
-	}
-	\label{fig:fids}
-	\label{fig:mses}
-	\label{fig:paretos}
-\end{figure}
 
 %In this set of experiments, 
 We first study the influence of the  regularization parameter $\lambda$ on both the quality of the generated samples and the respect of the constraints. We experiment on the %MNIST \citep{Lecun1998} and
 FashionMNIST \citep{Xiao2017} dataset, since such a study requires intensive simulations permitted by the low resolution of FashionMnist images and the used architectures (see Section \ref{subs:architectures}). 
 %a lot of re-training and the small size of the images allowed us to run several hundreds of experiments.
+
+\begin{figure}[!h]
+	\begin{tabular}{ll} 
+		\multicolumn{1}{c}{\hspace{-20px}\textbf{MNIST}} & \multicolumn{1}{c}{\hspace{-20px}\textbf{FashionMNIST} \hspace{20px}}\\
+		\includegraphics[trim=20 0 0 40, clip,scale=0.5]{MSE_mnist}				 & \includegraphics[trim=30 0 0 40, clip,scale=0.5]{MSE_fashion} \\
+		\includegraphics[trim=20 0 40 40, clip,scale=0.5]{FID_mnist}				 & \includegraphics[trim=25 0 0 40, clip,scale=0.5]{FID_fashion} \\
+		\includegraphics[trim=00 0 20 00, clip,scale=0.6]{pareto_mnist} & \includegraphics[trim=20 0 0 0, clip,scale=0.6]{pareto_fashion} \\
+	\end{tabular}
+	\caption[Hyperparameter study for our approach and the GAN/CGAN approach on MNIST and FashionMNIST]{Our approach compared to the GAN and CGAN baselines. MSE (Top) and  FID (center) w.r.t. the regularization parameter $\lambda$; MSE w.r.t the FID (bottom), on the MNIST (left) and Fashion MNIST (right) datasets. Note  that the different orders of magnitude for the FID is due to the different classifiers used to compute this distances.
+	}
+	\label{fig:fids}
+	\label{fig:mses}
+	\label{fig:paretos}
+\end{figure}
 
 To overcome classical GANs instability, the networks are trained 10 times and the median values of the best scores on the test set at the best epoch 
 are recorded. The epoch that minimizes the cost
@@ -644,6 +801,7 @@ C(FID, MSE) = \sqrt{\left(\frac{FID - FID_{min}}{FID_{max}- FID_{min}}\right)^2 
 Empirical evidences (highlighted in Figure \ref{fig:mses}) show that with a good choice of $\lambda$, the regularization term helps the generator to enforce the constraints, leading to smaller MSEs than when using the CGAN ($\lambda=0$) without compromising on the quality of generated images. Also, we can note that using the regularization term even leads to a better image quality compared to GAN and CGAN.
 %
 The bottom panel in Figure \ref{fig:paretos} illustrates that the trade-off between image quality and the satisfaction of the constraints can be controlled by appropriately setting the value of $\lambda$. Nevertheless, for small values of $\lambda$ (less or equal to $10^{-1}$), our GAN model fails to learn meaningful distribution of the training images and only generates uniformly black images. This leads to the plateaus on the MSE and FID plots (top panels in Figure \ref{fig:mses}).
+
 
 
 % \begin{figure}
@@ -780,12 +938,8 @@ Finally, we evaluate our approach on the Subsurface dataset. We use the UNetResP
 
 The obtained results are summarized in Tables \ref{tab:subsurface} and \ref{tab:subsurface_visual}. They are coherent with the previous experiments since the generated samples are diverse and have a low error regarding the constrained pixels. The conditioning have a limited impact on the visual quality of the generated samples and compares well to unconditional approaches \citep{Ruffino2017}. Evaluation of the generated images using the domain-connectivity function highlights this fact on Figure \ref{fig:ours_connectivity} in the supplementary materials. Also examples of generated images by our approach  pictured in Figure \ref{fig:samples_subsurface} (see appendix \ref{app:generated_images}) show that we preserve the visual quality and honor the constraints.
 
-The obtained results are summarized in Tables \ref{tab:subsurface} and \ref{tab:subsurface_visual}. They are coherent with the previous experiments since the generated samples are diverse and have a low error regarding the constrained pixels. The conditioning have a limited impact on the visual quality of the generated samples and compares well to unconditional approaches \citep{Ruffino2017}. Evaluation of the generated images using the domain-connectivity function highlights this fact on Figure \ref{fig:ours_connectivity} in the supplementary materials. Also examples of generated images by our approach  pictured in Figure \ref{fig:samples_subsurface} (see appendix \ref{app:generated_images}) show that we preserve the visual quality and honor the constraints.
 
-
-\section{Conclusion and discussion}
-
-\section{Conclusion and perspectives}
+\section{Conclusion and perspective}
 
 In this chapter, we address the task of learning effective generative adversarial networks when only very few pixel values are known beforehand. To solve this pixel-wise conditioned GAN, we model the conditioning information under a probabilistic framework. This leads to the maximization of the likelihood of the constraints given a
 generated image. Under the assumption of a Gaussian distribution over the given pixels, we formulate an objective function composed of the conditional GAN loss function regularized by a $\ell_2$-norm on pixel reconstruction errors. We describe the related optimization algorithm.
@@ -800,11 +954,11 @@ Empirical evidences illustrate that the proposed framework helps obtaining good 
 		\label{fig:rec_error}
 	\end{subfigure}\begin{subfigure}[t]{0.5\textwidth}
 		\centering
-		\includegraphics[scale=0.5]{GaussianBeta}
+		\includegraphics[scale=0.5]{Mixture}
 		\caption{Mixture distribution fit}
 		\label{fig:mixture_dist}
 	\end{subfigure}	
-	\caption[Better modeling of the reconstruction error on the Subsurface dataset]{In orange: Histogram of the reconstruction error of the UNetResPAC model on 100 generated images, with $\lambda = 1$. As we can see, is either close to 0, -2 or 2. In blue: Probability density functions of a Gaussian ($\mathcal{N}(\mu=0,\sigma=0.01)$) and a mixture model of this Gaussian distribution with a weight of 0.95 and a Beta distribution ($B(\alpha=\beta=0.75)$) with weight 0.05 (which roughly corresponds to the error rate of the UNetResPAC model).}
+	\caption[Better modeling of the reconstruction error on the Subsurface dataset]{In orange: Histogram of the reconstruction error of the UNetResPAC model on 100 generated subsurface images, with $\lambda = 1$. As we can see, the error is either close to 0, -2 or 2. In blue: Probability density functions of a best fit Gaussian and a mixture model of a Gaussian distribution with a weight of 0.95 and two exponential distribution, each with weights of 0.025 (0.05 being roughly the error rate of the UNetResPAC model).}
 \end{figure}
 
 In future work, an interesting direction would be to investigate other prior distributions for the given pixels. As mentioned in the section \citesec{subs:maximum_a_posteriori}, we assume that the reconstruction error of the model is Gaussian. This however is not necessarily true in practice, as we observed that in the case of the Subsurface dataset, since the pixels are always either -1 or 1, the reconstruction error tend to be close to either 0, -2, or 2 (see \citefig{fig:rec_error}). For this example, a mixture distribution could be more appropriate as it could model both the cases where the error is close to 0 (which can be assumed to be normal) and the cases where it is close to -2 or 2 (\citefig{fig:mixture_dist}).  This however raises the questions of finding a closed form solution for the maximum likelihood estimation for such a distribution.
