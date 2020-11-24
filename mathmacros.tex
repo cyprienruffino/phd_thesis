@@ -5,6 +5,14 @@
 \newcommand{\setX}{\mathcal{X}}
 \newcommand{\setY}{\mathcal{Y}}
 \newcommand{\setZ}{\mathcal{Z}}
+\newcommand{\setC}{\mathcal{C}}
+
+%% Spaces
+\newcommand{\spaceS}{\mathbb{S}}
+\newcommand{\spaceX}{\mathbb{X}}
+\newcommand{\spaceY}{\mathbb{Y}}
+\newcommand{\spaceZ}{\mathbb{Z}}
+\newcommand{\spaceR}{\mathbb{R}}
 
 %% Spaces
 \newcommand{\spaceS}{\mathbb{S}}
@@ -23,11 +31,17 @@
 \newcommand{\vs}{\textbf{s}}
 \newcommand{\vv}{\textbf{v}}
 \newcommand{\vt}{\textbf{t}}
+\newcommand{\vr}{\textbf{r}}
+\newcommand{\vu}{\textbf{u}}
 
 %% Matrices
-\newcommand{\mx}{\uppercase{x}}
-\newcommand{\my}{\uppercase{y}}
-\newcommand{\mz}{\uppercase{z}}
+\newcommand{\mx}{\uppercase{\textbf{x}}}
+\newcommand{\my}{\uppercase{\textbf{y}}}
+\newcommand{\mz}{\uppercase{\textbf{z}}}
+\newcommand{\ma}{\uppercase{\textbf{a}}}
+\newcommand{\mb}{\uppercase{\textbf{b}}}
+\newcommand{\mm}{\uppercase{\textbf{m}}}
+\newcommand{\mn}{\uppercase{\textbf{n}}}
 
 %% Distributions
 \newcommand{\p}[1]{p_{#1}}
@@ -66,3 +80,13 @@
 \newcommand*\diff{\mathop{}\!\mathrm{d}}
 \renewcommand{\cmark}{\ding{51}}%
 \renewcommand{\xmark}{\ding{55}}%
+
+\makeatletter
+\newcommand{\doublehat}[1]{%
+\begingroup%
+\let\macc@kerna\z@%
+\let\macc@kernb\z@%
+\let\macc@nucleus\@empty%
+\hat{\raisebox{.2ex}{\vphantom{\ensuremath{#1}}}\smash{\hat{#1}}}%
+\endgroup}
+\makeatother

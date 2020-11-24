@@ -8,8 +8,8 @@
 \minitoc
 
 
-\section{Generative modeling with Adversarial models}
-Generative modeling with deep neural networks has been a challenging task due to the stochastic nature of sampling, which prevents the computation of gradient, thus preventing the classical training of a deep model with gradient descent. However recent approaches such as variational autoencoders (\ac{VAE}s) \citep{Kingma2014b}, flow methods \citep{Dinh2017, Kingma2018} and adversarial models \citep{Goodfellow2014} managed to overcome this restriction. In this section, we first propose an introduction to generative modeling with a focus on latent variable models.
+\section{Generative modeling and adversarial learning}
+Generative modeling with deep neural networks has been a challenging task due to the stochastic nature of sampling, which prevents the computation of gradient, thus preventing the classical training of a deep model with gradient descent. However recent approaches such as variational auto-encoders (\ac{VAE}s) \citep{Kingma2014b}, flow methods \citep{Dinh2017, Kingma2018} and adversarial models \citep{Goodfellow2014} managed to overcome this restriction. In this section, we first propose an introduction to generative modeling with a focus on latent variable models.
 
 We will then focus on the Generative Adversarial Networks \citep{Goodfellow2014} framework, their training process  and some of their variants, especially their conditional and domain-transfer variants. We outline some limitations of this framework and propose a formulation of these limitations in the form of a trilemma between the intrinsic quality of the generated samples, their diversity and the quality of the conditioning of the model. With this tool, we propose a taxonomy of the recent \ac{GAN} approaches and identify trends in these approaches.
 
@@ -25,7 +25,7 @@ We will then focus on the Generative Adversarial Networks \citep{Goodfellow2014}
 
 Generative modeling is the task of learning the underlying distribution of a dataset in order to generate more samples from that distribution. In other words, it describes how data is generated in terms of a probabilistic model,  a distribution from which the whole dataset could have been sampled with a high likelihood.
 
- Indeed,  whereas a discriminative model tries to find decision boundaries by fitting a parametric model $\pt{\vy|\vx}$  to a conditional probability distribution $\p{\vy|\vx}$ of data $\vx\in\setX$ and labels $\vy \in \setY$ relatively to the data $\vx \sim \p{x}$, a generative model aims to fit $\pt{\vx}$ to $\p{\vx}$  the intrinsic distribution of the data and to provide a sampling mechanism on this distribution (\seefigure{fig:disc_gen}).
+ Indeed,  whereas a discriminative model tries to find decision boundaries by fitting a parametric model $\pt{Y|X}$  to a conditional probability distribution $\p{Y|X}$ of data $\vx\in\setX$ and labels $\vy \in \setY$ relatively to the data $\vx \sim \p{X}$, a generative model aims to fit $\pt{X}$ to $\p{X}$  the intrinsic distribution of the data and to provide a sampling mechanism on this distribution (\seefigure{fig:disc_gen}).
 
 These two learning tasks, the discriminative (\citeq{eq:disc_mle}) modeling and the generative modeling (\ \citeq{eq:gen_mle}) can be formulated as a maximum log-likelihood estimation \\
 
@@ -42,7 +42,7 @@ These two learning tasks, the discriminative (\citeq{eq:disc_mle}) modeling and 
 	\end{equation}
 \end{minipage}\\
 
-An simple example of generative model are Gaussian Mixture Models (\ac{GMM}) . They consist in a sum of $K$ Gaussian distributions $\mathcal{N}(\mu_k, \sigma_k^2), k \in 1..K$ which are all attributed a selection probability $p(\vz=k) = \pi_k$, with $\vz \in \setZ$, so that $\p{\vx|\vz=k} = \mathcal{N}(\mu_k, \sigma_k^2)$ . The model is then formulated as 
+An simple example of generative model are Gaussian Mixture Models (\ac{GMM}) . They consist in a sum of $k$ Gaussian distributions $\mathcal{N}(\mu_i, \sigma_i^2), i \in 1..k$ which are all attributed a selection probability $\p{Z=i} = \pi_k$, with $\vz \in \setZ$, so that $\p{\vx|\vz=k} = \mathcal{N}(\mu_k, \sigma_k^2)$ . The model is then formulated as 
 
 \begin{equation*}
 	\pt{\vx} = \sum_{z}\p{z}\pt{\vx|z}\enspace,
@@ -127,7 +127,7 @@ In the same fashion as the generative models mentioned in \citesub{sub:deep_gen_
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth*3/4]{chapter1/div.pdf}\hspace{-2cm}
-	\caption[Illustration of a divergence]{A divergence $\Div{\alpha}{\beta}$ can capture the distance between a parametric model $\alpha_\theta$ and the observations $\beta$. Density fitting can then be formulated as $\alpha_{\theta^*} = \arg\min_\theta \Div{\alpha_\theta}{\beta}$, where $\alpha_{\theta^*}$ is the best fit model.}
+	\caption[Illustration of a divergence]{A divergence $\Div{\alpha_\theta}{\beta}$ can capture the distance between a parametric model $\alpha_\theta$ and the observations $\beta$. Density fitting can then be formulated as  finding $\theta^* = \arg\min_\theta \Div{\alpha_\theta}{\beta}$, such that $\alpha_{\theta^*}$ is the best fit model.}
 	\label{fig:divergence}
 \end{figure}
 
@@ -376,7 +376,7 @@ where $\mathcal{F}$ is a family of real-valued bounded measurable functions. By 
 
 Another category of approaches that are part of the \ac{IPMs} are moment matching methods, most notably the Maximum Mean Discrepancy (\ac{MMD}) \citep{Gretton2012}, which is defined as the \ac{IPM} that restricts the set $\mathcal{F}$ to the set of functions in the ball of a Reproducing Kernel Hilbert Space (\ac{RKHS}) , or more formally: $\mathcal{F} = \{f:||f||_\mathcal{H} \leq 1\}$, with $\mathcal{H}$ a \ac{RKHS} of kernel $k:\setX\times\setX\rightarrow \mathbb{R}$).
 
-Although this distance can show nice properties, allowing for two-sample testing, it relies on the choice of the kernel $k$. Thus by using a fixed kernel, \ac{MMD} was used to formulate the different \ac{MMD}GAN \citep{Li2017a ,Dziugaite2015, Binkowski2018} approaches, which train GANs by estimating the \ac{MMD} with either gaussian or quadratic kernels. 
+Although this distance can show nice properties, allowing for two-sample testing, it relies on the choice of the kernel $k$. Thus by using a fixed kernel, \ac{MMD} was used to formulate the different \ac{MMD}GAN \citep{Li2017a,Dziugaite2015, Binkowski2018} approaches, which train GANs by estimating the \ac{MMD} with either gaussian or quadratic kernels. 
 
 More recent approaches leverage gradient penalty similar as \ac{WGAN-GP} in order to learn the kernel $k$, which translates into special cases of \ac{MMD} such as Energy Distance \citep{Bellemare2017, Szekely2004} or the so-called Fisher IPM \cite{ Mroueh2017}.
 
@@ -386,6 +386,7 @@ More recent approaches leverage gradient penalty similar as \ac{WGAN-GP} in orde
 		\hline
 		Approach & Divergence \\
 		\hline 
+		\hline 
 		\multicolumn{2}{|l|}{$f$-divergences} \\
 		\hline
 		GAN \citep{Goodfellow2014}& Jensen-Shannon \\
@@ -393,6 +394,7 @@ More recent approaches leverage gradient penalty similar as \ac{WGAN-GP} in orde
 		LSGAN \citep{Mao2017}& Pearson $\chi^2$ \\
 		EBGAN* \citep{Zhao2017} & Total variation \\
 		$f$-GAN \citep{Nowozin2016} & Various $f$-divergences\\
+		\hline 
 		\hline 
 		\multicolumn{2}{|l|}{Integral Probability Metrics (\ac{IPM}s)}\\
 		\hline

@@ -1,2 +1,104 @@
 \chapter{Experiment details for the Polarimetric CycleGAN}
 \label{chap:details_eccv}
+
+\section{Proof of the property $\vx_0 + \vx_{90} = \vx_{45} + \vx_{135}$}
+\label{app:physical_prop}
+
+\begin{proof}
+	We call $\hat{\vx}$ and $\tilde{\vx}$ respectively an image that we want to evaluate and the intensities computed by equation (\ref{eq:calibration_constraint}). From this equation, the calibration matrix $\ma$ and its pseudo-inverse $\ma^\dagger$, we have the following equality:
+	$$\begin{bmatrix} 
+		\tilde{\vx}_0 \\
+		\tilde{\vx}_{45} \\
+		\tilde{\vx}_{90} \\
+		\tilde{\vx}_{135} 
+	\end{bmatrix} = \frac{1}{2}\begin{bmatrix}
+		1 & 1 & 0 \\
+		1 & 0 & 1 \\
+		1 & -1 & 0 \\
+		1 & 0 & -1
+	\end{bmatrix}
+	\times \begin{bmatrix}
+		1 & 0 & 1 & 0 \\
+		1 & 0 & -1 & 0 \\
+		0 & 1 & 0 & -1
+	\end{bmatrix} \times \begin{bmatrix} 
+		\hat{\vx}_0 \\
+		\hat{\vx}_{45} \\
+		\hat{\vx}_{90} \\
+		\hat{\vx}_{135}
+	\end{bmatrix}
+	$$
+	Let $\mm = \ma\ma^\dagger$, then we have:
+	$$
+	\tilde{\vx} = \mm\hat{\vx} = \frac{1}{2}\begin{bmatrix}
+		2 & 0 & 0 & 0 \\
+		1 & 1 & 1 & -1 \\
+		0 & 0 & 2 & 0 \\
+		1 & -1 & 1 & 1
+	\end{bmatrix} \times \begin{bmatrix} 
+		\hat{\vx}_0 \\
+		\hat{\vx}_{45} \\
+		\hat{\vx}_{90} \\
+		\hat{\vx}_{135}
+	\end{bmatrix}
+	$$
+	
+	The polarimetric images is the set $\setX$ for which $\tilde{\vx} = \hat{\vx}$, which means:
+	$$
+	\setX = \{\vx | \vx = \mm\vx\} = \{\vx | (\mm - Id)\vx = 0\}
+	$$
+	
+	The solution of this equation is:
+	$$
+	\setX = Ker(\mm - Id)
+	$$
+	Lets first compute the matrix $\mm-Id$:
+	\begin{equation*}
+		\begin{split}
+			\mm - Id & = \frac{1}{2} \left( 
+			\begin{bmatrix}
+				2 & 0 & 0 & 0 \\
+				1 & 1 & 1 & -1 \\
+				0 & 0 & 2 & 0 \\
+				1 & -1 & 1 & 1
+			\end{bmatrix} -
+			\begin{bmatrix}
+				2 & 0 & 0 & 0 \\
+				0 & 2 & 0 & 0 \\
+				0 & 0 & 2 & 0 \\
+				0 & 0 & 0 & 2
+			\end{bmatrix}
+			\right)
+			\\
+			\mm - Id & = \frac{1}{2}\begin{bmatrix}
+				0 & 0 & 0 & 0 \\
+				1 & -1 & 1 & -1 \\
+				0 & 0 & 0 & 0 \\
+				1 & -1 & 1 & -1
+			\end{bmatrix}
+		\end{split}
+	\end{equation*}
+	Lets now find $\vx$ such that $(\mm - Id)x = 0$:
+	$$
+	\frac{1}{2}\begin{bmatrix}
+		0 & 0 & 0 & 0 \\
+		1 & -1 & 1 & -1 \\
+		0 & 0 & 0 & 0 \\
+		1 & -1 & 1 & -1
+	\end{bmatrix} 
+	\times
+	\begin{bmatrix}
+		x_1 \\
+		x_2 \\
+		x_3 \\
+		x_4
+	\end{bmatrix} = 
+	\begin{bmatrix}
+		0 \\
+		0 \\
+		0 \\
+		0
+	\end{bmatrix}
+	$$
+	The solution of this equation is the set $\setX = \Big\{\begin{bmatrix}	\vx_0 & \vx_1 & \vx_2 & \vx_3 \end{bmatrix}^\top \Big|\enspace \vx_1 + \vx_3 = \vx_2 + \vx_4\Big\}$.
+\end{proof}

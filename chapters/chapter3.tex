@@ -1,4 +1,4 @@
-\chapter{Domain-transfer modeling with auxiliary tasks}
+\chapter{Polarimetric image generation with auxiliary tasks for domain-transfer modeling}
 \label{chap:chapter3}
 
 \graphicspath{{images/chapter3/}, {tikz/chapter3/} }
@@ -33,7 +33,7 @@ Contrary to \ac{RGB}, \ac{LiDAR}, thermal or infrared image generation which mos
 
 Therefore, we formulate our problem of polarimetric image generation as a CycleGAN learning problem under physical constraints to ensure that the generated images are valid. CycleGANs \citep{Zhu2017a} enabled to achieve unpaired image-to-image translation with only a few number of images. They allow to circumvent the expensive labeling step by transferring a source labeled dataset to one or multiple target domain \citep{Almahairi2018} by keeping unchanged the shapes of the source image. Starting from unpaired sets of RGB and polarimetric images, our framework based on \ac{CycleGAN}is able to handle the physical polarization constraints during training. 
 
-We demonstrate the effectiveness of our constrained-output CycleGAN on the of Karlsruhe Institute of Technology and Toyota Technological Institute (KITTI) dataset \citep{Geiger2012} and the Berkeley Deep Drive dataset (BDD100K) \cite{Xu2017}, two common datasets used for object detection in road scenes. Using the generated polarization-encoded images to train a deep object detectors, we witness an improvement of the detection performances of cars and pedestrians which are of great interest for autonomous driving applications. 
+We demonstrate the effectiveness of our constrained-output CycleGAN on the of Karlsruhe Institute of Technology and Toyota Technological Institute (KITTI) dataset \citep{Geiger2012} and the Berkeley Deep Drive dataset (BDD100K) \citep{Xu2017}, two common datasets used for object detection in road scenes. Using the generated polarization-encoded images to train a deep object detectors, we witness an improvement of the detection performances of cars and pedestrians which are of great interest for autonomous driving applications. 
 
 To summarize, the contributions of this chapter are:
 \begin{itemize}
@@ -42,73 +42,16 @@ To summarize, the contributions of this chapter are:
 	\item when plugged into the training procedure of an object detector for pretraining, the generated images help improving the detection performances.
 \end{itemize}
 
-The remainder of the chapter is organized as follows:  \CR{NON ! }
-the polarization formalism and the physical constraints it involves are first presented. Then, the image-to-image translation using Cycle-Consistent GAN is described and a way to take into account these physical constraints during the training process of the CycleGAN for generating polarimetric images is investigated. Experimental evaluations are conducted ; they aim to translate RGB images of KITTI and BDD100K datasets into polarimetric images. Finally, the generated images are exploited to boost the performances of an object detection network. 
+The remainder of the chapter is organized as follows:  the polarization formalism and the physical constraints it involves are first presented in Section \ref{sec3:physical_prop}. Then, in Section \ref{sec3:related_works}, the formulation of the image-to-image translation from \ac{RGB} images to the polarimetric domain is described, and we review different approaches to tackle this problem, as well as their limitations. In Section \ref{sec3:solutions}a way to take into account these physical constraints during the training process of the CycleGAN for generating polarimetric images is investigated. Experimental evaluations are conducted in Section \ref{sec3:experiments}, in which we aim to translate RGB images of KITTI and BDD100K datasets into polarimetric images. We evaluate our approach as a data augmentation technique by evaluating the performances of an object detection network trained on the generated images. The last section concludes the chapter.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction to polarimetric imaging}
+\label{sec3:physical_prop}
 
-\section{Context and application}
+As most of this chapter revolves around the application of generating polarimetric images, we first introduce the formalism of polarization that stems from the physics of polarimetry.  Polarization is a property of light that represents the direction of propagation of the electrical field of the light wave. Polarimetric imaging consists in representing the polarization state of the light wave reflected from each part of the scene. When an un-polarized light wave is being reflected, it becomes partially linearly polarized and its polarization depends on the normal surface  and the refractive index of the material it impinges on. As such, it is a different modality than classical color images, since they do not represent the wavelength of light, but contains rich information about the surfaces that the light reflected on, most notably information about the materials of these surfaces.
 
-This section introduces the polarization formalism. \CR{TODO}
+\subsection{Polarimetry-encoded images and Stokes vectors as parameters for polarization}
 
-\subsection{Introduction to polarimetric imaging}
-\label{physical_prop}
-
-Polarization is a property of light that represents the direction of propagation of the electrical field of the light wave. When the direction is linear, elliptical or circular, the polarization state is said to be totally polarized. However, it is partially polarized or non polarized when the light wave partly propagates in a random way \citep{Bass1995}. Polarimetric imaging consists in representing the polarization state of the light wave reflected from each part of the scene. When an un-polarized light wave is being reflected, it becomes partially linearly polarized. Its polarization depends on the normal surface  and the refractive index of the material it impinges on. As such, it is a different modality than classical color images since they do not represent the wavelength of light. \CR{TODO}
-
-\subsection{Mathematical formulation}
-
-The linear part of the reflected light can be described by measurable parameters, specifically by the linear Stokes vector $\vs = \begin{bmatrix}
-\vs_0 & \vs_1 & \vs_2 \end{bmatrix}^\top \in \spaceR^{n\times m \times 3}$. Here, $\vs_0>0$ represents the total intensity, $\vs_1$ the amount of horizontally and vertically linearly polarized light and $\vs_2$ the amount of linearly polarized light at $\pm$~45\degree. 
-%
-It is important to note that by design, any Stokes vector is physically admissible if and only if the two following conditions are met:  
-%
-\begin{equation}
-\vs_0 > 0
-\quad \mbox{ and } \quad 
-\vs_0^2 \geqslant \vs_1^2 + \vs_2^2 \enspace.
-\label{eqn:stokes_constraint_S0}
-\end{equation}
-
-One salient physical property, obtained from the Stokes parameters, is the degree of polarization (\ac{DOP}) \citep{Ainouz2013}  defined by:
-$$
-DOP = \frac{\sqrt{\vs_1^2+\vs_2^2}}{\vs_0} \enspace.
-$$
-%
-The $DOP \in [0,1]$ refers to the amount of polarized light in a wave. It is equal to 1 for a totally polarized light, 0 for un-polarized light and between 0 and 1 for partially polarized light.
-
-Polarization images are accordingly obtained by the computation of the Stokes vector related to each pixel. The acquisition principle is based on a device composed of a polarizer oriented at an angle $\alpha$ between the object and the sensor \citep{Wang2019}. At least three acquisitions with three different angles are required to get the Stokes parameters. The reflected light from the object, represented by the unknown Stokes vector, passes through the rotated polarizer before reaching the camera. 
-
-For this work, we rely on a polarimetric image encoding format that consists in four channel images respectively obtained with four different linear polarizers oriented at \\ $\alpha_i,  i\in\{1,...,4\} =$ (0\degree, 45\degree, 90\degree, 135\degree). The polarimetric camera captures an image $\vx \in \spaceR^{n \times m \times 4}$ consisting in the intensities $\vx_{\alpha_i}$ of the scene for each angle $\alpha_i$ for each pixel. The relationship between the Stokes vector $\vs$ and the intensities at angles $\vx_{\alpha_i}, i\in\{1,...,4\}$ reaching the camera is given by: 
-$$
-\vx_{\alpha_i} = \tfrac{1}{2}\begin{bmatrix}
-1 & \cos(2\alpha_i) & \sin(2\alpha_i)
-\end{bmatrix} \begin{bmatrix}\vs_0 \\ \vs_1 \\ \vs_2\end{bmatrix} \enspace,
-\forall i=1, 4 \nonumber 
-$$
-\noindent that is:
-\begin{equation}
-\vx = A\vs \enspace, 
-\label{eqn:IAS}
-\end{equation}
-\noindent where $\vx = \begin{bmatrix} \vx_0 & \vx_{45} & \vx_{90} & \vx_{135}\end{bmatrix}^\top$ refers to the four intensities according to each angle of the polarizer $(\alpha_i)_{i=1:4}$ and $A \in \mathbb{R}^{4\times 3}$, to the calibration matrix of the polarization camera, defined as: 
-$$
-A = \frac{1}{2} {\begin{bmatrix}
-	1 & \cos(2\alpha_1) & \sin(2\alpha_1) \\
-	1 & \cos(2\alpha_2) & \sin(2\alpha_2) \\
-	1 & \cos(2\alpha_3) & \sin(2\alpha_3) \\
-	1 & \cos(2\alpha_4) & \sin(2\alpha_4)
-	\end{bmatrix}}
-\\
-=  \frac{1}{2} {\begin{bmatrix}
-	1 & 1 & 0 \\
-	1 & 0 & 1 \\
-	1 & -1 & 0 \\
-	1 & 0 & -1
-	\end{bmatrix}} \enspace. \nonumber
-$$
-%
-An example of the different intensities for the same scene is shown in Figure~ \ref{fig:polar_overview intensities}. 
+In the same fashion as color images, several encoding formats exist for polarimetric images. The acquisition principle is based on a device composed of a set of polarizers installed between the object and the sensors \citep{Wang2019}. In this work, we rely on a polarimetric image encoding format that consists in four channel images respectively obtained with four different linear polarizers oriented at $\alpha_i,  i\in\{1,...,4\} =$ (0\degree, 45\degree, 90\degree, 135\degree). The polarimetric camera captures an image $\vx \in \spaceX \subset \spaceR^{n \times p \times 4}$ consisting in the light intensities $\vx_{\alpha_i}$ of the scene for each angle $\alpha_i$ for each pixel, thus  $\vx_{i,j} = \begin{bmatrix} \vx_{0_{i,j}}& \vx_{45_{i,j}} & \vx_{90_{i,j}} & \vx_{135_{i,j}}\end{bmatrix}^\top$, $ \forall i\leq n,  j\leq p$. An example of the different intensities for the same scene is shown in Figure~ \ref{fig:polar_overview intensities}. 
 
 \begin{figure}
 	\centering
@@ -128,54 +71,120 @@ An example of the different intensities for the same scene is shown in Figure~ \
 		\centering
 		\includegraphics[width=\linewidth]{2474_I135.png}
 	\end{subfigure}
-	\caption{Example of a polarimetric image. From left to right, the intensities corresponding to the polarizer rotation angles 0$\degree$, 45$\degree$, 90$\degree$ and 135$\degree$.}
+	\caption[Example of a polarimetric image]{Example of a polarimetric image. From left to right, the intensities corresponding to the polarizer rotation angles 0$\degree$, 45$\degree$, 90$\degree$ and 135$\degree$.}
 	\label{fig:polar_overview intensities}
 \end{figure}
+
+The linear part of the reflected light can be described by measurable parameters, specifically by the linear Stokes vectors. These parameters are encoded as an image $\vs \in \spaceS \subset \spaceR^{n\times p\times 3}$ such that each pixel $\vs_{i,j}$ of this image is a Stokes vector $\vs_{i,j} \begin{bmatrix} \vs_{0_{i,j}} & \vs_{1_{i,j}} & \vs_{2_{i,j}} \end{bmatrix}^\top \in \spaceR^3$, $\forall i\leq n,  j\leq p$  . Here, $\vs_0>0$ represents the total intensity, $\vs_1$ the amount of horizontally and vertically linearly polarized light and $\vs_2$ the amount of linearly polarized light at $\pm$~45\degree. 
+
+Associated with each polarimetry encoding format is its so-called calibration matrix $\ma$ that allows for computing the Stokes vectors. In this work, we define the calibration matrix as
 %
-To get the unknown Stokes parameters from the measured intensities (equation \ref{eqn:IAS}), we require $A^\dagger = (A^\top A)^{-1} A^\top \in \mathbb{R}^{3\times 4}$ the pseudoinverse of the matrix $A$. The relationship between $\vs$ and $\vx$ is then defined by:
-\begin{eqnarray}
-\vs & = & A^\dagger \vx = 
-\begin{bmatrix}
-1 & 0 & 1 & 0 \\
-1 & 0 & -1 & 0 \\
-0 & 1 & 0 & -1
-\end{bmatrix}
-\begin{bmatrix} 
-\vx_0 \\
-\vx_{45} \\
-\vx_{90} \\
-\vx_{135}
-\end{bmatrix} 
-= 
-\begin{bmatrix} 
-\vx_0 + \vx_{90} \\
-\vx_0 - \vx_{90} \\
-\vx_{45} - \vx_{135} 
-\end{bmatrix}
-\label{eqn:stokes2} \enspace.
-\end{eqnarray}
+$$
+\ma = \frac{1}{2} {\begin{bmatrix}
+		1 & \cos(2\alpha_1) & \sin(2\alpha_1) \\
+		1 & \cos(2\alpha_2) & \sin(2\alpha_2) \\
+		1 & \cos(2\alpha_3) & \sin(2\alpha_3) \\
+		1 & \cos(2\alpha_4) & \sin(2\alpha_4)
+\end{bmatrix}}
+\\
+=  \frac{1}{2} {\begin{bmatrix}
+		1 & 1 & 0 \\
+		1 & 0 & 1 \\
+		1 & -1 & 0 \\
+		1 & 0 & -1
+\end{bmatrix}} \enspace. \nonumber
+$$
 %
-Combining equations (\ref{eqn:IAS}) and (\ref{eqn:stokes2}), we attain the following condition  
-$$
-\vx = AA^\dagger \vx \enspace,
-$$
-\noindent which is satisfied if and only if:
+Using this calibration matrix, we define the relationship between the Stokes vectors $\vs \in \spaceR^{n\times p \times 3}$ and the light intensities $\vx \in \spaceR^{n \times p \times 4}$ reaching the camera is  then 
+%
 \begin{equation}
-\vx_0 + \vx_{90} = \vx_{45} + \vx_{135} \enspace.
-\label{eqn:physics}
+	\vx = \ma\vs \enspace, 
+	\label{eqn:IAS}
 \end{equation}
 %
-Stokes images should then satisfy two main conditions: the physical admissibility constraints in equation \eqref{eqn:stokes_constraint_S0}
-and the calibration constraint given by equation \eqref{eqn:physics}. The generation of new polarimetric images have to comply with these essential constraints. 
+\noindent where $\ma \in \mathbb{R}^{4\times 3}$ refers to the calibration matrix of the polarization camera. 
+
+To compute the Stokes parameters from the measured intensities (equation \ref{eqn:IAS}), we require $\ma^\dagger = (\ma^\top \ma)^{-1} \ma^\top \in \mathbb{R}^{3\times 4}$ the pseudo-inverse (or Moore-Penrose inverse) of the matrix $\ma$. The relationship between $\vs$ and $\vx$ is then defined by:
+\begin{eqnarray}
+	\vs & = & \ma^\dagger \vx = 
+	\begin{bmatrix}
+		1 & 0 & 1 & 0 \\
+		1 & 0 & -1 & 0 \\
+		0 & 1 & 0 & -1
+	\end{bmatrix}
+	\begin{bmatrix} 
+		\vx_0 \\
+		\vx_{45} \\
+		\vx_{90} \\
+		\vx_{135}
+	\end{bmatrix} 
+	= 
+	\begin{bmatrix} 
+		\vx_0 + \vx_{90} \\
+		\vx_0 - \vx_{90} \\
+		\vx_{45} - \vx_{135} 
+	\end{bmatrix}
+	\label{eqn:stokes2} \enspace.
+\end{eqnarray}
+
+
+\subsection{Physical constraints of polarimetry}
+
+A polarimetry-encoded image $\vx$ is considered to be valid if its Stokes values satisfy two main conditions: they must physically admissible and be the result of an acquisition process that use the right calibration. Since we are interested in generating new polarimetric images, they will have to comply with these essential constraints. 
+
+To ensure that the Stokes vectors $\vs$ are physically admissible, we rely on the degree of polarization (\ac{DOP}) \citep{Ainouz2013}. The $\ac{DOP}\in [0,1]$ refers to the amount of polarized light in a wave, where a \ac{DOP} of 1  represents a totally polarized light, 0 for un-polarized light and between 0 and 1 for partially polarized light. It is defined as
+%
+$$
+\ac{DOP} = \frac{\sqrt{\vs_1^2+\vs_2^2}}{\vs_0} \enspace.
+$$
+%
+Additionally, since $\vs_0$ represents the total light intensity, it cannot be 0. Thus, to be physically admissible, a Stokes vector has to meet the conditions
+%
+\begin{equation}
+	\vs_0 > 0
+	\quad \mbox{ and } \quad 
+	\vs_0^2 \geqslant \vs_1^2 + \vs_2^2 \enspace.
+	\label{eqn:stokes_constraint_S0}
+\end{equation}
+%
+Then, an additional check has to be done to ensure that a polarimetric image $\vx$  has been obtained using a given calibration matrix $\ma$.  To do so, we check if the image $\vx$ can be reconstructed from the Stokes vectors computed using the the pseudo-inverse $\ma^\dagger$ of the calibration matrix. By using equations \ref{eqn:IAS} and \ref{eqn:stokes2}, we can formulate the condition  
+%
+\begin{equation}
+\label{eq:calibration_constraint}
+\vx = \ma\ma^\dagger \vx \enspace,
+\end{equation}
+%
+\noindent which is satisfied if and only if $\vx_0 + \vx_{90} = \vx_{45} + \vx_{135}$. The proof of this result is found in appendix \ref{app:physical_prop}. 
+
+We finally obtain a set of three polarimetric constraints $\mathcal{C}_1$, $\mathcal{C}_2$ and $\mathcal{C}_3$ formulated as 
+%
+\begin{eqnarray}
+	\mathcal{C}_1 &:& \vx_0 + \vx_{90} = \vx_{45} + \vx_{135}, \\
+	\mathcal{C}_2 &:& \vs_0^2 \geqslant \vs_1^2 +\vs_2^2 \enspace, \nonumber\\
+	\mathcal{C}_3 &:& \vs_0 > 0 \enspace. \nonumber
+\end{eqnarray}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Conditional domain-transfer approaches}
-\label{polarGAN}
+\label{sec3:related_works}
+
+\CR{TODO }
 
 \subsection{Constrained problem formulation}
 
+
+
+\CR{TODO}We aim to learn a generative model $\G_{XY}$ such that the generated images $\Hat{\vy}$ have a high likelihood on $\p{Y}$ the distribution of the real polarimetric images and such that $\Hat{\vs} = \ma^\dagger\Hat{\vy}$ respects the constraints. Thus, we can formulate the problem as
+%
+\begin{eqnarray}
+	\label{eq:polar_constr_formulation}
+	\max_\G& L(\G) = \mathop{\mathbb{E}}_{\vx\sim \p{X}} \Big[\log (\p{Y}(\G_{XY}(\vx))\Big]  \\
+	\text{s.c.} & \vx_i = A\vs_i \enspace;\enspace \vs_{0_i}^2 \geq \vs_{2_i}^2 +\vs_{1_i}^2  \enspace\text{and}\enspace  \vs_{0_i}^2 > 0   \nonumber \\
+	\text{with}  & \vs_{i} = A^\dagger(\G_{XY}(\vx_{i})) \quad \forall i \nonumber
+\end{eqnarray}
 
 \CR{TODO}
 
@@ -185,40 +194,20 @@ and the calibration constraint given by equation \eqref{eqn:physics}. The genera
 
 \subsection{Related works}
 
-\CR{TODO: CyCADA, travaux d'Ahmed Rida Sekkat, ...}
+\CR{TODO: CyCADA, ...}
 
 \section{Approaches for solving the constrained domain-transfer problem}
+\label{sec3:solutions}
 
 \subsection{Relaxing the constraints}
-As discussed above, our main goal is to learn a generative model able to produce realistic polarization-based images starting from RGB images. For the sake, we adopt the image-to-image translation framework and extend it to account for the constraints a polarimetric image must fulfill. 
-
-To generate a polarimetric image  from an RGB image, we propose to use the CycleGAN approach to learn the translation models $G_{XY}$ and $G_{YX}$ between $\spaceX$ the space of the polarimetric images and $\spaceY$ the RGB image domain. Let $\Hat{\vx} \in \spaceR^{n \times m \times 4}$ be a generated polarimetric image. To be physically admissible, it has to satisfy the admissibility constraints (\ref{eqn:stokes_constraint_S0}) and the calibration constraint (\ref{eqn:physics}). 
+As discussed above, our main goal is to learn a generative model able to produce realistic polarization-based images starting from \ac{RGB} images. To generate a polarimetric image  from an \ac{RGB} image, we propose to use the CycleGAN approach to learn the translation models $G_{XY}$ between $\spaceX$ the space of the polarimetric images and $\spaceY$ the RGB image domain. Let $\Hat{\vx} \in \spaceR^{n \times m \times 4}$ be a generated polarimetric image. To be physically admissible, it has to satisfy the admissibility constraints (\ref{eqn:stokes_constraint_S0}) and the calibration constraint (\ref{eqn:physics}). 
 %
-We refer in the sequel these polarimetric constraints by $\mathcal{C}_1$, $\mathcal{C}_2$ and $\mathcal{C}_3$ as follows:
-\begin{eqnarray}
-\mathcal{C}_1 &:& \vx = A\vs\enspace, \nonumber\\
-\mathcal{C}_2 &:& \vs_0^2 \geqslant \vs_1^2 +\vs_2^2 \enspace, \nonumber\\
-\mathcal{C}_3 &:& \vs_0 > 0 \enspace. \nonumber
-\end{eqnarray}
-
-By design, the first component of the Stokes vector is always positive as it represents the total intensity reflected from an object.  As the last layer of the generation models customary uses the hyperbolic tangent as activation function, each output intensity $\Hat{\vx}$ is within the range $]-1,1[$ which we scale to $]0,255[$. Hence $\hat{\vs}_0=\hat{\vx}_0+\hat{\vx}_{90}$ (see equation (\ref{eqn:stokes2})) is ensured to be strictly positive. Therefore, constraint $\mathcal{C}_3$ can be deemed satisfied for the real and the generated polarimetric images. To handle the remaining constraints $\mathcal{C}_1$ and $\mathcal{C}_2$, one could resort to the Lagrangian dual of CycleGAN optimization problem (\ref{eq:cycleGAN}) subject to these constraints. However, this may be computationally expensive, as it requires to entirely optimize four neural networks (respectively the discrimination and the mapping network models) in an inner loop of a dual ascent algorithm. Moreover the overall optimization procedure may not be stable because of the min-max game involved in the CycleGAN learning. 
-
-\CR{TODO}We aim to learn a generative model $\G_{XY}$ such that the generated images $\Hat{\vy}$ have a high likelihood on $\p{Y}$ the distribution of the real polarimetric images and such that $\Hat{\vs} = A^\dagger\Hat{\vy}$ respects the constraints. Thus, we can formulate the problem as
-
-\begin{eqnarray}
-	\label{eq:polar_constr_formulation}
-	\max_G& L(G) = \mathop{\mathbb{E}}_{\vx\sim \p{X}} \Big[\log (\p{Y}(\G_{XY}(\vx))\Big]  \\
-	\text{s.c.} & \vx_i = A\vs_i \enspace;\enspace \vs_{0_i}^2 \geq \vs_{2_i}^2 +\vs_{1_i}^2  \enspace\text{and}\enspace  \vs_{0_i}^2 > 0   \nonumber \\
-	\text{with}  & \vs_{i} = A^\dagger(\G_{XY}(\vx)_{i}) \quad \forall i \nonumber
-\end{eqnarray}
-
-
-In order to derive  an efficient algorithm to learn CycleGAN under output constraints, we introduce a relaxation of the problem. Instead of strictly enforcing the constraints, we measure how far the generated image pixels are from the feasibility domain through additional cost functions we attempt to minimize.
+By design, the first component of the Stokes vector is always positive as it represents the total intensity reflected from an object.  As the last layer of the generation models customary uses the hyperbolic tangent as activation function, each output intensity $\Hat{\vx}$ is within the range $]-1,1[$ which we scale to $]0,255[$. Hence $\hat{\vs}_0=\hat{\vx}_0+\hat{\vx}_{90}$ (see equation (\ref{eqn:stokes2})) is ensured to be strictly positive. Therefore, constraint $\mathcal{C}_3$ can be deemed satisfied for the real and the generated polarimetric images. To handle the remaining constraints $\mathcal{C}_1$ and $\mathcal{C}_2$, one could resort to the Lagrangian dual of CycleGAN optimization problem (\ref{eq:cycleGAN}) subject to these constraints. However, this may be computationally expensive, as it requires to entirely optimize four neural networks (respectively the discrimination and the mapping network models) in an inner loop of a dual ascent algorithm. Moreover the overall optimization procedure may not be stable because of the min-max game involved in the CycleGAN learning. In order to derive  an efficient algorithm to learn CycleGAN under output constraints, we introduce a relaxation of the problem. Instead of strictly enforcing the constraints, as in \citeq{eq:polar_constr_formulation}, we measure how far the generated image pixels are from the feasibility domain through additional cost functions we attempt to minimize.
 %
 For the constraint $\mathcal{C}_1$, a $\ell_2$ distance between the generated image $G_{YX}$ and $A\Hat{\vs}$ is proposed. It reads
 %
 \begin{equation}
-L_{\mathcal{C}_1} = \mathop{\mathbb{E}}_{\vy\sim \p{Y}} ||G_{YX}(\vy) - A\hat{\vs}||_2\enspace,  \nonumber
+L_{\mathcal{C}_1} = \mathop{\mathbb{E}}_{\vy\sim \p{Y}} ||G_{YX}(\vy) - \ma\hat{\vs}||_2\enspace,  \nonumber
 \label{eqn:ls}
 \end{equation}
 %
@@ -227,6 +216,7 @@ with $\Hat{\vs}=\begin{bmatrix}
 \end{bmatrix}^\top$ the Stokes vector calculated from the generated image by $G_{YX}$ using equation \eqref{eqn:stokes2}.
 %
 Similarly, to enforce the constraint $\mathcal{C}_2$, a rectified linear penalty $L_{\mathcal{C}_2}$ is considered. It is defined by:
+%
 \begin{equation}
 L_{\mathcal{C}_2} = \mathop{\mathbb{E}}_{\vy\sim \p{Y}}  \max\left(\Hat{\vs}_1^2 + \Hat{\vs}_2^2 -
 \Hat{\vs}_0^2, 0 \right)\enspace.\nonumber
@@ -235,7 +225,16 @@ L_{\mathcal{C}_2} = \mathop{\mathbb{E}}_{\vy\sim \p{Y}}  \max\left(\Hat{\vs}_1^2
 %
 The loss $L_{\mathcal{C}_1}$ translates the respect of the acquisition conditions according to the calibration matrix $A$ while  $L_{\mathcal{C}_2}$ is related to the physical admissibility constraint on the deduced Stokes vectors from the generated image.
 
+\begin{figure} 
+	\centering
+	\includegraphics[scale=0.15]{PolarCycle.png}
+	\caption{Overview of the CycleGAN training process extended with $L_{\mathcal{C}_1}$ and $L_{\mathcal{C}_2}$. \CR{Remake with right colors, shapes and notations}}
+	\label{fig:overview_polarCycle}
+\end{figure}
+
+
 Gathering all these elements, we train our CycleGAN under physical constraints, by optimizing the following objective function:
+%
 \begin{equation}
 L_{final}= L_{CycleGAN}+\mu L_{\mathcal{C}_1} + \nu L_{\mathcal{C}_2} \enspace.
 \label{eqn:lfinal}
@@ -243,78 +242,73 @@ L_{final}= L_{CycleGAN}+\mu L_{\mathcal{C}_1} + \nu L_{\mathcal{C}_2} \enspace.
 %
 The non-negative hyper-parameters $\mu$ and $\nu \in \mathbb{R}^{+}$ control respectively the balance of admissibility and calibration constraints according to the CycleGAN loss $L_{CycleGAN}$ (see equation~\eqref{eqn:Lcyclegan}). As the values of $L_{\mathcal{C}_1}$ and $L_{\mathcal{C}_2}$ are computed pixel-wisely, we consider their averages over the whole image in the objective function. The training principle of the proposed generative model is illustrated in Figure~\ref{fig:overview_polarCycle}.
 
-\begin{figure} 
-	\centering
-	\includegraphics[scale=0.15]{PolarCycle.png}
-	\caption{Overview of the CycleGAN training process extended with $L_{\mathcal{C}_1}$ and $L_{\mathcal{C}_2}$.}
-	\label{fig:overview_polarCycle}
-\end{figure}
-
 \subsection{Gradient projection}
 
-	We aim to generate images $ \Hat{\vy} =  \G_{XY}(\vx)$, where $\vy \in \spaceY$ is a sample from the \ac{RGB} domain, such that $\Hat{\vs} = A^\dagger\Hat{\vy} \in  \spaceS$ the space of the Stokes vectors. Each of the vectors must  respect $\mathcal{C}_1$, $\mathcal{C}_2$ and $\mathcal{C}_3$, which correspond to a second-order cone, or Lorentz cone \citep{Boyd2004}. Thus, let
-
+	We aim to generate images $ \Hat{\vy} =  \G_{XY}(\vx)$, where $\vy \in \spaceY$ is a sample from the \ac{RGB} domain, such that $\Hat{\vs} = \ma^\dagger\Hat{\vy} \in  \spaceS$ the space of the Stokes vectors. Each of the vectors must  respect $\mathcal{C}_1$, $\mathcal{C}_2$ and $\mathcal{C}_3$, which correspond to a second-order cone, or Lorentz cone \citep{Boyd2004}. Thus, let
+%
 	\begin{equation}
-		\mathcal{C} = \left \lbrace (\vv,\vt) \in  \spaceS \,\, | \,\, \|\vv\|_2 \leq \vt, \,\, \vt=\vs_0, \vv = \begin{bmatrix} \vs_1 \\ \vs_2 \end{bmatrix} \right \rbrace \enspace,
+		\setC = \left \lbrace (\vv,\vt) \in  \spaceS \,\, | \,\, \|\vv\|_2 \leq \vt, \,\, \vt=\vs_0, \vv = \begin{bmatrix} \vs_1 \\ \vs_2 \end{bmatrix} \right \rbrace \enspace,
 	\end{equation}
- 	
- 	a convex set whose vectors satisfy the aforementioned constraints. 
-	
-\CR{
-	On souhaite générer des images $ \lbrace A^\dagger (G(z)) \rbrace$ où $z \in \mathbb{R}^d$ est le bruit suivant une loi de distribution connue (loi normale ou loi uniforme), $M$ l'opérateur (linéaire ??) permettant de passer de l'espace des images $\mathcal{I}$ à l'espace des vecteurs de Stokes $\in \mathcal{S}$. Chaque vecteur doit respecter la contrainte (\ref{eq:stokes_constraint}) qui est un cône de second ordre ou cône de Lorentz \cite[Section 2.2.3]{Boyd2004}. Soit l'ensemble convexe 
-	$$ \mathcal{C} = \left \lbrace (v,t) \in \mathcal{S} \,\, | \,\, \|v\|_2 \leq t, \,\, t=S_0, v = \begin{bmatrix} S_1 \\ S_2 \end{bmatrix} \right \rbrace$$. 
-	
-	On cherche à déterminer un modèle génératif $G$ couplé à un discriminateur $D$ permettant de distinguer entre les images réelles et les images synthétiques et tel que chaque super-pixel $s_{ij} \in \mathbb{R}^4$ vérifie la contrainte (\ref{eq:stokes_constraint}). Ceci conduit au problème d'optimisation usuel d'un GAN avec contraintes sur la sortie: 
-
-	
-	Etant donné un super-pixel $s_{i,j}$, que nous écrivons sous la forme $s_{i,j} = (v_{i,j}, t_{i,j})$ pour nous conformer à la notation du cône de second-ordre, l'opérateur de projection sur $\mathcal{C}$ peut être déterminé comme le problème proximal suivant :
-	$$
-	\min_{(u,r) \in \mathcal{C}} \frac{1}{2} \| (v, t) - (u, r)\|_2^2 
-	$$
-	dont la solution est donnée par \citep{Parikh2014}
+ %	
+ 	a convex set whose vectors satisfy the aforementioned constraints. As such, we can reformulate the problem \citeq{eq:polar_constr_formulation} as
+ %	
+ 	\begin{eqnarray}
+ 		\label{eq:polar_set_formulation}
+ 		\max_G& L(G) = \mathop{\mathbb{E}}_{\vx\sim \p{X}} \Big[\log (\p{Y}(\G_{XY}(\vx))\Big]  \\
+ 		\text{s.c.}  & \ma^\dagger(\G_{XY}(\vx_{i})) \in \setC \forall i \nonumber \enspace .
+ 	\end{eqnarray}
+% 	
+ 	With such a membership constraint, the projection operator on $\setC$ can be defined as finding the solution to the optimization problem
+%	
 	\begin{equation}
-		\Pi_{\mathcal{C}}(v, t) = \left \lbrace
+		\label{eq:projection_op}
+		\min_{(\vu,\vr) \in \setC} \frac{1}{2} \| (\vv, \vt) - (\vu, \vr)\|_2^2 
+	\end{equation}
+%
+	which has a closed-form solution \citep{Parikh2014} 
+%	
+	\begin{equation}
+		\label{eq:proj_lorentz_cone_2}
+		\Pi_{\setC}(\vv, \vt) = \left \lbrace
 		\begin{array}{lll}
-			0 &  \text{si} & \| v \|_2 \leq -t \\
-			(v, t) & \text{si} & \| v \|_2 \leq t \\
-			\frac{1+ t/\|v\|_2}{2} (v, \|v\|_2) & \text{si} & \| v \|_2 \geq t
+			0 &  \text{if} & \| \vv \|_2 \leq -\vt \\
+			(\vv, \vt) & \text{if} & \| \vv \|_2 \leq \vt \\
+			\frac{1+ \vt/\|\vv\|_2}{2} (\vv, \|\vv\|_2) & \text{if} & \| \vv \|_2 \geq \vt
 		\end{array}
 		\right.
-		\label{eq:proj_lorentz_cone_2}
 	\end{equation}
-	Partant de cela, on peut proposer une formulation alternative au problème (\ref{eq:polar_constr_formulation}) comme suit :
-	\begin{eqnarray}
-		\label{eq:polar_alt_formulation}
-		\min_G \max_D &  \mathop{\mathbb{E}}_{x\sim P_r} \Big[\log (D(x))\Big] + \mathop{\mathbb{E}}_{z\sim P_z} \Big[\log (1-D(G(z)))\Big]  +  \lambda \sum_{i} \sum_{j} \Omega_{\mathcal{C}}(s_{i,j})  \\
-		\text{s.c.}  & s_{i,j} = M(G(z)_{i,j}) \quad \forall i,j \nonumber 
-	\end{eqnarray}
-	avec 
-	$$ \Omega_{\mathcal{C}}(s_{i,j}) =  \|s_{i,j} - \Pi_{\mathcal{C}}(s_{i,j}) \|_2^2
-	$$ 
-	et $\lambda > 0$ un paramètre de régularisation. Une telle approche de prise en compte des contraintes a été utilisée par exemple dans \citep{Kervadec2019} comme une alternative à une version lagrangienne d'un problème de segmentation d'image sous contraintes de volume sur certaines régions de l'image, lesdites contraintes étant exprimées à partir d'un réseau CNN \cite{Pathak2015}. 
-	
-	Notons $\theta_G$ les paramètres du générateur $G$. Avec la notation $s=(v, t)$, le gradient de $\Omega_{\mathcal{C}}$ par rapport à $\theta_G$ s'écrit
+%
+	Using this solution, we can formulate an alternative version to the relaxed problem \citeq{ex:polar_relaxed_problem} as
+%	
 	\begin{equation}
-		\frac{\partial \Omega_{\mathcal{C}}}{\partial \theta_G}(s) = \left( s - \Pi_{\mathcal{C}}(s) \right) \times \left \lbrace
+		\label{eq:polar_proximal_formulation}
+		\max_\G  L(\G) = \mathop{\mathbb{E}}_{\vx\sim \p{X}} \Big[\log \p{Y}(\G_{XY}(\vx)) + \lambda \|\ma^\dagger \G_{XY}(\vx) - \Pi_\setC(\ma^\dagger \G_{XY}(\vx))\|^2\Big] \enspace  ,
+	\end{equation}
+%	
+	with $\lambda$ a regularization parameter. 	Note that the gradient of the distance $\Omega_\setC = \|A^\dagger \G_{XY}(\vx) - \Pi_\setC(A^\dagger \G_{XY}(\vx))\|^2$ can be expressed as 
+%
+	\begin{equation}
+		\frac{\partial \Omega_{\setC}}{\partial \G_{XY}}(s) = \left( \vs - \Pi_{\setC}(\vs) \right) \times \left \lbrace
 		\begin{array}{lll}
-			\frac{\partial s}{\partial \theta_G} &  \text{si} & \| v \|_2 \leq -t \\
-			0 & \text{si} & \| v \|_2 \leq t \\
-			\frac{\partial s}{\partial \theta_G} -  \frac{\partial \frac{1+ t/\|v\|_2}{2} (v, \|v\|_2) }{\partial \theta_G}  & \text{si} & \| v \|_2 \geq t
+			\frac{\partial \vs}{\partial \G_{XY}} &  \text{if} & \| \vv \|_2 \leq -\vt \\
+			0 & \text{if} & \| \vv \|_2 \leq \vt \\
+			\frac{\partial \vs}{\partial\G_{XY}} -  \frac{\partial \frac{1+ \vt/\|\vv\|_2}{2} (\vv, \|\vv\|_2) }{\partial \G_{XY}}  & \text{if} & \| \vv \|_2 \geq \vt
 		\end{array}
 		\right.
 		\label{eq:grad_lorentz_cone_3}
 	\end{equation}
+%
+	Such an approach for learning models with constraints has been used, for example, by \citet{Kervadec2019} as an alternative to the Lagrangian version of ai image segmentation problem under volume constrains, determined by a convolutional neural network \citep{Pathak2015}.
 
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Experimental evaluation}
+\label{sec3:experiments}
 
 Hereafter, the experimental setup, including the image generation procedure and its evaluation, is presented. 
 
 \subsection{Polarimetric images generation using CycleGAN} \label{subsec:polar_gen}
 
-To conduct the experiments, we rely on the polarimetric dataset presented in \citep{Blin2020} whose details are summarized in Table \ref{tab:dataset_properties}. From this dataset we select 2485 unpaired images from each domain (RGB and polarimetry). Example instances are shown in Figures~\ref{fig:polar_example} and~\ref{fig:rgb_example}  for polarimetric and RGB images respectively. The polarimetric images are of dimension $500 \times 500 \times 4$. The latter dimension is due to the four intensities acquired by the camera, namely $I_0, I_{45}, I_{90}$ and $I_{135}$. The RGB images are of dimension $906 \times 945 \times 3$.
+To conduct the experiments, we rely on the polarimetric dataset presented in \citep{Blin2020} whose details are summarized in Table \ref{tab:dataset_properties}. From this dataset we select 2485 unpaired images from each domain (RGB and polarimetry). Example instances are shown in Figures~\ref{fig:polar_example} and~\ref{fig:rgb_example}  for polarimetric and RGB images respectively. The polarimetric images are of dimension $500 \times 500 \times 4$. The latter dimension is due to the four intensities acquired by the camera, namely $\vx_0, \vx_{45}, \vx_{90}$ and $\vx_{135}$. The RGB images are of dimension $906 \times 945 \times 3$.
 
 \begin{table}
 	\begin{center}
@@ -329,7 +323,7 @@ To conduct the experiments, we rely on the polarimetric dataset presented in \ci
 			bike & 16 & 35 & 3 \\
 			motorbike & 52 & 4 & 5 \\
 		\end{tabular}
-		\caption{Polarimetric dataset features. The bottom rows indicate the total number of instances within each class.}
+		\caption[Polarimetric dataset features]{Polarimetric dataset features. The bottom rows indicate the total number of instances within each class.}
 		\label{tab:dataset_properties}
 	\end{center}
 \end{table}
@@ -356,7 +350,7 @@ To conduct the experiments, we rely on the polarimetric dataset presented in \ci
 		\centering
 		\includegraphics[width=\linewidth]{766_I0.png}
 	\end{subfigure}
-	\caption{Examples of images in the polarimetric dataset \citep{Blin2020}. Only the intensities $I_0$ are shown here.}
+	\caption[Examples of images in the polarimetric dataset ]{Examples of images in the polarimetric dataset \citep{Blin2020}. Only the intensities $I_0$ are shown here.}
 	\label{fig:polar_example}
 \end{figure}
 
@@ -399,22 +393,22 @@ In order to assert the ability of the generated Polar-KITTI and Polar-BDD100K da
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{Final_experiment_correction.png}
-	\caption{Setup of the detection evaluation experiment. The procedure is illustrated with the KITTI dataset and straightforwardly extends to the BDD100K dataset.}
+	\caption[Setup of the detection evaluation experiment]{Setup of the detection evaluation experiment. The procedure is illustrated with the KITTI dataset and straightforwardly extends to the BDD100K dataset. \CR{Remake this one too ?}}
 	\label{fig:experimental_setup}
 \end{figure}
 
 Overall, the trained CycleGANs and detection networks under these settings are evaluated in qualitative and quantitative ways. The end goal is to check: (i) the ability of the generated images to help learning polarimetry-based features for object detection, and (ii) the influence of respecting the polarimetric feasibility constraints on detection performances.
 
-We  measure the visual quality of the generated images by computing the classical Fréchet Inception Distance \citep{Heusel2017}. Computing this distance requires to extract visual features from each set of images (real and generated) using a pre-trained deep neural network (usually an Inception v3 \citep{Szegedy2016} network pre-trained on \ac{ImageNet} \citep{Deng2009}) and to evaluate the Fréchet (or Wasserstein) distance between the distributions of these features, which are assumed be Gaussian distributions. We calculate this distance using 509 images from each generated polarimetric dataset and from the test set as described in Table \ref{tab:dataset_properties}.
+We  measure the visual quality of the generated images by computing the classical Fréchet Inception Distance \citep{Heusel2017}. Computing this distance requires to extract visual features from each set of images (real and generated) using a pre-trained deep neural network (usually an Inception v3 \citep{Szegedy2016} network pre-trained on \ac{ImageNet} \citep{Deng2009}) and to evaluate the Fréchet (or Wasserstein) distance between the distributions of these features, which are assumed be Gaussian distributions (thoroughly explained in \citesec{subs:evaluation_methods}). We calculate this distance using 500 images from each generated polarimetric dataset and from the test set as described in Table \ref{tab:dataset_properties}.
 
 As feature extractor, since the classical Inception v3 network is not adapted to polarimetric images, we use the convolutional part of a polarimetry-adapted RetinaNet detection network \citep{Blin2019}, which has been trained on the MS-COCO dataset and fine-tuned on a real polarimetric dataset.
 %
 In order to evaluate the improvements in the detection, we compute the error rate evolution $ER_o$. The improvement $ER_o$ on the detection of the object $o$ is given by:
 $$
-ER_o = \frac{1 - AP_o^{p} - (1 - AP_o^{RGB})}{1-AP_o^{RGB}}\enspace,
+ER_o = \frac{1 - \ac{AP}_o^{p} - (1 - AP_o^{RGB})}{1-AP_o^{RGB}}\enspace,
 $$
 
-\noindent where $AP_o^{RGB}$ and $AP_o^{p}$ respectively denote the average precision for object $o$ detection in RGB and in polarimetric images.
+\noindent where $\ac{AP}_o^{RGB}$ and $AP_o^{p}$ respectively denote the average precision for object $o$ detection in \ac{RGB} and in polarimetric images.
 
 \subsection{Results and discussion}
 
@@ -569,7 +563,7 @@ First we evaluate whether the generated images are qualitatively coherent. For t
 		\centering
 		\includegraphics[width=\linewidth]{I135_0059179.png}
 	\end{subfigure}
-	\caption{Examples  of polarimetric image reconstruction. From left to right: $I_0$, $I_{45}$, $I_{90}$ and $I_{135}$ ground truth, RGB image and $I_0$, $I_{45}$, $I_{90}$ and $I_{135}$ generated from RGB image.}
+	\caption[Examples  of polarimetric image reconstruction]{Examples  of polarimetric image reconstruction. From left to right: $I_0$, $I_{45}$, $I_{90}$ and $I_{135}$ ground truth, RGB image and $I_0$, $I_{45}$, $I_{90}$ and $I_{135}$ generated from RGB image.}
 	\label{fig:reco_polar}
 \end{figure}
 
@@ -600,13 +594,13 @@ As for the constraints, Table \ref{tab:polar_constraints} shows how including th
 			polar with $\mathcal{C}$ & $\mathcal{C}_2$ & 1.55 $\pm$ 3.36\% & 0.14\% \\
 			& $\mathcal{C}_3$ & 0\% & 0\% \\
 		\end{tabular}
-		\caption{Evaluation of the constraint fulfillment using the designed losses $L_{\mathcal{C}_1}$ and $L_{\mathcal{C}_2}$ at the pixel scale. Here, the column $\mathcal{C}$ indicates the evaluated constraint. $\mathcal{C}_1$ refers to the constraints $I = AS$, $\mathcal{C}_2$ to $S_0^2 \geqslant S_1^2 + S_2^2$ and $\mathcal{C}_3$ to $S_0 > 0$. The mean and the median of the percentage of pixels in an image that do not fulfill the constraints $\mathcal{C}_2$ and $\mathcal{C}_3$ are computed. Regarding the constraint $\mathcal{C}_1$, we compute the mean and the median of $||I - AS|| / (||I|| + ||AS||)$.}
+		\caption[Evaluation of the constraint fulfillment using the designed losses]{Evaluation of the constraint fulfillment using the designed losses $L_{\mathcal{C}_1}$ and $L_{\mathcal{C}_2}$ at the pixel scale. Here, the column $\mathcal{C}$ indicates the evaluated constraint. $\mathcal{C}_1$ refers to the constraints $I = AS$, $\mathcal{C}_2$ to $S_0^2 \geqslant S_1^2 + S_2^2$ and $\mathcal{C}_3$ to $S_0 > 0$. The mean and the median of the percentage of pixels in an image that do not fulfill the constraints $\mathcal{C}_2$ and $\mathcal{C}_3$ are computed. Regarding the constraint $\mathcal{C}_1$, we compute the mean and the median of $||I - AS|| / (||I|| + ||AS||)$.}
 		\label{tab:polar_constraints}
 	\end{center}
 \end{table}
 
 Next, we show the benefit of the generated images in object detection task, enabling to verify that objects in them are globally physically coherent. 
-The RetinaNet-based detection model were trained according to the setups described in Section \ref{subsec:eval_gen_img} and the obtained detection performances in term of mean average precision ($mAP$) are summarized in Table \ref{tab:obtained_results}. We choose not to evaluate the bike and motorbike detection performances as the polarimetric dataset does not contain enough objects of those two classes.
+The RetinaNet-based detection model were trained according to the setups described in Section \ref{subsec:eval_gen_img} and the obtained detection performances in term of mean average precision ($\ac{mAP}$) are summarized in Table \ref{tab:obtained_results}. We choose not to evaluate the bike and motorbike detection performances as the polarimetric dataset does not contain enough objects of those two classes.
 
 \begin{table}
 	\begin{center}
@@ -618,37 +612,34 @@ The RetinaNet-based detection model were trained according to the setups describ
 			+ real polar & car & 0.785 & N/A & + real polar & car & \textbf{0.821} & N/A \\
 			\multicolumn{2}{c}{$mAP$} & 0.724 & N/A & \multicolumn{2}{c}{$mAP$} & 0.778 & N/A \\
 			\specialrule{.2em}{.1em}{.1em} 
-			Polar-KITTI no $\mathcal{C}$ & person & 0.673 & -0.03 & Polar-BDD100K no $\mathcal{C}$ & person & 0.720 & 0.06 \\
-			+ real polar & car & 0.786 & -0.01 & + real polar & car & 0.816 & 0.03 \\
+			Polar-KITTI  & person & 0.673 & -0.03 & Polar-BDD100K  & person & 0.720 & 0.06 \\
+			no $\mathcal{C}$ + real polar & car & 0.786 & -0.01 & no $\mathcal{C}$ + real polar & car & 0.816 & 0.03 \\
 			\multicolumn{2}{c}{$mAP$} & 0.730 & -0.02 & \multicolumn{2}{c}{$mAP$} & 0.768 & 0.05 \\
 			\specialrule{.2em}{.1em}{.1em} 
-			Polar-KITTI with $\mathcal{C}$ & person & \textbf{0.704} & -0.12 & Polar-BDD100K with $\mathcal{C}$ & person & \textbf{0.762} & -0.10 \\
-			+ real polar & car & \textbf{0.794} & -0.04 & + real polar & car & 0.815 & 0.03 \\
+			Polar-KITTI with  & person & \textbf{0.704} & -0.12 & Polar-BDD100K  & person & \textbf{0.762} & -0.10 \\
+			$\mathcal{C}$ + real polar & car & \textbf{0.794} & -0.04 & with $\mathcal{C}$ + real polar & car & 0.815 & 0.03 \\
 			\multicolumn{2}{c}{$mAP$} & \textbf{0.749} & -0.09 & \multicolumn{2}{c}{$mAP$} & \textbf{0.789} & -0.05 \\
 		\end{tabular}
 	\end{center}
-	\caption{
+	\caption[Comparison of the detection performance after successive fine-tunings]{
 		Comparison of the detection performance after the two successive fine-tunings. RetinaNet-50 pre-trained on MS COCO is the baseline of all the experiments. The first row refers to the RetinaNet-50 fine-tuned on KITTI or BDD100K RGB. The second row refers to the fine-tuning on Polar-KITTI or Polar-BDD100K without constraints while the bottom row represents the detection models fine-tuned on Polar-KITTI or Polar-BDD100K with the constraints. All these models are finally fine-tuned on the real polarimetric dataset. 
 	}
 	\label{tab:obtained_results}
 \end{table}
 
-As we can see in Table \ref{tab:obtained_results}, using the generated polarimetric images improves the detection performance in real polarimetric images. The improvement is substantial for car and pedestrian detection. We achieve an improvement of 4\% for car detection and of 12\% for pedestrian detection which leads to a global improvement of 9\% in the detection, using Polar-KITTI with constraints. Similarly for Polar-BDD100K dataset, we notice an improvement of 10\% for pedestrian detection which leads to an increased $mAP$ of 5\% (pedestrians and cars). However, we shall notice that for BDD100K similar detection performances are obtained either for RGB or polarimetric images and this is due to the fact that generated images using CycleGANs don't perform well on small objects. To verify that, we compared the evolution of the detections scores while setting a minimal area to the bounding boxes to be detected. The results of this experiment are shown for the training including the Polar-BDD100K and the RGB BDD100K in Figure~\ref{fig:bounding_boxes}.
+As we can see in Table \ref{tab:obtained_results}, using the generated polarimetric images improves the detection performance in real polarimetric images. The improvement is substantial for car and pedestrian detection. We achieve an improvement of 4\% for car detection and of 12\% for pedestrian detection which leads to a global improvement of 9\% in the detection, using Polar-KITTI with constraints. Similarly for Polar-BDD100K dataset, we notice an improvement of 10\% for pedestrian detection which leads to an increased $\ac{mAP}$ of 5\% (pedestrians and cars). However, we shall notice that for BDD100K similar detection performances are obtained either for RGB or polarimetric images and this is due to the fact that generated images using CycleGANs don't perform well on small objects. To verify that, we compared the evolution of the detections scores while setting a minimal area to the bounding boxes to be detected. The results of this experiment are shown for the training including the Polar-BDD100K and the RGB BDD100K in Figure~\ref{fig:bounding_boxes}.
 
 \begin{figure}
 	\centering
 	\includegraphics[width=\linewidth]{area_bounding_boxes_study.png}
-	\caption{Evolution of the average precision when setting a minimal area of the bounding boxes to be detected. Here green lines refer to the evolution of cars' detection, blue lines to the evolution of the $mAP$ and red lines to the evolution of person's detection. The dashed lines refer to the training including the BDD100K RGB and the solid lines to the training including Polar-BDD100K.}
+	\caption[Evolution of the average precision when setting a minimal area of the bounding boxes]{Evolution of the average precision when setting a minimal area of the bounding boxes to be detected. Here green lines refer to the evolution of cars' detection, blue lines to the evolution of the $\ac{mAP}$ and red lines to the evolution of person's detection. The dashed lines refer to the training including the BDD100K RGB and the solid lines to the training including Polar-BDD100K.}
 	\label{fig:bounding_boxes}
 \end{figure}
 
-The results of this experiment showed that when the minimal area of bounding boxes increases the $AP$ of car regarding the training including Polar-BDD100K overcomes the one including RGB BDD100K. We can thus conclude that the limit of this work is the low quality of the small objects in the generated images. 
+The results of this experiment showed that when the minimal area of bounding boxes increases the $\ac{AP}$ of car regarding the training including Polar-BDD100K overcomes the one including RGB BDD100K. We can thus conclude that the limit of this work is the low quality of the small objects in the generated images. 
 
-\section{Conclusion and future work}
+\section{Conclusion and perspective}
 
 In this work, we proposed an efficient way to generate realistic polarimetric images subject to physical admissibility constraints. An adapted \ac{CycleGAN} is used to achieve the generation of pixel-wise physical images. To train the proposed output-constrained CycleGAN, we combined the standard \ac{CycleGAN}'s objective function with two designed cost functions in order to handle the feasibility constraints related to each polarization-encoded pixel in the image. 
 With the proposed generative model, we successfully translated RGB images from road scenes to polarimetric images showing an enhancement of the detection performances.
 Future work would consist in improving the quality of the small objects in generated images. It would also be interesting to extend the generation of polarimetric images to other domains such as medical and Synthetic-Aperture Radar (SAR) imaging. Extension of the generation procedure to road scene images under adverse weather conditions may help improving object detection in these situations. From the optimization side, we plan to directly address the genuine constrained CycleGAN problem instead of its proposed relaxation. 
-
-
-\CR{Future works : using adapted metrics for the non-euclidean outspace}
