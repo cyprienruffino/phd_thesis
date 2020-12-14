@@ -12,23 +12,23 @@
 \node[text width=1cm] at (4.8,2.5) {\LARGE Div(};
 \draw[\cola] node at (5.65,2.5) {\LARGE$\alpha_\theta$};
 \node[text width=1cm] at (6.5,2.5) {\LARGE $\|$};
-\draw[\colc] node at (6.6,2.5) {\LARGE$\beta$};
+\draw[\colb] node at (6.6,2.5) {\LARGE$\beta$};
 \node[text width=1cm] at (7.3,2.5) {\LARGE )};
 \draw[<->, dashed, line width=1mm] (3.5,2)--(7.5,2);
 
 \begin{scope}[xshift=7cm,yshift=-1cm]
 
 \foreach\i in {0,0.1,...,1} {
-	\fill[opacity=\i,\colb,rotate around={320:(4.2,5)}](4.2,2.5)ellipse ({1.5-\i} and {3.5-2*\i});         
+	\fill[opacity=\i,\colc,rotate around={320:(4.2,5)}](4.2,2.5)ellipse ({1.5-\i} and {3.5-2*\i});         
 };
 
 
-\draw[\colb] node at (4,1.8) {\LARGE$\alpha_{\theta^*},$};
-\draw[\colc] node at (4.6,1.8) {\LARGE$\beta$};
+\draw[\colc] node at (4,1.8) {\LARGE$\alpha_{\theta^*},$};
+\draw[\colb] node at (4.6,1.8) {\LARGE$\beta$};
 \begin{axis}[
 hide axis,
 scatter/classes={
-	a={mark=+,draw=\colc,fill=\colc},
+	a={mark=+,draw=\colb,fill=\colb},
 	b={mark=o,draw=white}} ]
 ]
 \addplot[scatter,only marks,scatter src=explicit symbolic]%

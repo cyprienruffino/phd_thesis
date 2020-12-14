@@ -7,7 +7,7 @@
 	
 	\begin{scope}[triangle/.style = {regular polygon, regular polygon sides=3}]
 
-\path[draw=\colc,dashed] plot [smooth cycle] coordinates {(-0.5,-0.5) (-0.5,5.5) (5.5,5.5) (5.5,-.5)};
+\path[draw=\cold,dashed] plot [smooth cycle] coordinates {(-0.5,-0.5) (-0.5,5.5) (5.5,5.5) (5.5,-.5)};
 
 \node[draw=\cola,fill=\cola, triangle] at (0,0) (xsw) {};
 \node[draw=\cola,fill=\cola, triangle] at (0.7,1.5)  {};
@@ -58,24 +58,24 @@
 %\path[fill=\colc!20] plot [smooth cycle] coordinates {(-0.5,3.5) (-0.5,5.5) (1.5,5.5) (1.5,3.5)};
 %\path[fill=\cold!20] plot [smooth cycle] coordinates {(2,2) (2,3) (4,3) (4,2)};	
 
-\node[draw=black,fill=black, circle] at (0,0) (xsw) {};
-\node[draw=black,fill=black, circle] at (0.7,1.5)  {};
-\node[draw=black,fill=black, circle] at (0.9,0.6)  {};
-\node[draw=black,fill=black, circle] at (2,1)  {};
 
-\node[draw=black,fill=black, circle] at (4.5,4.1) {};
-\node[draw=black,fill=black, circle] at (3.5,4.5) {};
-\node[draw=black,fill=black, circle] at (5,5) (xne) {};
+\filldraw[\cold](0.7,1.5)  circle (3pt) node[anchor=west]{};
+\filldraw[\cold](0.9,0.6)   circle (3pt) node[anchor=west]{};
+\filldraw[\cold](2,1)  circle (3pt) node[anchor=west]{};
+
+\filldraw[\cold](4.5,4.1) circle (3pt) node[anchor=west]{};
+\filldraw[\cold](3.5,4.5)  circle (3pt) node[anchor=west]{};
+\filldraw[\cold](5,5) circle (3pt) node[anchor=west]{};
 
 
-\node[draw=black!75!\cold,fill=black!75!\cold, circle] at (0.5,4.1) {};
-\node[draw=black!75!\cold,fill=black!75!\cold, circle] at (0.7,4.5) {};
-\node[draw=black!75!\cold,fill=black!75!\cold, circle] at (0.1,5)  {};
+\filldraw[\cold] (0.5,4.1) circle (3pt) node[anchor=west]{};
+\filldraw[\cold] (0.7,4.5) circle (3pt) node[anchor=west]{};
+\filldraw[\cold] (0.1,5) circle (3pt) node[anchor=west]{};
 
-\node[draw=black,fill=black, circle] at (2.5,2.7) {};
-\node[draw=black,fill=black, circle] at (2.7,2.4) {};
-\node[draw=black,fill=black, circle] at (3,2.5) {};
-\node[draw=black,fill=black, circle] at (3.5,2.6) {};
+\filldraw[\cold] (2.5,2.7) circle (3pt) node[anchor=west]{};
+\filldraw[\cold]  (2.7,2.4)  circle (3pt) node[anchor=west]{};
+\filldraw[\cold] (3,2.5) circle (3pt) node[anchor=west]{};
+\filldraw[\cold]  (3.5,2.6)  circle (3pt) node[anchor=west]{};
 
 
 \end{scope}
