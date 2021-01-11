@@ -47,11 +47,11 @@ The remainder of the chapter is organized as follows:  the polarization formalis
 \section{Polarimetric imaging: formalism and constraints}
 \label{sec3:physical_prop}
 
-As most of this chapter revolves around polarimetric image generation, we first introduce the formalism of polarization that stems from the physics of polarimetry.  Polarization is a property of light that represents the direction of propagation of the electrical field of the light wave. Polarimetric imaging defines the polarization state of light waves reflected by each part of the scene. When an un-polarized light wave is being reflected, it becomes partially linearly polarized and its polarization depends on the normal surface  and the refractive index of the material it impinges on. As such, it is a different modality than classical color images, since it does not represent the wavelength of light, but contains rich information about the surfaces that the light reflected on, most notably information about the materials of these surfaces. In this section, we first propose an overview of the mathematical formulation of polarimetric imaging and then review the different physical constraints that apply to this imaging paradigm.
+As most of this chapter revolves around polarimetric image generation, we first introduce the formalism of polarization that stems from the physics of polarimetry.  Polarization is a property of light that represents the direction of propagation of the electrical field of the light wave. Polarimetric imaging defines the polarization state of light waves reflected by each part of the scene. When an un-polarized light wave is being reflected, it becomes partially linearly polarized and its polarization depends on the normal surface  and the refractive index of the material it impinges on. As such, it is a different modality than classical color images, since it does not represent the wavelength of light, but contains rich information about the surfaces that the light reflected on, most notably information about the materials of these surfaces \citep{Gross2012}. In this section, we first propose an overview of the mathematical formulation of polarimetric imaging and then review the different physical constraints that apply to this imaging paradigm.
 
 \subsection{Polarimetry-encoded images and Stokes vectors as parameters for polarization}
 
-Similarly  to color images, several encoding formats exist for polarimetric images. The acquisition principle of a polarimetric camera is based on a set of polarizers located between the object and the sensors \citep{Bass1995}. In this work, we rely on a polarimetric image encoding format that consists in four channel images respectively obtained with four different linear polarizers oriented at $\alpha_i,  i\in\{1,...,4\} =$ (0\degree, 45\degree, 90\degree, 135\degree). The polarimetric camera captures an image $\vy \in \spaceX \subset \spaceR^{n \times p \times 4}$ consisting in the light intensities $\vy_{\alpha_i}$ of the scene for each angle $\alpha_i$ for each pixel $\vy_{i,j} = \begin{bmatrix} \vy_{0_{i,j}}& \vy_{{i,j}_{45}} & \vy_{{i,j}_{90}} & \vy_{{i,j}_{135}}\end{bmatrix}^\top$, $ \forall i\leq n,  j\leq p$. An example of the different intensities for the same scene is shown in Figure~ \ref{fig:polar_overview intensities}. 
+Similarly  to color images, several encoding formats exist for polarimetric images. The acquisition principle of a polarimetric camera is based on a set of polarizers located between the object and the sensors \citep{Bass1995}. In this work, we rely on a polarimetric image encoding format that consists in four channel images respectively obtained with four different linear polarizers oriented at $\alpha_\theta,  \theta\in\{1,...,4\} =$ (0\degree, 45\degree, 90\degree, 135\degree). The polarimetric camera captures an image $\vy \in \spaceY \subset \spaceR^{n \times p \times 4}$ consisting in the light intensities $\vy_{i,j_{\alpha_\theta}}$ of the scene for each angle $\alpha_\theta$ for each pixel $\vy_{i,j} = \begin{bmatrix} \vy_{i,j_{0}}& \vy_{{i,j}_{45}} & \vy_{{i,j}_{90}} & \vy_{{i,j}_{135}}\end{bmatrix}^\top$, $ \forall i\leq n,  j\leq p$. An example of the four different intensities for the same scene is shown in Figure~ \ref{fig:polar_overview intensities}. 
 
 \begin{figure}
 	\centering
@@ -77,7 +77,7 @@ Similarly  to color images, several encoding formats exist for polarimetric imag
 
 The linearly-polarized reflected light can be described by measurable parameters, specifically by the linear Stokes vectors. These parameters are encoded as an image $\vs \in \spaceS \subset \spaceR^{n\times p\times 3}$ such that each pixel $\vs_{i,j}$ is a Stokes vector $\vs_{i,j} = \begin{bmatrix} \vs_{{i,j}_0} & \vs_{{i,j}_1} & \vs_{{i,j}_2} \end{bmatrix}^\top \in \spaceR^3$, $1 \leq i\leq n, 1\leq j\leq p$  . Here, $\vs_0>0$ represents the total light intensity, $\vs_1$ the amount of horizontally and vertically linearly polarized light and $\vs_2$ the amount of linearly polarized light at $\pm$~45\degree. 
 
-Associated with each polarimetry encoding format is its so-called calibration matrix $\ma$ that allows for computing the Stokes vectors. In this work, we define the calibration matrix as
+Associated with each polarimetry encoding format is its so-called calibration matrix $\ma$ that allows for computing the Stokes vectors. In this work, the calibration matrix is set by the manufacturer of the polarimetric camera we use (a Polarcam\texttrademark 4D Technology\footnote{\href{https://www.4dtechnology.com}{https://www.4dtechnology.com}}) as
 %
 \begin{equation}
 \ma = \frac{1}{2} {\begin{bmatrix}
@@ -104,15 +104,15 @@ Using $\ma\in\spaceR^{4\times3}$, we define\footnote{To ease the notation for th
 \end{equation}
 %
 To compute the Stokes parameters from the measured intensities (equation \ref{eqn:IAS}), we require $\ma^\dagger = (\ma^\top \ma)^{-1} \ma^\top \in \mathbb{R}^{3\times 4}$ the pseudo-inverse (or Moore-Penrose inverse) of the matrix $\ma$. The relationship between $\vs$ and $\vy$ is defined for each pixel as
-
+%
 \begin{equation}
 	\vs_{i,j} = \ma^\dagger \vy_{i,j} 
 	\forall i\leq n, j\leq p \nonumber
 	\label{eqn:stokes2} \enspace.
 \end{equation}
-
+%
 In our work, the pseudo-inverse $\ma_\dagger$ of the calibration matrix $\ma$ is
-
+%
 \begin{equation}
 	\ma_\dagger = 
 \begin{bmatrix}
@@ -122,9 +122,9 @@ In our work, the pseudo-inverse $\ma_\dagger$ of the calibration matrix $\ma$ is
 \end{bmatrix}
 \enspace,
 \end{equation}
-
+%
 thus we have the relation
-
+%
 \begin{equation}
 	\vs_{i,j} =  \ma^\dagger \vy_{i,j}  =
 	\begin{bmatrix}
@@ -151,13 +151,18 @@ thus we have the relation
 
 A polarimetry-encoded image $\vy$ is deemed valid if its Stokes vectors satisfy two main conditions: they must be physically admissible and they must be the result of an acquisition process that uses the right calibration. Since we are interested in generating new polarimetric images, they will have to comply with these essential constraints. 
 
-To ensure that the Stokes vectors $\vs$ are physically admissible, we rely on the degree of polarization (\ac{DOP}) \citep{Ainouz2013}, defined as
-%
+The three components of the Stokes vectors represent respectively the total light intensity, the intensity of the vertically and horizontally polarized light, and the intensity of the diagonally polarized light. To be physically admissible, the total light intensity $\vs_0$ of the Stokes vectors $\vs$ should be at least superior to the sum of the intensities of the diagonally, vertically and horizontally polarized light. Thus, we have
+
 \begin{equation}
-	\ac{DOP} = \frac{\sqrt{\vs_1^2+\vs_2^2}}{\vs_0} \enspace.
+	\vs_0 \geq \sqrt{\vs_1^2 + \vs_2^2} \enspace .
 \end{equation}
-%
-The $\ac{DOP}\in [0,1]$ refers to the amount of polarized light in a wave, where a \ac{DOP} of 1  represents a totally polarized light, a null value corresponds to un-polarized light,  and a \ac[DOP] between 0 and 1 for partially polarized light. 
+%rely on the degree of polarization (\ac{DOP}) \citep{Ainouz2013}, defined as
+
+%\begin{equation}
+%	\ac{DOP} = \frac{\sqrt{\vs_1^2+\vs_2^2}}{\vs_0} \enspace.
+%\end{equation}
+
+%The $\ac{DOP}\in [0,1]$ refers to the amount of polarized light in a wave, where a \ac{DOP} of 1  represents a totally polarized light, a null value corresponds to un-polarized light,  and a \ac{DOP} between 0 and 1 for partially polarized light. 
 
 Additionally, since $\vs_0$ represents the total light intensity, it cannot be 0. Thus, to be physically admissible, a Stokes vector has to meet the conditions
 %
@@ -209,11 +214,15 @@ We can formulate this as
 \begin{eqnarray}
 	\label{eq:polar_constr_formulation}
 	\max_{\G_{XY}}& L(\G_{XY}) = \mathop{\mathbb{E}}_{\vx\sim \p{X}} \Big[\log (\p{Y}(\G_{XY}(\vx))\Big]  \\
-	\text{s.c.} & \vy_i = \ma\vs_i \enspace;\enspace \vs_{0_i}^2 \geq \vs_{1_i}^2 +\vs_{2_i}^2  \enspace\text{and}\enspace  \vs_{0_i}^2 > 0   \nonumber \\
-	\text{with}  & \vs_{i} = \ma^\dagger(\G_{XY}(\vy_{i})) \quad \forall i \nonumber
+	\text{s.c.} & \G_{XY}(\vx_i) = \ma\vs_i \enspace;\enspace \vs_{0_i}^2 \geq \vs_{1_i}^2 +\vs_{2_i}^2  \enspace\text{and}\enspace  \vs_{0_i}^2 > 0   \nonumber \\
+	\text{with}  & \vs_{i} = \ma^\dagger(\G_{XY}(\vx_{i})) \quad \forall i \nonumber
 \end{eqnarray}
 
-Then, we aim to enforce the semantic consistency between the input $\vx$ and the generated image $\Hat{\vy}$. One additional requirement is that the model should be trainable in an unpaired and unsupervised way. This implies that the only available datasets consist in unpaired and unlabeled samples $\setX = \{\vx_1, ..., \vx_s\}, \vx_i \in \spaceX$ and $\setY = \{\vy_1, ..., \vy_s\}, \vy_i \in \spaceY$ from the two domains $\spaceX $ and $\spaceY$. This requirement can be approached using unsupervised domain-transfer methods.
+These constraints enforce the physical admissibility of the generated polarimetric images, however they do not guarantee that the objects pictured in the generated images $\G_{XY(\vx_i)}$ will be the same as in the original images $\vx_i$. This property is called \textbf{semantic consistency} between the input $\vx$ and the generated image $\Hat{\vy}$ and is essential to the task of domain-transfer. Indeed, a model that is not semantically consistent could generate realistic images that are completely different from the provided inputs.
+
+One final requirement is that the model should be trainable in an unpaired and unsupervised way. This implies that the only available datasets consist in unpaired and unlabeled samples $\setX = \{\vx_1, ..., \vx_s\}, \vx_i \in \spaceX$ and $\setY = \{\vy_1, ..., \vy_s\}, \vy_i \in \spaceY$ from the two domains $\spaceX $ and $\spaceY$. 
+
+These two requirements can be approached using unsupervised domain-transfer methods.
 
 \subsection{Approaches for unsupervised conditional domain-transfer}
 
@@ -233,18 +242,33 @@ While these approaches allow for efficient domain-translation (and notably image
 
 To constrain the domain-transfer process, several approaches rely on adding a task specific loss to the \ac{CycleGAN} objective. This can be done in a supervised way, leveraging on labeled data by training a task model and minimizing its error, or in an unsupervised way with an explicit task loss.
 
-\textbf{TD-GAN} \citep{Zhang2018c} integrates a supervised conditioning process in a task of semantic segmentation from organ X-ray images. To do so, the authors rely on existing labeled datasets of digitally reconstructed radiographs (DRRs) and use them to train a semantic segmentation model. They use this model to condition a \ac{CycleGAN}-like model that translates images from the X-ray to the DRR domain by adding the segmentation loss to the \ac{CycleGAN} objective. In other words, DRR images are translated to X-ray, then back to DRRs, segmented using the pre-trained model and then compared to the ground truth segmentation using binary cross-entropy. 
+\textbf{TD-GAN} \citep{Zhang2018c} integrates a supervised conditioning process in a task of semantic segmentation from organ X-ray images. To do so, the authors rely on existing labeled datasets of digitally reconstructed radiographs (DRRs) and use them to train a Dense Image-to-Image (DI2I) \citep{Huang2018} semantic segmentation model. They use this model to condition a \ac{CycleGAN}-like model that translates images from the X-ray to the DRR domain by adding the segmentation loss to the \ac{CycleGAN} objective. In other words, DRR images are translated to X-ray, then back to DRRs, segmented using the pre-trained model and then compared to the ground truth segmentation using binary cross-entropy.  The full procedure is described in Figure \ref{fig:tdgan}.
 
-\textbf{CyCADA} \citep{Hoffman2018} also implements the idea of using pre-trained classifiers or segmentation models to condition domain-transfer.  They achieve this conditioning by comparing the classes (or segmentation maps) of the source and generated images, and then adding the fitting term of these supervision models to the objective loss of a \ac{CycleGAN}-like model. While this conditioning process requires a model pre-trained in a supervised way, training the CyCADA model does not require labeled data. They demonstrate this approach for domain-transfer with datasets such as \ac{MNIST} \citep{LeCun1998a} and Street View House Numbers (SVHN) \citep{Netzer2011} for a digit classification task, and the SYNTHIA \citep{Ros2016}, GTA \citep{Richter2016} and Cityscapes \citep{Cordts2015} datasets for road scenes semantic segmentation.
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{tdgan}
+	\caption{Overview of the TD-GAN approach. Figure from \citet{Zhang2018c}.}
+	\label{fig:tdgan}
+\end{figure}
+
+\textbf{CyCADA} \citep{Hoffman2018} also implements the idea of using pre-trained classifiers or segmentation models to condition domain-transfer.  They achieve this conditioning by comparing the classes (or segmentation maps) of the source and generated images, and then adding the fitting term of these supervision models to the objective loss of a \ac{CycleGAN}-like model. While this conditioning process requires a model pre-trained in a supervised way, training the CyCADA model does not require labeled data. They demonstrate this approach for domain-transfer with datasets such as \ac{MNIST} \citep{LeCun1998a} and Street View House Numbers (SVHN) \citep{Netzer2011} for a digit classification task, and the SYNTHIA \citep{Ros2016}, GTA \citep{Richter2016} and Cityscapes \citep{Cordts2015} datasets for road scenes semantic segmentation The full method is illustrated in Figure \ref{fig:cycada}.
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{cycada}
+	\caption[Cycle-consistent adversarial adaptation (CyCADA) overview]{Cycle-consistent adversarial adaptation overview. By directly remapping source training data into the target domain, they remove the low-level differences between the domains, ensuring that their task model is well-conditioned on target data. They depict here the image-level adaptation as composed of the pixel GAN loss ({\color{green}green}), the source cycle loss ({\color{red}red}), and the source and target semantic consistency losses (black dashed) – used when needed to prevent label flipping. For clarity the target cycle is omitted. The feature-level adaptation is depicted as the feature GAN loss ({\color{orange}orange}) and the source task loss ({\color{purple}purple}). Figure from \citet{Hoffman2018}.}
+	\label{fig:cycada}
+\end{figure}
 
 Several methods also leverage on this conditioning approach to enhance the performance of the domain-transfer task. \textbf{VIGAN} \citep{Shang2017} includes a denoising auto-encoder; the aforementioned \textbf{CyCADA} an uses adversarial loss on the features extracted by a pre-trained classifier and \textbf{Attention-GAN} \citep{Chen2018b} leverages on an attention mechanism, both to increase the visual quality of the generated samples.
 
 \section{Generating polarimetric images with auxiliary tasks for domain-transfer modeling}
 \label{sec3:solutions}
 
-The problem studied in this chapter is image-to-image translation from \ac{RGB} images to the polarimetric domain. In the previous sections, we formalized the constraints of polarimetric imaging and reviewed the different approaches for image-to-image translation based on generative modeling, as well as conditioning mechanism based on task-specific losses.
+The problem studied in this chapter is image-to-image translation from \ac{RGB} images to the polarimetry domain. In the previous sections, we formalized the constraints of polarimetric imaging and reviewed the different approaches for image-to-image translation based on generative modeling, as well as conditioning mechanism based on task-specific losses.
 
-As  a main contribution in this chapter, we propose here three variants of the \ac{CycleGAN} approach for conditioning the domain translation task with the constraints of polarimetry. Our first approach is to formulate a relaxation of both the calibration constraint (see Equation \ref{eq:calibration_constraint}) and the constraint of physical admissibility (see Equation \ref{eq:polar_constr_formulation}) and add the related costs to the \ac{CycleGAN} losses. For the second approach, train the generator network with the relaxed calibration constraint and use a proximal operator to project the generated image pixels in the space of the constraints. Finally for the third approach, we formulate a distance between the generated sample and its projection and we add it to the \ac{CycleGAN} objective.
+As  a main contribution in this chapter, we propose here three variants of the \ac{CycleGAN} approach for conditioning the domain translation task with the constraints of polarimetry. Our first approach is to formulate a relaxation of both the calibration constraint (see Equation \ref{eq:calibration_constraint}) and the constraint of physical admissibility (see Equation \ref{eq:polar_constr_formulation}) and add the related costs to the \ac{CycleGAN} losses. For the second approach, train the generator network with the relaxed calibration constraint and use a proximal operator to project the generated image pixels in the space of the constraints. Finally for the third approach, we formulate a proximal distance between the generated sample and its projection in the space of the constraints and we add it as an auxiliary task to the model.
 
 We evaluate these methods on a road-scene \ac{RGB} to polarimetric image translation. We compare the visual quality of the samples and the respect of the polarimetric constraints. We further examine the physical admissibility by studying the impact of using our generated images as a dataset for a road-scene detection task. \CR{We observe that our approaches outperforms \ac{CycleGAN} on every criterions and that using generated polarimetric images contributes to enhance the performances on the road-scene detection task.}
 
@@ -270,7 +294,7 @@ L_{\mathcal{C}_1} (\G_{XY}) = \mathop{\mathbb{E}}_{\vx\sim \p{X}} ||\G_{XY}(\vx)
 \label{eqn:ls}
 \end{equation}
 %
-Similarly, to enforce the constraint $\mathcal{C}_2$, a rectified linear penalty $L_{\mathcal{C}_2}$ is considered. It is defined by:
+Similarly, to enforce the constraint $\mathcal{C}_2$, a rectified linear penalty $L_{\mathcal{C}_2}$ is considered. It is defined by
 %
 \begin{equation}
 L_{\mathcal{C}_2} (\G_{XY}) = \mathop{\mathbb{E}}_{\vx\sim \p{X}}  \max\left(\Hat{\vs}_1^2 + \Hat{\vs}_2^2 -
@@ -289,18 +313,18 @@ The loss $L_{\mathcal{C}_1}$ translates the respect of the acquisition condition
 %
 \begin{algorithm}[!t]
 	\begin{algorithmic}[]
-		\REQUIRE{$\trainsetX$ and $\trainsetY$ two unpaired datasets, $\Gxy$ and $\Gyx$ the mapping networks, $\Dx$ and $\Dy$ the discrimination models, $m$ the mini-batch size, $\ma$ the calibration matrix and $\ma^\dagger$ its pseudo-inverse, $\lambda, \mu, \nu$ hyperparameters}
+		\REQUIRE{$\trainsetX$ and $\trainsetY$ two unpaired datasets, $\Gxy$ and $\Gyx$ the mapping networks, $\Dx$ and $\Dy$ the discrimination models, $b$ the mini-batch size, $\ma$ the calibration matrix and $\ma^\dagger$ its pseudo-inverse, $\lambda, \mu, \nu$ hyperparameters}
 		\REPEAT
-		\STATE sample a mini-batch $\lbrace \vx_i \rbrace_{i=1}^m$ from the RGB $\trainsetX$\;
-		\STATE sample a mini-batch $\lbrace \vy_i \rbrace_{i=1}^m$ from the polarimetric $\trainsetY$\;
+		\STATE sample a mini-batch $\lbrace \vx_i \rbrace_{i=1}^b$ from the RGB $\trainsetX$\;
+		\STATE sample a mini-batch $\lbrace \vy_i \rbrace_{i=1}^b$ from the polarimetric $\trainsetY$\;
 		\STATE update $\Dx$ by stochastic gradient descent of
 		\STATE \ \ \ \ $ \sum_{i=1}^{m}\big(\Dx(\vx_i)-1)^2 + (\Dx(\Gyx(\vy_i))\big)^2$
 		\STATE update $\Dy$ by stochastic gradient descent of
 		\STATE \ \ \ \ $ \sum_{i=1}^{m}\big(\Dy(\vy_i)-1)^2 + (\Dy(\Gxy(\vx_i))\big)^2$
-		\STATE \textbf{for} $i=1$ to $m$, compute $\hat{\vs_i} = \begin{bmatrix}	\Hat{\vs_{0_i}} & 	\Hat{\vs_{1_i}} & 	\Hat{\vs_{2_i}}\end{bmatrix}^\top = \ma^\dagger\G_{XY}(\vx_i)$.
+		\STATE \textbf{for} $i=1$ to $b$, compute $\hat{\vs_i} = \begin{bmatrix}	\Hat{\vs_{0_i}} & 	\Hat{\vs_{1_i}} & 	\Hat{\vs_{2_i}}\end{bmatrix}^\top = \ma^\dagger\G_{XY}(\vx_i)$.
 		\STATE update $\Gxy$ by stochastic gradient descent of
 		\STATE \ \ \ \ $ \sum_{i=1}^n\big(\Dy(\Gxy(\vx_i))-1\big)^2 + \lambda \big(||\vx_i - \Gyx(\Gxy(\vx_i)\big)||_1 +||\vy_i -\Gxy(\Gyx(\vy_i))||_1\big)$
-		\STATE \ \ \ \ \ \ $+ \mu \big(\ma\Hat{\ma^\dagger\G_{XY}(\vx_i)}\Big)+ \nu \big(\max(\vs_{1_i}^2 + \vs_{2_i}^2 - \vs_{0_i}^2, 0\big)$
+		\STATE \ \ \ \ \ \ $+ \mu \big(\|\vx_i - \ma\ma^\dagger\G_{XY}(\vx_i)\|^2_F\Big)+ \nu \big(\max(\vs_{1_i}^2 + \vs_{2_i}^2 - \vs_{0_i}^2, 0\big)$
 		\STATE update $\Gyx$ by stochastic gradient descent of
 		\STATE \ \ \ \ $ \sum_{i=1}^n \big(\Dx(\Gyx(\vy_i))-1\big)^2+ \lambda \big(||\vx_i - \Gyx(\Gxy(\vx_i))||_1 + ||\vy_i - \Gxy(\Gyx(\vy_i))||_1\big)$\;
 		\UNTIL a stopping condition is met
@@ -329,11 +353,10 @@ The non-negative hyper-parameters $\mu$ and $\nu \in \mathbb{R}^{+}$ control res
  		\STATE \ \ \ \ $ \sum_{i=1}^{m}\big(\Dx(\vx_i)-1)^2 + (\Dx(\Gyx(\vy_i))\big)^2$
  		\STATE update $\Dy$ by stochastic gradient descent of
  		\STATE \ \ \ \ $ \sum_{i=1}^{m}\big(\Dy(\vy_i)-1)^2 + (\Dy(\ma\Pi_{\setC}(\ma^\dagger\Gxy(\vx_i)))\big)^2$
- 		\STATE sample a mini-batch $\lbrace \vx_i \rbrace_{i=1}^m$ from $\trainsetX$\;
- 		\STATE sample a mini-batch $\lbrace \vy_i \rbrace_{i=1}^m$ from $\trainsetY$\;
  		\STATE update $\Gxy$ by stochastic gradient descent of
  		\STATE \ \ \ \ $ \sum_{i=1}^n\big(\Dy(\Gxy(\vx_i))-1\big)^2$ $+ \mu \big(\ma\ma^\dagger\G_{XY}(\vx_i)\Big)$
  		\STATE \ \ \ \ \ \ $ + \lambda \big(||\vx_i - \Gyx(\ma\Pi_{\setC}(\ma^\dagger\Gxy(\vx_i))\big)||_1 +||\vy_i -\ma\Pi_{\setC}(\ma^\dagger\Gxy(\Gyx(\vy_i)))||_1\big)$
+ 		\STATE \ \ \ \ \ \ $ + \mu \big(\|\vx_i - \ma\ma^\dagger\G_{XY}(\vx_i)\|^2_F\Big)$
  		\STATE update $\Gyx$ by stochastic gradient descent of
  		\STATE \ \ \ \ $ \sum_{i=1}^n \big(\Dx(\Gyx(\vy_i))-1\big)^2 $
  		\STATE \ \ \ \ \ \ 	$+ \lambda \big(||\vx_i - \Gyx(\ma\Pi_{\setC}(\ma^\dagger\Gxy(\vx_i)))||_1 + ||\vy_i -\ma\Pi_{\setC}(\ma^\dagger\Gxy(\Gyx(\vy_i))||_1\big)$\;
@@ -346,11 +369,11 @@ The non-negative hyper-parameters $\mu$ and $\nu \in \mathbb{R}^{+}$ control res
 \begin{figure} 
 	\centering
 	\includegraphics[width=\textwidth]{ours_proj}
-	\caption{Overview of the CycleGAN training process with extended the projection operator. The $L_{\setC_1}$ is omitted.}
+	\caption[Overview of the CycleGAN training process with extended the projection operator]{Overview of the CycleGAN training process with extended the projection operator. The $L_{\setC_1}$ term is omitted.}
 	\label{fig:overview_polarCycle_proj}
 \end{figure}
 
- 	a convex set whose vectors satisfy the aforementioned constraints. As such, we can reformulate the problem (\ref{eq:polar_constr_formulation}) as
+ 	a convex set whose vectors satisfy the aforementioned constraints. As such, we can reformulate the Problem (\ref{eq:polar_constr_formulation}) as
  %	
  	\begin{eqnarray}
  		\label{eq:polar_set_formulation}
@@ -395,12 +418,10 @@ with $\vx \in \spaceX$ an \ac{RGB} image. This process is summed up in Algorithm
 		\STATE \ \ \ \ $ \sum_{i=1}^{m}\big(\Dx(\vx_i)-1)^2 + (\Dx(\Gyx(\vy_i))\big)^2$
 		\STATE update $\Dy$ by stochastic gradient descent of
 		\STATE \ \ \ \ $ \sum_{i=1}^{m}\big(\Dy(\vy_i)-1)^2 + (\Dy(\Gxy(\vx_i))\big)^2$
-		\STATE sample a mini-batch $\lbrace \vx_i \rbrace_{i=1}^m$ from $\trainsetX$\;
-		\STATE sample a mini-batch $\lbrace \vy_i \rbrace_{i=1}^m$ from $\trainsetY$\;
-		\STATE for $i=1$ to $n$, compute $\hat{\vs_i} = \begin{bmatrix}	\Hat{\vs_{0_i}} & 	\Hat{\vs_{1_i}} & 	\Hat{\vs_{2_i}}\end{bmatrix}^\top = \ma^\dagger\G_{XY}(\vx_i)$.
+		\STATE \textbf{for} $i=1$ to $n$, compute $\hat{\vs_i} = \begin{bmatrix}	\Hat{\vs_{0_i}} & 	\Hat{\vs_{1_i}} & 	\Hat{\vs_{2_i}}\end{bmatrix}^\top = \ma^\dagger\G_{XY}(\vx_i)$.
 		\STATE update $\Gxy$ by stochastic gradient descent of
 		\STATE \ \ \ \ $ \sum_{i=1}^n\big(\Dy(\Gxy(\vx_i))-1\big)^2 + \lambda \big(||\vx_i - \Gyx(\Gxy(\vx_i)\big)||_1 +||\vy_i -\Gxy(\Gyx(\vy_i))||_1\big)$
-		\STATE \ \ \ \ \ \ $+ \mu \big(\ma\Hat{\ma^\dagger\G_{XY}(\vx_i)}\Big)+ \nu \|\ma^\dagger \G_{XY}(\vx_i) - \Pi_\setC(\ma^\dagger \G_{XY}(\vx_i))\|^2$\;
+		\STATE \ \ \ \ \ \ $+ \mu \big(\|\vx_i - \ma\ma^\dagger\G_{XY}(\vx_i)\|^2_F\Big)  + \nu \|\ma^\dagger \G_{XY}(\vx_i) - \Pi_\setC(\ma^\dagger \G_{XY}(\vx_i))\|^2$\;
 		\STATE update $\Gyx$ by stochastic gradient descent of
 		\STATE \ \ \ \ $ \sum_{i=1}^n \big(\Dx(\Gyx(\vy_i))-1\big)^2+ \lambda \big(||\vx_i - \Gyx(\Gxy(\vx_i))||_1 + ||\vy_i - \Gxy(\Gyx(\vy_i))||_1\big)$\;
 		\UNTIL a stopping condition is met
@@ -430,7 +451,7 @@ with $\vx \in \spaceX$ an \ac{RGB} image. This process is summed up in Algorithm
 		\label{eqn:lfinal_prox}
 	\end{equation}
 	%
-	This process is summed up in Algorithm \ref{alg:cyclegan_train_proximal} and illustrated in Figure \ref{fig:overview_polarCycle_prox}. Note that the gradient of the distance $\Omega_\setC = \|A^\dagger \G_{XY}(\vy) - \Pi_\setC(A^\dagger \G_{XY}(\vy))\|^2$ can be expressed \citep{Parikh2014} as 
+	This process is summed up in Algorithm \ref{alg:cyclegan_train_proximal} and illustrated in Figure \ref{fig:overview_polarCycle_prox}. Note that the gradient of the distance $\Omega_\setC = \|\ma^\dagger \G_{XY}(\vy) - \Pi_\setC(\ma^\dagger \G_{XY}(\vy))\|^2$ can be expressed \citep{Parikh2014} as 
 %
 	\begin{equation}
 		\nabla_{\G_{XY}} \Omega_{\setC}(\vs) = \left( \vs - \Pi_{\setC}(\vs) \right) \times \left \lbrace
