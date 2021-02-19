@@ -258,7 +258,7 @@ While using the \ac{CGAN} approach alone could theoretically be enough to solve 
 %
 \begin{equation}
 	\label{eq:CGAN_problem_reco_norm}
-	\min_\G\max_\D \esp{\vx,\vy\sim \p{X,Y}} [\log \D(\vx, \vy)] +  \esp{\vy\sim \p{Y} \\ \vz\sim\p{Z}} [1 - \log \D(\G(\vy, \vz), \vy)] +  \| \mm_\vy \odot \G(\vy, \vz) - \vy \|^2_F \enspace , \\
+	\min_\G\max_\D \esp{\vx,\vy\sim \p{X,Y}} [\log \D(\vx, \vy)] +  \esp{\vy\sim \p{Y} \\ \vz\sim\p{Z}} [1 - \log \D(\G(\vy, \vz), \vy)] +  \| \mm_\vy \odot \G(\vy, \vz) - \vy \|^2_F \enspace , 
 \end{equation}
 %
 These approaches are often extended with techniques such as using multiple discriminators \citep{Yu2018, Armanious2019}, extending the training with extra information and features \citep{Armanious2019} as for medical imaging modalities, or using style losses \citep{Guo2019} (See \citesec{subs:augmented_objectives}). However, several of these CGAN-based inpainting methods \citep{Demir2018} rely on generating a patch that will fill up a structured missing part of the image and achieve impressive results. As such, they are not well suited to reconstruct from very sparse and unstructured observations $\vy$. 
@@ -288,7 +288,6 @@ Here, the discriminator has no knowledge of the distribution of the full images 
 	\label{fig:ambientgan}
 \end{figure}
 
-A summary of the main features of the presented related work is provided in Table \ref{tab:reconstruction_approaches}. These features are the need for a dataset of samples, with only the need for altered samples for the Ambient GAN and UNIR approaches; the need for solving a reconstruction problem for each generated image,  which is computationally expensive; the ability to sample multiple images on the conditional distribution $\p{Y|X}$ for a given $\vy$, and the different ways to control the enforcement of the constraints.
 
 \textbf{Unsupervised Image Reconstruction} (\ac{UNIR}) \citep{Pajot2019} extends the Ambient GAN approach by adding a conditioning to the model, which allows for the reconstruction of an image $\vx$ from an altered image $\vy\sim\p{Y}$, without any knowledge of the real data distribution $\p{X}$. \ac{UNIR} is deterministic and does not allow for sampling, as the only input of the model is the altered image $\vy$. For this, an additional reconstruction task is considered. It consists in first generating a reconstruction $\tilde{\vx} = \G(\vy)$ and applying the alteration function $f_\theta$ to the generated image $\tilde{\vx}$ to get $\tilde{\vy} = f_\theta(\G(\vy))$, then re-generating an image as $\hat{\vx} = \G(f_\theta(\G(\vy)))$ and finally re-applying $f_\theta$ to the image $\Hat{\vx}$ to get $\Hat{\vy} = f_\theta(\G(f_\theta(\G(\vy))))$. This procedure can be deemed as 
 %
@@ -701,7 +700,15 @@ Table \ref{tab:ablation-cgan} compares our proposed approach to CGAN using fully
 \end{table}
 
 \subsubsection{- High-dimension image reconstruction}
-We extend the comparison of our approach to CGAN on the CIFAR10 and CelebA  datasets (Table \ref{tab:cifar10}). We investigate all the architectures described in Section \ref{subs:architectures}. According to the results obtained in Section \ref{subs:results}, we fixed the regularization parameter to $\lambda=1$. We train the networks for 150 epochs using the same dataset split as stated previously in order to keep independence between the images and the constraint maps. The evaluation procedure remains also unchanged. We use the PacGAN approach to avoid the loss of diversity issues. The experiments on both datasets show that although CGAN  provides better results in terms of visual quality, our approach greatly outperforms it according to the respect of the pixel constraints. Samples generated with our approach are shown in Figure \ref{fig:samples_celeba}
+We extend the comparison of our approach to CGAN on the CIFAR10 and CelebA  datasets (Table \ref{tab:cifar10}). We also compare generation times (Table \ref{tab:times}) and visual quality on the CelebA dataset (Table \ref{tab:cifar10}) with the Semantic Inpainting by Constrained Image Generation approach \citep{Yeh2017}, in order to show the difference in generation times with the approaches that use optimization at generation time.
+
+ According to the results obtained in Section \ref{subs:results} and \ref{subs:architectures}, we used the \textit{UNetResPac} architecture and fixed the regularization parameter to $\lambda=1$. We train the networks for 150 epochs using the same dataset split as stated previously in order to keep independence between the images and the constraint maps. The evaluation procedure remains also unchanged. We use the PacGAN approach to avoid the loss of diversity issues. 
+ 
+ We compare the times (in seconds) for generating a set number of 16-images mini-batches for our proposed GAN conditioned on scarce constraint map to the Semantic Inpainting approach \citep{Yeh2017}. The  Semantic Inpainting by Constrained Image Generation model is fully trained with the parameters used by \citet{Yeh2017} \footnote{Times computed with the author's code, using a NVIDIA GTX 1080Ti. }.
+ 
+ The experiments on both datasets show that although CGAN  provides better results in terms of visual quality, our approach greatly outperforms it according to the respect of the pixel constraints. They also show that, even if they greatly increase the respect of the constraints (which is to be expected, since these approach optimizes the constraints at generation time), for roughly equivalent visual qualities, solving an optimization problem at generation times is computationally expensive. These computation time makes them prohibitive for generating a very large number of images.
+ 
+  Samples generated with our approach are shown in Figure \ref{fig:samples_celeba}
 
 \begin{table}[t]
 	\centering
@@ -714,11 +721,35 @@ We extend the comparison of our approach to CGAN on the CIFAR10 and CelebA  data
 		&Ours            & 3.120 & \textbf{0.010} & 3.530 & \textbf{0.011} \\    
 		\bigrule
 		CelebA &CGAN      & \textbf{1.34e-4} & 0.0209 &  \textbf{1.81e-4} & 0.0450\\
-		&Ours            & 2.09e-4& \textbf{0.0053} & 5.392e-4 & \textbf{0.0249} \\
+		&Ours            & 2.09e-4& 0.0053 & 5.392e-4 & \textbf{0.0249} \\
+		&\citet{Yeh2017} & 2.44e-4& \textbf{$\leq$ 0.0001} & / & / \\
 	\end{tabular}
 	
 	\caption[Results on the CIFAR10 and CelebA datasets]{Results on the CIFAR10 and CelebA datasets. The reported performances compare CGAN to our proposed GAN conditioned on scarce constraint map.}
 	\label{tab:cifar10}
+\end{table}
+
+\begin{table}[t]
+	\centering
+	\begin{tabular}{l c c c c c }
+		\Bigrule
+		Minibatches & Ours & \citet{Yeh2017} \\
+		\bigrule
+		1&0.39s&75.73s
+\\
+		2&0.72s&152.05s
+ \\
+		4&0.88s&316.09s
+ \\
+		8&1.56s&744.25s
+\\
+		16&2.20s&1056.87s \\
+
+		32&4.48s&2211.45s \\
+	\end{tabular}
+	
+	\caption[Time comparison on the CelebA datasets]{Time comparison (in seconds) on the CelebA datasets with the Semantic Inpainting with Constrained Generative Models \citep{Yeh2017} for set numbers of 16-images minibatches.}
+	\label{tab:times}
 \end{table}
 
 
@@ -810,15 +841,9 @@ The obtained results are summarized in Tables \ref{tab:subsurface} and \ref{tab:
 	\label{fig:samples_subsurface}
 \end{figure}
 
-
-
 \section{Conclusion and perspective}
 
-In this chapter, we address the task of learning effective generative adversarial networks when only very few pixel values are known beforehand. To solve this pixel-wise conditioned GAN, we model the conditioning information under a probabilistic framework. This leads to the maximization of the likelihood of the constraints given a
-generated image. Under the assumption of a Gaussian distribution over the given pixels, we formulate an objective function composed of the conditional GAN loss function regularized by a $\ell_2$-norm on pixel reconstruction errors. We describe the related optimization algorithm.
-
-Empirical evidences illustrate that the proposed framework helps obtaining good image quality while best fulfilling the constraints compared to classical GAN approaches. We show that, even when including the PacGAN technique,  this approach  allows for the use of fully-convolutional architectures and scales well to larger images. We apply this approach to a common geological simulation task and show that it allows the generation of realistic samples which fulfill the prescribed constraints.
-\begin{figure}[t]
+\begin{figure}[!t]
 	
 	\begin{subfigure}[t]{0.5\textwidth}
 		\centering
@@ -833,6 +858,12 @@ Empirical evidences illustrate that the proposed framework helps obtaining good 
 	\end{subfigure}	
 	\caption[Better modeling of the reconstruction error on the Subsurface dataset]{In orange: Histogram of the reconstruction error of the UNetResPAC model on 100 generated subsurface images, with $\lambda = 1$. As we can see, the error is either close to 0, -2 or 2. In blue: Probability density functions of a best fit Gaussian and a mixture model of a Gaussian distribution with a weight of 0.95 and two exponential distribution, each with weights of 0.025 (0.05 being roughly the error rate of the UNetResPAC model).}
 \end{figure}
+
+In this chapter, we address the task of learning effective generative adversarial networks when only very few pixel values are known beforehand. To solve this pixel-wise conditioned GAN, we model the conditioning information under a probabilistic framework. This leads to the maximization of the likelihood of the constraints given a
+generated image. Under the assumption of a Gaussian distribution over the given pixels, we formulate an objective function composed of the conditional GAN loss function regularized by a $\ell_2$-norm on pixel reconstruction errors. We describe the related optimization algorithm.
+
+Empirical evidences illustrate that the proposed framework helps obtaining good image quality while best fulfilling the constraints compared to classical GAN approaches. We show that, even when including the PacGAN technique,  this approach  allows for the use of fully-convolutional architectures and scales well to larger images. We apply this approach to a common geological simulation task and show that it allows the generation of realistic samples which fulfill the prescribed constraints.
+
 
 In future work, an interesting direction would be to investigate other prior distributions for the given pixels. As mentioned in the section \citesec{subs:maximum_a_posteriori}, we assume that the reconstruction error of the model is Gaussian. This however is not necessarily true in practice, as we observed that in the case of the Subsurface dataset, since the pixels are always either -1 or 1, the reconstruction error tend to be close to either 0, -2, or 2 (see \citefig{fig:rec_error}). For this example, a mixture distribution could be more appropriate as it could model both the cases where the error is close to 0 (which can be assumed to be normal) and the cases where it is close to -2 or 2 (\citefig{fig:mixture_dist}). 
 

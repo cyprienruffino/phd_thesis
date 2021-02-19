@@ -5,7 +5,7 @@
 	
 	\begin{tikzpicture}[scale=0.7,dot/.style={circle,minimum size=1mm,inner sep=0pt, fill=\cola}]
 		
-	\filldraw[fill=\colc, draw=black] plot coordinates {(1,0) (1,2.5) (1.8,2.5) (1.8,0) };
+	\filldraw[fill=\colc, draw=black] plot coordinates {(1,0) (1,2.5) (1.8,2.5) (1.8,0) (1,0) };
 	\draw node at (1.4,1.2) {\Large$\vx$};
 		
 	\tikznn{2}{0}{draw=black,fill=\cola}
@@ -42,7 +42,7 @@
 	\end{scope}
 	\draw node at (9.8,1.2) {\Large$G$};
 	
-	\filldraw[fill=\colc, draw=black] plot coordinates {(11.2,0) (11.22,2.5) (12,2.5) (12,0) };
+	\filldraw[fill=\colc, draw=black] plot coordinates {(11.2,0) (11.22,2.5) (12,2.5) (12,0)(11.2,0)};
 	\draw node at (11.6,1.2) {\Large$\hat{\vx}$};
 	
 				%L2

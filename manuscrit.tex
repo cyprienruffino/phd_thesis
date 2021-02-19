@@ -38,8 +38,7 @@
 \hypersetup{
     pdfauthor={Cyprien Ruffino},
     pdfsubject={Manuscrit de thèse de doctorat},
-    pdftitle={Auxiliary Tasks for the Conditioning of Generative Adversarial Networks},
-    pdfkeywords={TODO}%TODO
+    pdftitle={Auxiliary Tasks for the Conditioning of Generative Adversarial Networks}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -53,17 +52,20 @@
 % Infos de la page de garde
 \author{Cyprien \textsc{Ruffino}}
 \title{Auxiliary Tasks for the Conditioning of Generative Adversarial Networks\\}
-\frenchtitle{Tâches auxilliaires pour le conditionnement des réseaux antagonistes génératifs}
+\frenchtitle{Conditionnement par tâches auxiliaires des réseaux antagonistes génératifs}
 \specialite{Informatique}
-\ecole{l'\'Ecole Doctorale Mathématiques, Information, Ingéniérie des Systèmes}
+\ecole{\'Ecole Doctorale Mathématiques, Information, Ingéniérie des Systèmes}
 \date{[Date de la soutenance]}
 \directeur{Gilles \textsc{Gasso}}
 \encadrant{encadrée par Romain \textsc{Hérault}} %Optionnel
-\jurya{Civilité / prénom \textsc{Nom}}{Grade / fonction / statut / lieu d'exercice}{Rapporteur ou examinateur ou directeur de thèse ou codirecteur de thèse}
-\juryb{Civilité / prénom \textsc{Nom}}{Grade / fonction / statut / lieu d'exercice}{Rapporteur ou examinateur ou directeur de thèse ou codirecteur de thèse}
-\juryc{Civilité / prénom \textsc{Nom}}{Grade / fonction / statut / lieu d'exercice}{Rapporteur ou examinateur ou directeur de thèse ou codirecteur de thèse}
-\juryd{Civilité / prénom \textsc{Nom}}{Grade / fonction / statut / lieu d'exercice}{Rapporteur ou examinateur ou directeur de thèse ou codirecteur de thèse}
-\jurye{Civilité / prénom \textsc{Nom}}{Grade / fonction / statut / lieu d'exercice}{Rapporteur ou examinateur ou directeur de thèse ou codirecteur de thèse}
+\jurya{M. Patrick \textsc{Gallinari}}{Professeur, Sorbonne Université - LIP6 \& Chercheur, Criteo}{Rapporteur}
+\juryb{M. Jakob \textsc{Verbeek}}{Chercheur HdR, Inria \& Facebook AI Research}{Rapporteur}
+\juryc{M. Stéphane \textsc{Canu}}{Professeur, Normandie Université - LITIS}{Examinateur}
+\juryd{Mme Cécile \textsc{Caponni}}{Professeure, Université Aix-Marseille - LIS}{Examinatrice}
+\jurye{M. John Aldo \textsc{Lee}}{Professeur, Université Catholique de Louvain - MIRO}{Examinateur}
+%\jury{M. Fabrice \textsc{Mériaudeau}}{Professeur, Université Bourgogne Franche-Comté - ImViA}{Examinateur }
+\juryf{M. Gilles \textsc{Gasso}}{Professeur, Normandie Université - LITIS}{Directeur}
+\juryg{M. Romain \textsc{Hérault}}{Maître de conférences HdR, Normandie Université - LITIS}{Encadrant}
 
 \pagestyle{fancy}
 \begin{document}
@@ -86,7 +88,7 @@
 
 \dominitoc
 
-\setcounter{mtc}{4}	% "Corrige" les minitocs décallés à cause des chapter* (ex : table des matières)
+\setcounter{mtc}{5}	% "Corrige" les minitocs décallés à cause des chapter* (ex : table des matières)
 \tableofcontents		
 
 
@@ -97,6 +99,7 @@
 
 \pagenumbering{arabic}
 \adjustmtc
+\input{chapters/introduction_francais.tex}
 \input{chapters/introduction.tex}
 \input{chapters/chapter1.tex}
 \input{chapters/chapter2.tex}
@@ -109,7 +112,8 @@
 \begin{appendix}
 	\input{chapters/publications.tex}
 	\input{chapters/details_neucom.tex}
-	\input{chapters/details_eccv.tex}
+	%\input{chapters/details_eccv.tex}
+	\input{chapters/proof.tex}
 \end{appendix}
 	
 \end{document}

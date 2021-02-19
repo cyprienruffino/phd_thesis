@@ -36,23 +36,28 @@
 
 \usepackage[
 backend=biber,
-bibstyle=authoryear,
-citestyle=apa,
+doi=false,
+isbn=false,
+url=false,
+eprint=false,
 maxbibnames=1000,
 maxcitenames=2,
 natbib=true,
- hyperref=true,
-backref=true
+hyperref=true,
+uniquename=false,
+uniquelist=false,
+backref=true,
+citestyle=authoryear-comp,
+bibstyle=authoryear
 ]{biblatex}
 \addbibresource{library.bib}
 
-\usepackage{babel}
+\usepackage[french,main=english]{babel}
 \usepackage{lmodern}
 \usepackage{ae,aecompl}										% Utilisation des fontes vectorielles modernes
 \usepackage[upright]{fourier}
-
+\usepackage{bibentry}
 \usepackage{csquotes}
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -87,9 +92,6 @@ backref=true
 \usepackage{tabularx}
 \usepackage{multirow}
 \usepackage{threeparttable}
-\usepackage{etoolbox}
-	\appto\TPTnoteSettings{\footnotesize}
-\addto\captionsfrench{\def\tablename{{\textsc{Tableau}}}}	% Renome 'table' en 'tableau'
 \usepackage{colortbl}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -180,3 +182,15 @@ backref=true
 \usepackage{pifont}% http://ctan.org/pkg/pifont
 \usepackage{siunitx}
 \usepackage{gensymb}
+
+
+\makeatletter
+\DeclareCiteCommand{\longfullcite}
+{\usebibmacro{prenote}}
+{\usedriver
+	{\c@maxnames\blx@maxbibnames\relax
+		\DeclareNameAlias{sortname}{default}}
+	{\thefield{entrytype}}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
+\makeatother

@@ -1,31 +1,79 @@
 \chapter*{Introduction}
+\fancyhead[R]{\textit{INTRODUCTION}}
 \addcontentsline{toc}{chapter}{Introduction}
 \label{chap:intro}
 
 \section*{Context}
 \addcontentsline{toc}{section}{Context}
-Generic deep learning introduction, generic introduction to generative modeling (image generation, whichfaceisreal.com, etc...)
 
-Generative Adversarial Networks (\GAN) \cite{Goodfellow2014} have been recently highlighted for their ability to generate photo-realistic images. By providing a simple framework for high-quality, high-dimensional generative modeling, they quickly found real-world applications such as the notorious "deepfakes" \citep{Vaccari2020}, face-aging \citep{Antipov2017}, image super-resolution \citep{Wang2020}, map style tranfer \citep{Kang2019}, video prediction \citep{Vondrick2016} or 3D objects generation \citep{Wu2017}.
+Over the last decade, deep learning has emerged as one of the most promising areas of artificial intelligence, progressively equaling or surpassing all traditional approaches in several fields of application. Thanks to the generalization capacity of deep neural networks, it is able to leverage large amounts of data to learn complex patterns and behaviors. Deep learning has been applied successfully to diverse domains such as machine translation, the game of go and high-frequency trading. Among all these application domains, computer vision is surely the one in which deep learning has had the greatest impact. Consisting in analyzing and processing images automatically, computer vision is a complex field that contains many problems such as object detection or pattern recognition. Nowadays, deep learning is the reference approach for all computer vision tasks and is used in areas such as medical imaging, facial recognition and autonomous driving.
 
-Introduction to applied conditional generative modeling : examples others than geology
+One of the sub-domains of computer vision that emerged thanks to deep learning is automatic image generation. Generative Adversarial Networks (\ac{GANs}) \citep{Goodfellow2014} are now the spearhead of deep learning for image generation. They were made famous during recent years for their ability to generate photo-realistic images\footnote{A striking example : \url{https://www.whichfaceisreal.com/}}. Indeed, by allowing for the generation of high quality and high dimensional images, they have quickly found applications in many domains such as increasing image resolution \citep{Wang2020}, cartography \citep{Kang2019}, video completion \citep{Vondrick2016} or automatic  3D objects generation \citep{Wu2017}. The use of \ac{GANs} has also been extended to application targeting the public at large, such as the numerous "filters" available on social networks, allowing for example to edit pictures of a person to make them look older \citep{Antipov2017a}. \ac{GANs} also lead to some more harmful applications, such as the famous "deepfakes" \citep{Vaccari2020} that automatically generates images and videos whose purpose is to deceive by falsifying the identity of a person, most often a celebrity or a politician.
+
+In this thesis, we propose to study auxiliary tasks for the conditioning of generative adversarial networks. While \ac{GANs} excel in image generation and allow for generating very high quality images, they only reach their full potential when they are conditioned, i.e. when it is possible to control the model output. Indeed, the conditioning makes it possible to ensure that the obtained images have desired properties, which is essential for, for example, all dynamic image editing applications such as "filters" or the increase in resolution. Indeed, the content of the image, for example the person on which the filter is applied, must remain the same. We therefore propose to focus on a family of techniques conditioning \ac{GANs}: auxiliary tasks. By training a \ac{GAN} to solve a secondary task, simultaneously to learning the distribution of real data, it is possible to push the model towards respecting some targeted properties. These auxiliary tasks need to be designed specifically for each type of conditioning. Over the course of this thesis, we will examine examples of problems that can be solved by conditioned generative models and will propose appropriate auxiliary tasks to solve these problems.
+
 
 \section*{Motivations}
 \addcontentsline{toc}{section}{Motivations}
-Geostatistical application :  introduction and needs \begin{itemize}
-	\item Tuneable (quality vs enforcement of the constraints)
-	\item Pixel-precise
-	\item Keeping diversity
+
+Our work is motivated by two applications requiring conditioned generative models: the reconstruction of images, and more precisely maps of underground water channel formations; and the conversion of road scene \ac{RGB} image databases into the polarimetric domain. 
+
+\subsection*{Reconstruction of hydro-geological images}
+
+\quad First, we study the problem of image reconstruction, consisting in (re-)generating an image from a very reduced set of a priori known pixels. This is a generic task which includes the problem of reconstructing maps of underground water channel formations. Within this application, we seek several properties:
+
+\textbf{Pixel precise.} Since the task of image reconstruction consists in generating an image from which precisely-positioned pixels are pre-drawn, their positions and values must be preserved in the resulting image. In the context of the geology application, this implies preserving precisely the position and value of the real measurements made on the field.
+
+\textbf{Preserves diversity.} One of the limitations of \ac{GANs} is their tendency to loose the ability to generate diverse samples, and thus they produce images that are very close to each other. In geological applications, it is important to be able to produce a large number of diverse candidate images that fulfill the pre-drawn pixels.
+
+\textbf{Fast generation process.} In order to be able to generate a large number of candidate images, it is also important that the generation process is fast. Thus, existing approaches that require solving an optimization problem for each generated image will most often be far too slow to be applicable here.
+
+\subsection*{Polarimetric Image Conversion}
+
+\quad In a second step, we address the problem of polarimetric image generation as a data augmentation technique. Indeed, the lack of labeled polarimetric data is a major impediment to research in the field of computer vision in polarimetric images. These images, capturing properties of light that are not present in color images, allow, for example, for better results in detection tasks in adverse weather conditions such as heavy rain or fog. By transferring labeled databases from the color image domain to the polarimetric domain, this shortage of labeled polarimetric data could be circumvented. However, there are several requirements that must be met:
+
+\textbf{Respect of polarimetric constraints.} Polarimetric imaging is subject to strong constraints emanating from the wave physics of light. These constraints must be taken into account in order to generate images that are not only realistic, but above also the physical properties that may allow improved detection results in adverse weather conditions.
+
+\textbf{Respect of the polarimetric camera calibration.} In order to capture polarimetric images, a dedicated camera uses a number of filters that let polarized light pass through at predefined angles. The configuration of these filters may differ depending on the used camera. The calibration directly affects the nature of the acquired images. Thus, when generating polarimetric data, it is necessary to ensure that the produced images correspond to the calibration of the used camera.
+
+\textbf{Preserves the image content.} The objective of this application is to produce synthetic labeled datasets by transferring existing labeled datasets into the polarimetric domain. In order to be able to preserve the labels between these two domains, it is therefore necessary that the image content remains similar in nature and position.
+
+\textbf{Quick generation process.} In order to be able to transfer entire databases into the polarimetric domain, it is also necessary that the image generation time is not too high, since these databases may contain several hundreds of thousands of high-resolution images. High generation times would thus make the approach prohibitively expensive.
+
+\section*{Outline and contributions}
+\addcontentsline{toc}{section}{Outline and contributions}
+
+Since conditioning generative models is a crucial step for applying them to real-world problems, in this thesis we study the conditioning of Generative Adversarial Networks, most notably using auxiliary tasks. The thesis is composed of three chapters, whose contents are detailed below, as well as a conclusion.
+
+\subsection*{Chapter 1: Introduction to Generative Adversarial Networks}
+
+We begin the thesis with an introduction chapter on Generative Adversarial Networks (GANs), a framework for training deep neural networks as generative models that is particularly well suited for image generation. We  highlight their limitations, most notably the instability of the training process and the lack of diversity in the generated data. We investigate its conditional variants. These allow for exerting some control over the generation process by applying constraints on the generated data, as well as domain transfer approaches, the task of projecting data from one domain to another (e.g., converting a painting into a photo).  We present an overview of the different techniques used to counteract the limitations of GANs by improving the neural network architecture and changing the cost function of the GAN. Finally, we conclude this chapter by discussing the difficulties involved in evaluating generative models and examine the most commonly used metrics for evaluating GANs.
+
+\subsection*{Chapter 2: Image reconstruction as an auxiliary task to generative modeling}
+
+In this chapter, we propose an overview of the task of reconstructing altered images with generative models. As a contribution to this problem, we propose an approach for conditioning \ac{GANs} using an explicit auxiliary reconstruction task. Combined with a technique for limiting the diversity-loss issues, optimizing this auxiliary task during the training process, the obtained models are able to quickly reconstruct images, in comparison to similar methods, such as compressed sensing-based approaches, that need to solve an optimization problem for each reconstructed image.  A byproduct of our approach is a hyper-parameter that controls the impact of the reconstruction loss on the generative model. We show that this hyper-parameter directly influences a trade-off between the fidelity of the reconstruction and visual quality of the generated images.
+
+We evaluate our approach on several image reconstruction tasks using classical image datasets such as MNIST or CIFAR10, as well as a texture image dataset. Finally, we apply this method to a geology problem, namely reconstructing underground water channels formations using very few points. Empirical results show that our approach equals or outperforms existing approaches while providing the ability to control the trade-off between the visual quality and the fulfillment of the constraints.
+
+\subsection*{Chapter 3: Domain-transfer with auxiliary tasks for generative modeling}
+
+In this chapter, we study the conditioning of domain-transfer models that makes use of Generative Adversarial Networks. Such models, usually revolving around the idea of cycle-consistency, allow for transferring images from one "domain" to the other without the used of paired data, which is usually very hard to obtain. We focus on the task of transferring a color image to the polarimetric domain. Such images bear hard constraints that directly stem from the physics of light, thus unconstrained domain-transfer approaches cannot solve this problem by themselves. 
+
+We introduce new auxiliary tasks based on a reformulation of these constraints and propose an algorithm to integrate them to the training of a domain-transfer model. We show that this method performs well on a polarimetric image generation task, both in term of visual quality and respect of the constraints.
+
+Finally, we apply this approach to a data-augmentation task. Indeed, no large polarimetric images datasets are publicly available at the time of writing this thesis, so training deep models to solve problems on polarimetric images is difficult. By transferring color-images labeled datasets to the polarimetric images domain, we can produce large datasets of labeled polarimetric images. We show that such a dataset increases the performance of a detection network in polarimetric images.
+
+
+\section*{Related publications}
+\addcontentsline{toc}{section}{Related publications}
+
+\begin{itemize}
+	\item\longfullcite{Ruffino2017}
+	\item\longfullcite{Ruffino2019a}
+	\item\longfullcite{Laloy2019}
+	\item\longfullcite{Ruffino2020}
+	\item\longfullcite{Blin2021}
 \end{itemize}
 
-Polarimetry application : introduction and needs \begin{itemize}
-	\item Designing custom-made constraints for the problem
-	\item Non-euclidian
-	\item Compatible with domain transfer
-\end{itemize}
 
-\section*{Contributions}
-\addcontentsline{toc}{section}{Contributions}
-
-\section*{Outline}
-\addcontentsline{toc}{section}{Outline}
+\fancyhead[R]{}

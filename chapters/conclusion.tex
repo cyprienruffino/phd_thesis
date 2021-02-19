@@ -1,8 +1,45 @@
 \chapter{Conclusion and Perspectives}
 \label{chap:conclusion}
 
+In this conclusion, we sum up the contributions proposed in this thesis and discuss interesting directions for future work.
 
+\section*{Contributions}
 
+In this thesis, we study the conditioning of Generative Adversarial Networks (\ac{GANs}) using of auxiliary tasks. We focus on two real-world applications, the task of reconstructing underground water channels from a limited set of points and the task of transferring images from the color domain to a polarimetry-encoded image modality.  Through these applications, we propose several auxiliary tasks for conditioning both image-reconstruction and domain-transfer models.
 
+\subsection*{Image reconstruction as an auxiliary task to generative modeling}
 
+The task of image reconstruction consists in recovering an image from very noisy or sparse measurements. In Chapter \ref{chap:chapter2} of this thesis, we study the case in which only a few pixels of the image are available, usually less than a percent. We propose to use a \ac{GAN} combined with a reconstruction task to learn to recover images from a very few amount of pixels. The first benefit of this method is that, similarly to the Conditional GAN approach (see Section \ref{subs:CGAN}), a model trained with our method is able to generate new samples in a single neural network forward pass. This allows for quickly sampling a high number of potential image reconstructions from a single set of pixels. Then, a benefit of this approach is that it introduces a hyperparameter $\lambda$ that weighs the impact of the reconstruction task. Through a large-scale study on the MNIST and FashionMNIST datasets, we empirically showed that this hyperparameter allows for controlling a trade-off between the visual quality of the generated samples and the fidelity of the generation process with respect to the initial image. We evaluate our method on several datasets of natural images, namely CIFAR10, CelebA and a texture dataset and show that our method provides equal or better result than a conditional GAN without auxiliary task, while provided with the added benefit of the control hyperparameter. Finally, we show that our method performs well on the real-world application of reconstructing underground terrain from few measurements by evaluating it on a dataset of image-like 2D slices of underground terrain.
 
+\subsection*{Polarimetric image generation with auxiliary tasks for generative modeling}
+
+As a second main contribution, we propose to study the conditioning of \ac{GAN}-based domain-transfer approaches using auxiliary tasks. We focus on the task of image modality transfer, from the color domain to polarimetric images. Such images bear strong constraints that directly stems from both the physics of polarimetry and the configuration of the acquisition device. We design a set of auxiliary tasks that directly aim to push the transferred images towards enforcing the aforementioned constraints. We propose to integrate these new auxiliary tasks to a CycleGAN, a domain-transfer approach based on \textit{cyclic consistency}. We show that our method produces high-quality polarimetric images that enforce both the physical and configuration constraints and generally performs better than unconditioned methods. As a further test for our method, we propose to transfer existing two road-scene color images datasets , BDD100K and KITTI, to the polarimetric domain and train a polarimetric variant of the RetinaNet detection network on the generated data. We show that this approach performs better than the existing approaches.
+
+\section*{Perspectives}
+
+We now discuss some interesting perspectives of our contributions that could be addressed in future works.
+
+\subsection*{On image reconstruction as an auxiliary task}
+
+In Chapter \ref{chap:chapter2}, we studied the problem of image reconstruction and proposed an approach based on an auxiliary reconstruction task for conditioning generative adversarial networks. Even though this approach provided good results, several directions could be explored in order to enhance it.
+
+\subsubsection*{Better modeling of the prior distribution of the model error}
+
+To formulate the problem as a maximum a-posteriori estimation, the error of the model is assumed to be normal. This, however, is not necessarily true and we provide a real-word example of the mismatch between the assumed and actual errors of the generator (see Subsection \ref{subs:subsurface}). A solution to this problem could be to use adapted distributions to model these errors, typically a distribution (or mixture of distributions) from the exponential family \citep{Brown1986}, as we proposed in Chapter \ref{chap:chapter2} with a mixture of Gaussian and exponential distributions. This would allow to reformulate the maximum a-posteriori estimation and provide with specialized auxiliary tasks for a given image reconstruction problem.
+
+\subsubsection*{Better architectures and techniques}
+
+Although the different architectures employed in our experiments were common for their time, they are nowadays outdated and obsolete. This is not necessarily compromising, since the main result of this work is to show that the introduced auxiliary task both allow for high-fidelity image reconstruction and introduces a controllable trade-off between the visual quality and the respect of the constraints. Indeed, these results are independent from the architecture choices but, for real-world applications, the highest possible quality is desires. In Chapter \ref{chap:chapter1}, we reviewed a number of more recent techniques and architectures that are far more efficient and could give way to better results, both for visual quality and respect of the constraints. These techniques could be directly implemented in our approach without any major changes and immediately increase the overall performance of the trained models.
+
+\subsubsection*{Application to other domains}
+
+In this thesis, we applied image reconstruction to a task of underground terrain reconstruction. Thus, we focused our work on image data with a focus on texture images, but our approach could be applied to a number of applications. Similarly to compressed sensing-based approaches, we could envision applications in medical imaging, image compression, or tasks on different types of signals such as audio inpainting \citep{Marafioti2018}, tasks that require to efficiently sample potential reconstructions.
+
+\subsection*{On color-to-polarimetric domain transfer for data augmentation}
+
+\subsubsection*{Stochastic modeling}
+
+\subsubsection*{Better metrics for compared acquisition}
+
+\subsubsection*{Other domains of application for polarimetric images}
+	

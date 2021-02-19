@@ -103,19 +103,18 @@
   keywords = {Africa,Ethosa,Namibia,zebra}
 }
 
-@online{Antipov2017,
-  title = {Face {{Aging With Conditional Generative Adversarial Networks}}},
-  author = {Antipov, Grigory and Baccouche, Moez and Dugelay, Jean-Luc},
-  date = {2017-05-30},
-  url = {http://arxiv.org/abs/1702.01983},
-  urldate = {2020-05-19},
-  abstract = {It has been recently shown that Generative Adversarial Networks (GANs) can produce synthetic images of exceptional visual fidelity. In this work, we propose the GAN-based method for automatic face aging. Contrary to previous works employing GANs for altering of facial attributes, we make a particular emphasize on preserving the original person's identity in the aged version of his/her face. To this end, we introduce a novel approach for "Identity-Preserving" optimization of GAN's latent vectors. The objective evaluation of the resulting aged and rejuvenated face images by the state-of-the-art face recognition and age estimation solutions demonstrate the high potential of the proposed method.},
-  archivePrefix = {arXiv},
-  eprint = {1702.01983},
-  eprinttype = {arxiv},
-  file = {/home/cyprien/.zotero/zotero/storage/KK4C8NU4/Antipov et al. - 2017 - Face Aging With Conditional Generative Adversarial.pdf;/home/cyprien/.zotero/zotero/storage/WHIS5FNE/1702.html},
-  keywords = {Computer Science - Computer Vision and Pattern Recognition},
-  primaryClass = {cs}
+@inproceedings{Antipov2017a,
+  title = {Face Aging with Conditional Generative Adversarial Networks},
+  booktitle = {2017 {{IEEE International Conference}} on {{Image Processing}} ({{ICIP}})},
+  author = {Antipov, G. and Baccouche, M. and Dugelay, J.},
+  date = {2017-09},
+  pages = {2089--2093},
+  issn = {2381-8549},
+  doi = {10.1109/ICIP.2017.8296650},
+  abstract = {It has been recently shown that Generative Adversarial Networks (GANs) can produce synthetic images of exceptional visual fidelity. In this work, we propose the first GAN-based method for automatic face aging. Contrary to previous works employing GANs for altering of facial attributes, we make a particular emphasize on preserving the original person's identity in the aged version of his/her face. To this end, we introduce a novel approach for ``Identity-Preserving'' optimization of GAN's latent vectors. The objective evaluation of the resulting aged and rejuvenated face images by the state-of-the-art face recognition and age estimation solutions demonstrate the high potential of the proposed method.},
+  eventtitle = {2017 {{IEEE International Conference}} on {{Image Processing}} ({{ICIP}})},
+  file = {/home/cyprien/.zotero/zotero/storage/F2NVNYWV/Antipov et al. - 2017 - Face aging with conditional generative adversarial.pdf;/home/cyprien/.zotero/zotero/storage/54RXPF7U/8296650.html;/home/cyprien/.zotero/zotero/storage/YXMJVUI6/8296650.html},
+  keywords = {age estimation solutions,aged rejuvenated face images,aged version,Aging,automatic face aging,conditional generative adversarial networks,deep learning,Deep Learning,estimation theory,exceptional visual fidelity,Face,Face Aging,face recognition,Face recognition,Face Synthesis,facial attributes,Gallium nitride,GAN,GAN's latent vectors,Generators,Identity-Preserving optimization,Image reconstruction,learning (artificial intelligence),neural nets,optimisation,Optimization,synthetic images,vectors}
 }
 
 @article{Antoniou2017,
@@ -304,8 +303,6 @@
   title = {The {{Cramer Distance}} as a {{Solution}} to {{Biased Wasserstein Gradients}}},
   author = {Bellemare, Marc G. and Danihelka, Ivo and Dabney, Will and Mohamed, Shakir and Lakshminarayanan, Balaji and Hoyer, Stephan and Munos, R\'emi},
   date = {2017-05-30},
-  url = {http://arxiv.org/abs/1705.10743},
-  urldate = {2020-05-21},
   abstract = {The Wasserstein probability metric has received much attention from the machine learning community. Unlike the Kullback-Leibler divergence, which strictly measures change in probability, the Wasserstein metric reflects the underlying geometry between outcomes. The value of being sensitive to this geometry has been demonstrated, among others, in ordinal regression and generative modelling. In this paper we describe three natural properties of probability divergences that reflect requirements from machine learning: sum invariance, scale sensitivity, and unbiased sample gradients. The Wasserstein metric possesses the first two properties but, unlike the Kullback-Leibler divergence, does not possess the third. We provide empirical evidence suggesting that this is a serious issue in practice. Leveraging insights from probabilistic forecasting we propose an alternative to the Wasserstein metric, the Cram\textbackslash 'er distance. We show that the Cram\textbackslash 'er distance possesses all three desired properties, combining the best of the Wasserstein and Kullback-Leibler divergences. To illustrate the relevance of the Cram\textbackslash 'er distance in practice we design a new algorithm, the Cram\textbackslash 'er Generative Adversarial Network (GAN), and show that it performs significantly better than the related Wasserstein GAN.},
   archivePrefix = {arXiv},
   eprint = {1705.10743},
@@ -360,19 +357,16 @@
   keywords = {()}
 }
 
-@online{Bengio2014,
+@inproceedings{Bengio2014a,
   title = {Deep {{Generative Stochastic Networks Trainable}} by {{Backprop}}},
+  booktitle = {Proceedings  of  the 31st {{International}}  {{Conference}}  on  {{Machine Learning}}},
   author = {Bengio, Yoshua and Thibodeau-Laufer, \'Eric and Alain, Guillaume and Yosinski, Jason},
-  date = {2014-05-23},
-  url = {http://arxiv.org/abs/1306.1091},
-  urldate = {2020-05-22},
+  date = {2014},
+  pages = {9},
   abstract = {We introduce a novel training principle for probabilistic models that is an alternative to maximum likelihood. The proposed Generative Stochastic Networks (GSN) framework is based on learning the transition operator of a Markov chain whose stationary distribution estimates the data distribution. The transition distribution of the Markov chain is conditional on the previous state, generally involving a small move, so this conditional distribution has fewer dominant modes, being unimodal in the limit of small moves. Thus, it is easier to learn because it is easier to approximate its partition function, more like learning to perform supervised function approximation, with gradients that can be obtained by backprop. We provide theorems that generalize recent work on the probabilistic interpretation of denoising autoencoders and obtain along the way an interesting justification for dependency networks and generalized pseudolikelihood, along with a definition of an appropriate joint distribution and sampling mechanism even when the conditionals are not consistent. GSNs can be used with missing inputs and can be used to sample subsets of variables given the rest. We validate these theoretical results with experiments on two image datasets using an architecture that mimics the Deep Boltzmann Machine Gibbs sampler but allows training to proceed with simple backprop, without the need for layerwise pretraining.},
-  archivePrefix = {arXiv},
-  eprint = {1306.1091},
-  eprinttype = {arxiv},
-  file = {/home/cyprien/.zotero/zotero/storage/W784RHVX/Bengio et al. - 2014 - Deep Generative Stochastic Networks Trainable by B.pdf;/home/cyprien/.zotero/zotero/storage/HAI82UWS/1306.html},
-  keywords = {Computer Science - Machine Learning},
-  primaryClass = {cs}
+  eventtitle = {Nternational  {{Conference}}  on  {{MachineLearning}}},
+  file = {/home/cyprien/.zotero/zotero/storage/695DR99J/Bengio et al. - Deep Generative Stochastic Networks Trainable by B.pdf},
+  langid = {english}
 }
 
 @inproceedings{Berger2017,
@@ -467,6 +461,14 @@
   author = {Blin, Rachel and Ainouz, Samia and Canu, Stephane and Meriaudeau, Fabrice},
   date = {2020},
   pages = {216--217}
+}
+
+@inproceedings{Blin2021,
+  title = {Generating {{Polarimetric}}-Encoded {{Images}} Using {{Constrained Cycle}}-{{Consistent GenerativeAdversarial Networks}}},
+  booktitle = {Currently in Preparation},
+  author = {Blin, Rachel and Ruffino, Cyprien and Ainouz, Samia and H\'erault, Romain and Gasso, Gilles and M\'eriaudeau, Fabrice and Canu, St\'ephane},
+  date = {2021},
+  abstract = {The  problem  addressed  in  this  paper  is  the  generation  ofpolarimetric images using Cyle-Consistent Generative Adversarial Net-works (CycleGAN) with constraints derived from the optics of polarime-try.  The  conducted  research  is  motivated  by  the  increasing  popularityof the combination of deep learning frameworks with polarimetric imag-ing  in  various  domains,  including  medical  imaging  and  scene  analysis.Even  if  polarimetric  imaging  has  shown  improved  performances,  theirrobustness may be questioned because of the small size of the trainingdatasets. This issue could be resolved by data augmentation. However,polarization modality is subject to some physical feasibility constraintsthat could be impeded with classical data augmentation techniques. Inthis paper we propose a framework based on CycleGAN, integrating theconstraints of polarimetric images during training stage. We evaluate theproposed generative model on road scene images. The obtained resultsachieved an effective generation of physical polarization-encoded images.Further experiments on the task of road object detection show that withthe generated images, the detection of cars and pedestrian are improvedby up to 9\%}
 }
 
 @article{Bluche2015,
@@ -772,19 +774,25 @@
   file = {/home/cyprien/.zotero/zotero/storage/29U7A9KN/Self-Supervised Generative Adversarial Networks - 2018.pdf;/home/cyprien/.zotero/zotero/storage/MDDMDRF3/Self-Supervised Generative Adversarial Networks - 2018.pdf}
 }
 
-@online{Chen2018b,
+@inproceedings{Chen2018c,
   title = {Attention-{{GAN}} for {{Object Transfiguration}} in {{Wild Images}}},
+  booktitle = {Proceedings of the European Conference on Computer Vision ({{ECCV}})},
   author = {Chen, Xinyuan and Xu, Chang and Yang, Xiaokang and Tao, Dacheng},
-  date = {2018-03-19},
-  url = {http://arxiv.org/abs/1803.06798},
-  urldate = {2020-12-01},
-  abstract = {This paper studies the object transfiguration problem in wild images. The generative network in classical GANs for object transfiguration often undertakes a dual responsibility: to detect the objects of interests and to convert the object from source domain to target domain. In contrast, we decompose the generative network into two separat networks, each of which is only dedicated to one particular sub-task. The attention network predicts spatial attention maps of images, and the transformation network focuses on translating objects. Attention maps produced by attention network are encouraged to be sparse, so that major attention can be paid to objects of interests. No matter before or after object transfiguration, attention maps should remain constant. In addition, learning attention network can receive more instructions, given the available segmentation annotations of images. Experimental results demonstrate the necessity of investigating attention in object transfiguration, and that the proposed algorithm can learn accurate attention to improve quality of generated images.},
-  archivePrefix = {arXiv},
-  eprint = {1803.06798},
-  eprinttype = {arxiv},
-  file = {/home/cyprien/.zotero/zotero/storage/BB4E6A5U/Chen et al. - 2018 - Attention-GAN for Object Transfiguration in Wild I.pdf;/home/cyprien/.zotero/zotero/storage/FFDP3ZMD/1803.html},
-  keywords = {Computer Science - Computer Vision and Pattern Recognition},
-  primaryClass = {cs}
+  editor = {Ferrari, Vittorio and Hebert, Martial and Sminchisescu, Cristian and Weiss, Yair},
+  date = {2018},
+  volume = {11206},
+  pages = {167--184},
+  publisher = {{Springer International Publishing}},
+  location = {{Cham}},
+  doi = {10.1007/978-3-030-01216-8_11},
+  url = {http://link.springer.com/10.1007/978-3-030-01216-8_11},
+  urldate = {2021-02-03},
+  abstract = {This paper studies the object transfiguration problem in wild images. The generative network in classical GANs for object transfiguration often undertakes a dual responsibility: to detect the objects of interests and to convert the object from source domain to another domain. In contrast, we decompose the generative network into two separated networks, each of which is only dedicated to one particular sub-task. The attention network predicts spatial attention maps of images, and the transformation network focuses on translating objects. Attention maps produced by attention network are encouraged to be sparse, so that major attention can be paid on objects of interests. No matter before or after object transfiguration, attention maps should remain constant. In addition, learning attention network can receive more instructions, given the available segmentation annotations of images. Experimental results demonstrate the necessity of investigating attention in object transfiguration, and that the proposed algorithm can learn accurate attention to improve quality of generated images.},
+  eventtitle = {European {{Conference}} on {{Computer Vision}}},
+  file = {/home/cyprien/.zotero/zotero/storage/53LCPYSV/Chen et al. - 2018 - Attention-GAN for Object Transfiguration in Wild I.pdf},
+  isbn = {978-3-030-01215-1 978-3-030-01216-8},
+  langid = {english},
+  series = {Lecture {{Notes}} in {{Computer Science}}}
 }
 
 @article{Chen2019,
@@ -1066,6 +1074,18 @@
   primaryClass = {cs}
 }
 
+@inproceedings{Denton2015a,
+  title = {Deep {{Generative Image Models}} Using a ￼{{Laplacian Pyramid}} of {{Adversarial Networks}}},
+  booktitle = {Proceedings of {{Neural Information Processing Systems}}},
+  author = {Denton, Emily L and Chintala, Soumith},
+  date = {2015},
+  pages = {9},
+  abstract = {In this paper we introduce a generative parametric model capable of producing high quality samples of natural images. Our approach uses a cascade of convolutional networks within a Laplacian pyramid framework to generate images in a coarse-to-fine fashion. At each level of the pyramid, a separate generative convnet model is trained using the Generative Adversarial Nets (GAN) approach [11]. Samples drawn from our model are of significantly higher quality than alternate approaches. In a quantitative assessment by human evaluators, our CIFAR10 samples were mistaken for real images around 40\% of the time, compared to 10\% for samples drawn from a GAN baseline model. We also show samples from models trained on the higher resolution images of the LSUN scene dataset.},
+  eventtitle = {Neural {{Information Processing Systems}}},
+  file = {/home/cyprien/.zotero/zotero/storage/CH2MGFMT/Denton and Chintala - Deep Generative Image Models using a ￼Laplacian Py.pdf},
+  langid = {english}
+}
+
 @article{Deshpande2018,
   title = {Generative {{Modeling}} Using the {{Sliced Wasserstein Distance}}},
   author = {Deshpande, Ishan and Zhang, Ziyu and Schwing, Alexander},
@@ -1112,6 +1132,23 @@
   url = {http://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Donahue_Long-Term_Recurrent_Convolutional_2015_CVPR_paper.pdf},
   abstract = {Models based on deep convolutional networks have dom-inated recent image interpretation tasks; we investigate whether models which are also recurrent, or " temporally deep " , are effective for tasks involving sequences, visual and otherwise. We develop a novel recurrent convolutional architecture suitable for large-scale visual learning which is end-to-end trainable, and demonstrate the value of these models on benchmark video recognition tasks, image de-scription and retrieval problems, and video narration chal-lenges. In contrast to current models which assume a fixed spatio-temporal receptive field or simple temporal averag-ing for sequential processing, recurrent convolutional mod-els are " doubly deep " in that they can be compositional in spatial and temporal " layers " . Such models may have advantages when target concepts are complex and/or train-ing data are limited. Learning long-term dependencies is possible when nonlinearities are incorporated into the net-work state updates. Long-term RNN models are appealing in that they directly can map variable-length inputs (e.g., video frames) to variable length outputs (e.g., natural lan-guage text) and can model complex temporal dynamics; yet they can be optimized with backpropagation. Our recurrent long-term models are directly connected to modern visual convnet models and can be jointly trained to simultaneously learn temporal dynamics and convolutional perceptual rep-resentations. Our results show such models have distinct advantages over state-of-the-art models for recognition or generation which are separately defined and/or optimized.},
   file = {/home/cyprien/.zotero/zotero/storage/8V7AG45U/Long-term Recurrent Convolutional Networks for Visual Recognition and Description - Unknown.pdf;/home/cyprien/.zotero/zotero/storage/FKNLXH9L/Long-term Recurrent Convolutional Networks for Visual Recognition and Description - Unknown.pdf}
+}
+
+@inproceedings{Donahue2017,
+  title = {Adversarial {{Feature Learning}}},
+  booktitle = {Proceedings of the {{International Conference}} on {{Learning Representations}}},
+  author = {Donahue, Jeff and Kr\"ahenb\"uhl, Philipp and Darrell, Trevor},
+  date = {2017},
+  url = {http://arxiv.org/abs/1605.09782},
+  urldate = {2021-01-18},
+  abstract = {The ability of the Generative Adversarial Networks (GANs) framework to learn generative models mapping from simple latent distributions to arbitrarily complex data distributions has been demonstrated empirically, with compelling results showing generators learn to ``linearize semantics'' in the latent space of such models. Intuitively, such latent spaces may serve as useful feature representations for auxiliary problems where semantics are relevant. However, in their existing form, GANs have no means of learning the inverse mapping \textendash{} projecting data back into the latent space. We propose Bidirectional Generative Adversarial Networks (BiGANs) as a means of learning this inverse mapping, and demonstrate that the resulting learned feature representation is useful for auxiliary supervised discrimination tasks, competitive with contemporary approaches to unsupervised and self-supervised feature learning.},
+  archivePrefix = {arXiv},
+  eprint = {1605.09782},
+  eprinttype = {arxiv},
+  eventtitle = {International {{Conference}} on {{Learning Representations}}},
+  file = {/home/cyprien/.zotero/zotero/storage/QQMJI8DP/Donahue et al. - 2017 - Adversarial Feature Learning.pdf},
+  keywords = {Computer Science - Artificial Intelligence,Computer Science - Computer Vision and Pattern Recognition,Computer Science - Machine Learning,Computer Science - Neural and Evolutionary Computing,Statistics - Machine Learning},
+  langid = {english}
 }
 
 @inproceedings{Dong2014,
@@ -1211,19 +1248,18 @@
   file = {/home/cyprien/.zotero/zotero/storage/D8MPGC3X/Transition-Based Dependency Parsing with Stack Long Short-Term Memory - Unknown.pdf;/home/cyprien/.zotero/zotero/storage/VSY4Z7E9/Transition-Based Dependency Parsing with Stack Long Short-Term Memory - Unknown.pdf}
 }
 
-@online{Dziugaite2015,
+@inproceedings{Dziugaite2015,
   title = {Training Generative Neural Networks via {{Maximum Mean Discrepancy}} Optimization},
+  booktitle = {Proceedings of the {{Thirty}}-{{First Conference}} on {{Uncertainty}} in {{Artificial Intelligence}}},
   author = {Dziugaite, Gintare Karolina and Roy, Daniel M. and Ghahramani, Zoubin},
-  date = {2015-05-14},
-  url = {http://arxiv.org/abs/1505.03906},
-  urldate = {2020-05-25},
+  date = {2015},
   abstract = {We consider training a deep neural network to generate samples from an unknown distribution given i.i.d. data. We frame learning as an optimization minimizing a two-sample test statistic---informally speaking, a good generator network produces samples that cause a two-sample test to fail to reject the null hypothesis. As our two-sample test statistic, we use an unbiased estimate of the maximum mean discrepancy, which is the centerpiece of the nonparametric kernel two-sample test proposed by Gretton et al. (2012). We compare to the adversarial nets framework introduced by Goodfellow et al. (2014), in which learning is a two-player game between a generator network and an adversarial discriminator network, both trained to outwit the other. From this perspective, the MMD statistic plays the role of the discriminator. In addition to empirical comparisons, we prove bounds on the generalization error incurred by optimizing the empirical MMD.},
   archivePrefix = {arXiv},
   eprint = {1505.03906},
   eprinttype = {arxiv},
+  eventtitle = {Conference on {{Uncertainty}} in {{Artificial Intelligence}}},
   file = {/home/cyprien/.zotero/zotero/storage/GEZP8LWU/Dziugaite et al. - 2015 - Training generative neural networks via Maximum Me.pdf;/home/cyprien/.zotero/zotero/storage/3A72ANBF/1505.html},
-  keywords = {Computer Science - Machine Learning,Statistics - Machine Learning},
-  primaryClass = {cs, stat}
+  keywords = {Computer Science - Machine Learning,Statistics - Machine Learning}
 }
 
 @article{Elman1990,
@@ -1402,6 +1438,27 @@
   url = {http://proceedings.mlr.press/v15/glorot11a/glorot11a.pdf},
   abstract = {While logistic sigmoid neurons are more bi-ologically plausible than hyperbolic tangent neurons, the latter work better for train-ing multi-layer neural networks. This pa-per shows that rectifying neurons are an even better model of biological neurons and yield equal or better performance than hy-perbolic tangent networks in spite of the hard non-linearity and non-differentiability at zero, creating sparse representations with true zeros, which seem remarkably suitable for naturally sparse data. Even though they can take advantage of semi-supervised setups with extra-unlabeled data, deep rectifier net-works can reach their best performance with-out requiring any unsupervised pre-training on purely supervised tasks with large labeled datasets. Hence, these results can be seen as a new milestone in the attempts at under-standing the difficulty in training deep but purely supervised neural networks, and clos-ing the performance gap between neural net-works learnt with and without unsupervised pre-training.},
   file = {/home/cyprien/.zotero/zotero/storage/BRUZM5AP/Deep Sparse Rectifier Neural Networks - 2011.pdf;/home/cyprien/.zotero/zotero/storage/IYWADRKJ/Deep Sparse Rectifier Neural Networks - 2011.pdf}
+}
+
+@article{Golub2000,
+  title = {Eigenvalue Computation in the 20th Century},
+  author = {Golub, Gene H. and van der Vorst, Henk A.},
+  date = {2000-11-01},
+  journaltitle = {Journal of Computational and Applied Mathematics},
+  shortjournal = {Journal of Computational and Applied Mathematics},
+  volume = {123},
+  pages = {35--65},
+  issn = {0377-0427},
+  doi = {10.1016/S0377-0427(00)00413-1},
+  url = {http://www.sciencedirect.com/science/article/pii/S0377042700004131},
+  urldate = {2021-01-19},
+  abstract = {This paper sketches the main research developments in the area of computational methods for eigenvalue problems during the 20th century. The earliest of such methods dates back to work of Jacobi in the middle of the 19th century. Since computing eigenvalues and vectors is essentially more complicated than solving linear systems, it is not surprising that highly significant developments in this area started with the introduction of electronic computers around 1950. In the early decades of this century, however, important theoretical developments had been made from which computational techniques could grow. Research in this area of numerical linear algebra is very active, since there is a heavy demand for solving complicated problems associated with stability and perturbation analysis for practical applications. For standard problems, powerful tools are available, but there still remain many open problems. It is the intention of this contribution to sketch the main developments of this century, especially as they relate to one another, and to give an impression of the state of the art at the turn of our century.},
+  file = {/home/cyprien/.zotero/zotero/storage/GECA624G/Golub and van der Vorst - 2000 - Eigenvalue computation in the 20th century.pdf;/home/cyprien/.zotero/zotero/storage/WF6H97NT/S0377042700004131.html},
+  keywords = {Arnoldi's method,Jacobi–Davidson,Jacobi's method,Lanczos’ method,Perturbation theory,Power iteration,QR,QZ,RKS,SVD},
+  langid = {english},
+  number = {1},
+  options = {useprefix=true},
+  series = {Numerical {{Analysis}} 2000. {{Vol}}. {{III}}: {{Linear Algebra}}}
 }
 
 @inproceedings{Gondara2016,
@@ -1829,20 +1886,21 @@
   pagetotal = {10522\textendash 10533}
 }
 
-@online{Huang2018,
+@inproceedings{Huang2018,
   title = {Densely {{Connected Convolutional Networks}}},
+  booktitle = {Proceedings of the {{Conference}} on {{Computer Vision}} and {{Pattern Recognition}}},
   author = {Huang, Gao and Liu, Zhuang and van der Maaten, Laurens and Weinberger, Kilian Q.},
-  date = {2018-01-28},
+  date = {2018},
   url = {http://arxiv.org/abs/1608.06993},
   urldate = {2021-01-04},
   abstract = {Recent work has shown that convolutional networks can be substantially deeper, more accurate, and efficient to train if they contain shorter connections between layers close to the input and those close to the output. In this paper, we embrace this observation and introduce the Dense Convolutional Network (DenseNet), which connects each layer to every other layer in a feed-forward fashion. Whereas traditional convolutional networks with L layers have L connections - one between each layer and its subsequent layer - our network has L(L+1)/2 direct connections. For each layer, the feature-maps of all preceding layers are used as inputs, and its own feature-maps are used as inputs into all subsequent layers. DenseNets have several compelling advantages: they alleviate the vanishing-gradient problem, strengthen feature propagation, encourage feature reuse, and substantially reduce the number of parameters. We evaluate our proposed architecture on four highly competitive object recognition benchmark tasks (CIFAR-10, CIFAR-100, SVHN, and ImageNet). DenseNets obtain significant improvements over the state-of-the-art on most of them, whilst requiring less computation to achieve high performance. Code and pre-trained models are available at https://github.com/liuzhuang13/DenseNet .},
   archivePrefix = {arXiv},
   eprint = {1608.06993},
   eprinttype = {arxiv},
-  file = {/home/cyprien/.zotero/zotero/storage/YEV75EAL/Huang et al. - 2018 - Densely Connected Convolutional Networks.pdf},
+  eventtitle = {Computer {{Vision}} and {{Pattern Recognition}} ({{CVPR}})},
+  file = {/home/cyprien/.zotero/zotero/storage/YEV75EAL/Huang et al. - 2018 - Densely Connected Convolutional Networks.pdf;/home/cyprien/.zotero/zotero/storage/RG8GNX5T/1608.html},
   keywords = {Computer Science - Computer Vision and Pattern Recognition,Computer Science - Machine Learning},
-  options = {useprefix=true},
-  primaryClass = {cs}
+  options = {useprefix=true}
 }
 
 @article{Huszar2015,
@@ -1941,6 +1999,23 @@
   file = {/home/cyprien/.zotero/zotero/storage/2PRX8YGA/Composite Functional Gradient Learning of Generative Adversarial Models - 2018.pdf;/home/cyprien/.zotero/zotero/storage/F5RFQHJR/Composite Functional Gradient Learning of Generative Adversarial Models - 2018.pdf}
 }
 
+@online{Jolicoeur-Martineau2018,
+  title = {The Relativistic Discriminator: A Key Element Missing from Standard {{GAN}}},
+  shorttitle = {The Relativistic Discriminator},
+  author = {Jolicoeur-Martineau, Alexia},
+  date = {2018-09-10},
+  url = {http://arxiv.org/abs/1807.00734},
+  urldate = {2021-01-12},
+  abstract = {In standard generative adversarial network (SGAN), the discriminator D estimates the probability that the input data is real. The generator G is trained to increase the probability that fake data is real. We argue that it should also simultaneously decrease the probability that real data is real because 1) this would account for a priori knowledge that half of the data in the mini-batch is fake, 2) this would be observed with divergence minimization, and 3) in optimal settings, SGAN would be equivalent to integral probability metric (IPM) GANs.},
+  archivePrefix = {arXiv},
+  eprint = {1807.00734},
+  eprinttype = {arxiv},
+  file = {/home/cyprien/.zotero/zotero/storage/IVLIDXGV/Jolicoeur-Martineau - 2018 - The relativistic discriminator a key element miss.pdf},
+  keywords = {Computer Science - Artificial Intelligence,Computer Science - Cryptography and Security,Computer Science - Machine Learning,Statistics - Machine Learning},
+  langid = {english},
+  primaryClass = {cs, stat}
+}
+
 @article{Jozefowicz2015,
   title = {An {{Empirical Exploration}} of {{Recurrent Network Architectures}}},
   author = {Jozefowicz, Rafal and Zaremba, Wojciech and Sutskever, Ilya},
@@ -2035,8 +2110,9 @@
   file = {/home/cyprien/.zotero/zotero/storage/9HMA6H8Q/PROGRESSIVE GROWING OF GANS FOR IMPROVED QUALITY, STABILITY, AND VARIATION - Unknown.pdf}
 }
 
-@online{Karras2020,
+@inproceedings{Karras2020,
   title = {Analyzing and {{Improving}} the {{Image Quality}} of {{StyleGAN}}},
+  booktitle = {Proceedings of the {{Conference}} on {{Computer Vision}} and {{Pattern Recognition}}},
   author = {Karras, Tero and Laine, Samuli and Aittala, Miika and Hellsten, Janne and Lehtinen, Jaakko and Aila, Timo},
   date = {2020-03-23},
   url = {http://arxiv.org/abs/1912.04958},
@@ -2045,9 +2121,39 @@
   archivePrefix = {arXiv},
   eprint = {1912.04958},
   eprinttype = {arxiv},
+  eventtitle = {Conference on {{Computer Vision}} and {{Pattern Recognition}}},
   file = {/home/cyprien/.zotero/zotero/storage/VD6NUUZP/Karras et al. - 2020 - Analyzing and Improving the Image Quality of Style.pdf;/home/cyprien/.zotero/zotero/storage/G6T9VK2Z/1912.html},
-  keywords = {Computer Science - Computer Vision and Pattern Recognition,Computer Science - Machine Learning,Computer Science - Neural and Evolutionary Computing,Electrical Engineering and Systems Science - Image and Video Processing,Statistics - Machine Learning},
-  primaryClass = {cs, eess, stat}
+  keywords = {Computer Science - Computer Vision and Pattern Recognition,Computer Science - Machine Learning,Computer Science - Neural and Evolutionary Computing,Electrical Engineering and Systems Science - Image and Video Processing,Statistics - Machine Learning}
+}
+
+@online{Kermani2017,
+  title = {Sparse {{MRI}} and {{CT Reconstruction}}},
+  author = {Kermani, Ali},
+  date = {2017},
+  url = {/paper/Sparse-MRI-and-CT-Reconstruction-Kermani/1d4468b6c27584851e15fd28a587d51d9ff62414},
+  urldate = {2020-10-21},
+  abstract = {.............................................................................................................................. iii DEDICATION ............................................................................................................................ v TABLE OF CONTENTS ........................................................................................................... vi LIST OF TABLES ..................................................................................................................... ix LIST OF FIGURES ..................................................................................................................... x CHAPTER 1INTRODUCTION ........................................................................................... 1 1.1. Imaging Models: CT and MRI ......................................................................................... 1 1.1.1. CT ............................................................................................................................. 1 1.1.1.1. Sparse-view CT ................................................................................................. 2 1.1.2. MRI ........................................................................................................................... 5 1.1.2.1. Compressed sensing MRI (CSMRI) .................................................................. 5 CHAPTER 2METHODS .................................................................................................... 10 2.1. Computed tomography reconstruction ........................................................................... 10 2.1.1. Computed tomography method: AIRR method ...................................................... 10 2.1.1.1. Traditional IRR method ...................................................................................... 11 2.1.1.2. AIRR method ...................................................................................................... 13 Iterative algebraic reconstruction .................................................................... 14 Shearlet-based denoising ................................................................................. 15 Reprojection..................................................................................................... 17 2.1.2. Computed Tomography Method: CTV ................................................................... 19 2.1.3. Computed Tomography Method: Nonconvex L1-L2 CT ....................................... 24},
+  file = {/home/cyprien/.zotero/zotero/storage/8ZE423A7/1d4468b6c27584851e15fd28a587d51d9ff62414.html},
+  langid = {english},
+  organization = {{undefined}}
+}
+
+@article{Kervadec2019,
+  title = {Constrained-{{CNN}} Losses for Weakly Supervised Segmentation},
+  author = {Kervadec, Hoel and Dolz, Jose and Tang, Meng and Granger, Eric and Boykov, Yuri and Ben Ayed, Ismail},
+  date = {2019-05-01},
+  journaltitle = {Medical Image Analysis},
+  shortjournal = {Medical Image Analysis},
+  volume = {54},
+  pages = {88--99},
+  issn = {1361-8415},
+  doi = {10.1016/j.media.2019.02.009},
+  url = {http://www.sciencedirect.com/science/article/pii/S1361841518306145},
+  urldate = {2020-10-30},
+  abstract = {Weakly-supervised learning based on, e.g., partially labelled images or image-tags, is currently attracting significant attention in CNN segmentation as it can mitigate the need for full and laborious pixel/voxel annotations. Enforcing high-order (global) inequality constraints on the network output (for instance, to constrain the size of the target region) can leverage unlabeled data, guiding the training process with domain-specific knowledge. Inequality constraints are very flexible because they do not assume exact prior knowledge. However, constrained Lagrangian dual optimization has been largely avoided in deep networks, mainly for computational tractability reasons. To the best of our knowledge, the method of Pathak et~al. (2015a) is the only prior work that addresses deep CNNs with linear constraints in weakly supervised segmentation. It uses the constraints to synthesize fully-labeled training masks (proposals) from weak labels, mimicking full supervision and facilitating dual optimization. We propose to introduce a differentiable penalty, which enforces inequality constraints directly in the loss function, avoiding expensive Lagrangian dual iterates and proposal generation. From constrained-optimization perspective, our simple penalty-based approach is not optimal as there is no guarantee that the constraints are satisfied. However, surprisingly, it yields substantially better results than the Lagrangian-based constrained CNNs in Pathak~et~al.~(2015a), while reducing the computational demand for training. By annotating only a small fraction of the pixels, the proposed approach can reach a level of segmentation performance that is comparable to full supervision on three separate tasks. While our experiments focused on basic linear constraints such as the target-region size and image tags, our framework can be easily extended to other non-linear constraints, e.g., invariant shape moments (Klodt and Cremers, 2011) and other region statistics (Lim et~al., 2014). Therefore, it has the potential to close the gap between weakly and fully supervised learning in semantic medical image segmentation. Our code is publicly available.},
+  file = {/home/cyprien/.zotero/zotero/storage/I4BZTSIZ/Kervadec et al. - 2019 - Constrained-CNN losses for weakly supervised segme.pdf},
+  keywords = {CNN constraints,Deep learning,Semantic segmentation,Weakly-supervised learning},
+  langid = {english}
 }
 
 @online{Kermani2017,
@@ -2126,19 +2232,20 @@
   keywords = {Technical Papers: Natural Language Processing and}
 }
 
-@online{Kim2017,
+@inproceedings{Kim2017,
   title = {Learning to {{Discover Cross}}-{{Domain Relations}} with {{Generative Adversarial Networks}}},
+  booktitle = {Proceedings of The34th {{International Conference}} on {{Machine Learning}}},
   author = {Kim, Taeksoo and Cha, Moonsu and Kim, Hyunsoo and Lee, Jung Kwon and Kim, Jiwon},
-  date = {2017-05-15},
+  date = {2017},
   url = {http://arxiv.org/abs/1703.05192},
   urldate = {2020-11-25},
   abstract = {While humans easily recognize relations between data from different domains without any supervision, learning to automatically discover them is in general very challenging and needs many ground-truth pairs that illustrate the relations. To avoid costly pairing, we address the task of discovering cross-domain relations given unpaired data. We propose a method based on generative adversarial networks that learns to discover relations between different domains (DiscoGAN). Using the discovered relations, our proposed network successfully transfers style from one domain to another while preserving key attributes such as orientation and face identity. Source code for official implementation is publicly available https://github.com/SKTBrain/DiscoGAN},
   archivePrefix = {arXiv},
   eprint = {1703.05192},
   eprinttype = {arxiv},
+  eventtitle = {International {{Conference}} on {{Machine Learning}}},
   file = {/home/cyprien/.zotero/zotero/storage/PNMJIP28/Kim et al. - 2017 - Learning to Discover Cross-Domain Relations with G.pdf;/home/cyprien/.zotero/zotero/storage/F23Q8L93/1703.html},
-  keywords = {Computer Science - Computer Vision and Pattern Recognition},
-  primaryClass = {cs}
+  keywords = {Computer Science - Computer Vision and Pattern Recognition}
 }
 
 @online{Kim2020,
@@ -2179,7 +2286,7 @@
 
 @article{Kingma2014b,
   title = {Auto-{{Encoding Variational Bayes}}},
-  author = {Kingma, Diederik P and Welling, Max},
+  author = {Kingma, Diederik and Welling, Max},
   date = {2014},
   url = {https://arxiv.org/pdf/1312.6114.pdf},
   abstract = {How can we perform efficient inference and learning in directed probabilistic models, in the presence of continuous latent variables with intractable posterior distributions, and large datasets? We introduce a stochastic variational inference and learning algorithm that scales to large datasets and, under some mild differ-entiability conditions, even works in the intractable case. Our contributions is two-fold. First, we show that a reparameterization of the variational lower bound yields a lower bound estimator that can be straightforwardly optimized using stan-dard stochastic gradient methods. Second, we show that for i.i.d. datasets with continuous latent variables per datapoint, posterior inference can be made espe-cially efficient by fitting an approximate inference model (also called a recogni-tion model) to the intractable posterior using the proposed lower bound estimator. Theoretical advantages are reflected in experimental results.},
@@ -2443,21 +2550,22 @@
   file = {/home/cyprien/.zotero/zotero/storage/FZ376LR2/Triple Generative Adversarial Nets - Unknown.pdf;/home/cyprien/.zotero/zotero/storage/UIVID9U7/Triple Generative Adversarial Nets - Unknown.pdf}
 }
 
-@online{Li2017a,
+@inproceedings{Li2017a,
   ids = {Li2017b},
   title = {{{MMD GAN}}: {{Towards Deeper Understanding}} of {{Moment Matching Network}}},
   shorttitle = {{{MMD GAN}}},
+  booktitle = {Proceedings of the 31st {{Conference}} on {{Neural Information Processing}}},
   author = {Li, Chun-Liang and Chang, Wei-Cheng and Cheng, Yu and Yang, Yiming and P\'oczos, Barnab\'as},
-  date = {2017-11-27},
+  date = {2017},
   url = {http://arxiv.org/abs/1705.08584},
   urldate = {2020-05-19},
   abstract = {Generative moment matching network (GMMN) is a deep generative model that differs from Generative Adversarial Network (GAN) by replacing the discriminator in GAN with a two-sample test based on kernel maximum mean discrepancy (MMD). Although some theoretical guarantees of MMD have been studied, the empirical performance of GMMN is still not as competitive as that of GAN on challenging and large benchmark datasets. The computational efficiency of GMMN is also less desirable in comparison with GAN, partially due to its requirement for a rather large batch size during the training. In this paper, we propose to improve both the model expressiveness of GMMN and its computational efficiency by introducing adversarial kernel learning techniques, as the replacement of a fixed Gaussian kernel in the original GMMN. The new approach combines the key ideas in both GMMN and GAN, hence we name it MMD GAN. The new distance measure in MMD GAN is a meaningful loss that enjoys the advantage of weak topology and can be optimized via gradient descent with relatively small batch sizes. In our evaluation on multiple benchmark datasets, including MNIST, CIFAR- 10, CelebA and LSUN, the performance of MMD-GAN significantly outperforms GMMN, and is competitive with other representative GAN works.},
   archivePrefix = {arXiv},
   eprint = {1705.08584},
   eprinttype = {arxiv},
+  eventtitle = {Conference on {{Neural Information Processing}}},
   file = {/home/cyprien/.zotero/zotero/storage/7UM4Q55L/Li et al. - 2017 - MMD GAN Towards Deeper Understanding of Moment Ma.pdf;/home/cyprien/.zotero/zotero/storage/AAY388Z2/Li et al. - 2017 - MMD GAN Towards Deeper Understanding of Moment Ma.pdf;/home/cyprien/.zotero/zotero/storage/53PUYDGS/1705.html;/home/cyprien/.zotero/zotero/storage/W9MM4RSY/1705.html},
-  keywords = {Computer Science - Artificial Intelligence,Computer Science - Machine Learning,Statistics - Machine Learning},
-  primaryClass = {cs, stat}
+  keywords = {Computer Science - Artificial Intelligence,Computer Science - Machine Learning,Statistics - Machine Learning}
 }
 
 @book{LI2018,
@@ -2598,8 +2706,9 @@
   file = {/home/cyprien/.zotero/zotero/storage/D6EZM7DP/An intriguing failing of convolutional neural networks and the CoordConv solution - Unknown.pdf;/home/cyprien/.zotero/zotero/storage/WCLF4ZJY/An intriguing failing of convolutional neural networks and the CoordConv solution - Unknown.pdf}
 }
 
-@online{Liu2018a,
+@inproceedings{Liu2018a,
   title = {Unsupervised {{Image}}-to-{{Image Translation Networks}}},
+  booktitle = {Proceedings of the 31st {{International Conference}} on {{Neural Information Processing Systems}}},
   author = {Liu, Ming-Yu and Breuel, Thomas and Kautz, Jan},
   date = {2018-07-22},
   url = {http://arxiv.org/abs/1703.00848},
@@ -2608,9 +2717,9 @@
   archivePrefix = {arXiv},
   eprint = {1703.00848},
   eprinttype = {arxiv},
+  eventtitle = {International {{Conference}} on {{Neural Information Processing Systems}}},
   file = {/home/cyprien/.zotero/zotero/storage/6PKPPIYL/Liu et al. - 2018 - Unsupervised Image-to-Image Translation Networks.pdf;/home/cyprien/.zotero/zotero/storage/GKE95FFN/1703.html},
-  keywords = {Computer Science - Artificial Intelligence,Computer Science - Computer Vision and Pattern Recognition},
-  primaryClass = {cs}
+  keywords = {Computer Science - Artificial Intelligence,Computer Science - Computer Vision and Pattern Recognition}
 }
 
 @online{Long,
@@ -2711,12 +2820,12 @@
   langid = {english}
 }
 
-@online{Mallat2008,
-  title = {A {{Wavelet Tour}} of {{Signal Processing}} - 3rd {{Edition}}},
+@book{Mallat2008,
+  title = {A {{Wavelet Tour}} of {{Signal Processing}}},
   author = {Mallat, St\'ephane},
   date = {2008},
-  url = {https://www.elsevier.com/books/a-wavelet-tour-of-signal-processing/mallat/978-0-12-374370-1},
-  urldate = {2020-10-26},
+  edition = {3rd Edition},
+  publisher = {{Elsevier}},
   file = {/home/cyprien/.zotero/zotero/storage/3ARA9P6J/978-0-12-374370-1.html}
 }
 
@@ -2800,19 +2909,20 @@
   file = {/home/cyprien/.zotero/zotero/storage/4ZYM8GHK/Conditional Generative Adversarial Nets - Unknown.pdf;/home/cyprien/.zotero/zotero/storage/ZSU5A62C/Conditional Generative Adversarial Nets - Unknown.pdf}
 }
 
-@online{Miyato2018,
+@inproceedings{Miyato2018,
   title = {Spectral {{Normalization}} for {{Generative Adversarial Networks}}},
+  booktitle = {Proceedings of the {{International Conference}} on {{Learning Representations}}},
   author = {Miyato, Takeru and Kataoka, Toshiki and Koyama, Masanori and Yoshida, Yuichi},
-  date = {2018-02-16},
+  date = {2018},
   url = {http://arxiv.org/abs/1802.05957},
   urldate = {2020-05-21},
   abstract = {One of the challenges in the study of generative adversarial networks is the instability of its training. In this paper, we propose a novel weight normalization technique called spectral normalization to stabilize the training of the discriminator. Our new normalization technique is computationally light and easy to incorporate into existing implementations. We tested the efficacy of spectral normalization on CIFAR10, STL-10, and ILSVRC2012 dataset, and we experimentally confirmed that spectrally normalized GANs (SN-GANs) is capable of generating images of better or equal quality relative to the previous training stabilization techniques.},
   archivePrefix = {arXiv},
   eprint = {1802.05957},
   eprinttype = {arxiv},
+  eventtitle = {International {{Conference}} on {{Learning Representations}}},
   file = {/home/cyprien/.zotero/zotero/storage/7P7V5GLU/Miyato et al. - 2018 - Spectral Normalization for Generative Adversarial .pdf;/home/cyprien/.zotero/zotero/storage/JNXBL88B/1802.html},
-  keywords = {Computer Science - Computer Vision and Pattern Recognition,Computer Science - Machine Learning,Statistics - Machine Learning},
-  primaryClass = {cs, stat}
+  keywords = {Computer Science - Computer Vision and Pattern Recognition,Computer Science - Machine Learning,Statistics - Machine Learning}
 }
 
 @article{Mnih2014,
@@ -2851,8 +2961,9 @@
   file = {/home/cyprien/.zotero/zotero/storage/C83TBT8X/Conditioning of three-dimensional generative adversarial networks for pore and reservoir-scale models - Unknown.pdf;/home/cyprien/.zotero/zotero/storage/WY52SHHN/Conditioning of three-dimensional generative adversarial networks for pore and reservoir-scale models - Unknown.pdf}
 }
 
-@online{Mroueh2017,
+@inproceedings{Mroueh2017,
   title = {Fisher {{GAN}}},
+  booktitle = {Proceedings of the 31st {{International Conference}} on {{Neural Information Processing Systems}}},
   author = {Mroueh, Youssef and Sercu, Tom},
   date = {2017-11-03},
   url = {http://arxiv.org/abs/1705.09675},
@@ -2861,14 +2972,15 @@
   archivePrefix = {arXiv},
   eprint = {1705.09675},
   eprinttype = {arxiv},
+  eventtitle = {Neural {{Information Processing Systems}}},
   file = {/home/cyprien/.zotero/zotero/storage/BP5K55E8/Mroueh and Sercu - 2017 - Fisher GAN.pdf;/home/cyprien/.zotero/zotero/storage/UBPGRA2V/1705.html},
-  keywords = {Computer Science - Machine Learning,Statistics - Machine Learning},
-  primaryClass = {cs, stat}
+  keywords = {Computer Science - Machine Learning,Statistics - Machine Learning}
 }
 
-@online{Mroueh2017a,
+@inproceedings{Mroueh2017a,
   title = {{{McGan}}: {{Mean}} and {{Covariance Feature Matching GAN}}},
   shorttitle = {{{McGan}}},
+  booktitle = {Proceedings of the {{International Conference}} on {{Machine Learning}}},
   author = {Mroueh, Youssef and Sercu, Tom and Goel, Vaibhava},
   date = {2017-06-08},
   url = {http://arxiv.org/abs/1702.08398},
@@ -2877,9 +2989,9 @@
   archivePrefix = {arXiv},
   eprint = {1702.08398},
   eprinttype = {arxiv},
+  eventtitle = {International Conference on Machine Learning},
   file = {/home/cyprien/.zotero/zotero/storage/8AKIE34X/Mroueh et al. - 2017 - McGan Mean and Covariance Feature Matching GAN.pdf;/home/cyprien/.zotero/zotero/storage/RK5TLPEP/1702.html},
-  keywords = {Computer Science - Machine Learning,Statistics - Machine Learning},
-  primaryClass = {cs, stat}
+  keywords = {Computer Science - Machine Learning,Statistics - Machine Learning}
 }
 
 @report{Mukherjee2018,
@@ -3241,10 +3353,11 @@
   langid = {english}
 }
 
-@online{Peyre2020,
+@book{Peyre2020,
   title = {Computational {{Optimal Transport}}},
   author = {Peyr\'e, Gabriel and Cuturi, Marco},
   date = {2020-03-18},
+  publisher = {{Foundations and Trends in Machine Learning}},
   url = {http://arxiv.org/abs/1803.00567},
   urldate = {2020-05-23},
   abstract = {Optimal transport (OT) theory can be informally described using the words of the French mathematician Gaspard Monge (1746-1818): A worker with a shovel in hand has to move a large pile of sand lying on a construction site. The goal of the worker is to erect with all that sand a target pile with a prescribed shape (for example, that of a giant sand castle). Naturally, the worker wishes to minimize her total effort, quantified for instance as the total distance or time spent carrying shovelfuls of sand. Mathematicians interested in OT cast that problem as that of comparing two probability distributions, two different piles of sand of the same volume. They consider all of the many possible ways to morph, transport or reshape the first pile into the second, and associate a "global" cost to every such transport, using the "local" consideration of how much it costs to move a grain of sand from one place to another. Recent years have witnessed the spread of OT in several fields, thanks to the emergence of approximate solvers that can scale to sizes and dimensions that are relevant to data sciences. Thanks to this newfound scalability, OT is being increasingly used to unlock various problems in imaging sciences (such as color or texture processing), computer vision and graphics (for shape manipulation) or machine learning (for regression, classification and density fitting). This short book reviews OT with a bias toward numerical methods and their applications in data sciences, and sheds lights on the theoretical properties of OT that make it particularly useful for some of these applications.},
@@ -3252,8 +3365,7 @@
   eprint = {1803.00567},
   eprinttype = {arxiv},
   file = {/home/cyprien/.zotero/zotero/storage/D9BRVVG9/Peyré and Cuturi - 2020 - Computational Optimal Transport.pdf;/home/cyprien/.zotero/zotero/storage/L96FCCB9/1803.html},
-  keywords = {Statistics - Machine Learning},
-  primaryClass = {stat}
+  keywords = {Statistics - Machine Learning}
 }
 
 @book{Pietikainen2011,
@@ -3272,7 +3384,8 @@
 @online{Qi2018,
   title = {Loss-{{Sensitive Generative Adversarial Networks}} on {{Lipschitz Densities}}},
   author = {Qi, Guo-Jun},
-  date = {2018-03-18},
+  date = {2018},
+  journaltitle = {International Journal of Computer Vision},
   url = {http://arxiv.org/abs/1701.06264},
   urldate = {2020-05-21},
   abstract = {In this paper, we present the Lipschitz regularization theory and algorithms for a novel Loss-Sensitive Generative Adversarial Network (LS-GAN). Specifically, it trains a loss function to distinguish between real and fake samples by designated margins, while learning a generator alternately to produce realistic samples by minimizing their losses. The LS-GAN further regularizes its loss function with a Lipschitz regularity condition on the density of real data, yielding a regularized model that can better generalize to produce new data from a reasonable number of training examples than the classic GAN. We will further present a Generalized LS-GAN (GLS-GAN) and show it contains a large family of regularized GAN models, including both LS-GAN and Wasserstein GAN, as its special cases. Compared with the other GAN models, we will conduct experiments to show both LS-GAN and GLS-GAN exhibit competitive ability in generating new images in terms of the Minimum Reconstruction Error (MRE) assessed on a separate test set. We further extend the LS-GAN to a conditional form for supervised and semi-supervised learning problems, and demonstrate its outstanding performance on image classification tasks.},
@@ -3281,7 +3394,7 @@
   eprinttype = {arxiv},
   file = {/home/cyprien/.zotero/zotero/storage/YVSSYPFY/Qi - 2018 - Loss-Sensitive Generative Adversarial Networks on .pdf;/home/cyprien/.zotero/zotero/storage/D29HWLFK/1701.html},
   keywords = {Computer Science - Computer Vision and Pattern Recognition},
-  primaryClass = {cs}
+  number = {128}
 }
 
 @article{Qian1999,
@@ -3297,16 +3410,18 @@
   number = {1}
 }
 
-@online{Radford2015,
+@inproceedings{Radford2015,
   ids = {Radford2016,radford2015},
   title = {Unsupervised {{Representation Learning}} with {{Deep Convolutional Generative Adversarial Networks}}},
+  booktitle = {Proceedings of the {{International Conference}} on {{Learning Representations}}},
   author = {Radford, Alec and Metz, Luke and Chintala, Soumith},
-  date = {2015-11},
+  date = {2015},
   url = {http://arxiv.org/abs/1511.06434},
   abstract = {In recent years, supervised learning with convolutional networks (CNNs) has seen huge adoption in computer vision applications. Comparatively, unsupervised learning with CNNs has received less attention. In this work we hope to help bridge the gap between the success of CNNs for supervised learning and unsupervised learning. We introduce a class of CNNs called deep convolutional generative adversarial networks (DCGANs), that have certain architectural constraints, and demonstrate that they are a strong candidate for unsupervised learning. Training on various image datasets, we show convincing evidence that our deep convolutional adversarial pair learns a hierarchy of representations from object parts to scenes in both the generator and discriminator. Additionally, we use the learned features for novel tasks - demonstrating their applicability as general image representations.},
   archivePrefix = {arXiv},
   eprint = {1511.06434},
   eprinttype = {arxiv},
+  eventtitle = {International {{Conference}} on {{Learning Representations}}},
   file = {/home/cyprien/.zotero/zotero/storage/G2ERHWCH/Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks - 2015.pdf;/home/cyprien/.zotero/zotero/storage/ICNQAYKX/Radford et al. - 2016 - Unsupervised Representation Learning with Deep Con.pdf;/home/cyprien/.zotero/zotero/storage/TPYJMS7I/Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks - 2015.pdf;/home/cyprien/.zotero/zotero/storage/7ENHX2XD/1511.html},
   keywords = {Computer Science - Computer Vision and Pattern Recognition,Computer Science - Machine Learning}
 }
@@ -3415,6 +3530,23 @@
   organization = {{Springer}}
 }
 
+@online{Ronneberger2015a,
+  title = {U-{{Net}}: {{Convolutional Networks}} for {{Biomedical Image Segmentation}}},
+  shorttitle = {U-{{Net}}},
+  author = {Ronneberger, Olaf and Fischer, Philipp and Brox, Thomas},
+  date = {2015-05-18},
+  url = {http://arxiv.org/abs/1505.04597},
+  urldate = {2021-01-18},
+  abstract = {There is large consent that successful training of deep networks requires many thousand annotated training samples. In this paper, we present a network and training strategy that relies on the strong use of data augmentation to use the available annotated samples more efficiently. The architecture consists of a contracting path to capture context and a symmetric expanding path that enables precise localization. We show that such a network can be trained end-to-end from very few images and outperforms the prior best method (a sliding-window convolutional network) on the ISBI challenge for segmentation of neuronal structures in electron microscopic stacks. Using the same network trained on transmitted light microscopy images (phase contrast and DIC) we won the ISBI cell tracking challenge 2015 in these categories by a large margin. Moreover, the network is fast. Segmentation of a 512x512 image takes less than a second on a recent GPU. The full implementation (based on Caffe) and the trained networks are available at http://lmb.informatik.uni-freiburg.de/people/ronneber/u-net .},
+  archivePrefix = {arXiv},
+  eprint = {1505.04597},
+  eprinttype = {arxiv},
+  file = {/home/cyprien/.zotero/zotero/storage/F4ALEJL5/Ronneberger et al. - 2015 - U-Net Convolutional Networks for Biomedical Image.pdf;/home/cyprien/.zotero/zotero/storage/P4NQIX25/1505.html},
+  keywords = {Computer Science - Computer Vision and Pattern Recognition},
+  primaryClass = {cs},
+  version = {1}
+}
+
 @online{Ros2016,
   title = {Training {{Constrained Deconvolutional Networks}} for {{Road Scene Semantic Segmentation}}},
   author = {Ros, German and Stent, Simon and Alcantarilla, Pablo F. and Watanabe, Tomoki},
@@ -3497,13 +3629,14 @@
   file = {/home/cyprien/.zotero/zotero/storage/J7SNSIU8/Nonlinear total variation based noise removal algorithms - 1992.pdf;/home/cyprien/.zotero/zotero/storage/MKYU9QPS/Nonlinear total variation based noise removal algorithms - 1992.pdf}
 }
 
-@article{Ruffino2017,
+@inproceedings{Ruffino2017,
   title = {Dilated {{Spatial Generative Adversarial Networks}} for {{Ergodic Image Generation}}},
   author = {Ruffino, Cyprien and H\'erault, Romain and Laloy, Eric and Gasso, Gilles},
   date = {2017-05},
   url = {http://arxiv.org/abs/1905.08613},
   abstract = {Generative models have recently received renewed attention as a result of adversarial learning. Generative adversarial networks consist of samples generation model and a discrimination model able to distinguish between genuine and synthetic samples. In combination with convolutional (for the discriminator) and de-convolutional (for the generator) layers, they are particularly suitable for image generation, especially of natural scenes. However, the presence of fully connected layers adds global dependencies in the generated images. This may lead to high and global variations in the generated sample for small local variations in the input noise. In this work we propose to use architec-tures based on fully convolutional networks (including among others dilated layers), architectures specifically designed to generate globally ergodic images, that is images without global dependencies. Conducted experiments reveal that these architectures are well suited for generating natural textures such as geologic structures .},
   annotation = {\_eprint: 1905.08613},
+  eventtitle = {Conf\'erence Sur l'{{Apprentissage}}},
   file = {/home/cyprien/.zotero/zotero/storage/GY9JUZPR/Dilated Spatial Generative Adversarial Networks for Ergodic Image Generation - 2019.pdf}
 }
 
@@ -3667,20 +3800,21 @@
   file = {/home/cyprien/.zotero/zotero/storage/JLLG9X53/Measuring the Effects of Data Parallelism on Neural Network Training - 2018.pdf;/home/cyprien/.zotero/zotero/storage/LVGMZI9L/Measuring the Effects of Data Parallelism on Neural Network Training - 2018.pdf}
 }
 
-@online{Shang2017,
+@inproceedings{Shang2017,
   title = {{{VIGAN}}: {{Missing View Imputation}} with {{Generative Adversarial Networks}}},
   shorttitle = {{{VIGAN}}},
+  booktitle = {Proceedings of the {{IEEE International Conference}} on {{Big Data}}},
   author = {Shang, Chao and Palmer, Aaron and Sun, Jiangwen and Chen, Ko-Shin and Lu, Jin and Bi, Jinbo},
-  date = {2017-11-01},
+  date = {2017},
   url = {http://arxiv.org/abs/1708.06724},
   urldate = {2020-12-01},
   abstract = {In an era when big data are becoming the norm, there is less concern with the quantity but more with the quality and completeness of the data. In many disciplines, data are collected from heterogeneous sources, resulting in multi-view or multi-modal datasets. The missing data problem has been challenging to address in multi-view data analysis. Especially, when certain samples miss an entire view of data, it creates the missing view problem. Classic multiple imputations or matrix completion methods are hardly effective here when no information can be based on in the specific view to impute data for such samples. The commonly-used simple method of removing samples with a missing view can dramatically reduce sample size, thus diminishing the statistical power of a subsequent analysis. In this paper, we propose a novel approach for view imputation via generative adversarial networks (GANs), which we name by VIGAN. This approach first treats each view as a separate domain and identifies domain-to-domain mappings via a GAN using randomly-sampled data from each view, and then employs a multi-modal denoising autoencoder (DAE) to reconstruct the missing view from the GAN outputs based on paired data across the views. Then, by optimizing the GAN and DAE jointly, our model enables the knowledge integration for domain mappings and view correspondences to effectively recover the missing view. Empirical results on benchmark datasets validate the VIGAN approach by comparing against the state of the art. The evaluation of VIGAN in a genetic study of substance use disorders further proves the effectiveness and usability of this approach in life science.},
   archivePrefix = {arXiv},
   eprint = {1708.06724},
   eprinttype = {arxiv},
+  eventtitle = {{{IEEE International Conference}} on {{Big Data}}},
   file = {/home/cyprien/.zotero/zotero/storage/GWWRE45H/Shang et al. - 2017 - VIGAN Missing View Imputation with Generative Adv.pdf;/home/cyprien/.zotero/zotero/storage/ZF5AXLAQ/1708.html},
-  keywords = {Computer Science - Computer Vision and Pattern Recognition,Statistics - Machine Learning},
-  primaryClass = {cs, stat}
+  keywords = {Computer Science - Computer Vision and Pattern Recognition,Statistics - Machine Learning}
 }
 
 @inproceedings{Shaobing1994,
@@ -3793,8 +3927,9 @@
   file = {/home/cyprien/.zotero/zotero/storage/GEJVSJAM/Learning Structured Output Representation using Deep Conditional Generative Models - Unknown.pdf;/home/cyprien/.zotero/zotero/storage/PTATWZYW/Learning Structured Output Representation using Deep Conditional Generative Models - Unknown.pdf}
 }
 
-@online{Sonderby2017,
+@inproceedings{Sonderby2017,
   title = {Amortised {{MAP Inference}} for {{Image Super}}-Resolution},
+  booktitle = {Proceedings of the {{International Conference}} on {{Learning Representations}}},
   author = {S\o nderby, Casper Kaae and Caballero, Jose and Theis, Lucas and Shi, Wenzhe and Husz\'ar, Ferenc},
   date = {2017-02-21},
   url = {http://arxiv.org/abs/1610.04490},
@@ -3803,9 +3938,9 @@
   archivePrefix = {arXiv},
   eprint = {1610.04490},
   eprinttype = {arxiv},
+  eventtitle = {International {{Conference}} on {{Learning Representations}}},
   file = {/home/cyprien/.zotero/zotero/storage/6ZNDDFAC/Sønderby et al. - 2017 - Amortised MAP Inference for Image Super-resolution.pdf;/home/cyprien/.zotero/zotero/storage/CI3FF6HV/1610.html},
-  keywords = {Computer Science - Computer Vision and Pattern Recognition,Computer Science - Machine Learning,Statistics - Machine Learning},
-  primaryClass = {cs, stat}
+  keywords = {Computer Science - Computer Vision and Pattern Recognition,Computer Science - Machine Learning,Statistics - Machine Learning}
 }
 
 @online{Song2020,
@@ -3824,9 +3959,10 @@
   primaryClass = {cs, stat}
 }
 
-@online{Springenberg2015,
+@inproceedings{Springenberg2015,
   title = {Striving for {{Simplicity}}: {{The All Convolutional Net}}},
   shorttitle = {Striving for {{Simplicity}}},
+  booktitle = {Proceedings of the {{International Conference}} on {{Learning Representations}}},
   author = {Springenberg, Jost Tobias and Dosovitskiy, Alexey and Brox, Thomas and Riedmiller, Martin},
   date = {2015-04-13},
   url = {http://arxiv.org/abs/1412.6806},
@@ -3835,9 +3971,9 @@
   archivePrefix = {arXiv},
   eprint = {1412.6806},
   eprinttype = {arxiv},
+  eventtitle = {International {{Conference}} on {{Learning Representations}}},
   file = {/home/cyprien/.zotero/zotero/storage/QXVAMC93/Springenberg et al. - 2015 - Striving for Simplicity The All Convolutional Net.pdf;/home/cyprien/.zotero/zotero/storage/QGLG32PC/1412.html},
-  keywords = {Computer Science - Computer Vision and Pattern Recognition,Computer Science - Machine Learning,Computer Science - Neural and Evolutionary Computing},
-  primaryClass = {cs}
+  keywords = {Computer Science - Computer Vision and Pattern Recognition,Computer Science - Machine Learning,Computer Science - Neural and Evolutionary Computing}
 }
 
 @online{Sriperumbudur2009,
@@ -3955,19 +4091,20 @@
   langid = {english}
 }
 
-@online{Taigman2016,
+@inproceedings{Taigman2017,
   title = {Unsupervised {{Cross}}-{{Domain Image Generation}}},
+  booktitle = {Proceedings of the {{International Conference}} on {{Learning Representations}}},
   author = {Taigman, Yaniv and Polyak, Adam and Wolf, Lior},
-  date = {2016-11-07},
+  date = {2017},
   url = {http://arxiv.org/abs/1611.02200},
   urldate = {2020-11-26},
   abstract = {We study the problem of transferring a sample in one domain to an analog sample in another domain. Given two related domains, S and T, we would like to learn a generative function G that maps an input sample from S to the domain T, such that the output of a given function f, which accepts inputs in either domains, would remain unchanged. Other than the function f, the training data is unsupervised and consist of a set of samples from each domain. The Domain Transfer Network (DTN) we present employs a compound loss function that includes a multiclass GAN loss, an f-constancy component, and a regularizing component that encourages G to map samples from T to themselves. We apply our method to visual domains including digits and face images and demonstrate its ability to generate convincing novel images of previously unseen entities, while preserving their identity.},
   archivePrefix = {arXiv},
   eprint = {1611.02200},
   eprinttype = {arxiv},
-  file = {/home/cyprien/.zotero/zotero/storage/CWFENXYJ/Taigman et al. - 2016 - Unsupervised Cross-Domain Image Generation.pdf;/home/cyprien/.zotero/zotero/storage/G47AX848/1611.html},
-  keywords = {Computer Science - Computer Vision and Pattern Recognition},
-  primaryClass = {cs}
+  eventtitle = {International {{Conference}} on {{Learning Representations}}},
+  file = {/home/cyprien/.zotero/zotero/storage/CWFENXYJ/Taigman et al. - 2016 - Unsupervised Cross-Domain Image Generation.pdf;/home/cyprien/.zotero/zotero/storage/L9SC2NVW/Article_ECCV_PolarCycle.pdf;/home/cyprien/.zotero/zotero/storage/G47AX848/1611.html},
+  keywords = {Computer Science - Computer Vision and Pattern Recognition}
 }
 
 @article{Tanner1987,
@@ -4205,19 +4342,18 @@
   keywords = {-mdlstm,6,a single network usually,handwriting recognition,lasts several,long short-term memory,lstm,our knowledge,recurrent neural network,so far there is,that the training of,to the best of,weeks}
 }
 
-@online{Vondrick2016,
+@inproceedings{Vondrick2016,
   title = {Generating {{Videos}} with {{Scene Dynamics}}},
+  booktitle = {Proceedings of {{Neural Information Processing Systems}}},
   author = {Vondrick, Carl and Pirsiavash, Hamed and Torralba, Antonio},
-  date = {2016-10-26},
-  url = {http://arxiv.org/abs/1609.02612},
-  urldate = {2020-05-19},
+  date = {2016},
   abstract = {We capitalize on large amounts of unlabeled video in order to learn a model of scene dynamics for both video recognition tasks (e.g. action classification) and video generation tasks (e.g. future prediction). We propose a generative adversarial network for video with a spatio-temporal convolutional architecture that untangles the scene's foreground from the background. Experiments suggest this model can generate tiny videos up to a second at full frame rate better than simple baselines, and we show its utility at predicting plausible futures of static images. Moreover, experiments and visualizations show the model internally learns useful features for recognizing actions with minimal supervision, suggesting scene dynamics are a promising signal for representation learning. We believe generative video models can impact many applications in video understanding and simulation.},
   archivePrefix = {arXiv},
   eprint = {1609.02612},
   eprinttype = {arxiv},
+  eventtitle = {Neural {{Information Processing Systems}}},
   file = {/home/cyprien/.zotero/zotero/storage/VR85JP5G/Vondrick et al. - 2016 - Generating Videos with Scene Dynamics.pdf;/home/cyprien/.zotero/zotero/storage/5I2PHESM/1609.html},
-  keywords = {Computer Science - Computer Vision and Pattern Recognition,Computer Science - Graphics,Computer Science - Machine Learning},
-  primaryClass = {cs}
+  keywords = {Computer Science - Computer Vision and Pattern Recognition,Computer Science - Graphics,Computer Science - Machine Learning}
 }
 
 @article{Wang2017,
@@ -4384,19 +4520,20 @@
   number = {6}
 }
 
-@online{Wu2017,
+@inproceedings{Wu2017,
   title = {Learning a {{Probabilistic Latent Space}} of {{Object Shapes}} via {{3D Generative}}-{{Adversarial Modeling}}},
+  booktitle = {Proceedings of {{Neural Information Processing Systems}}},
   author = {Wu, Jiajun and Zhang, Chengkai and Xue, Tianfan and Freeman, William T. and Tenenbaum, Joshua B.},
-  date = {2017-01-04},
+  date = {2017},
   url = {http://arxiv.org/abs/1610.07584},
   urldate = {2020-05-19},
   abstract = {We study the problem of 3D object generation. We propose a novel framework, namely 3D Generative Adversarial Network (3D-GAN), which generates 3D objects from a probabilistic space by leveraging recent advances in volumetric convolutional networks and generative adversarial nets. The benefits of our model are three-fold: first, the use of an adversarial criterion, instead of traditional heuristic criteria, enables the generator to capture object structure implicitly and to synthesize high-quality 3D objects; second, the generator establishes a mapping from a low-dimensional probabilistic space to the space of 3D objects, so that we can sample objects without a reference image or CAD models, and explore the 3D object manifold; third, the adversarial discriminator provides a powerful 3D shape descriptor which, learned without supervision, has wide applications in 3D object recognition. Experiments demonstrate that our method generates high-quality 3D objects, and our unsupervisedly learned features achieve impressive performance on 3D object recognition, comparable with those of supervised learning methods.},
   archivePrefix = {arXiv},
   eprint = {1610.07584},
   eprinttype = {arxiv},
+  eventtitle = {Neural {{Information Processing Systems}}},
   file = {/home/cyprien/.zotero/zotero/storage/62APJ24E/Wu et al. - 2017 - Learning a Probabilistic Latent Space of Object Sh.pdf;/home/cyprien/.zotero/zotero/storage/YFQEGM69/1610.html},
-  keywords = {Computer Science - Computer Vision and Pattern Recognition,Computer Science - Machine Learning},
-  primaryClass = {cs}
+  keywords = {Computer Science - Computer Vision and Pattern Recognition,Computer Science - Machine Learning}
 }
 
 @inproceedings{Wu2019,
@@ -4507,20 +4644,21 @@
   file = {/home/cyprien/.zotero/zotero/storage/DTK4GMWV/Semantic Image Inpainting with Deep Generative Models - Unknown.pdf;/home/cyprien/.zotero/zotero/storage/GASZPJUB/Semantic Image Inpainting with Deep Generative Models - Unknown.pdf}
 }
 
-@online{Yi2018,
+@inproceedings{Yi2017,
   title = {{{DualGAN}}: {{Unsupervised Dual Learning}} for {{Image}}-to-{{Image Translation}}},
   shorttitle = {{{DualGAN}}},
+  booktitle = {Proceedings of the {{International Conference}} on {{Computer Vision}}},
   author = {Yi, Zili and Zhang, Hao and Tan, Ping and Gong, Minglun},
-  date = {2018-10-09},
+  date = {2017},
   url = {http://arxiv.org/abs/1704.02510},
   urldate = {2020-11-25},
   abstract = {Conditional Generative Adversarial Networks (GANs) for cross-domain image-to-image translation have made much progress recently. Depending on the task complexity, thousands to millions of labeled image pairs are needed to train a conditional GAN. However, human labeling is expensive, even impractical, and large quantities of data may not always be available. Inspired by dual learning from natural language translation, we develop a novel dual-GAN mechanism, which enables image translators to be trained from two sets of unlabeled images from two domains. In our architecture, the primal GAN learns to translate images from domain U to those in domain V, while the dual GAN learns to invert the task. The closed loop made by the primal and dual tasks allows images from either domain to be translated and then reconstructed. Hence a loss function that accounts for the reconstruction error of images can be used to train the translators. Experiments on multiple image translation tasks with unlabeled data show considerable performance gain of DualGAN over a single GAN. For some tasks, DualGAN can even achieve comparable or slightly better results than conditional GAN trained on fully labeled data.},
   archivePrefix = {arXiv},
   eprint = {1704.02510},
   eprinttype = {arxiv},
+  eventtitle = {International {{Conference}} on {{Computer Vision}}},
   file = {/home/cyprien/.zotero/zotero/storage/M3XYNPAR/Yi et al. - 2018 - DualGAN Unsupervised Dual Learning for Image-to-I.pdf;/home/cyprien/.zotero/zotero/storage/LNBV88MA/1704.html},
-  keywords = {Computer Science - Computer Vision and Pattern Recognition},
-  primaryClass = {cs}
+  keywords = {Computer Science - Computer Vision and Pattern Recognition}
 }
 
 @article{Yu2015,
@@ -4543,20 +4681,21 @@
   langid = {english}
 }
 
-@online{Yu2020,
+@inproceedings{Yu2020,
   title = {{{BDD100K}}: {{A Diverse Driving Dataset}} for {{Heterogeneous Multitask Learning}}},
   shorttitle = {{{BDD100K}}},
+  booktitle = {Proceedings of the {{Conference}} on {{Computer Vision}} and {{Pattern Recognition}}},
   author = {Yu, Fisher and Chen, Haofeng and Wang, Xin and Xian, Wenqi and Chen, Yingying and Liu, Fangchen and Madhavan, Vashisht and Darrell, Trevor},
-  date = {2020-04-08},
+  date = {2020},
   url = {http://arxiv.org/abs/1805.04687},
   urldate = {2020-12-04},
   abstract = {Datasets drive vision progress, yet existing driving datasets are impoverished in terms of visual content and supported tasks to study multitask learning for autonomous driving. Researchers are usually constrained to study a small set of problems on one dataset, while real-world computer vision applications require performing tasks of various complexities. We construct BDD100K, the largest driving video dataset with 100K videos and 10 tasks to evaluate the exciting progress of image recognition algorithms on autonomous driving. The dataset possesses geographic, environmental, and weather diversity, which is useful for training models that are less likely to be surprised by new conditions. Based on this diverse dataset, we build a benchmark for heterogeneous multitask learning and study how to solve the tasks together. Our experiments show that special training strategies are needed for existing models to perform such heterogeneous tasks. BDD100K opens the door for future studies in this important venue.},
   archivePrefix = {arXiv},
   eprint = {1805.04687},
   eprinttype = {arxiv},
+  eventtitle = {Conference on {{Computer Vision}} and {{Pattern Recognition}}},
   file = {/home/cyprien/.zotero/zotero/storage/IPID499Y/Yu et al. - 2020 - BDD100K A Diverse Driving Dataset for Heterogeneo.pdf;/home/cyprien/.zotero/zotero/storage/TQU3SVXJ/1805.html},
-  keywords = {Computer Science - Computer Vision and Pattern Recognition},
-  primaryClass = {cs}
+  keywords = {Computer Science - Computer Vision and Pattern Recognition}
 }
 
 @article{Zaremba2015,
@@ -4667,8 +4806,9 @@
   version = {1}
 }
 
-@online{Zhao2017,
+@inproceedings{Zhao2017,
   title = {Energy-Based {{Generative Adversarial Network}}},
+  booktitle = {Proceedings of the {{International Conference}} on {{Learning Representations}}},
   author = {Zhao, Junbo and Mathieu, Michael and LeCun, Yann},
   date = {2017-03-06},
   url = {http://arxiv.org/abs/1609.03126},
@@ -4677,9 +4817,9 @@
   archivePrefix = {arXiv},
   eprint = {1609.03126},
   eprinttype = {arxiv},
+  eventtitle = {International {{Conference}} on {{Learning Representations}}},
   file = {/home/cyprien/.zotero/zotero/storage/2YHSNKAA/Zhao et al. - 2017 - Energy-based Generative Adversarial Network.pdf;/home/cyprien/.zotero/zotero/storage/EKULMJDJ/1609.html},
-  keywords = {Computer Science - Machine Learning,Statistics - Machine Learning},
-  primaryClass = {cs, stat}
+  keywords = {Computer Science - Machine Learning,Statistics - Machine Learning}
 }
 
 @online{Zhong2017,

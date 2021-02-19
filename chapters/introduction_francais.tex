@@ -1,0 +1,84 @@
+\chapter*{Introduction en français}
+\fancyhead[R]{\textit{INTRODUCTION}}
+\addcontentsline{toc}{chapter}{Introduction en français}
+\label{chap:intro_fr}
+
+\begin{otherlanguage}{french}
+\section*{Contexte}
+
+\addcontentsline{toc}{section}{Context}
+
+Au cours de la dernière décennie, l'apprentissage profond (ou \textit{deep learning}) est apparu comme l'un des domaines les plus prometteur de l'intelligence artificielle, égalant ou surpassant progressivement toutes les approches traditionnelles dans nombre de domaines d'application. Grâce à la capacité de généralisation des réseaux de neurones profonds, l'apprentissage profond est capable d'utiliser des masses de données afin d'en extraire des motifs et des comportements pertinents. L'apprentissage profond s'est donc naturellement appliqué à des domaines aussi différents que la traduction automatique, le jeu de Go et le \textit{trading} à haute-fréquence. Parmi eux, la vision par ordinateur est très certainement le domaine sur lequel l'apprentissage profond aura eu le plus grand impact. Consistant à analyser et traiter des images automatiquement, la vision par ordinateur est un domaine complexe comprenant de nombreux problèmes tels que la détection d'objets ou la reconnaissance de formes. L'apprentissage profond est désormais l'approche de référence pour toutes les approches de vision par ordinateur et s'applique à des domaines tels que l'imagerie médicale, la reconnaissance faciale ou la conduite autonome. 
+
+Un des sous-domaines de la vision par ordinateur ayant a connu un essor fulgurant grâce à l'apprentissage profond est la génération automatique d'images. Les réseaux génératifs antagonistes (Generative Adversarial Networks, ou \ac{GANs}) \citep{Goodfellow2014}, mis en avant lors de ces dernières années pour leur capacité à générer des images photo-réalistes\footnote{Un exemple particulièrement frappant : \url{https://www.whichfaceisreal.com/}}, sont désormais le fer de lance de l'apprentissage profond pour la génération d'images. En permettant la génération d'images de haute qualité et de grande dimension, ils ont rapidement trouvé des applications dans de nombreux domaines techniques tels que l'augmentation de résolution d'image \citep{Wang2020}, la cartographie automatique \citep{Kang2019}, la génération de vidéos \citep{Vondrick2016} ou la génération automatique d'objets 3D \citep{Wu2017}. L'usage des \ac{GANs} s'est également étendu à des applications destinées au grand public : certaines inoffensives telles que les très nombreux "filtres" disponibles sur des réseaux sociaux permettant de par exemple de générer une photo d'une personne vieillie \citep{Antipov2017a}; d'autres plus néfastes, comme les fameux "deepfakes" \citep{Vaccari2020} des images et vidéos automatiquement générées dont le but est de tromper en falsifiant l'identité d'une personne, le plus souvent une célébrité ou une personnalité politique.
+
+Dans cette thèse, nous proposons d'étudier les tâches auxiliaires pour le conditionnement des réseaux génératifs antagonistes. Si les \ac{GANs} excellent dans la génération d'images et permettent d'obtenir des images de très haute qualité, ils ne présentent leur plein potentiel que lorsqu'ils sont conditionnés, c'est à dire  qu'il est possible d'exercer un contrôle sur la sortie du modèle. En effet, c'est ce conditionnement qui permet de s'assurer que l'image obtenue est bien celle attendue et est donc indispensable pour, par exemple, l'ensemble des applications d'édition dynamique d'images telles que les "filtres"  ou l'augmentation de résolution.En particulier nous nous concentrons sur une famille de techniques pour ce conditionnement : les tâches auxiliaires. En entraînant un \ac{GAN} à résoudre une tâche secondaire en parallèle de son apprentissage de la distribution des données réelles, il est possible de le pousser à respecter certaines propriétés désirées. Ces tâches auxiliaiaires nécessitent d'être conçues spécialement pour chaque type de conditionnement. Au cours de cette thèse, nous examinons donc des problèmes pouvant être résolus par des modèles génératifs conditionnées et proposons des tâches annexes appropriées pour résoudre ces problèmes.
+
+
+\section*{Motivations}
+\addcontentsline{toc}{section}{Motivations}
+
+\quad Nos travaux sont motivés par deux applications directes nécessitant des modèles génératifs conditionnés : la reconstruction d'images, et plus précisément de cartographies de formations de canaux d'eau souterrains; et la conversion de bases de données d'images couleur de scènes routières dans le domaine polarimétrique. 
+
+\subsection*{Reconstruction d'images hydro-géologiques}
+
+Nous étudions le problème de la reconstruction d'images, consistant à (ré-)générer une image à partir d'un ensemble très réduit de pixels connus a priori, qui est ici un cadre générique s'appliquant au problème de reconstruction de cartographies de formations de canaux d'eau souterrains. Dans le cadre de cette applicationn menée en collaboration avec le SCK$\cdot$CEN (Belgique), plusieurs critères sont recherchés :
+
+\textbf{Précision au pixel près.} La tâche de reconstruction d'images consistant à générer une image dont des pixels précis sont pré-tirés, leurs positions et valeurs doivent être préservées dans l'image obtenue. Dans le cadre de l'application en géologie, cela implique de préserver précisément la position et les valeurs des mesures réelles effectuées sur le terrain.
+
+\textbf{Préservation de la diversité.} L'une des limitations des \ac{GAN} est leur tendance à perdre la capacité à générer des échantillons diversifiés et ainsi ne produire que des images très proches les unes des autres. Dans le cadre de l'application en géologie, il est important de pouvoir produire un grand nombre d'images candidates diversifiées qui respectent les pixels pré-tirés.
+
+\textbf{Génération rapide.} Afin de pouvoir générer un grand nombre d'images  candidates, il est également important que le processus de génération soit rapide. Ainsi, les approches existantes nécessitant de résoudre un problème d'optimisation pour chaque image générée seront le plus souvent bien trop lentes pour être applicables ici.
+
+\subsection*{Conversion d'images couleur en images polarimétriques}
+
+\quad Dans cette application, nous nous penchons sur le problème de génération d'images polarimétriques comme moyen d'augmentation de données. En effet, le manque de données polarimétriques étiquetées est un frein important pour la recherche dans le domaine de la vision par ordinateur sur les images polarimétriques. Ces images, captant des propriétés de la lumière qui ne sont pas présentes dans des images couleur, permettent par exemple d'obtenir de meilleurs résultats dans des tâches de détection d'objets dans des conditions météorologiques adverses, telles qu'une pluie importante ou de la brume. En transférant des bases de données étiquetées du domaine de l'image couleur au domaine polarimétrique, cette pénurie de données polarimétriques étiquetées pourrait être  contournée. Cependant, plusieurs exigences sont à respecter :
+
+\textbf{Respect des contraintes polarimétriques.} L'imagerie polarimétrique est soumise à des contraintes fortes émanant de la physique ondulatoire de la lumière. Ces contraintes doivent être prises en compte afin de générer des images non seulement réalistes, mais surtout ayant les  propriétés physiques permettant d'obtenir de bons résultats dans des conditions météorologiques adverses.
+
+\textbf{Respect de la calibration de la caméra polarimétrique.} Pour pouvoir capturer des images polarimétriques, une caméra spécialisée utilise un certain nombres de filtres laissant passer la lumière polarisée à des angles prédéfinis. La configuration de ces filtres peut différer selon la caméra utilisée. Cette calibration affecte directement la nature des images acquises. Ainsi, lors de la génération de données polarimétriques, il est nécessaire de pouvoir assurer que les images produites correspondent à la calibration de la caméra.
+
+\textbf{Préservation du contenu de l'image.} L'objectif de cette application est de produire des bases de données étiquetées artificielles en transférant dans le domaine polarimétrique des bases de données existantes d'images couleur. Afin de pouvoir conserver les étiquettes entre ces deux domaines, il est donc nécessaire que le contenu des images reste similaire en nature et en position.
+
+\textbf{Processus de génération rapide.} Il est également nécessaire que le temps de génération d'une image ne soit pas trop élevé, puisque les bases de données visées peuvent contenir plusieurs centaines de milliers d'images de résolution élevée. Un temps de génération trop important rendrait ainsi cette approche prohibitive.
+
+
+\section*{Structure de la thèse}
+\addcontentsline{toc}{section}{Contributions et structure de la thèse}
+
+Puisque le conditionnement des modèles génératifs est une étape cruciale pour leur application à des problèmes du monde réel, nous proposons dans cette thèse d'étudier le conditionnement des réseaux adversaires générateurs, notamment en utilisant des tâches auxiliaires. La thèse est structurée en trois chapites, dont les contenus sont résumés ci-dessous, et une conclusion.
+
+\subsection*{Chapitre 1 : Introduction aux réseaux génératifs antagonistes}
+
+Nous commençons cette thèse par un chapitre introductif sur les réseaux génératifs antagonistes (GANs), une méthode pour entraîner des réseaux de neurones profonds comme modèles génératifs particulièrement appropriée pour la génération d'images. Nous mettons également en exergue leurs limitations, notamment l'instabilité du processus d'entraînement et le manque de diversité statistique dans les données générées. Nous nous penchons également sur les variantes conditionnelles des \ac{GAN}, permettant d'exercer un certain contrôle sur le processus de génération en appliquant des contraintes sur la donnée générée, ainsi que les approches de transfert de domaines, tâche consistant à projeter une donnée d'un domaine vers un autre (par exemple, convertir un tableau de maître en photo). Nous présentons un aperçu des différentes techniques employées pour contrecarrer les limitations intrinsèques des GANs par l'amélioration de l'architecture des réseaux de neurones ainsi que le changement de la fonction de coût du GAN. Enfin, nous terminons ce chapitre par une réflexion sur les difficultés que représentent l'évaluation des modèles génératifs et examinons les métriques les plus couramment utilisées pour évaluer les GANs.
+
+\subsection*{Chapitre 2 : La reconstruction d'images comme tâche auxiliaire à la modélisation générative}
+
+Dans ce chapitre, nous proposons un aperçu de la tâche de reconstruction d'images à l'aide de modèles génératifs. Comme contribution, nous proposons une approche de conditionnement des \ac{GANs} utilisant une tâche de reconstruction auxiliaire explicite. En optimisant cette tâche auxiliaire pendant le processus de génération, combinée à une technique permettant de limiter les problèmes de perte de diversité, les modèles obtenus sont capables de reconstruire rapidement les images, en comparaison avec des méthodes similaires, telles que les approches basées sur l'acquisition comprimée, devant résoudre un problème d'optimisation pour chaque image reconstruite.  Un sous-produit de notre approche est un hyper-paramètre qui contrôle l'impact de la fonction de coût liée à la tâche de reconstruction sur le modèle génératif. Nous montrons que cet hyper-paramètre influence directement un compromis entre la fidélité de la reconstruction et la qualité visuelle des images générées. 
+
+Nous évaluons notre approche sur plusieurs tâches de reconstruction d'images en utilisant des ensembles de données d'images classiques comme MNIST ou CIFAR10, ainsi qu'un ensemble de données d'images de texture. Enfin, nous appliquons cette méthode à un problème de géologie, à savoir la reconstruction des formations de canaux d'eau souterrains en utilisant très peu de points.  Les résultats expérimentaux montrent que notre approche obtient des résultats égalux ou supérieurs aux approches existantes tout en offrant la possibilité de contrôler le compromis entre la qualité visuelle et le respect des contraintes.
+
+
+\subsection*{Chapitre 3 : Transfert de domaines avec tâches auxiliaires pour la modélisation générative}
+
+Dans ce chapitre, nous étudions le conditionnement des modèles de transfert de domaines qui utilisent les réseaux génératifs antagonistes. Ces modèles, généralement basés sur l'idée de cohérence cyclique (ou \textit{cyclic-consistency}), permettent de transférer des images d'un "domaine" à l'autre sans utiliser de données appariées, qui sont généralement très difficiles à obtenir. Nous nous concentrons sur la tâche de transfert d'une image couleur vers le domaine polarimétrique. De telles images sont soumises à des contraintes strictes qui découlent directement de la physique ondulatoire de la lumière, de sorte que les approches de transfert de domaine sans contraintes ne peuvent pas résoudre ce problème à elles seules. 
+
+Nous introduisons de nouvelles tâches auxiliaires basées sur une reformulation de ces contraintes et proposons un algorithme pour les intégrer lors de l'entraînement d'un modèle de transfert de domaine. Nous montrons que cette méthode est performante dans une tâche de génération d'images polarimétriques, à la fois en termes de qualité visuelle et de respect des contraintes.
+
+Enfin, nous appliquons cette approche à une tâche d'augmentation de données. En effet, aucune base de données d'images polarimétriques étiquetées n'est publiquement disponible au moment de la rédaction de cette thèse, ce qui rend difficile l'apprentissage de modèles profonds pour résoudre des problèmes sur des images polarimétriques. En transférant des bases de données d'images en couleur étiquetées dans le domaine des images polarimétriques, nous pouvons produire de grandes quantités d'images polarimétriques étiquetées. Nous montrons que de telles données augmentent la performance d'un réseau de détection d'objets dans les images polarimétriques pour l'analyse de scène routière.
+
+\section*{Publications}
+\addcontentsline{toc}{section}{Publications}
+
+\end{otherlanguage}
+
+\begin{itemize}
+	\item\longfullcite{Ruffino2017}
+	\item\longfullcite{Ruffino2019a}
+	\item\longfullcite{Laloy2019}
+	\item\longfullcite{Ruffino2020}
+	\item\longfullcite{Blin2021}
+\end{itemize}
+
+
+\fancyhead[R]{}

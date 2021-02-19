@@ -1,0 +1,63 @@
+\input{../tikzheader.tex}
+
+\begin{document}
+	
+	
+	\begin{tikzpicture}[scale=0.7,dot/.style={circle,minimum size=1mm,inner sep=0pt, fill=\cola}]
+		
+		\tikzbrectshort{-4.1}{0.2}{fill=\colc,draw=black}
+		\draw node at (-3.7,1.2) {\Large$\vy$};
+		\draw[->, line width=.2mm] ((-3.3,1.5)->(-2.5,1.5);	
+		
+		\tikzbrectshort{-4.1}{-2.3}{fill=\colc,draw=black}
+		\draw node at (-3.7,-1.4) {\Large$\vz$};
+		
+		\draw[-, line width=.2mm] (	(-3.3, -1.4)--(-2.8, -1.4);	
+		\draw[-, line width=.2mm] ((-2.8, -1.4)--(-2.8,1);	
+		\draw[->, line width=.2mm] ((-2.8,1)->(-2.5,1);	
+		
+		\begin{scope}[yshift=2.5cm,rotate=180]
+			\tikznn{0}{0}{fill=\cola}
+		\end{scope}
+		\draw node at (-1.2,1.2) {\Large$G$};
+		\draw[->, line width=.2mm] ((0,1.2)->(0.4,1.2);	
+		\tikzbrectshort{.4}{0.2}{fill=\cold,draw=black}
+		\draw node at (.8,1.2) {\Large$\Hat{\vx}$};
+		
+		\tikzbrectshort{.4}{-2.3}{fill=\colc,draw=black}
+		\draw node at (.8,-1.4) {\Large$\vx$};
+		\draw[->, line width=.2mm] (1.2,-1.6)->(2.8,-1.6);
+		
+		\draw[-, line width=.2mm] (1.2,1.0)--(2.2,1);
+		\draw[-, line width=.2mm] (2.2,1.0)--(2.2,-1.2);
+		\draw[->, line width=.2mm] (2.2,-1.2)--(2.8,-1.2);
+		
+		
+		
+		\tikznn{2.8}{-2.6}{draw=black,fill=\cola}
+		\draw node at (4,-1.4) {\Large$D$};
+		
+		%\filldraw[fill=\cold,draw=black] plot coordinates {(5.7,-1) (5.7,0.5) (6.2,0.5) (6.2,-1) (5.7,-1) };
+		\tikzbrectsmall{5.6}{-2.1}{fill=\colb,draw=black}
+		
+		\draw node at (5.85,-1.7) {\large$0$};
+		\draw node at (5.85,-1.0) {\large$1$};
+	
+		\draw[->, line width=.2mm] (1.2,1.4)--(2.8,1.4);
+		\tikznn{2.8}{0}{draw=black,fill=\cola}
+		\draw node at (4,1.2) {\Large$C$};
+		
+		\draw[<-, line width=.2mm] (5.9,1.4)--(5.3,1.4);
+		\tikzbrectshort{5.9}{0.2}{fill=\colc,draw=black}
+		\draw node at (6.3,1.15) {\Large$\Hat{\vy}$};
+
+		\draw[-, line width=.2mm] (6.3,2.2)--(6.3,3);
+		\draw[->, line width=.2mm] (6.3,3)--(2.8,3);		
+
+		\draw[-, line width=.2mm] (-3.7,2.2)--(-3.7,3);
+		\draw[->, line width=.2mm] (-3.7,3)--(-.7,3);
+		
+		\filldraw[fill=\colb,draw=black] plot coordinates {(-.7,3.3) (2.8,3.3) (2.8,2.7) (-.7,2.7) (-.7,3.3)};	
+		\draw node at (1.05,3) {{\small \textbf{cross-entropy}}};
+	\end{tikzpicture}
+\end{document}
