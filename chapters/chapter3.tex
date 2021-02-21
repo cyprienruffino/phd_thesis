@@ -302,7 +302,7 @@ L_{\mathcal{C}_2} (\G_{XY}) = \mathop{\mathbb{E}}_{\vx\sim \p{X}}  \max\left(\Ha
 %
 with $\hat{\vs} = \begin{bmatrix}	\Hat{\vs_0} & 	\Hat{\vs_1} & 	\Hat{\vs_2} \end{bmatrix}^\top = \ma^\dagger\G_{XY}(\vx)$.
 
-The loss $L_{\mathcal{C}_1}$ translates the respect of the acquisition conditions according to the calibration matrix $A$ while  $L_{\mathcal{C}_2}$ is related to the physical admissibility constraint on the deduced Stokes vectors from the generated image. Gathering all these elements, we train our CycleGAN under physical constraints, by optimizing the following objective function
+The loss $L_{\mathcal{C}_1}$ translates the respect of the acquisition conditions according to the calibration matrix $A$ while  $L_{\mathcal{C}_2}$ is related to the physical admissibility constraint on the deduced Stokes vectors from the generated image. Gathering all these elements, we train our \ac{CycleGAN} under physical constraints, by optimizing the following objective function
 %
 \begin{equation}
 	L_{final}(\G_{XY}, \G_{YX}, \D_X, \D_Y)= L_{CycleGAN}(\G_{XY}, \G_{YX}, \D_X, \D_Y)+\mu L_{\mathcal{C}_1}(\G_{XY}) + \nu L_{\mathcal{C}_2}(\G_{XY}) \enspace.
