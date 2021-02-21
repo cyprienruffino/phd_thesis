@@ -432,7 +432,7 @@ In order to assert the ability of the generated Polar-KITTI and Polar-BDD100K da
 	\label{fig:experimental_setup}
 \end{figure}
 
-Overall, the trained CycleGANs and detection networks under these settings are evaluated in qualitative and quantitative ways. The end goal is to check the ability of the generated images to help learning polarimetry-based features for object detection, and the influence of respecting the polarimetric feasibility constraints on detection performances.
+Overall, the trained \ac{CycleGAN}s and detection networks under these settings are evaluated in qualitative and quantitative ways. The end goal is to check the ability of the generated images to help learning polarimetry-based features for object detection, and the influence of respecting the polarimetric feasibility constraints on detection performances.
 
 We  measure the visual quality of the generated images by computing the classical Fréchet Inception Distance \citep{Heusel2017} (see Section \ref{subs:evaluation_methods}). Computing this distance requires to extract visual features from each set of images (real and generated) using a pre-trained deep neural network (usually an Inception v3 \citep{Szegedy2016} network pre-trained on \ac{ImageNet} \citep{Deng2009}) and to evaluate the Fréchet (or Wasserstein) distance between the distributions of these features, which are assumed Gaussian distributions (thoroughly explained in \citesec{subs:evaluation_methods}). We compute this distance using 500 images from each generated polarimetric dataset and from the test set as described in Table \ref{tab:dataset_properties}.
 
