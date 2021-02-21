@@ -665,7 +665,6 @@ The RetinaNet-based detection model were trained according to the setups previou
 
 As we can see in Table \ref{tab:obtained_results}, using the generated images improves the detection performance in real polarimetric images. The improvement is substantial for car and pedestrian detection. We achieve an improvement of 4\% for car detection and of 12\% for pedestrian detection which leads to an overall improvement of 9\% in the detection, using Polar-KITTI with constraints. Similarly for Polar-BDD100K dataset, we notice an improvement of 10\% for pedestrian detection which leads to an increased $\ac{mAP}$ of 5\% (pedestrians and cars). However, we notice that for BDD100K similar detection performances are obtained either for RGB or polarimetric images and this is due to the fact that generated images using CycleGANs do not perform well on small objects. To verify that, we compare the evolution of the detection scores while setting a minimal area to the bounding boxes to be detected. The results of this experiment are shown for the training including the Polar-BDD100K and the RGB BDD100K in Figure~\ref{fig:bounding_boxes}.The results of this experiment illustrate that when the minimal area of bounding boxes increases the $\ac{AP}$ of car regarding the training including Polar-BDD100K overcomes the one including RGB BDD100K. We can thus conclude that the limit of this work is the low quality of the small objects in the generated images. 
 
-
 \begin{figure}
 	\centering
 	\includegraphics[width=\linewidth]{area_bounding_boxes_study.png}
