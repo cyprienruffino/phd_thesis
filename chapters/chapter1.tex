@@ -226,7 +226,7 @@ Several extensions to the \ac{GAN} framework allow for conditional modeling: \te
 	\arg\min_\G\max_\D \lcgan = 	\arg\min_\G\max_\D \esp{\vx,\vy\sim \p{X,Y}} [\log \D(\vx, \vy)] +  \esp{\vy\sim \p{Y} \\ \vz\sim\p{Z}} [1 - \log \D(\G(\vy, \vz), y)]
 \end{equation}
 %
-Other approaches such as \textbf{Auxillary Classifier GAN (ACGAN)} \citep{Odena2016}  try to learn the conditional distribution by adding an explicit loss term to the optimization problem. ACGAN aims to learn a conditional generative model with discrete labels by adding another output, with dimension $n$ equal to the number of labels, to the discriminator that acts as a classifier $C$ sharing its weights with the discriminator (see Figure \ref{fig:acgan}). The model is then trained by having both the generator and the discriminator minimize the categorical cross-entropy  between the real and predicted labels 
+Other approaches such as \textbf{Auxillary Classifier GAN (ACGAN)} \citep{Odena2016}  try to learn the conditional distribution by adding an explicit loss term to the optimization problem. ACGAN aims to learn a conditional generative model with discrete labels by adding another output, with dimension $n$ equal to the number of labels, to the discriminator that acts as a classifier $C$ sharing its weights with the discriminator (see Figure \ref{fig:acgan}). The model is then trained by having both the generator and the discriminator minimize the categorical cross-entropy  between the real and predicted labels.
 
 
 \begin{figure}[t]
