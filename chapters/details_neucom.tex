@@ -60,6 +60,10 @@ Additional information:
 Additional information: \begin{itemize}
 	\item Batch normalization \citep{Ioffe2015} is applied across all the layers
 	\item A Gaussian noise is applied to the input of the discriminator
+		\item Instance normalization \citep{Ulyanov2016} is applied across all the layers instead of Batch normalization. This is involved by the use of the PacGAN technique.
+	\item The layers noted with an asterisk are linked with a skip-connection
+\end{itemize}
+
 \end{itemize}
 
 
@@ -135,13 +139,6 @@ Additional information: \begin{itemize}
 \end{table*}
 \noindent
 
-Additional information: \begin{itemize}
-	\item Instance normalization \citep{Ulyanov2016} is applied across all the layers instead of Batch normalization. This is involved by the use of the PacGAN technique.
-	\item A Gaussian noise is applied to the input of the discriminator
-	\item The layers noted with an asterisk are linked with a skip-connection
-\end{itemize}
-\newpage
-
 %Additional details: \begin{itemize}
 %   \item Instance normalization\cite{ulyanov2016instance} is applied across all the layers instead of Batch normalization. This is due to the use of the PacGAN technique.
 %  \item Gaussian noise is applied to the input of the discriminator
@@ -167,9 +164,6 @@ Additional information: \begin{itemize}
 	\end{tabular}
 	\caption{PatchGAN discriminator}
 \end{table*}
-
-\newpage
-
 
 
 \begin{table*}[h]
