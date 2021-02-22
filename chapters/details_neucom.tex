@@ -97,13 +97,6 @@ Additional information: \begin{itemize}
 	
 \end{table*}
 
-Additional information: \begin{itemize}
-	\item Instance normalization \citep{Ulyanov2016} is applied across all the layers instead of Batch normalization. This is involved by the use of the PacGAN technique.
-	\item A Gaussian noise is applied to the input of the discriminator
-	\item The layers noted with an asterisk are linked with a skip-connection
-\end{itemize}
-\newpage
-
 \begin{table*}[!h]
 	\centering
 	\begin{tabular}{|l|c|c|c|c|c|}
@@ -141,7 +134,14 @@ Additional information: \begin{itemize}
 \caption{UNet-Res for CelebA}
 \end{table*}
 \noindent
-This network follows the same additional setup as described in Appendix (\ref{subsec:Unet-Cifar}).
+
+Additional information: \begin{itemize}
+	\item Instance normalization \citep{Ulyanov2016} is applied across all the layers instead of Batch normalization. This is involved by the use of the PacGAN technique.
+	\item A Gaussian noise is applied to the input of the discriminator
+	\item The layers noted with an asterisk are linked with a skip-connection
+\end{itemize}
+\newpage
+
 %Additional details: \begin{itemize}
 %   \item Instance normalization\cite{ulyanov2016instance} is applied across all the layers instead of Batch normalization. This is due to the use of the PacGAN technique.
 %  \item Gaussian noise is applied to the input of the discriminator
