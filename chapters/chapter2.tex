@@ -794,37 +794,6 @@ Finally, we evaluate our approach on the Subsurface dataset. We use the UNetResP
 
 The obtained results are summarized in Tables \ref{tab:subsurface} and \ref{tab:subsurface_visual}. They are coherent with the previous experiments since the generated samples are diverse and have a low error regarding the constrained pixels. The conditioning have a limited impact on the visual quality of the generated samples and compares well to unconditional approaches \citep{Ruffino2017}. Evaluation of the generated images using the domain-connectivity function highlights this fact on Figure \ref{fig:ours_connectivity} in the supplementary materials. Also examples of generated images by our approach  pictured in Figure \ref{fig:samples_subsurface} show that we preserve the visual quality and honor the constraints.
 
-
-\begin{figure}
-	\centering
-	Texture: Real samples\\
-	\includegraphics[scale=0.3]{realbrick1.png}\hspace{5px}\includegraphics[scale=0.3]{realbrick2.png}\hspace{5px}\includegraphics[scale=0.3]{realbrick3.png}\hspace{5px}\includegraphics[scale=0.3]{realbrick4.png}\hspace{5px}\includegraphics[scale=0.3]{realbrick5.png}\hspace{5px}\includegraphics[scale=0.3]{realbrick6.png}\\
-	\vspace{0.1cm}
-	\includegraphics[scale=0.3]{realbrick7.png}\hspace{5px}\includegraphics[scale=0.3]{realbrick8.png}\hspace{5px}\includegraphics[scale=0.3]{realbrick9.png}\hspace{5px}\includegraphics[scale=0.3]{realbrick10.png}\hspace{5px}\includegraphics[scale=0.3]{realbrick11.png}\hspace{5px}\includegraphics[scale=0.3]{realbrick12.png}\\
-	
-	Texture: Generated samples\\
-	\includegraphics[scale=0.3]{brick1.png}\hspace{5px}\includegraphics[scale=0.3]{brick2.png}\hspace{5px}\includegraphics[scale=0.3]{brick3.png}\hspace{5px}\includegraphics[scale=0.3]{brick4.png}\hspace{5px}\includegraphics[scale=0.3]{brick5.png}\hspace{5px}\includegraphics[scale=0.3]{brick6.png}\\
-	\vspace{0.1cm}
-	\includegraphics[scale=0.3]{brick11.png}\hspace{5px}\includegraphics[scale=0.3]{brick12.png}\hspace{5px}\includegraphics[scale=0.3]{brick13.png}\hspace{5px}\includegraphics[scale=0.3]{brick14.png}\hspace{5px}\includegraphics[scale=0.3]{brick15.png}\hspace{5px}\includegraphics[scale=0.3]{brick16.png}\\
-	
-	\caption{Real and generated samples from the Texture dataset.}
-	\label{fig:samples_texture}
-\end{figure}
-\begin{figure}
-	\centering
-	CelebA: Real samples\\
-	\includegraphics[scale=0.75]{realceleba_1.png}\hspace{5px}\includegraphics[scale=0.75]{realceleba_2.png}\hspace{5px}\includegraphics[scale=0.75]{realceleba_3.png}\hspace{5px}\includegraphics[scale=0.75]{realceleba_4.png}\hspace{5px}\includegraphics[scale=0.75]{realceleba_5.png}\hspace{5px}\includegraphics[scale=0.75]{realceleba_6.png}\\
-	\vspace{0.1cm}
-	\includegraphics[scale=0.75]{realceleba_7.png}\hspace{5px}\includegraphics[scale=0.75]{realceleba_8.png}\hspace{5px}\includegraphics[scale=0.75]{realceleba_9.png}\hspace{5px}\includegraphics[scale=0.75]{realceleba_10.png}\hspace{5px}\includegraphics[scale=0.75]{realceleba_11.png}\hspace{5px}\includegraphics[scale=0.75]{realceleba_12.png}\\
-		
-	CelebA: Generated samples\\
-	\includegraphics[scale=0.75]{celeba_1.png}\hspace{5px}\includegraphics[scale=0.75]{celeba_2.png}\hspace{5px}\includegraphics[scale=0.75]{celeba_3.png}\hspace{5px}\includegraphics[scale=0.75]{celeba_4.png}\hspace{5px}\includegraphics[scale=0.75]{celeba_5.png}\hspace{5px}\includegraphics[scale=0.75]{celeba_6.png}\\
-	\vspace{0.1cm}
-	\includegraphics[scale=0.75]{celeba_11.png}\hspace{5px}\includegraphics[scale=0.75]{celeba_12.png}\hspace{5px}\includegraphics[scale=0.75]{celeba_13.png}\hspace{5px}\includegraphics[scale=0.75]{celeba_14.png}\hspace{5px}\includegraphics[scale=0.75]{celeba_15.png}\hspace{5px}\includegraphics[scale=0.75]{celeba_16.png}\\
-	
-	\caption{Real and generated samples from the CelebA dataset.}
-	\label{fig:samples_celeba}
-\end{figure}
 \begin{figure}[t]
 	\centering
 	Subsurface: Real samples\\
