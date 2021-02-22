@@ -229,7 +229,7 @@ Several extensions to the \ac{GAN} framework allow for conditional modeling: \te
 Other approaches such as \textbf{Auxillary Classifier GAN (ACGAN)} \citep{Odena2016}  try to learn the conditional distribution by adding an explicit loss term to the optimization problem. ACGAN aims to learn a conditional generative model with discrete labels by adding another output, with dimension $n$ equal to the number of labels, to the discriminator that acts as a classifier $C$ sharing its weights with the discriminator (see Figure \ref{fig:acgan}). The model is then trained by having both the generator and the discriminator minimize the categorical cross-entropy  between the real and predicted labels 
 
 
-\begin{figure}
+\begin{figure}[t]
 	\centering
 	\includegraphics[width=\textwidth*3/5]{chapter1/acgan}
 	\caption[Auxiliary Classifier GAN approach]{Auxiliary Classifier Generative Adversarial Networks approach.}
