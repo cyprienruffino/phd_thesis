@@ -249,8 +249,6 @@ Other approaches such as \textbf{Auxillary Classifier GAN (ACGAN)} \citep{Odena2
 \label{fig:triplegan}
 \end{figure}
 
-Several extensions of the \ac{GAN} framework allow for conditional modeling. First introduced, \textbf{Conditional \ac{GAN}s (\ac{CGAN}s)} \citep{Goodfellow2014, Mirza2014} simply adds the label $y$ as an input for both the discriminator and the generator. The new optimization problem that results from this change is summed-up in  \citeq{eq:CGAN_problem} as follows
-
 \textbf{TripleGAN} \citep{Li2017} considers a classifier $C$, disjoint from $D$, which can be pre-trained  or learned jointly to the GAN models. This classifier is then used to train the generator to generate images whose label $\Hat{\vy} = C(\G(\vy, \vz)), \vy\sim\p{Y}, \vz\sim\p{Z}$ actually corresponds to the original label $\vy$ (see Figure \ref{fig:triplegan}). This is done by adding a classification loss to the GAN objective function, as
 
 \begin{equation}
