@@ -145,7 +145,7 @@ A divergence $\Div{\p{X}}{\q{X}}$ between two distributions $\p{X}$ and $\q{X}$ 
 	\label{fig:divergence}
 \end{figure}
 
-However in practice, such divergences are usually intractable in the case of natural distributions. Hence \ac{GAN}s aim to estimate the divergence by relying on another learnable function that will act as a surrogate to the divergence, the discriminator model $\D$. This discriminator is trained as a binary classifier that predicts the probability of a sample $\vx$ to be issued from the real distribution $\p{X}$ or generated from $\pg{\vx}$ using binary cross-entropy (see Figure \ref{fig:gan}) as
+However in practice, such divergences are usually intractable in the case of distributions. Hence \ac{GAN}s aim to estimate the divergence by relying on another learnable function that will act as a surrogate to the divergence, the discriminator model $\D$. This discriminator is trained as a binary classifier that predicts the probability of a sample $\vx$ to be issued from the real distribution $\p{X}$ or generated from $\pg{\vx}$ using binary cross-entropy (see Figure \ref{fig:gan}) as
 %
 \begin{equation}
 	\label{eq:disc_cost}
