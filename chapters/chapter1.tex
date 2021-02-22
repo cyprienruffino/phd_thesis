@@ -508,8 +508,6 @@ This approach was extended  with tricks for mitigating its instability \citep{Sa
 
 \textbf{Self-Attention GAN (SAGAN)} \citep{Zhang2018} implements attention-driven  mechanisms in \ac{GANs} to model \textit{long-range dependencies}. In most of the previous approaches, such as LAPGAN, DCGAN or Progressive GAN, the images are successively upscaled using convolutional layers. This causes issues in high-dimension, as some parts of the generated image could be inconsistent with each other due to the spatially local nature of convolutions. Self-attention propose to use non-local modeling as a solution to this issue. In the SAGAN approach, this is done by computing self-attention feature maps (see Figure \ref{fig:sagan}) that are then added to the convolution feature maps. 
 
-\CR{Ajouter StyleGAN/2 ? Conclure sur les architectures}
-
 \subsection{Augmenting the objective}
 \label{subs:augmented_objectives}
 
