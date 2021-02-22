@@ -149,7 +149,6 @@ This network follows the same additional setup as described in Appendix (\ref{su
 
 \subsection{Architectures for Texture}
 
-\subsubsection{PatchGAN discriminator}
 \begin{table*}[!h]
 	\centering
 	\begin{tabular}{|l|c|c|c|c|c|}
@@ -164,6 +163,7 @@ This network follows the same additional setup as described in Appendix (\ref{su
 		Conv2D & 512 3x3 & x1/2 & LeakyReLU &  10x10\\
 		\hline
 	\end{tabular}
+	\caption{PatchGAN discriminator}
 \end{table*}
 
 \begin{table*}[!h]
@@ -184,7 +184,7 @@ This network follows the same additional setup as described in Appendix (\ref{su
 		Conv2D & 3 3x3 & x1 & tanh & 160x160 \\
 		\hline
 	\end{tabular}
-\caption{UpDil Texture}
+	\caption{UpDil Texture}
 \end{table*}
 
 
