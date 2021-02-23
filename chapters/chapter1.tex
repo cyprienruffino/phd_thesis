@@ -484,7 +484,7 @@ In the same way  as the$f$-divergence family, the Wasserstein distance is a part
 D_\mathcal{F}(\p{X} || \pg{X})  =\sup_{f \in \mathcal{F}} \Big[ \esp{\vx\sim\p{X}} f(\vx) - \esp{\vx\sim\pg{X}} f(\vx) \Big] \enspace ,
 \end{equation}
 
-where $\mathcal{F}$ is a family of real-valued bounded measurable functions. By setting restrictions on $\mathcal{F}$,  several classical metrics can be recovered \citep{Sriperumbudur2009}, among them the Wasserstein distance ($\mathcal{F} = \{f:||f||_L \leq 1\}$), as well as the Total Variation ($\mathcal{F} = \{f:||f||_\infty \leq 1\}$). 
+\noindent where $\mathcal{F}$ is a family of real-valued bounded measurable functions. By setting restrictions on $\mathcal{F}$,  several classical metrics can be recovered \citep{Sriperumbudur2009}, among them the Wasserstein distance ($\mathcal{F} = \{f:||f||_L \leq 1\}$), as well as the Total Variation ($\mathcal{F} = \{f:||f||_\infty \leq 1\}$). 
 
 Also part of the \ac{IPM} family of metrics is the Maximum Mean Discrepancy (\ac{MMD}) \citep{Gretton2012}, with the set $\mathcal{F} = \{f:||f||_\mathcal{H} \leq 1\}$, where $\mathcal{H}$ is a Reproducing Kernel Hilbert Space (\ac{RKHS}) of kernel $k:\setX\times\setX\rightarrow \mathbb{R}$, thus relying on the choice of the kernel $k$. \ac{MMD} was used to formulate  different\textbf{ \ac{MMD}GAN} \citep{Li2017a,Dziugaite2015, Binkowski2018} approaches, which train GANs by estimating the \ac{MMD} with gaussian or quadratic kernels. More recent approaches leverage gradient penalty similarly to \ac{WGAN-GP} in order to learn the kernel $k$, which translates into special cases of \ac{MMD} such as \textbf{Energy Distance GAN} \citep{Bellemare2017, Szekely2004} or the so-called \textbf{Fisher GAN} \citep{Mroueh2017}.
 
