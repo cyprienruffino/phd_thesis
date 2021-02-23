@@ -244,8 +244,8 @@ Other approaches such as \textbf{Auxillary Classifier GAN (ACGAN)} \citep{Odena2
 
 \begin{align}
 	\label{eq:ACGAN_problem}
-	L_{ACGAN_{\D}}(\D, \G) &= \lgan(\D, \G) + \esp{(\vx, \vy) \sim\p{X,Y}} \Big[ -\sum_{i=1}^{n} \vy_i C(\vx)_i \Big]\\
-	L_{ACGAN_{\G}}(\D, \G) &= \lgan(\D, \G) - \esp{\vy\sim\p{Y}\\\vz\sim\p{Z}} \Big[ -\sum_{i=1}^{n} \vy_i C(\G(\vz))_i \Big]
+	L_{ACGAN_{\D}}(\D, \G) &= \lgan(\D, \G) + \esp{(\vx, \vy) \sim\p{X,Y}} \Big[ -\sum_{i=1}^{n} \vy_i C(\vx)_i \Big]\enspace,\\
+	L_{ACGAN_{\G}}(\D, \G) &= \lgan(\D, \G) - \esp{\vy\sim\p{Y}\\\vz\sim\p{Z}} \Big[ -\sum_{i=1}^{n} \vy_i C(\G(\vz))_i \Big]\enspace.
 \end{align}
 
 \begin{figure}
