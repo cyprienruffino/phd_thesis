@@ -266,6 +266,13 @@ Other approaches such as \textbf{Auxillary Classifier GAN (ACGAN)} \citep{Odena2
 \subsection{Domain-transfer approaches using generative adversarial networks}
 \label{subs:domain_transfer}
 
+\begin{figure}[th]
+	\centering
+	\includegraphics[width=\textwidth*3/5]{chapter1/pix2pix}
+	\caption[Pix2Pix approach]{Pix2Pix domain-transfer approach}
+	\label{fig:pix2pix}
+\end{figure}
+
 Domain-transfer is the task of learning a mapping $\G_{YX}:\spaceX\rightarrow\spaceY$ such that the generated samples $\Hat{\vx}$ are issued from the distribution $\p{X}$ while maintaining some semantic information. This can be, for example, changing the color palette of an image, or transforming a photo of an object into a painting of the same object (see Figure \ref{fig:cyclegan_samples}).
 
 Several approaches exist for domain-transfer \citep{Isola2016, Taigman2017} that require paired samples $\{(\vx_1, \vy_1),  ..., (\vx_s, \vy_s)\},  \vx_i \in \spaceX, \vy_i \in \spaceY$ from both domains. \ac{CGAN}s already learn to model the conditional distribution $\p{X|Y}$, and adding a way to enforce the consistency of the semantic information enables domain-transfer.
@@ -284,13 +291,6 @@ Several approaches exist for domain-transfer \citep{Isola2016, Taigman2017} that
 \end{figure}
 
 \noindent However, these approaches rely on paired data which can be very hard to obtain, especially in the case of natural images. \citet{Zhu2017a} present an example of this issue with a domain-adaptation task, in which a model turns images of horses into zebras. In such a case, it is very hard to get paired images of identical zebras and horses (see Figure \ref{fig:cyclegan_samples}). A solution to this problem of paired data was proposed in the form of \textbf{cyclic consistency} \citep{Zhu2017, Kim2017, Liu2018a, Yi2017}. Instead of training a single model $\G_{XY}$ with a reconstruction loss between $\vx$ and $\G(\vy)$, the cycle-consistent approaches train two domain-transfer models simultaneously: $\Gyx$ and $\Gxy$ that push-forward $\p{Y}$ onto $\p{X}$ and $\p{Y}$ onto $\p{X}$, respectively (\seefigure{fig:cyclegan}). This allows to compute the reconstruction errors  $||\vx - \Gyx(\Gxy(\vx))||_1$ and $||\vy - \Gxy(\Gyx(\vy))||_1$, which ensure that the content of the image is preserved through the mappings.  Note that these reconstruction errors do not require paired data $(\vx,\vy)$. 
-
-\begin{figure}[th]
-	\centering
-	\includegraphics[width=\textwidth*3/5]{chapter1/pix2pix}
-	\caption[Pix2Pix approach]{Pix2Pix domain-transfer approach}
-	\label{fig:pix2pix}
-\end{figure}
 
 
 The training of the two models in done an adversarial setup, with two discriminators $\Dx$ and $\Dy$, and is wrapped up in the \textbf{\ac{CycleGAN}} approach \citep{Zhu2017a} as
