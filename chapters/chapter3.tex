@@ -218,7 +218,7 @@ We can formulate this as
 	\label{eq:polar_constr_formulation}
 	\max_{\G_{XY}}& L(\G_{XY}) = \mathop{\mathbb{E}}_{\vx\sim \p{X}} \Big[\log (\p{Y}(\G_{XY}(\vx))\Big] \enspace. \\
 	\text{s.c.} & \G_{XY}(\vx_i) = \ma\vs_i \enspace;\enspace \vs_{0_i}^2 \geq \vs_{1_i}^2 +\vs_{2_i}^2  \enspace\text{and}\enspace  \vs_{0_i}^2 > 0   \nonumber \\
-	\text{with}  & \vs_{i} = \ma^\dagger(\G_{XY}(\vx_{i})) \quad \forall i \nonumber
+	\text{with}  & \vs_{i} = \ma^\dagger(\G_{XY}(\vx_{i})) \quad \forall i \nonumber \enspace.
 \end{eqnarray}
 
 These constraints enforce the physical admissibility of the generated polarimetric images, however they do not guarantee that the objects pictured in the generated images $\G_{XY(\vx_i)}$ will be the same as in the original images $\vx_i$. This property is called \textbf{semantic consistency} between the input $\vx$ and the generated image $\Hat{\vy}$ and is essential to the task of domain-transfer. Indeed, a model that is not semantically consistent could generate realistic images that are completely different from the provided inputs.
