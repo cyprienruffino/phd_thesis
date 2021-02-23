@@ -182,14 +182,6 @@ As said previously, the objective of the generator model $\G$ will be to maximiz
 		L_\G(\G) = \DKL{\p{X}}{\frac{\p{X}+\pg{X}}{2}} + \DKL{\pg{X}}{\frac{\p{X}+\pg{X}}{2} } = 2\cdot\JSD{\p{X}}{\pg{X}} \enspace.
 \end{equation}
 
-Assume the discriminator is trained to convergence. Minimizing $L_\G( \G) $ is therefore equivalent to minimizing the Jensen-Shannon (\ac{JS}) divergence between $\p{X}$ and $\pg{X}$.  This training process is summarized as the mini-max problem
-%
-\begin{equation}
-\label{eq:GAN_problem}
-\arg\min_\G\min_G\lgan = \arg\min_\G\max_\D \esp{\vx\sim \p{X}} [\log \D(\vx)] +  \esp{\vz\sim\p{Z}} [1 - \log \D(\G(\vz))] \enspace.
-\end{equation}
-%
-From Equation \ref{eq:gen_cost},  we find that the mini-max game has, assuming infinite capacity for both $\G$ and $\D$, a global optimum for $\p{X} = \pg{X}$. The \ac{GAN} training algorithm then consists in alternatively updating the discriminator and the generator via gradient ascent/descent respectively. A summary of this process is presented in \citealg{alg:GAN_train}. 
 
 \begin{algorithm}[!ht]
 	\caption{The \ac{GAN} training algorithm}
@@ -210,6 +202,16 @@ From Equation \ref{eq:gen_cost},  we find that the mini-max game has, assuming i
 \end{algorithm}
 
 \clearpage
+
+Assume the discriminator is trained to convergence. Minimizing $L_\G( \G) $ is therefore equivalent to minimizing the Jensen-Shannon (\ac{JS}) divergence between $\p{X}$ and $\pg{X}$.  This training process is summarized as the mini-max problem
+%
+\begin{equation}
+\label{eq:GAN_problem}
+\arg\min_\G\min_G\lgan = \arg\min_\G\max_\D \esp{\vx\sim \p{X}} [\log \D(\vx)] +  \esp{\vz\sim\p{Z}} [1 - \log \D(\G(\vz))] \enspace.
+\end{equation}
+%
+From Equation \ref{eq:gen_cost},  we find that the mini-max game has, assuming infinite capacity for both $\G$ and $\D$, a global optimum for $\p{X} = \pg{X}$. The \ac{GAN} training algorithm then consists in alternatively updating the discriminator and the generator via gradient ascent/descent respectively. A summary of this process is presented in \citealg{alg:GAN_train}. 
+
 
 \subsection{Conditional modeling with generative adversarial networks}
 \label{subs:CGAN}
