@@ -430,6 +430,7 @@ he first term in Problem (\ref{eq:bayesian_formulation_our_primary_CGAN_G}) meas
 
 The second term in Problem (\ref{eq:bayesian_formulation_our_primary_CGAN_G}) is the likelihood of the generated image under the true but unknown data distribution $\p{X}$. Maximizing this term can be equivalently achieved by minimizing the distance between $\p{X}$ and the marginal distribution of the generated samples $\G(\vy,\vz)$. This amounts to minimizing with respect to $\G$, the GAN-like objective function $\mathop{\mathbb{E}}_{\substack{\vx\sim \p{X}}} \log(\D(\vx)) + \mathop{\mathbb{E}}_{\substack{\vz\sim \p{Z}\\\vy\sim \p{Y}}} \log(1-\D(\G(\vy, \vz)))$  \citep{Goodfellow2014}.
 
+\clearpage
 
 Putting altogether these elements, we can propose a relaxation of the hard constraint optimization problem (\ref{eq:formulation_IR_problem}) (Figure \ref{fig:ourapproach}) that consists in learning a generative network $\G$ and the related discriminator model $\D$ by solving
 %minimizing the Jensen-Shannon divergence between the real data distribution and the distribution of the generated data \citep{Goodfellow2014}.
