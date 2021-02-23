@@ -454,7 +454,7 @@ Putting altogether these elements, we can propose a relaxation of the hard const
 
 It is worth to note that the assumption of Gaussian noise measurement leads us to explicitly turn the pixel value constraints into the  minimization of the quadratic error between the real enforced pixel values and their generated counterparts as it corresponds to maximizing the conditional likelihood of the pixels in the generated  image. The additional term acts as a regularization over prescribed pixels by the mask $\mm_\vy$. The trade-off between the distribution matching loss and the constraint enforcement is assessed by the regularization parameter $\lambda \geq 0$. Figure \ref{fig:ourapproach} illustrates the overall principle of the model. It is also worth noting that the noise $\varepsilon$ can be of any other distribution, according to the prior information one may associate to the measurement noise. To formulate the maximum a posteriori, we however require this distribution to admit a closed-form solution for the maximum likelihood estimation for optimization purpose. Typical choices are distributions from the exponential family \citep{Brown1986}.
 
-\subsubsection{- Conditional image generation with an image reconstruction auxiliary task}
+\subsubsection{Conditional image generation with an image reconstruction auxiliary task}
 
 To solve Problem (\ref{eq:final_optim_problem}), we use stochastic gradient descent. The overall training procedure is detailed in Algorithm \ref{alg:train} and ends up when a maximal number of training epochs is attained. 
 
