@@ -137,7 +137,7 @@ with $\delta$ a small constant. This assumes that the reconstruction is the best
 	\label{eq:compressed_sensing}
 	\Hat{\vx} = \arg\min_\vx  \|\vx\|_1 \enspace \text{subject to} \enspace \|\ma\vx - \vy\|^2_2 \leq \delta \enspace  .
 \end{equation}
-%
+
 This method raises three important issues, the first one being that, in practice, the assumption of sparsity on $\vx$ is usually not enforced, especially for natural images.  The second problem of this approach is that it requires to solve an optimization problem for each sample. Even if the compressed sensing approach allows for the problem to be formulated as linear or quadratic programming, which can be solved in polynomial time,  it is still computationally expensive. Finally, the third issue is that the measurement matrix $\ma$ does not necessarily respect the \ac{RIP}. This is detrimental since the \ac{RIP} guarantees the coherency of the reconstructed sample. However, verifying that the matrix $\ma$ respects the \ac{RIP} is NP-hard in general. While several approaches for image compression use techniques for generating random matrices that have a high probability of respecting the \ac{RIP} \citep{Rudelson2008,Rauhut2010}, there are no guarantees in the case when $\ma$ is fixed, such as image reconstruction.
 
 \subsubsection{Compressed sensing with sparse coding}
