@@ -31,12 +31,12 @@ Generative modeling is the task of learning a statistical model of the underlyin
 Learning a discriminative model (\citeq{eq:disc_mle}) and a generative one (\ \citeq{eq:gen_mle}) can be formulated as a maximum log-likelihood estimation
 \begin{equation}
 		\label{eq:disc_mle}
-		\theta^* = \arg\max_\theta \esp{\vx,\vy\sim\p{Y|X}} \log\pt{Y|X}
+		\theta^* = \arg\max_\theta \esp{\vx,\vy\sim\p{Y|X}} \log\pt{Y|X}\enspace,
 \end{equation}
 
 \begin{equation}
 		\label{eq:gen_mle}
-		\theta^* = \arg\max_\theta \esp{\vx\sim\p{X}} \log\pt{X}
+		\theta^* = \arg\max_\theta \esp{\vx\sim\p{X}} \log\pt{X} \enspace.
 	\end{equation}
 %
 A simple example of generative model are Gaussian Mixture Models (\ac{GMM}) . Given $\vx\in\spaceR^d$, they consist in a sum of $k$ Gaussian distributions $\mathcal{N}(\mu_i, \Sigma_i), 1 \leq i \leq k, \mu_i\in\spaceR^d, \sigma_i\in\spaceR^{d\times d}$  which are all attributed a selection probability $\p{Z}(z=i) = \pi_i$, with $\vz \in \setZ$, so that $\p{X|Z=i} = \mathcal{N}(\mu_i, \Sigma_i)$ . The \ac{GMM} is then formulated as 
