@@ -356,7 +356,7 @@ The instability of the \ac{GAN} training has first been conjectured to be caused
 %
 \begin{equation}
 	\label{eq:nsgan}
-	\L_G(D, G) = -\esp{\vz\sim\p{Z}}\log(\D(\G(\vz)))
+	\L_G(D, G) = -\esp{\vz\sim\p{Z}}\log(\D(\G(\vz)))\enspace,
 \end{equation}, which helps considerably in avoiding failures of the training process \citep{Radford2015}.
 %
  While this new loss function converges to the same minimum as the original loss term, minimizing it no longer correspond to minimizing a \ac{JS} divergence but the non-symmetric reverse \ac{KL} divergence, minus a \ac{JS} term \citep{Arjovsky2017a}. More formally, 
