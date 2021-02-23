@@ -6,12 +6,10 @@
 		While the  Conditional GAN approach \citep{Mirza2014} is generic enough to model any kind of conditioning, it lacks some form of control or guarantee on the conditioning procedure. In this chapter, we propose to explore an approach for conditioning a GAN model through an image reconstruction task, which consists in (re-) generating images from a very small subset of randomly-located pixels known beforehand. Such a problem is directly motivated by applications in geosciences, most notably the generation of subsurface rock structure \citep{Laloy2019,Ruffino2017}.  We reformulate this conditional generation task as a Maximum A Posteriori estimation and propose a solution in the form of an explicit auxiliary reconstruction task, which adds to the original unconditional GAN objective as an additional loss term. Complemented with the PacGAN \citep{Lin2018} variant for training GANs, this approach enables the generation of diverse samples from a scarce pixel map. As opposed to the more classical Conditional GAN approach, this auxiliary task is interpretable and a hyperparameter allows to balance visual quality and importance of the conditioning in the learning procedure. We evaluate our approach on the classical MNIST, FashionMNIST and CIFAR10 datasets, as well as a custom-made texture dataset. Finally,  we apply this approach to a standard dataset from geosciences of subsurface rock formations.
 \end{chapterabstract}\\
 
-
-
 The work in this chapter has led to the publication of the following papers: 
 \begin{itemize}
 	\item \fullcite{Ruffino2019a}
-	\item \fullcite{Ruffino2020}
+	\item \fullcite{Ruffino2020a}
 \end{itemize}
 
 \newpage
