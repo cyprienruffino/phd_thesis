@@ -283,6 +283,8 @@ Several approaches exist for domain-transfer \citep{Isola2016, Taigman2017} that
 	\label{fig:cyclegan_samples}
 \end{figure}
 
+\noindent However, these approaches rely on paired data which can be very hard to obtain, especially in the case of natural images. \citet{Zhu2017a} present an example of this issue with a domain-adaptation task, in which a model turns images of horses into zebras. In such a case, it is very hard to get paired images of identical zebras and horses (see Figure \ref{fig:cyclegan_samples}). A solution to this problem of paired data was proposed in the form of \textbf{cyclic consistency} \citep{Zhu2017, Kim2017, Liu2018a, Yi2017}. Instead of training a single model $\G_{XY}$ with a reconstruction loss between $\vx$ and $\G(\vy)$, the cycle-consistent approaches train two domain-transfer models simultaneously: $\Gyx$ and $\Gxy$ that push-forward $\p{Y}$ onto $\p{X}$ and $\p{Y}$ onto $\p{X}$, respectively (\seefigure{fig:cyclegan}). This allows to compute the reconstruction errors  $||\vx - \Gyx(\Gxy(\vx))||_1$ and $||\vy - \Gxy(\Gyx(\vy))||_1$, which ensure that the content of the image is preserved through the mappings.  Note that these reconstruction errors do not require paired data $(\vx,\vy)$. 
+
 \begin{figure}[bh]
 	\centering
 	\includegraphics[width=\textwidth*3/5]{chapter1/pix2pix}
@@ -290,7 +292,6 @@ Several approaches exist for domain-transfer \citep{Isola2016, Taigman2017} that
 	\label{fig:pix2pix}
 \end{figure}
 
-\noindent However, these approaches rely on paired data which can be very hard to obtain, especially in the case of natural images. \citet{Zhu2017a} present an example of this issue with a domain-adaptation task, in which a model turns images of horses into zebras. In such a case, it is very hard to get paired images of identical zebras and horses (see Figure \ref{fig:cyclegan_samples}). A solution to this problem of paired data was proposed in the form of \textbf{cyclic consistency} \citep{Zhu2017, Kim2017, Liu2018a, Yi2017}. Instead of training a single model $\G_{XY}$ with a reconstruction loss between $\vx$ and $\G(\vy)$, the cycle-consistent approaches train two domain-transfer models simultaneously: $\Gyx$ and $\Gxy$ that push-forward $\p{Y}$ onto $\p{X}$ and $\p{Y}$ onto $\p{X}$, respectively (\seefigure{fig:cyclegan}). This allows to compute the reconstruction errors  $||\vx - \Gyx(\Gxy(\vx))||_1$ and $||\vy - \Gxy(\Gyx(\vy))||_1$, which ensure that the content of the image is preserved through the mappings.  Note that these reconstruction errors do not require paired data $(\vx,\vy)$. 
 
 The training of the two models in done an adversarial setup, with two discriminators $\Dx$ and $\Dy$, and is wrapped up in the \textbf{\ac{CycleGAN}} approach \citep{Zhu2017a} as
 %
