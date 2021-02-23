@@ -192,7 +192,7 @@ The method tries to minimize the difference between the distances among samples 
 	\label{eq:dcs_a}
 	\min_\theta L_{f_\theta} =& \mathop{\mathbb{E}}_{\substack{\vx\sim \p{X}\\\vz\sim \p{Z}}} \Big( \sum_{\substack{\vx_1, \vx_2 \in \setX\cup \{G(\vz)\} \\\vx_1 \ne \vx_2}}((\|f_\theta(\vx_1 - \vx_2)\|_2^2  - \|\vx_1 -\vx_2\|^2_2)^2 \Big) \enspace.
 \end{align}
-%
+
 In the same fashion as the objective in \citeq{eq:csmeta}, solving problem (\ref{eq:dcs_a}) pushes $f_\theta$ towards respecting the \ac{RIP}. \citet{Wu2019} showed that optimizing these two criterions trains both the generator $\G$ and the measurement function $f_\theta$, thus replacing the discriminator of the more classical \ac{GAN} framework.  As a benefit, the approach may generate an image $\hat{\vx} = \G(\hat{\vz})$ from a noisy information $\vy$ but at a high computation burden since it requires to solve an optimization problem (computing $\hat{\vz}$) at inference stage for generating an image.
 %and so that $\tilde{y}$ is as close as possible to $\vy$. %the sparsity assumption on the signal $\vx$ a learned prior on the data distribution $\p{X}$, as a generative model $\G$.  By first generating an image $\G(\vz)$ and exploring the latent space $\setZ$ of the generative model $\G$ by minimizing $\|A\G(\vz) - \vy\|^2_2$, so that altering the generated image gives $\Hat{\vy}=A\G(\vz)$ where $\Hat{\vy}$ is as close as possible to $\vy$. Then, Compressed sensing with meta-learning trains the generative model $\G$ to enforce the \ac{RIP} (\citeq{eq:rip}) so that it does not try to map all $\G(\vz)$ into the null space of $\ma$. The overall problem induced by this approach is formulated as
 
