@@ -400,7 +400,7 @@ Here $\mm_\vy$ is the masking matrix and the constrained pixels are assumed to b
 \label{eq:bayesian_formulation_our_primary_CGAN}
 \end{align}
 
-\noindent $\p{Y|X}(\vy|\vx)$ is the likelihood that the constrained pixels $\vy$ are issued from image $\vx$ while $\p{X|Y}(\vx|\vy)$ is the likelihood of an image knowing the constrained pixels $\vy$ . $\p{X}$ and $\p{Y}$ represent the marginal distributions of $\vx$ and $\vy$. Thus, we can introduce a conditional generative model $\G : (\spaceY, \spaceZ) \rightarrow \spaceX$ to replace the conditional distribution $\p{X|Y}$. This changes the original problem (\citeq{eq:noiseless_generation_primary_CGAN}) to
+$\p{Y|X}(\vy|\vx)$ is the likelihood that the constrained pixels $\vy$ are issued from image $\vx$ while $\p{X|Y}(\vx|\vy)$ is the likelihood of an image knowing the constrained pixels $\vy$ . $\p{X}$ and $\p{Y}$ represent the marginal distributions of $\vx$ and $\vy$. Thus, we can introduce a conditional generative model $\G : (\spaceY, \spaceZ) \rightarrow \spaceX$ to replace the conditional distribution $\p{X|Y}$. This changes the original problem (\citeq{eq:noiseless_generation_primary_CGAN}) to
 %
 \begin{equation}
 	\vy = \mm_\vy \odot \G(\vy, \vz) + \epsilon \enspace,
