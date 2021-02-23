@@ -201,7 +201,6 @@ As said previously, the objective of the generator model $\G$ will be to maximiz
 	\end{algorithmic}
 \end{algorithm}
 
-\clearpage
 
 Assume the discriminator is trained to convergence. Minimizing $L_\G( \G) $ is therefore equivalent to minimizing the Jensen-Shannon (\ac{JS}) divergence between $\p{X}$ and $\pg{X}$.  This training process is summarized as the mini-max problem
 %
@@ -212,6 +211,7 @@ Assume the discriminator is trained to convergence. Minimizing $L_\G( \G) $ is t
 %
 From Equation \ref{eq:gen_cost},  we find that the mini-max game has, assuming infinite capacity for both $\G$ and $\D$, a global optimum for $\p{X} = \pg{X}$. The \ac{GAN} training algorithm then consists in alternatively updating the discriminator and the generator via gradient ascent/descent respectively. A summary of this process is presented in \citealg{alg:GAN_train}. 
 
+\clearpage
 
 \subsection{Conditional modeling with generative adversarial networks}
 \label{subs:CGAN}
