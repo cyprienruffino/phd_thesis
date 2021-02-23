@@ -108,7 +108,7 @@ We propose here an overview of some of the seminal approaches for solving simila
 
 A first approach to tackle the image reconstruction problem is to recover the image through per-sample optimization. Although the original problem (\citeq{eq:reconstruction_system}) is linear, it is highly under determined, thus it induces an infinite number of solutions as the problem is  ill-posed. However, by including prior knowledge on the signal $\vx$ and by ensuring some constraints on the matrix $\ma$, solving this system can be done using techniques such as linear programming.
 
-\subsubsection{- Image reconstruction using compressed sensing}
+\subsubsection{Image reconstruction using compressed sensing}
 
 \citet{Candes2005} introduced \textbf{Compressed Sensing}, which consists in solving problem (\ref{eq:reconstruction_system}) by assuming that the signal $\vx$ to be recovered is sparse. In order to guarantee that the obtained image is indeed a reconstruction, they introduced the Restricted Isometry Property (\ac{RIP}) \citep{Candes2008} on the family of matrices $\ma$, which states that for two samples $\vx_1,\vx_2 \sim \p{X}$, 
 %
