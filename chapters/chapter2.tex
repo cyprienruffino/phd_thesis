@@ -20,7 +20,7 @@ Completion. In: Neurocomputing.
 \setcounter{minitocdepth}{3}
 \minitoc
 \setcounter{minitocdepth}{2}
-
+\clearpage
 \section{Introduction}
 
 Conditional \ac{GAN}s \citep{Mirza2014}  are powerful methods for learning conditional generative models. By simply providing a label to both the generation and discrimination networks, \ac{CGAN} is able to solve problems such as class-conditioned image generation \citep{Mirza2014}, image-to-image translation \citep{Isola2016, Wang2018}, image super-resolution \citep{Wang2020} or image inpainting \citep{Pathak2016}. Although this approach combined with enough data and the appropriate neural network architectures has led to impressive results \citep{Karras2020}, it lacks some mechanism to strongly enforce conditioning. Indeed, it only relies on the adversarial learning procedure with no explicit method for including the constraints into the generation task.
