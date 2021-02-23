@@ -545,7 +545,7 @@ To do so, a fifth of each set is used to generate the constrained pixel map $\vy
 %To avoid learning explicit correlations between real examples presented to the discriminator and constraint maps given to the generator, we create a splitting consisting in the classical train, validation and test databases, to which we add a constraints database that should remain unrelated to the three others. A fifth of each set is used to generated the matrix of constraints $C$ by randomly selecting $0.5\%$ of the pixels, uniformly. These images are then removed from the training, testing and validation sets.
 
 
-\subsubsection{title}{Network architectures}
+\subsubsection{Network architectures}
 \label{subs:architectures}
 
 We use a variety of neural network architectures for the \ac{GAN} generator and discriminator in order to adapt to the different scales and image sizes of our datasets. The detailed configuration of these architectures are exposed in Appendix \ref{app:det_archis}.
