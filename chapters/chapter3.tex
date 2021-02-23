@@ -336,12 +336,13 @@ The loss $L_{\mathcal{C}_1}$ translates the respect of the acquisition condition
 %
 The non-negative hyper-parameters $\mu$ and $\nu \in \mathbb{R}^{+}$ control respectively the balance of admissibility and calibration constraints according to the CycleGAN loss $L_{CycleGAN}$ (see equation~\eqref{eq:cyclegan}). As the values of $L_{\mathcal{C}_1}$ and $L_{\mathcal{C}_2}$ are computed pixel-wisely, we consider their averages over the whole images in the objective function. The training principle of the proposed generative model is illustrated in Figure~\ref{fig:overview_polarCycle} and detailed in Algorithm~\ref{alg:cyclegan_relaxed_train}.
 
+\clearpage
 \subsection{Experimental evaluation}
 \label{sec3:experiments}
 
 Hereafter, the experimental setup, including the image generation procedure and its evaluation, is presented. 
 
-\subsubsection{-  Experimental setup} \label{subsec:polar_gen}
+\subsubsection{ Experimental setup} \label{subsec:polar_gen}
 
 To conduct the experiments, we rely on the polarimetric dataset presented in \citep{Blin2020} whose details are summarized in Table \ref{tab:dataset_properties}. From this dataset we select 2485 unpaired images from each domain (RGB and polarimetry). Example instances are shown in Figures~\ref{fig:polar_example} and~\ref{fig:rgb_example}  for polarimetric and RGB images respectively. The polarimetric images are of dimension $500 \times 500 \times 4$. The latter dimension is due to the four intensities acquired by the camera, namely $\vy_0, \vy_{45}, \vy_{90}$ and $\vy_{135}$. The RGB images are of dimension $906 \times 945 \times 3$.
 \begin{figure}[t]
@@ -419,7 +420,7 @@ To evaluate the effectiveness of the generative model, we consider KITTI \citep{
 
 To assess whether or not fulfilling the physical  constraints is paramount, we investigate a variant of Polar-KITTI and Polar-BDD100K: we learn a standard unconstrained CycleGAN based on the same unpaired RGB/polarimetric images. It is worth mentioning that the so generated polarization-encoded images do not mandatory satisfy the feasibility constraints. 
 
-\subsubsection{- Evaluation of the generated images} \label{subsec:eval_gen_img}
+\subsubsection{Evaluation of the generated images} \label{subsec:eval_gen_img}
 
 In order to assert the ability of the generated Polar-KITTI and Polar-BDD100K datasets to preserve the relevant features for road scene applications, we train a detection network following the setup in Figure~\ref{fig:experimental_setup}. For this experiment, a RetinaNet-50 \citep{Lin2017} pre-trained on the MS COCO dataset \citep{Lin2014} is fine-tuned in two different settings. In the first setup the detection model is fine-tuned based on the original RGB KITTI (or BDD100K) while the second experimental setting considers the fine-tuning on the generated polarimetric images from KITTI (Polar-KITTI) or BDD100K (Polar-BDD100K) datasets. Afterwards the final detection models are obtained in both settings by a final fine-tuning on the real polarimetric dataset (see Table \ref{tab:dataset_properties}). The same experiments were carried out for the unconstrained variant of the generated images.
 
@@ -448,7 +449,7 @@ $$
 
 \noindent where $\ac{AP}_o^{RGB}$ and $AP_o^{p}$ respectively denote the average precision for object $o$ detection in \ac{RGB} and in polarimetric images.
 
-\subsubsection{- Results and discussion}
+\subsubsection{Results and discussion}
 \label{subs3:results}
 
 First we evaluate whether the generated images are qualitatively coherent or not. For the sake, we reconstruct the polarimetric images from their RGB generation, which refers to $\G_{XY} \circ \G_{YX}$. The reconstruction of these RGB images is shown in Figure~\ref{fig:reco_polar}. 
