@@ -107,7 +107,7 @@ Once the model is trained, generating a new sample $\Hat{\vx}$ then consists in 
 
 \begin{figure}
 	\centering
-	\includegraphics[width=\textwidth/4]{chapter1/realnvp_1}
+	\includegraphics[width=\textwidth/3]{chapter1/realnvp_1}
 	\hspace{3cm}
 	\includegraphics[width=\textwidth/4]{chapter1/realnvp_2}
 	\caption[RealNVP affine transformations]{The affine transformation used in RealNVP. Left: Forward pass, Right: backward pass. A variable $\vx$ is split in two variables $\vx_1$ and $\vx_2$. The non-linear functions $s(\vx_1)$ and $t(\vx_1)$ are then used to compute the output variables $\vy_1 = \vx_1$ and $\vy_2 =  s(\vx_1) \vx_2 + t(\vx_1)$. Inverting this transformation can then be done by computing $\vx_1 = \vy_1$ and $\vx_2 =  (\vy_2 / s(\vy_1)) - t(\vy_1)$.  Figure by \citet{Dinh2017}}
