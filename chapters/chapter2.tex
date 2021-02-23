@@ -180,7 +180,7 @@ To overcome these problems, \textbf{Compressed Sensing with Meta-Learning} \cite
 	&\text{where } \hat{\vz} = \min_\vz \|\vy - \ma\G(\vz) \|^2_2\enspace.
 \end{align}
 \noindent
-%
+
 The method tries to minimize the difference between the distances among samples (generated or real) and the distances among samples altered by $\ma$. Solving this problem pushes the generator towards producing samples on which the \ac{RIP} of $\ma$ is respected. This implies that the generated samples will have a high likelihood on the real data distribution. Note that, in practice, $\hat{\vz}$ is computed with gradient descent on $\vz$ by minimizing $\|\vy - \ma\G(\vz) \|^2_2$, starting from a random $\vz \sim \p{Z}$. \\
 
 
