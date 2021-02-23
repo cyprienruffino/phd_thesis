@@ -292,6 +292,19 @@ Several approaches exist for domain-transfer \citep{Isola2016, Taigman2017} that
 
 \noindent However, these approaches rely on paired data which can be very hard to obtain, especially in the case of natural images. \citet{Zhu2017a} present an example of this issue with a domain-adaptation task, in which a model turns images of horses into zebras. In such a case, it is very hard to get paired images of identical zebras and horses (see Figure \ref{fig:cyclegan_samples}). A solution to this problem of paired data was proposed in the form of \textbf{cyclic consistency} \citep{Zhu2017, Kim2017, Liu2018a, Yi2017}. Instead of training a single model $\G_{XY}$ with a reconstruction loss between $\vx$ and $\G(\vy)$, the cycle-consistent approaches train two domain-transfer models simultaneously: $\Gyx$ and $\Gxy$ that push-forward $\p{Y}$ onto $\p{X}$ and $\p{Y}$ onto $\p{X}$, respectively (\seefigure{fig:cyclegan}). This allows to compute the reconstruction errors  $||\vx - \Gyx(\Gxy(\vx))||_1$ and $||\vy - \Gxy(\Gyx(\vy))||_1$, which ensure that the content of the image is preserved through the mappings.  Note that these reconstruction errors do not require paired data $(\vx,\vy)$. 
 
+
+The training of the two models in done an adversarial setup, with two discriminators $\Dx$ and $\Dy$, and is wrapped up in the \textbf{\ac{CycleGAN}} approach \citep{Zhu2017a} as
+%
+\begin{align}
+	\label{eq:cyclegan}
+	\min_{\Gxy, \Gyx}\max_{\Dx, \Dy} & \enspace \lcycgan  (\G_{XY}, \G_{YX}, \D_X, \D_Y) = \nonumber \\ 
+	\min_{\Gxy, \Gyx}\max_{\Dx, \Dy}  &\enspace \lgan(\G_{YX}, \D_{X}) +\lgan(\G_{XY}, D_{Y}) \nonumber \\
+	& +\lambda \Big[ \esp{\vx\sim\p{X}} ||\vx - \Gyx(\Gxy(\vx))||_1 + \esp{\vy\sim\p{Y}} ||\vy - \Gxy(\Gyx(\vy))||_1 \Big] \enspace .
+\end{align}
+%
+The \ac{CycleGAN} training process then consists in alternatively updating the two discriminators and the two generators via gradient ascent/descent (\citealg{alg:cyclegan_train}). Note that, as opposed to the previous approaches, \ac{CycleGAN} does not use random vectors $\vz\in\p{Z}$ to generate images. The stochastic part of the generation process is instead contained in the initial image $\vy\sim\p{Y}$
+
+
 \begin{algorithm}
 	\begin{algorithmic}
 		\REQUIRE{$\trainsetX$ and $\trainsetY$ two unpaired datasets, $\Gxy$ and $\Gyx$ the mapping networks, $\Dx$ and $\Dy$ the discrimination models, $m$ the mini-batch size, $\lambda$ a hyperparameter}
@@ -311,20 +324,7 @@ Several approaches exist for domain-transfer \citep{Isola2016, Taigman2017} that
 \end{algorithm}
 
 
-
-The training of the two models in done an adversarial setup, with two discriminators $\Dx$ and $\Dy$, and is wrapped up in the \textbf{\ac{CycleGAN}} approach \citep{Zhu2017a} as
-%
-\begin{align}
-	\label{eq:cyclegan}
-	\min_{\Gxy, \Gyx}\max_{\Dx, \Dy} & \enspace \lcycgan  (\G_{XY}, \G_{YX}, \D_X, \D_Y) = \nonumber \\ 
-	\min_{\Gxy, \Gyx}\max_{\Dx, \Dy}  &\enspace \lgan(\G_{YX}, \D_{X}) +\lgan(\G_{XY}, D_{Y}) \nonumber \\
-	& +\lambda \Big[ \esp{\vx\sim\p{X}} ||\vx - \Gyx(\Gxy(\vx))||_1 + \esp{\vy\sim\p{Y}} ||\vy - \Gxy(\Gyx(\vy))||_1 \Big] \enspace .
-\end{align}
-%
-The \ac{CycleGAN} training process then consists in alternatively updating the two discriminators and the two generators via gradient ascent/descent (\citealg{alg:cyclegan_train}). Note that, as opposed to the previous approaches, \ac{CycleGAN} does not use random vectors $\vz\in\p{Z}$ to generate images. The stochastic part of the generation process is instead contained in the initial image $\vy\sim\p{Y}$
-
-
-\begin{figure}
+\begin{figure}[t]
 	\centering
 	\includegraphics[width=\textwidth*3/5]{chapter1/cyclegan}
 	\caption[CycleGAN approach]{The CycleGAN approach. Half of the training setup is illustrated, the other half consisting in the same setup but with inverted $\vx$ and $\vy$}
