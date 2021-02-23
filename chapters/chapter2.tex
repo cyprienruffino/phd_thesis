@@ -238,7 +238,7 @@ As opposed to the aforementioned methods, approaches based on conditional genera
 
 In the case of image reconstruction, a generative model $\G$ which input is constraint map $\vy \in  \spaceR^{n\times p\times c}$ learns to generate an image satisfying the constraints while likely following the distribution $\p{X}$ (see \citefig{fig:image_completion}). For a generative model to provide a sampling mechanism, the common solution consists in relying on  a random vector $\vz$  sampled from a known distribution $\p{Z}$ (usually uniform or  Gaussian) over a space $\spaceZ$ that will be used as a latent variable for the model.
 
-\subsubsection{- Conditional generative adversarial networks for image reconstruction}
+\subsubsection{Conditional generative adversarial networks for image reconstruction}
 
 Although \ac{CGAN} was initially designed for class-conditioned image generation by setting $\vy$ as the class label of the image, it can naturally be applied to several types of conditioning information, including constraint maps. Thus obtaining an  image reconstruction with a high likelihood on the conditional distribution $\p{X|Y}$ is equivalent to taking a sample or image $\Hat{\vx} = \G(\vy, \vz)$, with $\vz \sim \p{Z}$, using the generative model $\G$ solution to the problem
 %
@@ -258,7 +258,7 @@ While using the \ac{CGAN} approach alone could theoretically be enough to solve 
 %
 These approaches are often extended with techniques such as using multiple discriminators \citep{Yu2018, Armanious2019}, extending the training with extra information and features \citep{Armanious2019} as for medical imaging modalities, or using style losses \citep{Guo2019} (See \citesec{subs:augmented_objectives}). However, several of these CGAN-based inpainting methods \citep{Demir2018} rely on generating a patch that will fill up a structured missing part of the image and achieve impressive results. As such, they are not well suited to reconstruct from very sparse and unstructured observations $\vy$. 
 
-\subsubsection{- Unsupervised image reconstruction with generative adversarial networks}
+\subsubsection{Unsupervised image reconstruction with generative adversarial networks}
 
 Another trend of approaches aims to reconstruct images without any knowledge of the real data distribution $\p{X}$, in other words they only hinge on datasets of altered samples $\vy \sim \p{Y}$. This problem is different from the one we tackle, since ours supposes that a dataset of unaltered samples $\setX = \{\vx_1, ...,  \vx_s\}, \vx_i \in \spaceR^{n\times m\times c}$ is available.  Among these approaches is \textbf{Ambient \ac{GAN}} \citep{Bora2018} (Figure \ref{fig:ambientgan}), which aims at training an unconditional generative model using a dataset of noisy or incomplete samples $\setY=\{\vy_1,...\vy_t\}, \vy_i\in \spaceR^{n\times m\times c}$. Ambient \ac{GAN} attempts to produce unaltered images $\tilde{\vx}$ which distribution matches the true one without having access to any of the original images $\vx$. For the sake, Ambient \ac{GAN} considers lossy measurements such as a blurred image, an image with removed patch or removed pixels at random (up to 95\%), leading to sparse pixel map $\vy$. This lossy measurement is simulated with a parameterized alteration function $f_\theta$ instead of the measurement matrix $\ma$
 %
