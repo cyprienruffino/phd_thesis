@@ -313,7 +313,7 @@ The training of the two models in done an adversarial setup, with two discrimina
 The \ac{CycleGAN} training process then consists in alternatively updating the two discriminators and the two generators via gradient ascent/descent (\citealg{alg:cyclegan_train}). Note that, as opposed to the previous approaches, \ac{CycleGAN} does not use random vectors $\vz\in\p{Z}$ to generate images. The stochastic part of the generation process is instead contained in the initial image $\vy\sim\p{Y}$
 
 
-\begin{algorithm}
+\begin{algorithm}[h]
 	\begin{algorithmic}
 		\REQUIRE{$\trainsetX$ and $\trainsetY$ two unpaired datasets, $\Gxy$ and $\Gyx$ the mapping networks, $\Dx$ and $\Dy$ the discrimination models, $m$ the mini-batch size, $\lambda$ a hyperparameter}
 		\REPEAT
