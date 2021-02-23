@@ -188,7 +188,7 @@ The method tries to minimize the difference between the distances among samples 
 %
 \begin{align}
 	\label{eq:dcs}
-	\min_\G L_{\G} &= \mathop{\mathbb{E}}_{\substack{\vy\sim \p{Y}}} \ \|\vy - f_\theta(\G(\Hat{\vz}))\|^2_2 \\
+	\min_\G L_{\G} &= \mathop{\mathbb{E}}_{\substack{\vy\sim \p{Y}}} \ \|\vy - f_\theta(\G(\Hat{\vz}))\|^2_2 \enspace,\\
 	\label{eq:dcs_a}
 	\min_\theta L_{f_\theta} =& \mathop{\mathbb{E}}_{\substack{\vx\sim \p{X}\\\vz\sim \p{Z}}} \Big( \sum_{\substack{\vx_1, \vx_2 \in \setX\cup \{G(\vz)\} \\\vx_1 \ne \vx_2}}((\|f_\theta(\vx_1 - \vx_2)\|_2^2  - \|\vx_1 -\vx_2\|^2_2)^2 \Big) \enspace.
 \end{align}
