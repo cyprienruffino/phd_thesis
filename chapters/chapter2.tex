@@ -700,7 +700,7 @@ Table \ref{tab:ablation-cgan} compares our proposed approach to CGAN using fully
 	\label{tab:ablation-cgan}
 \end{table}
 
-\subsubsection{- High-dimension image reconstruction}
+\subsubsection High-dimension image reconstruction}
 We extend the comparison of our approach to CGAN on the CIFAR10 and CelebA  datasets (Table \ref{tab:cifar10}). We also compare generation times (Table \ref{tab:times}) and visual quality on the CelebA dataset (Table \ref{tab:cifar10}) with the Semantic Inpainting by Constrained Image Generation approach \citep{Yeh2017}, in order to show the difference in generation times with the approaches that use optimization at generation time.
 
  According to the results obtained in Section \ref{subs:results} and \ref{subs:architectures}, we used the \textit{UNetResPac} architecture and fixed the regularization parameter to $\lambda=1$. We train the networks for 150 epochs using the same dataset split as stated previously in order to keep independence between the images and the constraint maps. The evaluation procedure remains also unchanged. We use the PacGAN approach to avoid the loss of diversity issues. 
