@@ -395,7 +395,7 @@ Recall that the image reconstruction problem consists in recovering $\vx$, assum
 Here $\mm_\vy$ is the masking matrix and the constrained pixels are assumed to be randomly and independently selected.  We can formulate the Maximum A Posteriori (MAP) estimation problem which, given the constraint map $\vy$, consists in finding the most probable image $\vx^*$ following the posterior distribution $\p{X|Y}$, as
 %
 \begin{align}
-\vx^* &= \arg\max_\vx\log {\p{X|Y}}(\vx|\vy) + \log \p{Y}(\vy)\\
+\vx^* &= \arg\max_\vx\log {\p{X|Y}}(\vx|\vy) + \log \p{Y}(\vy)\enspace,\\
 &= \arg\max_\vx\log \p{Y|X}(\vy|\vx)+ \log \p{X}(\vx) \enspace.
 \label{eq:bayesian_formulation_our_primary_CGAN}
 \end{align}
