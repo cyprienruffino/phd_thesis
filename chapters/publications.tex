@@ -1,6 +1,25 @@
 \chapter{Publications}
 \label{chap:publications}
 
+\makeatletter
+\DeclareCiteCommand{\fullcite}
+{\defcounter{maxnames}{\blx@maxbibnames}%
+	\usebibmacro{prenote}}
+{\usedriver
+	{\DeclareNameAlias{sortname}{default}}
+	{\thefield{entrytype}}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
+\DeclareCiteCommand{\footfullcite}[\mkbibfootnote]
+{\defcounter{maxnames}{\blx@maxbibnames}%
+	\usebibmacro{prenote}}
+{\usedriver
+	{\DeclareNameAlias{sortname}{default}}
+	{\thefield{entrytype}}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
+\makeatother
+
 \begin{refsection}
 	\section*{Conference papers}
 		\fullcite{Ruffino2017}
