@@ -175,14 +175,14 @@ Additionally, since $\vs_0$ represents the total light intensity, it cannot be 0
 	\vs_0^2 \geqslant \vs_1^2 + \vs_2^2 \enspace.
 	\label{eqn:stokes_constraint_S0}
 \end{equation}
-%
+
 Then, an additional check has to be done to ensure that a polarimetric image $\vy$  has been obtained using a given calibration matrix $\ma$.  To do so, we evaluate if the image $\vy$ can be reconstructed from the Stokes vectors computed using the pseudo-inverse $\ma^\dagger$ of the calibration matrix. By using equations (\ref{eqn:IAS}) and (\ref{eqn:stokes2}), we can formulate the condition  
 %
 \begin{equation}
 \label{eq:calibration_constraint}
 \vy = \ma\ma^\dagger \vy \enspace.
 \end{equation}
-%
+
 Note that in the case where $\ma$ is invertible, $\ma^\dagger=\ma^{-1}$ so $\ma\ma^\dagger=Id$, thus this constraint is always enforced. In general, this constraint is satisfied if and only if $\vy \in \ker(\ma\ma^\dagger-Id)$ In the specific case where the calibration matrix $\ma$ defined in Equation \ref{eq3:calibration_matrix} is used, the solution to this constraint is 
 %
 \begin{equation}
