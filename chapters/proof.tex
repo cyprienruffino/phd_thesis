@@ -2,14 +2,14 @@
 \label{app:physical_prop}
 
 \begin{proof}
-	We call $\hat{\vx}$ and $\tilde{\vx}$ respectively an image that we want to evaluate and the intensities computed by equation (\ref{eq:calibration_constraint}). From this equation, the calibration matrix $\ma$ and its pseudo-inverse $\ma^\dagger$, we have the following equality:
+	We call $\hat{\vy}$ and $\tilde{\vy}$ respectively an image that we want to evaluate and the intensities computed by equation (\ref{eq:calibration_constraint}). From this equation, the calibration matrix $\ma$ and its pseudo-inverse $\ma^\dagger$, we have the following equality:
 	\begin{equation}
 			\label{eq:app_problem}
 		\begin{bmatrix} 
-			\tilde{\vx}_0 \\
-			\tilde{\vx}_{45} \\	
-			\tilde{\vx}_{90} \\
-			\tilde{\vx}_{135} 
+			\tilde{\vy}_0 \\
+			\tilde{\vy}_{45} \\	
+			\tilde{\vy}_{90} \\
+			\tilde{\vy}_{135} 
 		\end{bmatrix} = \frac{1}{2}\begin{bmatrix}
 			1 & 1 & 0 \\
 			1 & 0 & 1 \\
@@ -21,31 +21,31 @@
 			1 & 0 & -1 & 0 \\
 			0 & 1 & 0 & -1
 		\end{bmatrix} \times \begin{bmatrix} 
-			\hat{\vx}_0 \\
-			\hat{\vx}_{45} \\
-			\hat{\vx}_{90} \\
-			\hat{\vx}_{135}
+			\hat{\vy}_0 \\
+			\hat{\vy}_{45} \\
+			\hat{\vy}_{90} \\
+			\hat{\vy}_{135}
 		\end{bmatrix}\enspace.
 	\end{equation}
 	
 	Let $\mm = \ma\ma^\dagger$, then we have:
 	$$
-	\tilde{\vx} = \mm\hat{\vx} = \frac{1}{2}\begin{bmatrix}
+	\tilde{\vy} = \mm\hat{\vy} = \frac{1}{2}\begin{bmatrix}
 		2 & 0 & 0 & 0 \\
 		1 & 1 & 1 & -1 \\
 		0 & 0 & 2 & 0 \\
 		1 & -1 & 1 & 1
 	\end{bmatrix} \times \begin{bmatrix} 
-		\hat{\vx}_0 \\
-		\hat{\vx}_{45} \\
-		\hat{\vx}_{90} \\
-		\hat{\vx}_{135}
+		\hat{\vy}_0 \\
+		\hat{\vy}_{45} \\
+		\hat{\vy}_{90} \\
+		\hat{\vy}_{135}
 	\end{bmatrix} \enspace.
 	$$
 	
 	The set $\setX$ such that its elements are solutions to Problem \ref{eq:app_problem} is
 	$$
-	\setX = \{\vx | \vx = \mm\vx\} = \{\vx | (\mm - \mi)\vx = 0\}  = Ker(\mm - \mi)\enspace.
+	\setX = \{\vy | \vy = \mm\vy\} = \{\vy | (\mm - \mi)\vy = 0\}  = Ker(\mm - \mi)\enspace.
 	$$
 	
 	Lets first compute the matrix $\mm-\mi$:
@@ -73,7 +73,7 @@
 			\end{bmatrix}
 		\end{split} \enspace,
 	\end{equation*}
-	with $\mi$ the identity matrix. Lets now find $\vx$ such that $(\mm - \mi)\vx = 0$:
+	with $\mi$ the identity matrix. Lets now find $\vy$ such that $(\mm - \mi)\vy = 0$:
 	$$
 	\frac{1}{2}\begin{bmatrix}
 		0 & 0 & 0 & 0 \\
@@ -83,10 +83,10 @@
 	\end{bmatrix} 
 	\times
 	\begin{bmatrix}
-		\vx_1 \\
-		\vx_2 \\
-		\vx_3 \\
-		\vx_4
+		\vy_1 \\
+		\vy_2 \\
+		\vy_3 \\
+		\vy_4
 	\end{bmatrix} = 
 	\begin{bmatrix}
 		0 \\
@@ -95,5 +95,5 @@
 		0
 	\end{bmatrix}
 	$$
-	Thus we have $\vx_1 - \vx_2 + \vx_3 - \vx_4 = 0$. Hence $\setX$ comprises vectors $\vx\in\spaceR^4$ with the constraint $\vx_1 + \vx_3 = \vx_2 + \vx_4$, leading to $\setX = \Big\{\begin{bmatrix}	\vx_0 & \vx_1 & \vx_2 & \vx_3 \end{bmatrix}^\top \Big|\enspace \vx_1 + \vx_3 = \vx_2 + \vx_4\Big\}$.
+	Thus we have $\vy_1 - \vy_2 + \vy_3 - \vy_4 = 0$. Hence $\setX$ comprises vectors $\vy\in\spaceR^4$ with the constraint $\vy_1 + \vy_3 = \vy_2 + \vy_4$, leading to $\setX = \Big\{\begin{bmatrix}	\vy_0 & \vy_1 & \vy_2 & \vy_3 \end{bmatrix}^\top \Big|\enspace \vy_1 + \vy_3 = \vy_2 + \vy_4\Big\}$.
 \end{proof}
