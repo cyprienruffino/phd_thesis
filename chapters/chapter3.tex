@@ -755,7 +755,7 @@ We can introduce this projection operator to the training algorithm instead of t
 %
 with $\vx \in \spaceX$ an \ac{RGB} image. This process is summed up in Algorithm \ref{alg:cyclegan_train_projection} and illustrated in Figure \ref{fig:overview_polarCycle_proj}.
 
-\begin{algorithm}[!t]
+\begin{algorithm}[b]
 	\begin{algorithmic}[]
 		\REQUIRE{$\trainsetX$ and $\trainsetY$ two unpaired datasets, $\Gxy$ and $\Gyx$ the mapping networks, $\Dx$ and $\Dy$ the discrimination models, $m$ the mini-batch size, $\ma$ the calibration matrix and $\ma^\dagger$ its pseudo-inverse, $\lambda, \mu, \nu$ hyperparameters}
 		\REPEAT
