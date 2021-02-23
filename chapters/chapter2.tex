@@ -167,7 +167,7 @@ where $\lambda$ is a parameter that controls the trade-off between the quality o
 %
 This learned basis $\Hat{\mb}$ can then be used as a basis for compressed sensing. Several algorithms exist for solving this problem, usually by iteratively updating the basis $\Hat{\mb}$ and the representations $\vs_i$ alternatively. Examples of such algorithms are  LASSO \citep{Tibshirani1996}, basis pursuit \citep{Donoho2006} the method of optimal directions \citep{Engan1999},  K-SVD \citep{Aharon2006}, stochastic gradient descent or the Lagrange dual method.
 
-\subsubsection{- Generative modeling as a prior to compressed sensing}
+\subsubsection{Generative modeling as a prior to compressed sensing}
 
 Compressed sensing-based methods for image reconstruction have the advantage of explicitly modeling the constraints, which ensures that they will be enforced in the reconstructed image. However, there are no guarantees on the quality of the reconstruction procedure if the measurement matrix $\ma$ does not satisfy the \ac{RIP} \citeq{eq:rip}. In the case of the image reconstruction process, this means that while the reconstructed image $\hat{\vx}$ is guaranteed to enforce the constraints, it may not be necessarily close to the real data distribution $\p{X}$.
 
