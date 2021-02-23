@@ -527,7 +527,7 @@ Training a \ac{GAN} in a supervised way with conditioning approaches such as Con
 Another category of approaches aim to include an inference process into the GAN framework to retrieve the input noise from a generated sample, that is obtaining a function $I$ such that $I(\G(\vz)) = \vz, \vz \in \p{Z}$. \textbf{Artificially Learned Inference (ALI)} \citep{Dumoulin2016} and \textbf{Bidirectional GAN (BiGAN)} \citep{Donahue2017} are two similar approaches that aim to train a neural network $I: \spaceX \rightarrow \spaceZ$ as an inference mechanism. By providing the discriminator with either the input noise $\vz$ or the input noise $I(\vx)$ inferred from the real sample $\vx$ (see Figure \ref{fig:ali}), the networks $G, D$ and the inference model $I$ are trained simultaneously by solving the problem
 %
 \begin{equation}
-		\min_{\G,I}\max_\D \esp{\vx \sim \p{X}} \Big[\log(\D(\vx, I(\vx)))\Big] + \esp{\vz\sim\p{Z}} \Big[\log(1-\D(\G(\vz), \vz))\Big]
+		\min_{\G,I}\max_\D \esp{\vx \sim \p{X}} \Big[\log(\D(\vx, I(\vx)))\Big] + \esp{\vz\sim\p{Z}} \Big[\log(1-\D(\G(\vz), \vz))\Big]\enspace.
 \end{equation}
 %
 The main interest of these approaches is that they increase the diversity among the generated samples, but the trained inference model serve several purposes.  For example, since the optimal generator and inference models $G^*$ and $I^*$ are inverse of each others, as $I^*(G^*(\vz)) = \vz, \vz\sim\p{Z}$ and $G^*(I^*(\vx)) = \vx, \vx\sim\p{X}$, this allow for approximating the likelihood of a sample using the \textit{change of variable formula} (see Equation \ref{eq:change_variable_formula}) by considering $I^* = G^{*^{-1}}$.
