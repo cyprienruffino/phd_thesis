@@ -553,7 +553,7 @@ To experiment on the Texture dataset, we consider a set of fully-convolutional g
 
 We keep the PatchGAN discriminator \citep{Isola2016} across all the experiments with these architectures, which is a five-layer fully-convolutional network with a sigmoid activation.
 
-The Up-Dil architecture consists in a set of transposed convolutions (the up-scaling part), and a set of dilated convolutional layers \citep{Yu2015}, while the Up-EncDec has an up-scaling part followed by an encoder-decoder section with skip-connections, where the constraints are down-scaled, concatenated to the noise, and re-up-scaled to the output size.
+The Up-Dil architecture consists in a set of \gl{deconv}{transposed convolutions} (the up-scaling part), and a set of dilated convolutional layers \citep{Yu2015}, while the Up-EncDec has an up-scaling part followed by an encoder-decoder section with skip-connections, where the constraints are down-scaled, concatenated to the noise, and re-up-scaled to the output size.
 
 The UNet \citep{Ronneberger2015} architecture is an \gl{encdec}{encoder-decoder} where \gl{skip}{skip-connections} are added between the encoder and the decoder.
 The Res architecture is an \gl{encdec}{encoder-decoder} where \gl{resblock}{residual blocks} \citep{He2015} are added after the noise is concatenated to the features. The UNet-Res combines the UNet and the Res architectures by including both residual blocks and skip-connections.
