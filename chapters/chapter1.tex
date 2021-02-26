@@ -562,7 +562,7 @@ where $L_{\vx,\vy}$ and $L_{\vx, \vz}$ are adversarial losses, $L_\vy$ is a clas
 \end{figure}
 
 %
-Another method for conditioning GANs is \textbf{Packing GAN (PacGAN)} \citep{Lin2018}. This technique, designed to help with the diversity issues of GANs, consists in using sets of samples as input to the discriminator (see Figure) instead of single ones
+Another method for conditioning GANs is \textbf{Packing GAN (PacGAN)} \citep{Lin2018}. This technique, designed to help with the diversity issues of GANs, consists in using sets of samples as input to the discriminator (see Figure \ref{fig:pacgan}) instead of single ones
 %
 \begin{equation}
 	L_{PacGAN} = \esp{(\vx_1, ..., \vx_l) \sim \p{X}} \Big[\log(\D((\vx_1, ..., \vx_l)))\Big] + \esp{(\vz_1,...,\vz_l)} \Big[\log(1-\D((\G(\vz_1), ..., \G(\vz_l))))\Big] \enspace.
