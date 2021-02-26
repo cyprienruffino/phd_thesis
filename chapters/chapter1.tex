@@ -83,7 +83,7 @@ The marginalization allows for the use of an arbitrary flexible $\G$. However, t
 	\label{fig:vae}
 \end{figure}
 
-Variational Auto-Encoders (\ac{VAE}) \citep{Kingma2014b}  are deep latent variable models that learn the distribution of the latent model $\pg{X|Z}$ using an auto-encoder approach to train the generative model. In classical auto-encoders, two functions $\F: \setX \rightarrow \setZ$ and $\G: \setZ \rightarrow \setX$ are learned jointly by minimizing
+Variational Auto-Encoders (\ac{VAE}) \citep{Kingma2014b}  are deep latent variable models that learn the distribution of the latent model $\pg{X|Z}$ using an \gl{ae}{auto-encoder} approach to train the generative model. In classical auto-encoders, two functions $\F: \setX \rightarrow \setZ$ and $\G: \setZ \rightarrow \setX$ are learned jointly by minimizing
 %
 \begin{equation}
 		L_{AE}	 = \esp{\vx\sim\p{X}} ||\vx - \G(\F(\vx))|| \enspace,
