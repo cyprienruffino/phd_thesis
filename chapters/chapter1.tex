@@ -568,7 +568,7 @@ Another method for conditioning GANs is \textbf{Packing GAN (PacGAN)} \citep{Lin
 	L_{PacGAN} = \esp{(\vx_1, ..., \vx_l) \sim \p{X}} \Big[\log(\D((\vx_1, ..., \vx_l)))\Big] + \esp{(\vz_1,...,\vz_l)} \Big[\log(1-\D((\G(\vz_1), ..., \G(\vz_l))))\Big] \enspace.
 \end{equation}
 %
- Since the real images $\vx_1, ..., \vx_l$ should always be different from each other, the task of the discriminator becomes very easy if the generator collapsed, that is if the generated samples $\G(\vz_1), ..., \G(\vz_l)$ are similar. This approach, albeit computationally more expensive than the classical \ac{GAN} framework because of the $l$ generated samples needed to train the discriminator, is very effective in preventing mode collapse.
+ Since the real images $\vx_1, ..., \vx_l$ should always be different from each other, the task of the discriminator becomes very easy if the generator collapsed, that is if the generated samples $\G(\vz_1), ..., \G(\vz_l)$ are similar. This approach, albeit computationally more expensive than the classical \ac{GAN} framework because of the $l$ generated samples needed to train the discriminator, is very effective in preventing mode collapse. In practice, two samples are enough to prevent the model from collapsing.
 
 Conversely to these conditioning approaches, several works showed that constraining the discriminator to be Lipschitz continuous \citep{Arjovsky2017a, Arjovsky2017, Qi2018} improved the stability of the training process. \textbf{Spectral Normalization} \citep{Miyato2018} show that normalizing the weights of the discriminator using the spectral norm of its weight matrix $\mw\in\spaceR^{n\times m}$, as 
 %
