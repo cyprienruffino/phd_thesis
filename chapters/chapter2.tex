@@ -642,7 +642,7 @@ Fully-convolutional architectures for GANs are widely used, either for domain-tr
 Our training algorithm ran for 40 epochs on all reported results. We provide a comparison to CGAN \citep{Mirza2014} approach by using the selected best architectures.
 The models are evaluated in terms of best FID (visual quality of sampled images) at each epoch and MSE (conditioning on fixed pixel values).  We also compute the FID score of the models at the epochs where the MSE is the lowest. In the other way around, the MSE is reported at epoch when the FID is the lowest. The obtained performances are detailed in Table \ref{tab:ablation}.
 
-For the encoder-decoder models, we can notice that the models using ResNet blocks perform better than just using a \gl{unet}{UNet} generator. A trade-off can also be seen between the FID and MSE for the ResNet models and the UNet-ResNet, which could mean that skip-connections help the generator to fulfill the constraints but at the price of lowered visual quality.
+For the encoder-decoder models, we can notice that the models using ResNet blocks perform better than just using a \gl{unet}{UNet} generator. A trade-off can also be seen between the FID and MSE for the ResNet models and the \gl{unet}{UNet}-ResNet, which could mean that skip-connections help the generator to fulfill the constraints but at the price of lowered visual quality.
 
 Although the encoder-decoder models perform the best, they tend to lose diversity in the generated samples (see Figure \ref{fig:diversity_loss}), whereas the up-scaling-based models have high FID and MSE but naturally preserve diversity in the generated samples.
 
