@@ -418,7 +418,7 @@ Although showing notable differences in their behavior when optimized, both the 
 	D_f(\p{X} || \q{X})  =\esp{\vx\sim\q{X}}f\Big(\frac{\p{X}(\vx)}{\q{X}(\vx)}\Big)  \enspace ,
 \end{equation}
 
-where $f: \mathbb{R}^+\rightarrow \mathbb{R}$  is a convex, lower-semi-continuous function satisfying $f(1) = 0$. By carefully choosing $f$, we can recover the \ac{KL} ($f(u) =  u\log u$), reverse \ac{KL} ($f(u) =  -\log u$), \ac{JS} ($f(u) =  -(u+1)\log (\frac{u+1}{2} + u\log u)$) and Pearson's $\chi^2$ ($f(u) = (u-1)^2$) divergences. \citet{Nowozin2016} proposed a generalized approach for these divergences as well as several new GAN formulations based on divergences such as the Squared Hellinger distance ($f(u) = (\sqrt{u}-1)^2$) or the Total Variation ($f(u) = \frac{1}{2}|u-1|$). The \textbf{hinge loss} variant for GANs \citep{Lim2017}, which redefines the loss of the discriminator as
+\noindent where $f: \mathbb{R}^+\rightarrow \mathbb{R}$  is a convex, lower-semi-continuous function satisfying $f(1) = 0$. By carefully choosing $f$, we can recover the \ac{KL} ($f(u) =  u\log u$), reverse \ac{KL} ($f(u) =  -\log u$), \ac{JS} ($f(u) =  -(u+1)\log (\frac{u+1}{2} + u\log u)$) and Pearson's $\chi^2$ ($f(u) = (u-1)^2$) divergences. \citet{Nowozin2016} proposed a generalized approach for these divergences as well as several new GAN formulations based on divergences such as the Squared Hellinger distance ($f(u) = (\sqrt{u}-1)^2$) or the Total Variation ($f(u) = \frac{1}{2}|u-1|$). The \textbf{hinge loss} variant for GANs \citep{Lim2017}, which redefines the loss of the discriminator as
 %
 \begin{equation}
 		\loss{{hinge_D}}(\D, \G) = - \esp{\vx \sim \p{X}} \Big[\min(0, \D(\vx) - 1)\Big] - \esp{\vz\sim\p{Z}} \Big[\min(0, -\D(\G(\vz))-1)\Big] \enspace,
