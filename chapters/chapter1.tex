@@ -576,7 +576,7 @@ Conversely to these conditioning approaches, several works showed that constrain
 	\mw' = \frac{\mw}{\sigma(\mw)}\enspace,
 \end{equation}
 %
-with $\sigma(\mw)$ being the spectral norm\footnote{The spectral norm $\sigma(\mw)$ of a matrix $\mw$ is its maximum singular value} of $\mw$, is sufficient to ensure that the discriminator is 1-Lipschitz. Since computing the spectral norm for each training step is computationally expensive, the authors propose to use the \textit{power method} \citep{Golub2000} to compute a fast approximation of the spectral norm. This is done by sampling a random vector $\vu\in\spaceR^n$ iteratively updating them as
+with $\sigma(\mw)$ being the spectral norm\footnote{The spectral norm $\sigma(\mw)$ of a matrix $\mw$ is its maximum singular value} of $\mw$, is sufficient to ensure that the discriminator is 1-Lipschitz. Since computing the spectral norm for each training step is computationally expensive, the authors propose to use the \textit{power method} \citep{Golub2000} to compute a fast approximation of the spectral norm. This is done by sampling a random vector $\vu\in\spaceR^n$ and by iteratively computing
 %
 \begin{equation}
 	\vv \leftarrow \frac{\mw^\top\mw\vu}{||\mw^\top\mw\vu||_2},  \enspace \vu \leftarrow  \frac{\mw\vv}{||\mw\vv||_2} \enspace,
