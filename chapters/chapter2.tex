@@ -253,7 +253,7 @@ While using the \ac{CGAN} approach alone could theoretically be enough to solve 
 %
 \begin{equation}
 	\label{eq:CGAN_problem_reco_norm}
-	\min_\G\max_\D \esp{\vx,\vy\sim \p{X,Y}} [\log \D(\vx, \vy)] +  \esp{\vy\sim \p{Y} \\ \vz\sim\p{Z}} [1 - \log \D(\G(\vy, \vz), \vy)] +  \| \mm_\vy \odot \G(\vy, \vz) - \vy \|^2_F \enspace , 
+	\min_\G\max_\D \esp{\vx,\vy\sim \p{X,Y}} [\log \D(\vx, \vy)] +  \esp{\vy\sim \p{Y} \\ \vz\sim\p{Z}} [1 - \log \D(\G(\vy, \vz), \vy)] +  \| \mm_\vy \odot \G(\vy, \vz) - \vy \|^2_F \enspace .
 \end{equation}
 %
 These approaches are often extended with techniques such as using multiple discriminators \citep{Yu2018, Armanious2019}, extending the training with extra information and features \citep{Armanious2019} as for medical imaging modalities, or using style losses \citep{Guo2019} (See \citesec{subs:augmented_objectives}). However, several of these CGAN-based inpainting methods \citep{Demir2018} rely on generating a patch that will fill up a structured missing part of the image and achieve impressive results. As such, they are not well suited to reconstruct from very sparse and unstructured observations $\vy$. 
