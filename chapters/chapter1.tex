@@ -585,8 +585,7 @@ with $\sigma(\mw)$ being the spectral norm\footnote{The spectral norm $\sigma(\m
 from which the spectral norm is estimated as
 %
 \begin{equation}
-	\sigma(\mw) = \sqrt{\vu^\top(W^\top W)\vu}\enspace.
-	
+	\sigma(\mw) = \sqrt{\vu^\top (W^\top W)\vu}\enspace.
 \end{equation}
 %
 This technique showed excellent results in stabilizing the GAN training process, notably allowing for learning a conditional generative model that was able to generate samples from the 1000 classes of the ImageNet dataset \citep{Deng2009}.
@@ -639,8 +638,7 @@ In this chapter, we introduce the Generative Adversarial Network (\ac{GANs}) fra
 
 We expose some of the limitations of the GAN framework, most notably the stability issues of the training process, the lack of diversity among the generated samples and the difficulty to produce high-quality, high-dimension images.  We review recent research works that aim to solve these issues, among them variants of the loss functions, changes to the architectures and advanced conditioning techniques. We also expose the difficulties of evaluating generative models and present common solutions for assessing the visual quality of generated samples.
 
-
-
+Although we restrict ourselves to image generation, it is worth noting that the application range of \ac{GAN}s covers text generation \citep{???}, videos or sound
 
 
 
