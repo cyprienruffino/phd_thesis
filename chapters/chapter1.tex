@@ -545,7 +545,7 @@ The main interest of these approaches is that they increase the diversity among 
 	\min_{\G,I,C}\max_D L_{\vx,\vy}(\G, \D, C) + L_{\vx, \vz}(\G, \D, I) + L_\vy(\G, \D, C) + L_\vz(\G, \D, I) \enspace,
 \end{equation}
 %
-where $L_{\vx,\vy}$ and $L_{\vx, \vz}$ are adversarial losses, $L_\vy$ is a classification loss and $L_\vz$ is a disentanglement loss, that is a loss that aims to ensure that an inferred noise $I(\G(\vy, \vz)),  \vy\sim\p{Y}, \vz\sim\p{Z}$ is independent from the class label $\vy$. These losses takes the forms
+where $L_{\vx,\vy}$ and $L_{\vx, \vz}$ are adversarial losses, $L_\vy$ is a classification loss and $L_\vz$ is a disentanglement loss, that is a loss that aims to ensure that an inferred noise $I(\G(\vy, \vz)),  \vy\sim\p{Y}, \vz\sim\p{Z}$ is independent from the class label $\vy$. These losses take the forms
 %
 \begin{align}
 	L_{\vx, \vy} (\G, \D, C)&= \esp{\vx\sim\p{X}}\Big[\log\D_\vy(\vx, C(\vx))\Big] + \esp{\vy\sim\p{Y}\\\vz\sim\p{Z}} \Big[\log(\D_\vy(\G(\vy, \vz),  \vy))\Big]\\
