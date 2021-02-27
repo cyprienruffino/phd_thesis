@@ -384,7 +384,7 @@ Another conjectured cause is raised by the alternate gradient descent. Indeed, t
 
 As for the instability problem, there is, to our knowledge, no clear consensus on the origin mode collapse. However, a trade-off seems to emerge: using the original \ac{GAN} creates instability which leads to a drop of visual quality, and using the non-saturating variant that stabilizes the training creates a lack of diversity. This extends to more recent approaches in which higher visual quality induces a loss of diversity \citep{Brock2018}.
 
-In the most extreme cases, this loss of diversity can result in a complete collapsing of the sampling mechanism, making it impossible to draw diverse samples. In that case, the generated images $\Hat{\vx} = \G(\vz)$ can be considered independent from $\vz$. This loss of diversity, however, is not as much of an issue for conditional tasks that consists in mapping an input to one of many acceptable outputs, the most notable of these tasks being domain-transfer (see Section \ref{subs:domain_transfer}). 
+In the most extreme cases, this loss of diversity can result in a complete collapsing of the sampling mechanism, making it impossible to draw diverse samples. In that case, the generated images $\Hat{\vx} = \G(\vz)$ can be considered independent from $\vz$. This loss of diversity, however, is not a severe issue for conditional tasks that consists in mapping an input to one of many acceptable outputs, the most notable of these tasks being domain-transfer (see Section \ref{subs:domain_transfer}). 
 
 \section{Improvements to Generative Adversarial Networks}
 \label{sec:improvements}
