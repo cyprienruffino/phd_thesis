@@ -39,7 +39,7 @@ Learning a discriminative model (\citeq{eq:disc_mle}) and a generative one (\ \c
 		\theta^* = \arg\max_\theta \esp{\vx\sim\p{X}} \log\pt{X} \enspace.
 	\end{equation}
 %
-A simple example of generative model are Gaussian Mixture Models (\ac{GMM}) . Given $\vx\in\spaceR^d$, they consist in a sum of $k$ Gaussian distributions $\mathcal{N}(\mu_i, \Sigma_i), 1 \leq i \leq k, \mu_i\in\spaceR^d, \sigma_i\in\spaceR^{d\times d}$  which are all attributed a selection probability $\p{Z}(z=i) = \pi_i$, with $\vz \in \setZ$, so that $\p{X|Z=i} = \mathcal{N}(\mu_i, \Sigma_i)$ . The \ac{GMM} is then formulated as 
+A simple example of generative model are Gaussian Mixture Models (\ac{GMM}) . Given $\vx\in\spaceR^d$, they consist in a sum of $k$ Gaussian distributions $\mathcal{N}(\mu_i, \Sigma_i), 1 \leq i \leq k, \mu_i\in\spaceR^d, \Sigma_i\in\spaceR^{d\times d}$  which are all attributed a selection probability $\p{Z}(z=i) = \pi_i$, with $\vz \in \setZ$, so that $\p{X|Z=i} = \mathcal{N}(\mu_i, \Sigma_i)$ . The \ac{GMM} is then formulated as 
 %
 \begin{equation}
 	\pt{X}(\vx) = \sum_{\vz}\p{Z}(\vz)\pt{X|Z}(\vx|\vz)\enspace,
