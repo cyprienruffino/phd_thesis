@@ -549,14 +549,14 @@ We use a variety of neural network architectures for the \ac{GAN} generator and 
 For the experiments on the FashionMNIST \citep{Xiao2017}, we use a lightweight convolutional network for both the discriminator and the generator, similar to \ac{DCGAN}  \citep{Radford2015}, due to the small resolution of FashionMNIST images.
 %This is motivated by the large number of experiments and the small dimension of the images.
 
-To experiment on the Texture dataset, we consider a set of fully-convolutional generator architectures based on either \gl{dilconv}{dilated convolutions} \citep{Yu2015}, which behave well on texture datasets \citep{Ruffino2017}, or \gl{encdec}{encoder-decoder} architectures that are commonly used in domain-transfer applications such as CycleGAN \citep{Zhu2017}.
+To experiment on the Texture dataset, we consider a set of fully-convolutional generator architectures based on either \gl{dilconv}{dilated convolutions} \citep{Yu2015}, which behave well on texture datasets \citep{Ruffino2017}, or \glnf{encdec}{encoder-decoder} architectures that are commonly used in domain-transfer applications such as CycleGAN \citep{Zhu2017}.
 
 We keep the PatchGAN discriminator \citep{Isola2016} across all the experiments with these architectures, which is a five-layer fully-convolutional network with a sigmoid activation.
 
-The Up-Dil architecture consists in a set of \gl{deconv}{transposed convolutions} (the up-scaling part), and a set of dilated convolutional layers \citep{Yu2015}, while the Up-EncDec has an up-scaling part followed by an encoder-decoder section with skip-connections, where the constraints are down-scaled, concatenated to the noise, and re-up-scaled to the output size.
+The Up-Dil architecture consists in a set of \glnf{deconv}{transposed convolutions} (the up-scaling part), and a set of dilated convolutional layers \citep{Yu2015}, while the Up-EncDec has an up-scaling part followed by an encoder-decoder section with skip-connections, where the constraints are down-scaled, concatenated to the noise, and re-up-scaled to the output size.
 
-The UNet \citep{Ronneberger2015} architecture is an \gl{encdec}{encoder-decoder} where \gl{skip}{skip-connections} are added between the encoder and the decoder.
-The Res architecture is an \gl{encdec}{encoder-decoder} where \gl{resblock}{residual blocks} \citep{He2015} are added after the noise is concatenated to the features. The UNet-Res combines the UNet and the Res architectures by including both residual blocks and skip-connections.
+The UNet \citep{Ronneberger2015} architecture is an \gl{encdec}{encoder-decoder} where \glnf{skip}{skip-connections} are added between the encoder and the decoder.
+The Res architecture is an \glnf{encdec}{encoder-decoder} where \glnf{resblock}{residual blocks} \citep{He2015} are added after the noise is concatenated to the features. The UNet-Res combines the UNet and the Res architectures by including both residual blocks and skip-connections.
 
 Finally, we will evaluate our approach on the Subsurface dataset using the architecture that yields to the best performances on the Texture dataset.
 
