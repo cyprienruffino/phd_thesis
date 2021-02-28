@@ -504,7 +504,7 @@ On the other hand, the \textbf{Deep Convolutional GAN (\ac{DCGAN})} \citep{Radfo
 	\label{fig:proggan}
 \end{figure}
 
-This approach was extended  with tricks for mitigating its instability \citep{Salimans2016}, such as adding \gl{batchnorm}{Batch Normalization} \citep{Ioffe2015}, smoothing the 0/1 label used for training the discriminator or adding noise to the discriminator's input \citep{Sonderby2017}. They effectively helped stabilizing the training process. However, the \ac{DCGAN} approach remains limited in both the visual quality of the generated samples and in its ability to generate high-dimension images.
+This approach was extended  with tricks for mitigating its instability \citep{Salimans2016}, such as adding \glnf{batchnorm}{Batch Normalization} \citep{Ioffe2015}, smoothing the 0/1 label used for training the discriminator or adding noise to the discriminator's input \citep{Sonderby2017}. They effectively helped stabilizing the training process. However, the \ac{DCGAN} approach remains limited in both the visual quality of the generated samples and in its ability to generate high-dimension images.
 
 \textbf{Progressive GAN} \citep{Karras2017} first enabled high-dimensional image generation with GANs by progressively adding convolutional layers in the generator and the discriminator during training. Thus, the training starts with low-dimension images and progressively increase the dimension of the images throughout the learning process, which is illustrated in Figure \ref{fig:proggan}. This approach yielded the first high-quality, high-definition images generated with \ac{GANs}.
 
