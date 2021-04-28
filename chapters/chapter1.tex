@@ -206,7 +206,7 @@ Assume the discriminator is trained to convergence. Minimizing $L_\G( \G) $ is t
 %
 \begin{equation}
 \label{eq:GAN_problem}
-\arg\min_\G\min_G\lgan = \arg\min_\G\max_\D \esp{\vx\sim \p{X}} [\log \D(\vx)] +  \esp{\vz\sim\p{Z}} [1 - \log \D(\G(\vz))] \enspace.
+\arg\min_\G\min_G\lgan = \arg\min_\G\max_\D \esp{\vx\sim \p{X}} [\log \D(\vx)] +  \esp{\vz\sim\p{Z}} [ \log 1 - \D(\G(\vz))] \enspace.
 \end{equation}
 %
 From Equation \ref{eq:gen_cost},  we find that the mini-max game has, assuming infinite capacity for both $\G$ and $\D$, a global optimum for $\p{X} = \pg{X}$. The \ac{GAN} training algorithm then consists in alternatively updating the discriminator and the generator via gradient ascent/descent respectively. A summary of this process is presented in \citealg{alg:GAN_train}. 
