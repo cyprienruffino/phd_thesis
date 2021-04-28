@@ -547,7 +547,7 @@ where $L_{\vx,\vy}$ and $L_{\vx, \vz}$ are adversarial losses, $L_\vy$ is a clas
 \begin{align}
 	L_{\vx, \vy} (\G, \D, C)&= \esp{\vx\sim\p{X}}\Big[\log\D_\vy(\vx, C(\vx))\Big] + \esp{\vy\sim\p{Y}\\\vz\sim\p{Z}} \Big[\log(\D_\vy(\G(\vy, \vz),  \vy))\Big]\\
 	L_{\vx,\vz} (\G, \D, I)&= \esp{\vx\sim\p{X}}\Big[\log\D_\vz(\vx, I(\vx))\Big] + \esp{\vy\sim\p{Y}\\\vz\sim\p{Z}} \Big[\log(\D_\vz(\G(\vy, \vz),  \vz))\Big]\nonumber \\
-	L_\vy(\G,\D, C)	&= - \esp{(\vx, \vy) \sim \p{X,Y}} \Big[\sum_{i=1}^{n}\vy_i C(\vx)_i\Big] - \esp{\vy \sim \p{Y} \\ \vz \sim \p{Z}} \Big[\sum_{i=1}^{n}\vy_i C(G(\vz))_i\Big] \nonumber \\
+	L_\vy(\G,\D, C)	&= - \esp{(\vx, \vy) \sim \p{X,Y}} \Big[\sum_{i=1}^{n}\vy_i, C(\vx)_i\Big] - \esp{\vy \sim \p{Y} \\ \vz \sim \p{Z}} \Big[\sum_{i=1}^{n}\vy_i C(G(\vz))_i\Big] \nonumber \\
 	L_\vz(\G, \D, I) &= - \esp{\vy_1, \vy_2\sim\p{Y}\\\vz \sim\p{Z}} \Big[||I(\G(\vy_1, \vz)) - I(\G(\vy_2, \vz)) ||^2_2\Big] \enspace.
 \end{align}
 
