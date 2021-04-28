@@ -278,7 +278,7 @@ We evaluate this methods on a road-scene \ac{RGB} to polarimetric image translat
 
 \subsection{Auxiliary tasks for color to polarimetric images domain-transfer}
 
-As discussed above, to generate a realistic  polarimetric image  from an \ac{RGB} image, we propose to use the \ac{CycleGAN} approach to learn the translation models $\G_{XY}$ between $\spaceX$ the space of the polarimetric images and $\spaceY$ the RGB image domain. Let $\Hat{\vy} \in \spaceR^{n \times p \times 4}$ be a generated polarimetric image. To be physically admissible, it has to satisfy the admissibility constraints (\ref{eqn:stokes_constraint_S0}) and the calibration constraint (\ref{eq:calibration_constraint}). 
+As discussed above, to generate a realistic  polarimetric image  from an \ac{RGB} image, we propose to use the \ac{CycleGAN} approach to learn the translation models $\G_{XY}$ between $\spaceY$ the space of the polarimetric images and $\spaceX$ the RGB image domain. Let $\Hat{\vy} \in \spaceR^{n \times p \times 4}$ be a generated polarimetric image. To be physically admissible, it has to satisfy the admissibility constraints (\ref{eqn:stokes_constraint_S0}) and the calibration constraint (\ref{eq:calibration_constraint}). 
 
 \begin{figure} 
 	\centering
