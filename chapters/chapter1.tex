@@ -98,7 +98,7 @@ where $||.||$ is usually a $\ell_1$, $\ell_2$ or Frobenius norm, $F$ is an encod
 with $d$ being the dimension of the distribution $\mathcal{N}(0,I)$. By combining the auto-encoder and \ac{KL} terms, we get the objective function of the \ac{VAE} (summed up in Figure \ref{fig:vae}) defined as
 %
 \begin{equation}
-	L_{VAE}(\F, \G) = \esp{\vx \sim \p{X}}\big[ ||\vx - \G(\F(\vx))||^2_2 \big] - \DKL{\mathcal{N}(\mu_\vx, \Sigma_\vx)}{\p{Z}}\enspace.
+	L_{VAE}(\F, \G) = \esp{\vx \sim \mathcal{N}(\mu_\vx, \Sigma_\vx)}\big[ ||\vx - \G(\F(\vx))||^2_2 \big] - \DKL{\mathcal{N}(\mu_\vx, \Sigma_\vx)}{\p{Z}}\enspace.
 \end{equation}
 %
 Once the model is trained, generating a new sample $\Hat{\vx}$ then consists in sampling a random vector $\vz \sim \mathcal{N}(0, \textbf{1})$ and computing $\Hat{\vx} = \G(\vz)$.
