@@ -151,7 +151,7 @@ However in practice, such divergences are usually intractable for most distribut
 %
 \begin{equation}
 	\label{eq:disc_cost}
-	L_\D(\D, \G) =  \esp{\vx\sim \p{X}} [\log \D(\vx)] +  \esp{\Hat{\vx}\sim\pg{\vx}} [1 - \log \D(\Hat{\vx})] \enspace .
+	L_\D(\D, \G) =  \esp{\vx\sim \p{X}} [\log \D(\vx)] +  \esp{\Hat{\vx}\sim\pg{\vx}} [\log \D(1 - \Hat{\vx})] \enspace .
 \end{equation}
 %
 The intuition behind this model is that once the discriminator is trained, maximizing its error on generated samples $\Hat{\vx}\sim\pg{X}$ w.r.t $\G$ will push $\pg{X}$ towards $\p{X}$.
