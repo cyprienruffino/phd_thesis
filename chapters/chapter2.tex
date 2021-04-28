@@ -410,7 +410,7 @@ where $\epsilon$ represents the error of the model, which we consider to be an i
 \label{eq:bayesian_formulation_our_primary_CGAN_G}
 \end{equation}
 
-The first term in Problem (\ref{eq:bayesian_formulation_our_primary_CGAN_G}) measures the likelihood of the constraints given a generated image. The second term measures the likelihood of the generated images according to the data distribution $\p{X}$. Let rewrite Equation (\ref{eq:bayesian_formulation_our_primary_CGAN_G}) as $\vect(\vy) = \vect(\mm_\vy \odot \vx) + \vect(\varepsilon)$ where $\vect(\cdot)$ is the vectorisation operator that consists in stacking the pixels, with $\vect(\vy) \in \spaceR^{n.m.c}$ for $\vy \in \spaceR^{n\times m\times c}$. Therefore, assuming $\vect(\varepsilon)$ is i.i.d and follows a Gaussian distribution $\mathcal{N}(0,\sigma^2 I)$, the conditional likelihood of $\vy$ knowing $\vx$  reads as
+The first term in Problem (\ref{eq:bayesian_formulation_our_primary_CGAN_G}) measures the likelihood of the constraints given a generated image. The second term measures the likelihood of the generated images according to the data distribution $\p{X}$. Let rewrite Equation (\ref{eq:generation_primary_CGAN}) as $\vect(\vy) = \vect(\mm_\vy \odot \vx) + \vect(\varepsilon)$ where $\vect(\cdot)$ is the vectorisation operator that consists in stacking the pixels, with $\vect(\vy) \in \spaceR^{n.m.c}$ for $\vy \in \spaceR^{n\times m\times c}$. Therefore, assuming $\vect(\varepsilon)$ is i.i.d and follows a Gaussian distribution $\mathcal{N}(0,\sigma^2 I)$, the conditional likelihood of $\vy$ knowing $\vx$  reads as
 \begin{equation}
 \log \p{Y|X}(\vy, \G(\vy| \vz)) \, \propto - \left \|\vect(\vy) - \vect(\mm_\vy \odot \G(\vy,\vz))\right\|_2^2 \enspace.
 \end{equation}
