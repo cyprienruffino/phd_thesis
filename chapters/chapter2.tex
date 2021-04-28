@@ -414,7 +414,7 @@ The first term in Problem (\ref{eq:bayesian_formulation_our_primary_CGAN_G}) mea
 \begin{equation}
 \log \p{Y|X}(\vy, \G(\vy| \vz)) \, \propto - \left \|\vect(\vy) - \vect(\mm_\vy \odot \G(\vy,\vz))\right\|_2^2 \enspace.
 \end{equation}
-\noindent It evaluates the euclidean distance between the conditioning pixels and their predictions by $\G$. In other words, using a matrix notation of  Equation (\ref{eq:generation_primary_CGAN}), the latter conditional likelihood given a generated image equivalently writes
+\noindent It evaluates the Euclidean distance between the conditioning pixels and their predictions by $\G$. In other words, using a matrix notation of  Equation (\ref{eq:generation_primary_CGAN}), the latter conditional likelihood given a generated image equivalently writes
 
 \begin{equation}
 \log {p_{Y|X}}(\vy, \G(\vy, \vz) \, \propto - \left \|\vy - \mm_\vy \odot \G(\vy,\vz)\right\|_F^2 \enspace.
