@@ -124,7 +124,7 @@ when the measurement process is assumed to be noiseless. In practice, the measur
 %
 \begin{equation}
 	\label{eq:noiseful_compressed_sensing}
-	\Hat{\vx} = \arg\min_\vx  \|\vx\|_0\enspace \text{subject to} \enspace \|\ma\vx - \vy\|^2_2 \leq \delta \enspace  .
+	\Hat{\vx} = \arg\min_\vx  \|\vx\|_0\enspace \text{subject to} \enspace \|\ma\vx - \vy\|^2_2 \leq \delta \enspace  ,
 \end{equation}
 %
 with $\delta$ a small constant. This assumes that the reconstruction is the best possible while taking noise into account. In either cases, solving this problem is NP-hard due to the $\ell_0$ norm,  however a convex relaxation seeks the minimal $\ell_1$-norm solution is also the sparsest solution \citep{Donoho2006a}. Thus we can instead recover the sparse signal $\vx$  as
