@@ -172,7 +172,7 @@ As the optimum of $f(x) = a\log(x) + b\log(1-x)$ is $\frac{a}{a+b}$, the discrim
 
 By plugging back Equation \ref{eq:optimal_D} into $L_D(\D, \G)$ (Equation \ref{eq:disc_cost}), we get
 \begin{equation}
-		\max_\D L_\D(\D,\G) =  \esp{\vx\sim \p{X}} \Big[\log \frac{\p{X}(\vx)}{\p{X}(\vx) + \pg{X}(\vx)}\Big] +   \esp{\vx\sim \pg{X}} \Big[1 - \log  \frac{\p{\vx}(\vx)}{\p{X}(\vx) + \pg{X}(\vx)}\Big] \nonumber \enspace.
+		\max_\D L_\D(\D,\G) =  \esp{\vx\sim \p{X}} \Big[\log \frac{\p{X}(\vx)}{\p{X}(\vx) + \pg{X}(\vx)}\Big] +   \esp{\vx\sim \pg{X}} \Big[\log  1 - \frac{\p{\vx}(\vx)}{\p{X}(\vx) + \pg{X}(\vx)}\Big] \nonumber \enspace.
 \end{equation}
 
 As said previously, the objective of the generator model $\G$ will be to maximize the error of the discriminator $\D$. Thus, we can formulate the objective function $L_\G(\G)$ related to $\G$ as $L_\G(\G) = \max_\D L_\D(\D,\G)$. Up to additive and multiplicative constants, $L_\G(\G)$ can be reformulated \citep{Goodfellow2014} as
