@@ -326,7 +326,7 @@ The loss $L_{\mathcal{C}_1}$ translates the respect of the acquisition condition
 		\STATE \textbf{for} $i=1$ to $b$, compute $\hat{\vs_i} = \begin{bmatrix}	\Hat{\vs_{0_i}} & 	\Hat{\vs_{1_i}} & 	\Hat{\vs_{2_i}}\end{bmatrix}^\top = \ma^\dagger\G_{XY}(\vx_i)$.
 		\STATE update $\Gxy$ by stochastic gradient descent of
 		\STATE \ \ \ \ $ \sum_{i=1}^n\big(\Dy(\Gxy(\vx_i))-1\big)^2 + \lambda \big(||\vx_i - \Gyx(\Gxy(\vx_i)\big)||_1 +||\vy_i -\Gxy(\Gyx(\vy_i))||_1\big)$
-		\STATE \ \ \ \ \ \ $+ \mu \big(\|\vx_i - \ma\ma^\dagger\G_{XY}(\vx_i)\|^2_F\Big)+ \nu \big(\max(\vs_{1_i}^2 + \vs_{2_i}^2 - \vs_{0_i}^2, 0\big)$
+		\STATE \ \ \ \ \ \ $+ \mu \big(\|\G_{XY}(\vx_i) - \ma\ma^\dagger\G_{XY}(\vx_i)\|^2_F\Big)+ \nu \big(\max(\vs_{1_i}^2 + \vs_{2_i}^2 - \vs_{0_i}^2, 0\big)$
 		\STATE update $\Gyx$ by stochastic gradient descent of
 		\STATE \ \ \ \ $ \sum_{i=1}^n \big(\Dx(\Gyx(\vy_i))-1\big)^2+ \lambda \big(||\vx_i - \Gyx(\Gxy(\vx_i))||_1 + ||\vy_i - \Gxy(\Gyx(\vy_i))||_1\big)$\;
 		\UNTIL a stopping condition is met
