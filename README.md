@@ -3,10 +3,10 @@ Dépôt de mon manuscrit de thèse
 
 ## Compilation
 ### (pdf)latex
-Le fichier `Manuscrit.tex` est le fichier maitre, c'est donc lui qu'il faut compiler avec (pdf)latex. 
+Le fichier `Manuscrit.tex` est le fichier maitre, c'est donc lui qu'il faut compiler avec (pdf|xe)latex. 
 
-### bibtex
-Une bibliographie globale est prévue pour le document, à compiler avec `bibtex`
+### biber
+Une bibliographie globale est prévue pour le document, à compiler avec `biber`
 
 ### Makefile
 Un makefile est à votre disposition pour faciliter la compilation.
